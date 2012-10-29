@@ -1,7 +1,7 @@
-package dk.dma.enav.services.intendedroute;
+package dk.dma.enav.services.voyage.intendedroute;
 
 import dk.dma.enav.model.voyage.Route;
-import dk.dma.enav.services.navigationalstatus.CurrentPositionReportMessage;
+import dk.dma.enav.services.voyage.navigationalstatus.CurrentPositionReportMessage;
 
 public class IntendedRouteMessage extends CurrentPositionReportMessage {
 

@@ -1,4 +1,4 @@
-package dk.dma.enav.services.navigationalstatus;
+package dk.dma.enav.services.voyage.navigationalstatus;
 
 import dk.dma.enav.messages.MaritimeMessage;
 import dk.dma.enav.model.geometry.Position;

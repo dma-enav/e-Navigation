@@ -1,4 +1,4 @@
-package dk.dma.enav.services.areanotification;
+package dk.dma.enav.services.shore.areanotification;
 
 import dk.dma.enav.messages.MaritimeMessage;
 import dk.dma.enav.model.geometry.Shape;

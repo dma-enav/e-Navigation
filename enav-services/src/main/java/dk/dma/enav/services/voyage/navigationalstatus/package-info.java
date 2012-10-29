@@ -19,4 +19,4 @@
  *
  * <img src="dk.dma.enav.model.geometry.png" height="900" width="1200"/>
  **/
-package dk.dma.enav.services.navigationalstatus;
+package dk.dma.enav.services.voyage.navigationalstatus;
