@@ -4,7 +4,7 @@ import dk.dma.enav.model.MaritimeId;
 
 public class MaritimeAuthorityId extends MaritimeId {
 
-	/** serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
 }

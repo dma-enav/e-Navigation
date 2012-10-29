@@ -8,39 +8,39 @@ import dk.dma.enav.model.MaritimeId;
  */
 public class ShipId extends MaritimeId {
 
-	/** serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/** The id of the vessel */
-	private final String id;
+    /** The id of the vessel */
+    private final String id;
 
-	private ShipId(String id) {
-		this.id = requireNonNull(id, "id is null");
-	}
+    private ShipId(String id) {
+        this.id = requireNonNull(id, "id is null");
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		return other instanceof ShipId && equals((ShipId) other);
-	}
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ShipId && equals((ShipId) other);
+    }
 
-	public boolean equals(ShipId other) {
-		return other == this || (other != null && id.equals(other.id));
-	}
+    public boolean equals(ShipId other) {
+        return other == this || (other != null && id.equals(other.id));
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	@Override
-	public int hashCode() {
-		return id.hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 
-	public String toString() {
-		return id;
-	}
+    public String toString() {
+        return id;
+    }
 
-	public static ShipId create(String id) {
-		return new ShipId(id);
-	}
+    public static ShipId create(String id) {
+        return new ShipId(id);
+    }
 }

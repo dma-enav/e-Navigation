@@ -6,13 +6,13 @@ import dk.dma.enav.model.geometry.Element;
 //can interact with others
 public class MaritimeBoundaryElement {
 
-	// Har et id
-	// Er shape element, enten en position eller
-	MaritimeId getId() {
-		return null;
-	}
+    // Har et id
+    // Er shape element, enten en position eller
+    MaritimeId getId() {
+        return null;
+    }
 
-	Element getBoundary() {
-		return null;
-	}
+    Element getBoundary() {
+        return null;
+    }
 }

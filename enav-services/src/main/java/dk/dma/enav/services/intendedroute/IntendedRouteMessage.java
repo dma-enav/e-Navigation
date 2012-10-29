@@ -5,10 +5,10 @@ import dk.dma.enav.services.navigationalstatus.CurrentPositionReportMessage;
 
 public class IntendedRouteMessage extends CurrentPositionReportMessage {
 
-	/** serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	Route route;
+    Route route;
 
-	int activeWaypoint;
+    int activeWaypoint;
 }
