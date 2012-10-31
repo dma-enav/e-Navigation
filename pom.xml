@@ -36,6 +36,20 @@
     </dependency>
   </dependencies>
   
+    <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <doctitle>Cake ${project.version}</doctitle>
+          <windowtitle>Cake ${project.version}</windowtitle>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build> 
+  
+  
 <build>
     <plugins>
       <plugin>
@@ -43,6 +57,8 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.9</version>
         <configuration>
+          <doctitle>e-Navigation ${project.version} API</doctitle>
+          <windowtitle>e-Navigation API</windowtitle>
           <aggregate>true</aggregate> 
           <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
           <docletArtifact>
