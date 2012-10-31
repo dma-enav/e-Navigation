@@ -1,11 +1,11 @@
 package dk.dma.enav.model.voyage;
 
 public enum NavigationalStatus {
-    UNDEFINED, UNDER_WAY_USING_ENGINE, AT_ANCHOR, NOT_UNDER_COMMAND, RESTRICTED_MANOEUVRABILITY, CONSTRAINED_BY_HER_DRAUGHT, MOORED, AGROUND, ENGAGED_IN_FISHING, UNDER_WAY, SAILING, AIS_SART {
+    AGROUND, AIS_SART {
         public String toString() {
             return name().replace("_", "-");
         }
-    };
+    }, AT_ANCHOR, CONSTRAINED_BY_HER_DRAUGHT, ENGAGED_IN_FISHING, MOORED, NOT_UNDER_COMMAND, RESTRICTED_MANOEUVRABILITY, SAILING, UNDEFINED, UNDER_WAY, UNDER_WAY_USING_ENGINE;
 
     public String toString() {
         String navStat = name().replace("_", " ");

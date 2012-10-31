@@ -16,13 +16,11 @@ public abstract class Shape implements Element {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified element is fully contained in the
-     * shape, otherwise <tt>false</tt>.
+     * Returns <tt>true</tt> if the specified element is fully contained in the shape, otherwise <tt>false</tt>.
      * 
      * @param element
      *            the element to test
-     * @return true if the specified element is fully contained in the shape,
-     *         otherwise false
+     * @return true if the specified element is fully contained in the shape, otherwise false
      */
     public boolean containedWithin(Element element) {
         throw new UnsupportedOperationException();

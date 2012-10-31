@@ -44,7 +44,7 @@ public class Circle extends Shape {
     }
 
     public boolean equals(Circle other) {
-        return other == this || (other != null && center.equals(other.center) && radius == other.radius);
+        return other == this || other != null && center.equals(other.center) && radius == other.radius;
     }
 
     /**
@@ -81,6 +81,12 @@ public class Circle extends Shape {
         return radius;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return center.hashCode() ^ new Double(radius).hashCode();
+    }
+
     @Override
     public double rhumbLineDistanceTo(Element other) {
         if (other instanceof Position) {
@@ -90,8 +96,7 @@ public class Circle extends Shape {
     }
 
     /**
-     * Returns a new circle with the same radius as this circle but with the new
-     * position as the center
+     * Returns a new circle with the same radius as this circle but with the new position as the center
      * 
      * @param newCenter
      *            the new center of the circle

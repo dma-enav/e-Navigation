@@ -64,8 +64,8 @@ public class CurrentPositionReportMessage extends MaritimeMessage {
     }
 
     /**
-     * Sets the heading of the vessel. Which is defined as the direction to
-     * which the bow is pointing relative to true north.
+     * Sets the heading of the vessel. Which is defined as the direction to which the bow is pointing relative to true
+     * north.
      * 
      * @param heading
      *            the heading of the vessel
@@ -86,8 +86,7 @@ public class CurrentPositionReportMessage extends MaritimeMessage {
     }
 
     /**
-     * Sets the speed over ground (SOG). SOG is the actual speed that the vessel
-     * is moving over the ground.
+     * Sets the speed over ground (SOG). SOG is the actual speed that the vessel is moving over the ground.
      * 
      * @param speedOverGround
      *            speed over ground

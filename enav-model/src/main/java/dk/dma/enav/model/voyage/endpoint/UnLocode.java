@@ -6,20 +6,15 @@ import java.util.regex.Pattern;
 
 public final class UnLocode {
 
-    private final String unlocode;
-
     private static final Pattern PATTERN = Pattern.compile("[a-zA-Z]{2}[a-zA-z2-9]{3}");
+
+    private final String unlocode;
 
     public UnLocode(String unlocode) {
         this.unlocode = requireNonNull(unlocode, "unlocode is null").toUpperCase();
         if (!PATTERN.matcher(unlocode).matches()) {
             throw new IllegalArgumentException(unlocode + " is not a valid UN/LOCODE (does not match pattern)");
         }
-    }
-
-    @Override
-    public int hashCode() {
-        return unlocode.hashCode();
     }
 
     /**
@@ -32,6 +27,11 @@ public final class UnLocode {
 
     public boolean equals(UnLocode other) {
         return other == this || (other != null && unlocode.equals(other.unlocode));
+    }
+
+    @Override
+    public int hashCode() {
+        return unlocode.hashCode();
     }
 
 }

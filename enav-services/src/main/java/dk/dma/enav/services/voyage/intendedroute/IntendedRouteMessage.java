@@ -8,7 +8,7 @@ public class IntendedRouteMessage extends CurrentPositionReportMessage {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    Route route;
-
     int activeWaypoint;
+
+    Route route;
 }

@@ -15,10 +15,10 @@ public class Waypoint implements Serializable {
     /** Mandatory latitude. */
     private double latitude;
 
+    Leg leg;
+
     Line line;
     // Waypoint related
-
-    Leg leg;
 
     /** Mandatory longitude. */
     private double longitude;

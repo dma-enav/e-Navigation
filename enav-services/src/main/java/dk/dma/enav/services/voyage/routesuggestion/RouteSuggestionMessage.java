@@ -9,8 +9,6 @@ public class RouteSuggestionMessage extends MaritimeMessage {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    String routeSuggestionId;
-
     // Who suggested the route
     MaritimeAuthorityId authorityId;
 
@@ -19,5 +17,7 @@ public class RouteSuggestionMessage extends MaritimeMessage {
 
     // The route that is suggested
     Route route;
+
+    String routeSuggestionId;
 
 }

@@ -8,8 +8,7 @@ public interface Element extends Serializable {
     double distanceTo(Element position, CoordinateSystem system);
 
     /**
-     * Returns the geodetic (great circle) distance from this element to the
-     * specified element in meters.
+     * Returns the geodetic (great circle) distance from this element to the specified element in meters.
      * 
      * @param other
      *            the other element
@@ -27,13 +26,11 @@ public interface Element extends Serializable {
      * <li>this is DISJOINT other</li>
      * <li>this INTERSECTS other</li>
      * </ul>
-     * Note that a Shape implementation may choose to return INTERSECTS when the
-     * true answer is WITHIN or CONTAINS for performance reasons. If a shape
-     * does this then it <i>must</i> document when it does. Ideally the shape
-     * will not do this approximation in all circumstances, just sometimes.
+     * Note that a Shape implementation may choose to return INTERSECTS when the true answer is WITHIN or CONTAINS for
+     * performance reasons. If a shape does this then it <i>must</i> document when it does. Ideally the shape will not
+     * do this approximation in all circumstances, just sometimes.
      * <p />
-     * If the shapes are equal then the result is CONTAINS (preferred) or
-     * WITHIN.
+     * If the shapes are equal then the result is CONTAINS (preferred) or WITHIN.
      */
     // SpatialRelation relationTo(Element otherShape);
 }

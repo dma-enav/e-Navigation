@@ -25,8 +25,8 @@ import java.util.HashSet;
 import java.util.Properties;
 
 /**
- * Class to represent a country by its assigned MID's (Maritime Identification
- * Digits) in addition to its ISO 3166 identification.
+ * Class to represent a country by its assigned MID's (Maritime Identification Digits) in addition to its ISO 3166
+ * identification.
  * 
  * See {@link http://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity}
  * 
@@ -35,9 +35,11 @@ public class Country implements Serializable {
     private static final String LOCATION = Country.class.getPackage().getName().replace(".", "/")
             + "/country.properties";
 
-    static HashMap<String, Country> twoLetterMap = new HashMap<String, Country>();
-    static HashMap<String, Country> threeLetterMap = new HashMap<String, Country>();
-    static HashMap<Integer, Country> midCountryMap = new HashMap<Integer, Country>();
+    static HashMap<Integer, Country> midCountryMap = new HashMap<>();
+    private static final long serialVersionUID = 1L;
+    static HashMap<String, Country> threeLetterMap = new HashMap<>();
+
+    static HashMap<String, Country> twoLetterMap = new HashMap<>();
 
     static {
         Properties props = new Properties();
@@ -72,6 +74,76 @@ public class Country implements Serializable {
         }
     }
 
+    private final HashSet<Integer> mids = new HashSet<>();
+
+    protected String name;
+
+    protected String number;
+    protected String threeLetter;
+    protected String twoLetter;
+
+    protected Country(String name, String twoLetter, String threeLetter, String number) {
+        this.name = name;
+        this.twoLetter = twoLetter;
+        this.threeLetter = threeLetter;
+        this.number = number;
+    }
+
+    void addMid(int mid) {
+        mids.add(mid);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.twoLetter.equals(((Country) obj).getTwoLetter());
+    }
+
+    public HashSet<Integer> getMids() {
+        return mids;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public String getThreeLetter() {
+        return threeLetter;
+    }
+
+    public String getTwoLetter() {
+        return twoLetter;
+    }
+
+    @Override
+    public int hashCode() {
+        return twoLetter.hashCode();
+    }
+
+    public boolean matchMid(int mid) {
+        return mids.contains(mid);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[name=");
+        builder.append(name);
+        builder.append(", number=");
+        builder.append(number);
+        builder.append(", threeLetter=");
+        builder.append(threeLetter);
+        builder.append(", twoLetter=");
+        builder.append(twoLetter);
+        builder.append(", mids=");
+        builder.append(mids);
+        builder.append("]");
+        return builder.toString();
+    }
+
     /**
      * Get MidCountry by ISO 3166 two or three letter code
      * 
@@ -99,54 +171,6 @@ public class Country implements Serializable {
         return country;
     }
 
-    private static final long serialVersionUID = 1L;
-
-    private HashSet<Integer> mids = new HashSet<Integer>();
-    protected String name;
-    protected String twoLetter;
-    protected String threeLetter;
-    protected String number;
-
-    protected Country(String name, String twoLetter, String threeLetter, String number) {
-        this.name = name;
-        this.twoLetter = twoLetter;
-        this.threeLetter = threeLetter;
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getTwoLetter() {
-        return twoLetter;
-    }
-
-    public String getThreeLetter() {
-        return threeLetter;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return this.twoLetter.equals(((Country) obj).getTwoLetter());
-    }
-
-    void addMid(int mid) {
-        mids.add(mid);
-    }
-
-    public boolean matchMid(int mid) {
-        return mids.contains(mid);
-    }
-
-    public HashSet<Integer> getMids() {
-        return mids;
-    }
-
     public static Country getCountryForMmsi(Long mmsi) {
         Country country = null;
         String str = Long.toString(mmsi);
@@ -155,23 +179,6 @@ public class Country implements Serializable {
             country = getByMid(Integer.parseInt(str));
         }
         return country;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[name=");
-        builder.append(name);
-        builder.append(", number=");
-        builder.append(number);
-        builder.append(", threeLetter=");
-        builder.append(threeLetter);
-        builder.append(", twoLetter=");
-        builder.append(twoLetter);
-        builder.append(", mids=");
-        builder.append(mids);
-        builder.append("]");
-        return builder.toString();
     }
 
 }
