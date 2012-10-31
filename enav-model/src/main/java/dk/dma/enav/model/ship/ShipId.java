@@ -43,4 +43,5 @@ public class ShipId extends MaritimeId {
     public static ShipId create(String id) {
         return new ShipId(id);
     }
+    
 }
