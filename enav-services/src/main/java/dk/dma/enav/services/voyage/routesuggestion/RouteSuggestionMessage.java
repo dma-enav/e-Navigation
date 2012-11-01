@@ -1,6 +1,6 @@
 package dk.dma.enav.services.voyage.routesuggestion;
 
-import dk.dma.enav.messages.MaritimeMessage;
+import dk.dma.enav.messaging.MaritimeMessage;
 import dk.dma.enav.model.shore.MaritimeAuthorityId;
 import dk.dma.enav.model.voyage.Route;
 

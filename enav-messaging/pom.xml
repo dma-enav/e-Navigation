@@ -10,13 +10,13 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>enav-services</artifactId>
-  <name>eNav Services</name>
+  <artifactId>enav-messaging</artifactId>
+  <name>eNav Messaging</name>
   
   <dependencies>
     <dependency>
        <groupId>${project.groupId}</groupId>
-       <artifactId>enav-messaging</artifactId>
+       <artifactId>enav-model</artifactId>
        <version>${project.version}</version>
     </dependency>
     </dependencies>

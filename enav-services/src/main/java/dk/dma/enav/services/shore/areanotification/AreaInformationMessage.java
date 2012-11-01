@@ -1,6 +1,6 @@
 package dk.dma.enav.services.shore.areanotification;
 
-import dk.dma.enav.messages.MaritimeMessage;
+import dk.dma.enav.messaging.MaritimeMessage;
 import dk.dma.enav.model.geometry.Shape;
 
 public class AreaInformationMessage extends MaritimeMessage {
