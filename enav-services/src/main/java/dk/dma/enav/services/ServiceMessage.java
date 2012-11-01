@@ -18,8 +18,7 @@ package dk.dma.enav.services;
 import dk.dma.enav.messaging.MaritimeMessage;
 
 /**
- * 
- * @author Kasper Nielsen
+ * An e-Navigation service message.
  */
 public class ServiceMessage extends MaritimeMessage {
 
