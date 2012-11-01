@@ -1,14 +1,14 @@
 package dk.dma.enav.services.voyage.navigationalstatus;
 
-import dk.dma.enav.messaging.MaritimeMessage;
 import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.ship.ShipId;
+import dk.dma.enav.services.ServiceMessage;
 
 /**
  * Created by a ship to report its current position.
  * 
  */
-public class CurrentPositionReportMessage extends MaritimeMessage {
+public class CurrentPositionReportMessage extends ServiceMessage {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;

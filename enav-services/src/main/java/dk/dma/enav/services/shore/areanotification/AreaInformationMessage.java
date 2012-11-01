@@ -1,9 +1,9 @@
 package dk.dma.enav.services.shore.areanotification;
 
-import dk.dma.enav.messaging.MaritimeMessage;
 import dk.dma.enav.model.geometry.Shape;
+import dk.dma.enav.services.ServiceMessage;
 
-public class AreaInformationMessage extends MaritimeMessage {
+public class AreaInformationMessage extends ServiceMessage {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
