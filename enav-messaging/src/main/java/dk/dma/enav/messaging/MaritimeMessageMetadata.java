@@ -15,7 +15,7 @@ import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.geometry.Shape;
 
-public class MessageMetadata {
+public class MaritimeMessageMetadata {
 
     private static final String AUTHOR_ID = "author-id";
 
@@ -43,16 +43,16 @@ public class MessageMetadata {
 
     private final Map<String, Object> properties;
 
-    public MessageMetadata() {
+    public MaritimeMessageMetadata() {
         properties = new HashMap<>();
     }
 
-    MessageMetadata(Map<String, Object> properties) {
+    MaritimeMessageMetadata(Map<String, Object> properties) {
         this.properties = requireNonNull(properties);
     }
 
-    public MessageMetadata clone() {
-        return new MessageMetadata(properties);
+    public MaritimeMessageMetadata clone() {
+        return new MaritimeMessageMetadata(properties);
     }
 
     String getNonNull(String key) {
@@ -68,33 +68,33 @@ public class MessageMetadata {
         return requireNonNull(authorId);
     }
 
-    public MessageMetadata broadcastTo(Shape shape) {
+    public MaritimeMessageMetadata broadcastTo(Shape shape) {
         return broadcastTo(shape, BroadcastTTL.INSTANT);
     }
 
-    public MessageMetadata broadcastTo(Shape shape, BroadcastTTL ttl) {
+    public MaritimeMessageMetadata broadcastTo(Shape shape, BroadcastTTL ttl) {
         return this;
     }
 
-    public MessageMetadata setAuthor(MaritimeId maritimeId) {
+    public MaritimeMessageMetadata setAuthor(MaritimeId maritimeId) {
         this.authorId = requireNonNull(maritimeId);
         return this;
     }
 
-    public MessageMetadata addRecipient(MaritimeId id) {
+    public MaritimeMessageMetadata addRecipient(MaritimeId id) {
 
         return this;
     }
 
-    public MessageMetadata addRecipient(MaritimeId id, Runnable callback, long timeout, TimeUnit unit) {
+    public MaritimeMessageMetadata addRecipient(MaritimeId id, Runnable callback, long timeout, TimeUnit unit) {
 
         return this;
     }
 
-    MessageMetadata with(String key, String value) {
+    MaritimeMessageMetadata with(String key, String value) {
         HashMap<String, Object> map = new HashMap<>(properties);
         map.put(requireNonNull(key, "key is null"), requireNonNull(value, "value is null"));
-        return new MessageMetadata(map);
+        return new MaritimeMessageMetadata(map);
     }
 
     @SuppressWarnings({ "unused", "rawtypes" })
