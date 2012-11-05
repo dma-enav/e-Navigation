@@ -2,7 +2,12 @@ package dk.dma.enav.services.shore.areanotification;
 
 import dk.dma.enav.model.geometry.Shape;
 import dk.dma.enav.services.ServiceMessage;
+import dk.dma.enav.services.general.notification.NotificationMessage;
 
+/**
+ * @deprecated use {@link NotificationMessage} instead.
+ */
+@Deprecated
 public class AreaInformationMessage extends ServiceMessage {
 
     /** serialVersionUID. */
