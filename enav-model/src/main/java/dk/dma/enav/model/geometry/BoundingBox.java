@@ -1,8 +1,7 @@
 package dk.dma.enav.model.geometry;
 
-import java.io.Serializable;
 
-public class BoundingBox extends Polygon implements Serializable {
+public class BoundingBox extends Polygon {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
@@ -21,8 +20,8 @@ public class BoundingBox extends Polygon implements Serializable {
     }
 
     public boolean contains(Position point) {
-        return (point.getLatitude() >= minLatitude) && (point.getLongitude() >= minLongitude)
-                && (point.getLatitude() <= maxLatitude) && (point.getLongitude() <= maxLongitude);
+        return point.getLatitude() >= minLatitude && point.getLongitude() >= minLongitude
+                && point.getLatitude() <= maxLatitude && point.getLongitude() <= maxLongitude;
     }
 
     @Override
@@ -142,6 +141,6 @@ public class BoundingBox extends Polygon implements Serializable {
 
     private static int hashCode(double x) {
         long f = Double.doubleToLongBits(x);
-        return (int) (f ^ (f >>> 32));
+        return (int) (f ^ f >>> 32);
     }
 }

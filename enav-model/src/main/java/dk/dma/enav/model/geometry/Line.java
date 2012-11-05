@@ -14,6 +14,8 @@ public class Line implements Element {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    final CoordinateSystem cs;
+
     /** The end of the line. */
     final Position end;
 
@@ -26,16 +28,22 @@ public class Line implements Element {
         this.cs = requireNonNull(system);
     }
 
-    public boolean equals(Line other) {
-        return other == this
-                || (other != null && start.equals(other.start) && start.equals(other.start) && cs == other.cs);
-    }
-
-    final CoordinateSystem cs;
-
     @Override
     public double distanceTo(Element position, CoordinateSystem system) {
         throw new UnsupportedOperationException();
+    }
+
+    public boolean equals(Line other) {
+        return other == this || other != null && start.equals(other.start) && start.equals(other.start)
+                && cs == other.cs;
+    }
+
+    /**
+     * Equals method
+     */
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof Line && equals((Line) other);
     }
 
     @Override
@@ -45,19 +53,6 @@ public class Line implements Element {
 
     public final CoordinateSystem getCoordinateSystem() {
         return cs;
-    }
-
-    @Override
-    public double rhumbLineDistanceTo(Element other) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Equals method
-     */
-    @Override
-    public boolean equals(Object other) {
-        return other instanceof Line && equals((Line) other);
     }
 
     /**
@@ -85,5 +80,16 @@ public class Line implements Element {
      */
     public Position getStart() {
         return start;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return end.hashCode() ^ start.hashCode();
+    }
+
+    @Override
+    public double rhumbLineDistanceTo(Element other) {
+        throw new UnsupportedOperationException();
     }
 }

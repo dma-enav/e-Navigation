@@ -17,16 +17,14 @@ package dk.dma.enav.model.geometry;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.Serializable;
 import java.util.Locale;
 
 import dk.dma.enav.model.geometry.CoordinateSystem.VincentyCalculationType;
 
 /**
- * Representation of a WGS84 position and methods for calculating range and
- * bearing between positions.
+ * Representation of a WGS84 position and methods for calculating range and bearing between positions.
  */
-public class Position implements Serializable, Element {
+public class Position implements Element {
 
     /** The mean radius of the earth in meters. */
     static final double EARTH_RADIUS = 6371;
@@ -80,7 +78,7 @@ public class Position implements Serializable, Element {
 
     public boolean equals(Position other) {
         // id longitude 180 == - 180???
-        return other == this || (other != null && latitude == other.latitude && longitude == other.longitude);
+        return other == this || other != null && latitude == other.latitude && longitude == other.longitude;
     }
 
     /**
@@ -97,8 +95,7 @@ public class Position implements Serializable, Element {
     }
 
     /**
-     * Calculate final bearing for great circle route to location using Thaddeus
-     * Vincenty's</a> inverse formula.
+     * Calculate final bearing for great circle route to location using Thaddeus Vincenty's</a> inverse formula.
      * 
      * @param the
      *            second location
@@ -110,8 +107,7 @@ public class Position implements Serializable, Element {
     }
 
     /**
-     * Calculate initial bearing for great circle route to location using
-     * Thaddeus Vincenty's</a> inverse formula.
+     * Calculate initial bearing for great circle route to location using Thaddeus Vincenty's</a> inverse formula.
      * 
      * @param the
      *            second location
@@ -183,7 +179,7 @@ public class Position implements Serializable, Element {
         // code technique as java.lang.String
         long latLong = Double.doubleToLongBits(latitude);
         long lonLong = Double.doubleToLongBits(longitude);
-        return ((int) (latLong ^ (latLong >>> 32))) ^ ((int) (lonLong ^ (lonLong >>> 32)));
+        return (int) (latLong ^ latLong >>> 32) ^ (int) (lonLong ^ lonLong >>> 32);
     }
 
     /**
@@ -200,7 +196,7 @@ public class Position implements Serializable, Element {
 
         double dLon = Math.toRadians(position.longitude - longitude);
         if (Math.abs(dLon) > Math.PI) {
-            dLon = dLon > 0 ? -(2 * Math.PI - dLon) : (2 * Math.PI + dLon);
+            dLon = dLon > 0 ? -(2 * Math.PI - dLon) : 2 * Math.PI + dLon;
         }
         double brng = Math.atan2(dLon, dPhi);
         return (Math.toDegrees(brng) + 360) % 360;

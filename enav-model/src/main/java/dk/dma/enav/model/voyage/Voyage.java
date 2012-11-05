@@ -8,43 +8,43 @@ public class Voyage implements Serializable {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    Endpoint from;
-
-    Endpoint to;
-
     ActiveRoute activeRoute;
+
+    Endpoint from;
 
     Route plannedRoute;
 
-    public Endpoint getFrom() {
-        return from;
-    }
-
-    public void setFrom(Endpoint from) {
-        this.from = from;
-    }
-
-    public Endpoint getTo() {
-        return to;
-    }
-
-    public void setTo(Endpoint to) {
-        this.to = to;
-    }
+    Endpoint to;
 
     public ActiveRoute getActiveRoute() {
         return activeRoute;
     }
 
-    public void setActiveRoute(ActiveRoute activeRoute) {
-        this.activeRoute = activeRoute;
+    public Endpoint getFrom() {
+        return from;
     }
 
     public Route getPlannedRoute() {
         return plannedRoute;
     }
 
+    public Endpoint getTo() {
+        return to;
+    }
+
+    public void setActiveRoute(ActiveRoute activeRoute) {
+        this.activeRoute = activeRoute;
+    }
+
+    public void setFrom(Endpoint from) {
+        this.from = from;
+    }
+
     public void setPlannedRoute(Route plannedRoute) {
         this.plannedRoute = plannedRoute;
+    }
+
+    public void setTo(Endpoint to) {
+        this.to = to;
     }
 }

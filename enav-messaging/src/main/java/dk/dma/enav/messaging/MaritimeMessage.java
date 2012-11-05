@@ -1,4 +1,4 @@
-package dk.dma.enav.messages;
+package dk.dma.enav.messaging;
 
 import java.io.Serializable;
 

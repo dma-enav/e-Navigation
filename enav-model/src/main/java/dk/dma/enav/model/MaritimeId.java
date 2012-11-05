@@ -8,4 +8,8 @@ public abstract class MaritimeId implements Serializable {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    
+    public static MaritimeId from(String id) {
+        return null;
+    }
 }

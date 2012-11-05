@@ -5,6 +5,11 @@ public enum CoordinateSystem {
     CARTESIAN {
 
         @Override
+        double areaCircle(double latitude, double longitude, double radius) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         double distanceBetween(double latitude1, double longitude1, double latitude2, double longitude2) {
             double lat1 = Math.toRadians(latitude1);
             double lat2 = Math.toRadians(latitude2);
@@ -25,13 +30,15 @@ public enum CoordinateSystem {
             return Position.create(latitude + Math.sin(bearingRAD) * distance, longitude + Math.cos(bearingRAD)
                     * distance);
         }
+    },
+    GEODETIC {
 
         @Override
         double areaCircle(double latitude, double longitude, double radius) {
             throw new UnsupportedOperationException();
+            // double lat = toRadians(90 - circle.getRadius());
+            // return 2 * Math.PI * radiusDEG * radiusDEG * (1 - Math.sin(lat));
         }
-    },
-    GEODETIC {
 
         @Override
         double distanceBetween(double latitude1, double longitude1, double latitude2, double longitude2) {
@@ -43,26 +50,20 @@ public enum CoordinateSystem {
             throw new UnsupportedOperationException();
         }
 
-        @Override
-        double areaCircle(double latitude, double longitude, double radius) {
-            throw new UnsupportedOperationException();
-            // double lat = toRadians(90 - circle.getRadius());
-            // return 2 * Math.PI * radiusDEG * radiusDEG * (1 - Math.sin(lat));
-        }
-
     };
+    public static final double EARTH_EQUATORIAL_RADIUS_KM = 6378.1370;
     /**
-     * Earth's mean radius in KM according to The International Union of Geodesy
-     * and Gephysics.
+     * Earth's mean radius in KM according to The International Union of Geodesy and Gephysics.
      */
     public static final double EARTH_MEAN_RADIUS_KM = 6371.0087714;
-    public static final double EARTH_EQUATORIAL_RADIUS_KM = 6378.1370;
+
+    abstract double areaCircle(double latitude, double longitude, double radius);
 
     abstract double distanceBetween(double latitude1, double longitude1, double latitude2, double longitude2);
 
-    abstract Position pointOnBearing0(double latitude, double longitude, double distance, double bearing);
-
-    abstract double areaCircle(double latitude, double longitude, double radius);
+    public double distanceBetween(Position p1, Position p2) {
+        return distanceBetween(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
+    }
 
     public Position pointOnBearing(Position position, double distance, double bearing) {
         if (distance < 0) {
@@ -74,9 +75,7 @@ public enum CoordinateSystem {
         }
     }
 
-    public double distanceBetween(Position p1, Position p2) {
-        return distanceBetween(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
-    }
+    abstract Position pointOnBearing0(double latitude, double longitude, double distance, double bearing);
 
     /**
      * Vincenty formula

@@ -1,8 +1,8 @@
 package dk.dma.enav.services.voyage.routesuggestion;
 
-import dk.dma.enav.messages.MaritimeMessage;
+import dk.dma.enav.services.ServiceMessage;
 
-public class RouteSuggestionReplyMessage extends MaritimeMessage {
+public class RouteSuggestionReplyMessage extends ServiceMessage {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
