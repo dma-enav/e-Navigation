@@ -4,9 +4,11 @@ eNav-api
 A model and a service catalog for e-navigation:
 
 The project consists of 3 main parts.
-  eNav-model     A model of the maritime domain (still under development).
-  eNav-messages  A small framework for sending messages between different peers.
-  eNav-services  A number of e-Navigation services.
+<ol>
+  <li>eNav-model     A model of the maritime domain (still under development).</li>
+  <li>eNav-messages  A small framework for sending messages between different peers.</li>
+  <li>eNav-services  A number of e-Navigation services.</li>
+</ol>
 
 eNav-model
 ==========
@@ -32,7 +34,9 @@ if needed, a set of message arguments. The message identifier tells the receiver
 The arguments to the message contain additional information that is interpreted based on the type of message. 
 
 Describe howto
-* MaritimeMessage can both be a logical or physical message (or both such as ais)
+<ol>
+<li>MaritimeMessage can both be a logical or physical message (or both such as ais)</li>
+</ol>
 
 
 eNav-services
