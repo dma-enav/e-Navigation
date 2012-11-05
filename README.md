@@ -5,8 +5,8 @@ A model and a service catalog for e-navigation:
 
 The project consists of 3 main parts.
 <ol>
-  <li>eNav-model     A model of the maritime domain (still under development).</li>
-  <li>eNav-messages  A small framework for sending messages between different peers.</li>
+  <li>eNav-model:     A model of the maritime domain (still under development).</li>
+  <li>eNav-messages:  A small framework for sending messages between different peers.</li>
   <li>eNav-services  A number of e-Navigation services.</li>
 </ol>
 
