@@ -1,127 +1,82 @@
 package dk.dma.enav.messaging;
 
+import static dk.dma.enav.messaging.MetadataProperties.AUTHOR_ID;
+import static dk.dma.enav.messaging.MetadataProperties.AUTHOR_POSITION;
+import static dk.dma.enav.messaging.MetadataProperties.BROADCAST_AREA;
+import static dk.dma.enav.messaging.MetadataProperties.CREATION_TIME;
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.geometry.Shape;
 
-public class MaritimeMessageMetadata {
+/**
+ * MaritimeMessageMetadata is metadata information that is being sent around with a message.
+ * 
+ * @author Kasper Nielsen
+ */
+public class MaritimeMessageMetadata implements Serializable {
 
-    private static final String AUTHOR_ID = "author-id";
+    /** serialVersionUID. */
+    private static final long serialVersionUID = 1L;
+
+    static {
+        // we want to use MAC based uuids not random
+        // InetAddress ip = InetAddress.getLocalHost();
+        // NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+        // byte[] mac = network.getHardwareAddress();
+    }
 
     /** The id of the ship or shore station that created the message. */
     private MaritimeId authorId;
 
     private Position authorPosition;
 
-    /** The position of ship or shore station that created the message. */
-    private static final String AUTHOR_POSITION = "author-position";
-
-    private static final String CREATION_TIME = "creation-time";
-
-    private Date creationTime = new Date();
-    private static final String BROADCAST_AREA = "broadcast-area";
-
     private Shape broadcastArea;
 
     private BroadcastTTL broadcastTTL;
 
-    @SuppressWarnings("unused")
-    private static final String RECIPIENT_LIST = "recipient-list";
+    // Er ikke sikker paa vi kan bruge denne til noget
+    private final Date creationTime = new Date();
+
+    /** The message id. */
+    // boer den vaere paa beskeden??
+    // eller boer man kunne identifiere de enkelte frames?
+    // Det er primaert taenkt til at kunne reply paa en besked
+    private final UUID id = UUID.randomUUID();
+
+    private final MaritimeMessageMetadata previous;
 
     List<Recipiant> recipiants = new ArrayList<>();
 
-    private final Map<String, Object> properties;
-
     public MaritimeMessageMetadata() {
-        properties = new HashMap<>();
+        this.previous = null;
+
     }
 
-    MaritimeMessageMetadata(Map<String, Object> properties) {
-        this.properties = requireNonNull(properties);
-    }
-
-    public MaritimeMessageMetadata clone() {
-        return new MaritimeMessageMetadata(properties);
-    }
-
-    String getNonNull(String key) {
-        return getNonNull(key, String.class);
-    }
-
-    @SuppressWarnings("unchecked")
-    <T> T getNonNull(String key, Class<T> type) {
-        return (T) properties.get(key);
-    }
-
-    public MaritimeId getAuthor() {
-        return requireNonNull(authorId);
-    }
-
-    public MaritimeMessageMetadata broadcastTo(Shape shape) {
-        return broadcastTo(shape, BroadcastTTL.INSTANT);
-    }
-
-    public MaritimeMessageMetadata broadcastTo(Shape shape, BroadcastTTL ttl) {
-        return this;
-    }
-
-    public MaritimeMessageMetadata setAuthor(MaritimeId maritimeId) {
-        this.authorId = requireNonNull(maritimeId);
-        return this;
+    public MaritimeMessageMetadata(MaritimeMessageMetadata previous) {
+        this.previous = requireNonNull(previous);
     }
 
     public MaritimeMessageMetadata addRecipient(MaritimeId id) {
-
         return this;
     }
 
+    // De her ting skal over i testbeden
+    // Message metadata er udelukkende hvad der bliver sendt over wire.
+    //
     public MaritimeMessageMetadata addRecipient(MaritimeId id, Runnable callback, long timeout, TimeUnit unit) {
 
         return this;
-    }
-
-    MaritimeMessageMetadata with(String key, String value) {
-        HashMap<String, Object> map = new HashMap<>(properties);
-        map.put(requireNonNull(key, "key is null"), requireNonNull(value, "value is null"));
-        return new MaritimeMessageMetadata(map);
-    }
-
-    @SuppressWarnings({ "unused", "rawtypes" })
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        append(sb, AUTHOR_ID, authorId);
-        if (authorPosition != null) {
-            append(sb, AUTHOR_POSITION, authorPosition);
-        }
-        append(sb, CREATION_TIME, creationTime);// format time
-        if (broadcastArea != null) {
-            append(sb, BROADCAST_AREA, broadcastArea);// format time
-        }
-
-        for (Map.Entry<String, Object> e : new TreeMap<>(properties).entrySet()) {// sort
-            sb.append(e.getKey()).append(": ");
-            Object v = e.getValue();
-            if (v instanceof List) {
-                for (Object o : (List) v) {
-
-                }
-            } else {
-                sb.append(v);
-            }
-            sb.append(System.lineSeparator());
-        }
-        return sb.toString();
     }
 
     public SortedMap<String, String> asString() {
@@ -133,17 +88,54 @@ public class MaritimeMessageMetadata {
         result.put(CREATION_TIME, creationTime.toString());// format time
         if (broadcastArea != null) {
             String b = broadcastArea.toString();
-            if (broadcastTTL != null) {
-                b += "?broadcast-ttl=" + broadcastTTL.toString();
-            }
+            b += "?broadcast-ttl=" + broadcastTTL.toString();
             result.put(BROADCAST_AREA, b);// format time
         }
 
         return result;
     }
 
-    private static void append(StringBuilder sb, String key, Object o) {
-        sb.append(key).append(": ").append(o).append(System.lineSeparator());
+    public MaritimeMessageMetadata broadcastTo(Shape broadcastArea) {
+        return broadcastTo(broadcastArea, BroadcastTTL.INSTANT);
+    }
+
+    public MaritimeMessageMetadata broadcastTo(Shape broadcastArea, BroadcastTTL ttl) {
+        this.broadcastArea = requireNonNull(broadcastArea);
+        this.broadcastTTL = requireNonNull(ttl);
+        return this;
+    }
+
+    public MaritimeId getAuthor() {
+        return requireNonNull(authorId);
+    }
+
+    public Shape getBroadcastArea() {
+        return broadcastArea;
+    }
+
+    public BroadcastTTL getBroadcastTTL() {
+        return broadcastTTL;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public MaritimeMessageMetadata getPrevious() {
+        return previous;
+    }
+
+    public MaritimeMessageMetadata getRoot() {
+        MaritimeMessageMetadata root = this;
+        while (root.previous != null) {
+            root = root.previous;
+        }
+        return root;
+    }
+
+    public MaritimeMessageMetadata setAuthor(MaritimeId maritimeId) {
+        this.authorId = requireNonNull(maritimeId);
+        return this;
     }
 
     public abstract class Acknowledgement {
@@ -154,7 +146,7 @@ public class MaritimeMessageMetadata {
     }
 
     public static enum BroadcastTTL {
-        INSTANT, COUPLE_OF_MINUTES;
+        COUPLE_OF_MINUTES, INSTANT;
     }
 
     // Metadata
@@ -163,9 +155,38 @@ public class MaritimeMessageMetadata {
     // who are we allowed to send the message to
 
     public static class Recipiant {
-        MaritimeId id;
         Object callback;
+        MaritimeId id;
         long timeout;
         TimeUnit unit;
     }
+
+    //
+    // @SuppressWarnings({ "unused", "rawtypes" })
+    // public String toString() {
+    // StringBuilder sb = new StringBuilder();
+    // append(sb, AUTHOR_ID, authorId);
+    // if (authorPosition != null) {
+    // append(sb, AUTHOR_POSITION, authorPosition);
+    // }
+    // append(sb, CREATION_TIME, creationTime);// format time
+    // if (broadcastArea != null) {
+    // append(sb, BROADCAST_AREA, broadcastArea);// format time
+    // }
+    //
+    // for (Map.Entry<String, Object> e : new TreeMap<>(properties).entrySet()) {// sort
+    // sb.append(e.getKey()).append(": ");
+    // Object v = e.getValue();
+    // if (v instanceof List) {
+    // for (Object o : (List) v) {
+    //
+    // }
+    // } else {
+    // sb.append(v);
+    // }
+    // sb.append(System.lineSeparator());
+    // }
+    // return sb.toString();
+    // }
+
 }

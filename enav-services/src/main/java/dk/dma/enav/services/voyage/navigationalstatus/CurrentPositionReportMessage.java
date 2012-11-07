@@ -32,7 +32,6 @@ public class CurrentPositionReportMessage extends ServiceMessage {
     }
 
     public CurrentPositionReportMessage(ShipId id, Position point) {
-        setSource(id);
         setPosition(point);
     }
 
