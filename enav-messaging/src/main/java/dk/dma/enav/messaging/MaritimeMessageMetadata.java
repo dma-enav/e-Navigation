@@ -52,6 +52,8 @@ public class MaritimeMessageMetadata implements Serializable {
     // boer den vaere paa beskeden??
     // eller boer man kunne identifiere de enkelte frames?
     // Det er primaert taenkt til at kunne reply paa en besked
+    // http://www.eaipatterns.com/RequestReplyJmsExample.html
+    // http://docs.oracle.com/cd/E13171_01/alsb/docs25/interopjms/MsgIDPatternforJMS.html
     private final UUID id = UUID.randomUUID();
 
     private final MaritimeMessageMetadata previous;
