@@ -5,9 +5,11 @@ import java.io.Serializable;
 import dk.dma.enav.model.voyage.endpoint.Endpoint;
 
 public class Voyage implements Serializable {
+
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
+    /** The currently active route. */
     ActiveRoute activeRoute;
 
     Endpoint from;

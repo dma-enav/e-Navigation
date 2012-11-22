@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.geometry.Shape;
+import dk.dma.enav.model.operator.OperatorId;
 
 /**
  * MaritimeMessageMetadata is metadata information that is being sent around with a message.
@@ -37,7 +38,12 @@ public class MaritimeMessageMetadata implements Serializable {
     }
 
     /** The id of the ship or shore station that created the message. */
-    private MaritimeId authorId;
+
+    // The person
+    private OperatorId operatorId;
+
+    // the organization (on behalf)
+    private MaritimeId sourceId;
 
     private Position authorPosition;
 
@@ -60,6 +66,12 @@ public class MaritimeMessageMetadata implements Serializable {
 
     List<Recipiant> recipiants = new ArrayList<>();
 
+    // If broadcast will attempt to deliver it to new clients??
+    // For how long time to try and deliver a message before failling
+    private long timeToLive;
+
+    // MS
+
     public MaritimeMessageMetadata() {
         this.previous = null;
 
@@ -69,21 +81,9 @@ public class MaritimeMessageMetadata implements Serializable {
         this.previous = requireNonNull(previous);
     }
 
-    public MaritimeMessageMetadata addRecipient(MaritimeId id) {
-        return this;
-    }
-
-    // De her ting skal over i testbeden
-    // Message metadata er udelukkende hvad der bliver sendt over wire.
-    //
-    public MaritimeMessageMetadata addRecipient(MaritimeId id, Runnable callback, long timeout, TimeUnit unit) {
-
-        return this;
-    }
-
     public SortedMap<String, String> asString() {
         TreeMap<String, String> result = new TreeMap<>();
-        result.put(AUTHOR_ID, authorId.toString());
+        result.put(AUTHOR_ID, operatorId.toString());
         if (authorPosition != null) {
             result.put(AUTHOR_POSITION, authorPosition.toString());
         }
@@ -97,19 +97,17 @@ public class MaritimeMessageMetadata implements Serializable {
         return result;
     }
 
-    public MaritimeMessageMetadata broadcastTo(Shape broadcastArea) {
-        return broadcastTo(broadcastArea, BroadcastTTL.INSTANT);
-    }
-
-    public MaritimeMessageMetadata broadcastTo(Shape broadcastArea, BroadcastTTL ttl) {
-        this.broadcastArea = requireNonNull(broadcastArea);
-        this.broadcastTTL = requireNonNull(ttl);
-        return this;
-    }
-
     public MaritimeId getAuthor() {
-        return requireNonNull(authorId);
+        return requireNonNull(operatorId);
     }
+
+    // De her ting skal over i testbeden
+    // Message metadata er udelukkende hvad der bliver sendt over wire.
+    //
+    // public MaritimeMessageMetadata addRecipient(MaritimeId id, Runnable callback, long timeout, TimeUnit unit) {
+    //
+    // return this;
+    // }
 
     public Shape getBroadcastArea() {
         return broadcastArea;
@@ -135,9 +133,41 @@ public class MaritimeMessageMetadata implements Serializable {
         return root;
     }
 
-    public MaritimeMessageMetadata setAuthor(MaritimeId maritimeId) {
-        this.authorId = requireNonNull(maritimeId);
+    /**
+     * Sets the id of the operator.
+     * 
+     * @param operatorId
+     *            the id of the operator
+     * @return this
+     */
+    public MaritimeMessageMetadata setOperatorId(OperatorId operatorId) {
+        this.operatorId = requireNonNull(operatorId);
         return this;
+    }
+
+    public MaritimeMessageMetadata setSourceId(MaritimeId sourceId) {
+        this.sourceId = sourceId;
+        return this;
+    }
+
+    public MaritimeMessageMetadata setRecipient(MaritimeId id) {
+        return this;
+    }
+
+    public MaritimeMessageMetadata setRecipient(Shape broadcastArea) {
+        return setRecipient(broadcastArea, BroadcastTTL.INSTANT);
+    }
+
+    public MaritimeMessageMetadata setRecipient(Shape broadcastArea, BroadcastTTL ttl) {
+        this.broadcastArea = requireNonNull(broadcastArea);
+        this.broadcastTTL = requireNonNull(ttl);
+        return this;
+    }
+
+    public static void main(String[] args) {
+        double m = Integer.MAX_VALUE;
+        System.out.println(m);
+        System.out.println(TimeUnit.DAYS.convert((long) m, TimeUnit.MILLISECONDS));
     }
 
     public abstract class Acknowledgement {

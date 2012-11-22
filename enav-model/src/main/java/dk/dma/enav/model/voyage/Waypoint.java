@@ -6,10 +6,11 @@ import java.util.Date;
 import dk.dma.enav.model.geometry.Line;
 
 public class Waypoint implements Serializable {
+
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    /** ETA at waypoint . */
+    /** ETA at waypoint. */
     private Date eta;
 
     /** Mandatory latitude. */
