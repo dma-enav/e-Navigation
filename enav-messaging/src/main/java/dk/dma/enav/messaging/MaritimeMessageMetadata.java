@@ -35,15 +35,17 @@ public class MaritimeMessageMetadata implements Serializable {
         // InetAddress ip = InetAddress.getLocalHost();
         // NetworkInterface network = NetworkInterface.getByInetAddress(ip);
         // byte[] mac = network.getHardwareAddress();
+        // boer den vaere paa beskeden??
+        // eller boer man kunne identifiere de enkelte frames?
+        // Det er primaert taenkt til at kunne reply paa en besked
+        // http://www.eaipatterns.com/RequestReplyJmsExample.html
+        // http://docs.oracle.com/cd/E13171_01/alsb/docs25/interopjms/MsgIDPatternforJMS.html
+
     }
 
     /** The id of the ship or shore station that created the message. */
 
     // The person
-    private OperatorId operatorId;
-
-    // the organization (on behalf)
-    private MaritimeId sourceId;
 
     private Position authorPosition;
 
@@ -55,22 +57,31 @@ public class MaritimeMessageMetadata implements Serializable {
     private final Date creationTime = new Date();
 
     /** The message id. */
-    // boer den vaere paa beskeden??
-    // eller boer man kunne identifiere de enkelte frames?
-    // Det er primaert taenkt til at kunne reply paa en besked
-    // http://www.eaipatterns.com/RequestReplyJmsExample.html
-    // http://docs.oracle.com/cd/E13171_01/alsb/docs25/interopjms/MsgIDPatternforJMS.html
     private final UUID id = UUID.randomUUID();
+
+    /** An optional operator id (person authorizing the message) for the message. */
+    private OperatorId operatorId;
 
     private final MaritimeMessageMetadata previous;
 
     List<Recipiant> recipiants = new ArrayList<>();
+
+    /** The id of the ship or organization that created the message */
+    private MaritimeId sourceId;
 
     // If broadcast will attempt to deliver it to new clients??
     // For how long time to try and deliver a message before failling
     private long timeToLive;
 
     // MS
+
+    public MaritimeId getSourceId() {
+        return sourceId;
+    }
+
+    public long getTimeToLive() {
+        return timeToLive;
+    }
 
     public MaritimeMessageMetadata() {
         this.previous = null;
@@ -145,11 +156,6 @@ public class MaritimeMessageMetadata implements Serializable {
         return this;
     }
 
-    public MaritimeMessageMetadata setSourceId(MaritimeId sourceId) {
-        this.sourceId = sourceId;
-        return this;
-    }
-
     public MaritimeMessageMetadata setRecipient(MaritimeId id) {
         return this;
     }
@@ -161,6 +167,11 @@ public class MaritimeMessageMetadata implements Serializable {
     public MaritimeMessageMetadata setRecipient(Shape broadcastArea, BroadcastTTL ttl) {
         this.broadcastArea = requireNonNull(broadcastArea);
         this.broadcastTTL = requireNonNull(ttl);
+        return this;
+    }
+
+    public MaritimeMessageMetadata setSourceId(MaritimeId sourceId) {
+        this.sourceId = sourceId;
         return this;
     }
 

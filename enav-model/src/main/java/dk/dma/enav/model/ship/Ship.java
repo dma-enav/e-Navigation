@@ -6,6 +6,9 @@ import dk.dma.enav.model.voyage.Voyage;
 
 public class Ship extends MaritimePeer {
 
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
+
     private Voyage current;
 
     private ShipId id;

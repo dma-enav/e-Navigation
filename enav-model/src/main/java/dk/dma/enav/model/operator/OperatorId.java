@@ -18,7 +18,7 @@ package dk.dma.enav.model.operator;
 import dk.dma.enav.model.MaritimeId;
 
 /**
- * 
+ * The id of an {@link Operator}.
  */
 public class OperatorId extends MaritimeId {
 
