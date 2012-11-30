@@ -214,6 +214,14 @@ public class Position implements Element {
         return "(" + getLatitudeAsString() + ", " + getLongitudeAsString() + ")";
     }
 
+    public Position withLongitude(double longitude) {
+        return new Position(latitude, longitude);
+    }
+
+    public Position withLatitude(double longitude) {
+        return new Position(latitude, longitude);
+    }
+
     /**
      * Creates a new position from the specified latitude and longitude.
      * 
