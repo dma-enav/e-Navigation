@@ -56,9 +56,6 @@ public class Position implements Element {
         // We want simple equals and hashCode implementation. So we make sure
         // that
         // positions are never constructed with -0.0 as latitude or longitude.
-        // TODO Should we round in any way???
-        // Could be useful in equals, 64 bit is a lot of digits
-        // So, for example,
         this.latitude = latitude == -0.0 ? 0.0 : latitude;
         this.longitude = longitude == -0.0 ? 0.0 : longitude;
     }
@@ -76,6 +73,7 @@ public class Position implements Element {
         return other instanceof Position && equals((Position) other);
     }
 
+    // We probably want another function that also takes a precision.
     public boolean equals(Position other) {
         // id longitude 180 == - 180???
         return other == this || other != null && latitude == other.latitude && longitude == other.longitude;
@@ -116,6 +114,16 @@ public class Position implements Element {
     public double geodesicInitialBearingTo(Position location) {
         return CoordinateSystem.vincentyFormula(getLatitude(), getLongitude(), location.getLatitude(),
                 location.getLongitude(), VincentyCalculationType.INITIAL_BEARING);
+    }
+
+    public long getCell(double degress) {
+        if (degress < 0.0001) {
+            throw new IllegalArgumentException("degress = " + degress);
+        } else if (degress > 100) {
+            throw new IllegalArgumentException("degress = " + degress);
+        }
+        return (long) (Math.floor(getLatitude() / degress) * (360.0 / degress))
+                + (long) ((360.0 + getLatitude()) / degress) - (long) (360L / degress);
     }
 
     /**
@@ -214,11 +222,11 @@ public class Position implements Element {
         return "(" + getLatitudeAsString() + ", " + getLongitudeAsString() + ")";
     }
 
-    public Position withLongitude(double longitude) {
+    public Position withLatitude(double longitude) {
         return new Position(latitude, longitude);
     }
 
-    public Position withLatitude(double longitude) {
+    public Position withLongitude(double longitude) {
         return new Position(latitude, longitude);
     }
 
@@ -236,4 +244,9 @@ public class Position implements Element {
     public static Position create(double latitude, double longitude) {
         return new Position(latitude, longitude);
     }
+
+    public static boolean isValid(double latitude, double longitude) {
+        return latitude <= 90 && latitude >= -90 && longitude <= 180 && longitude >= -180;
+    }
+
 }
