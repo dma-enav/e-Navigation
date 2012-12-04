@@ -13,8 +13,6 @@ public interface MaritimeMessageHandler<T extends MaritimeMessage> {
      * 
      * @param message
      *            the message to handle
-     * @param metadata
-     *            metadata about the message
      */
-    void handle(T message, MaritimeMessageMetadata metadata);
+    void handle(T message);
 }
