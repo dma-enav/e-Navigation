@@ -171,9 +171,9 @@ public class Country implements Serializable {
         return country;
     }
 
-    public static Country getCountryForMmsi(Long mmsi) {
+    public static Country getCountryForMmsi(Integer mmsi) {
         Country country = null;
-        String str = Long.toString(mmsi);
+        String str = Integer.toString(mmsi);
         if (str.length() == 9) {
             str = str.substring(0, 3);
             country = getByMid(Integer.parseInt(str));
