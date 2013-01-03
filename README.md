@@ -5,14 +5,15 @@ A model and a service catalog for e-navigation:
 
 The project consists of 3 main parts.
 <ol>
-  <li>eNav-model:     A model of the maritime domain (still under development).</li>
-  <li>eNav-messages:  A small framework for sending messages between different peers.</li>
-  <li>eNav-services  A number of e-Navigation services.</li>
+  <li>enav-model:     A model of the maritime domain (still under development).</li>
+  <li>enav-messages:  A small framework for sending messages between different peers.</li>
+  <li>enav-services:  A number of e-Navigation services.</li>
+  <li>enav-util:      Various utility classes.</li>
 </ol>
 
 eNav-model
 ==========
-The eNav-model sub-project is a conceptual model of many of the common topics related to the maritime domain.
+The eNav-model sub-project is a conceptual model of many of the common topics in the maritime domain.
 It describes the various entities, their attribtues, roles and relationships.
 The main purpose of the model is to represent the vocabulary and key concepts of the maritime domain. 
 The domain model provides a structural view of the maritime domain that can be complemented by other dynamic views, 
@@ -26,7 +27,7 @@ It can also add precision and focus the discussion among business users as well 
 eNav-messages
 =============
 We suggest an archicture in which various agents (such as ships, VTS centers or lighthouses) communicate with each others
-by exchanging various messages.
+by exchanging a number of predifined messages.
 Essentially, a message is a structured piece of information sent from one agent to another over a communication channel.
 Some messages are requests made to one agent by another, other messages deliver data or notification to another agent.
 In most applications that we'll discuss, a message consists of a message identifier and, 
@@ -42,3 +43,7 @@ Describe howto
 eNav-services
 =============
 eNav-services contains some of the services we suggest for the eNavigation service portfolio.
+
+eNav-util
+=============
+Various utilities

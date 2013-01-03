@@ -123,7 +123,7 @@ public class Position implements Element {
             throw new IllegalArgumentException("degress = " + degress);
         }
         return (long) (Math.floor(getLatitude() / degress) * (360.0 / degress))
-                + (long) ((360.0 + getLatitude()) / degress) - (long) (360L / degress);
+                + (long) ((360.0 + getLongitude()) / degress) - (long) (360L / degress);
     }
 
     /**
@@ -228,6 +228,23 @@ public class Position implements Element {
 
     public Position withLongitude(double longitude) {
         return new Position(latitude, longitude);
+    }
+
+    // we lose some pression
+
+    public static Position fromPackedLong(long l) {
+        return new Position(Float.intBitsToFloat((int) (l >> 32)), Float.intBitsToFloat((int) l));
+    }
+
+    /**
+     * Packs the position into a long (losing some precision). Can be read later by
+     * 
+     * @return the packet long
+     */
+    public long toPackedLong() {
+        float lat = (float) getLatitude();
+        float lon = (float) getLongitude();
+        return ((long) Float.floatToRawIntBits(lat) << 32) + Float.floatToRawIntBits(lon);
     }
 
     /**
