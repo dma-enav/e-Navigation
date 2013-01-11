@@ -15,6 +15,7 @@ public class ShipId extends MaritimeId {
     private final String id;
 
     private ShipId(String id) {
+        super("ship");
         this.id = requireNonNull(id, "id is null");
     }
 
@@ -24,7 +25,7 @@ public class ShipId extends MaritimeId {
     }
 
     public boolean equals(ShipId other) {
-        return other == this || (other != null && id.equals(other.id));
+        return other == this || other != null && id.equals(other.id);
     }
 
     public String getId() {
@@ -43,5 +44,5 @@ public class ShipId extends MaritimeId {
     public static ShipId create(String id) {
         return new ShipId(id);
     }
-    
+
 }

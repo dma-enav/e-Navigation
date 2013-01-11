@@ -22,6 +22,13 @@ import dk.dma.enav.model.MaritimeId;
  */
 public class OperatorId extends MaritimeId {
 
+    /**
+     * @param scheme
+     */
+    public OperatorId() {
+        super("operator");
+    }
+
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 

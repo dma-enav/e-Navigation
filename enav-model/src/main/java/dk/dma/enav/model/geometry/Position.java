@@ -33,10 +33,10 @@ public class Position implements Element {
     private static final long serialVersionUID = 1L;
 
     /** The latitude part of the position. */
-    private final double latitude;
+    final double latitude;
 
     /** The longitude part of the position. */
-    private final double longitude;
+    final double longitude;
 
     /**
      * Constructor given position and timezone
@@ -47,7 +47,7 @@ public class Position implements Element {
      *            Negative east of Prime Meridian
      */
 
-    private Position(double latitude, double longitude) {
+    Position(double latitude, double longitude) {
         if (latitude > 90 || latitude < -90) {
             throw new IllegalArgumentException("Illegal latitude must be between -90 and 90, was " + latitude);
         } else if (longitude > 180 || longitude < -180) {

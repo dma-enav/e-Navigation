@@ -17,6 +17,10 @@ public class Circle extends Shape {
     /** The radius of the circle. */
     private final double radius;
 
+    public Circle(double latitude, double longitude, double radius, CoordinateSystem cs) {
+        this(Position.create(latitude, longitude), radius, cs);
+    }
+
     public Circle(Position center, double radius, CoordinateSystem cs) {
         super(cs);
         this.center = requireNonNull(center, "center is null");
@@ -98,11 +102,22 @@ public class Circle extends Shape {
     /**
      * Returns a new circle with the same radius as this circle but with the new position as the center
      * 
-     * @param newCenter
+     * @param center
      *            the new center of the circle
      * @return a new circle
      */
-    public Circle withCenter(Position newCenter) {
-        return new Circle(newCenter, radius, cs);
+    public Circle withCenter(Position center) {
+        return new Circle(center, radius, cs);
+    }
+
+    /**
+     * Returns a new circle with the same center as this circle but with the new radius.
+     * 
+     * @param radius
+     *            the new radius of the circle
+     * @return a new circle
+     */
+    public Circle withRadius(double radius) {
+        return new Circle(center, radius, cs);
     }
 }
