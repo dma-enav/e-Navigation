@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * A shape has an area
  **/
+// TODO rename to area
 public abstract class Shape implements Element {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;

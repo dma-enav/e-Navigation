@@ -67,7 +67,8 @@
   <modules>
     <module>enav-model</module>
     <module>enav-messaging</module>
-    <module>enav-services</module>
+    <module>enav-network</module>
+    <module>enav-service</module>
     <module>enav-util</module>
   </modules>
 </project>
