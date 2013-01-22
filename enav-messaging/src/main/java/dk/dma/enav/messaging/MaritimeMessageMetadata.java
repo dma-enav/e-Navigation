@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Position;
-import dk.dma.enav.model.geometry.Shape;
+import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.operator.OperatorId;
 
 /**
@@ -49,7 +49,7 @@ public class MaritimeMessageMetadata implements Serializable {
 
     private Position authorPosition;
 
-    private Shape broadcastArea;
+    private Area broadcastArea;
 
     private BroadcastTTL broadcastTTL;
 
@@ -120,7 +120,7 @@ public class MaritimeMessageMetadata implements Serializable {
     // return this;
     // }
 
-    public Shape getBroadcastArea() {
+    public Area getBroadcastArea() {
         return broadcastArea;
     }
 
@@ -160,11 +160,11 @@ public class MaritimeMessageMetadata implements Serializable {
         return this;
     }
 
-    public MaritimeMessageMetadata setRecipient(Shape broadcastArea) {
+    public MaritimeMessageMetadata setRecipient(Area broadcastArea) {
         return setRecipient(broadcastArea, BroadcastTTL.INSTANT);
     }
 
-    public MaritimeMessageMetadata setRecipient(Shape broadcastArea, BroadcastTTL ttl) {
+    public MaritimeMessageMetadata setRecipient(Area broadcastArea, BroadcastTTL ttl) {
         this.broadcastArea = requireNonNull(broadcastArea);
         this.broadcastTTL = requireNonNull(ttl);
         return this;

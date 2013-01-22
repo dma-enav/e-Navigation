@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dk.dma.enav.service.spi;
+package dk.dma.enav.service.exceptions;
 
 /**
  *
  * @author Kasper Nielsen
  */
-public class MaritimeConversationService {
+public class ServiceAccessException {
 
 }

@@ -78,4 +78,7 @@ public interface NetworkFuture<T> {
      *             if a completion computation threw an exception
      */
     T getNow(T valueIfAbsent);
+
+    // Returns how long time this have been running
+    // long getLatency(TimeUnit unit);
 }

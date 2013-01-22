@@ -15,10 +15,14 @@
  */
 package dk.dma.enav.net;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 
  * @author Kasper Nielsen
  */
 public interface ServiceRegistration {
+    boolean awaitRegistered(long timeout, TimeUnit unit);
+
     void cancel();
 }

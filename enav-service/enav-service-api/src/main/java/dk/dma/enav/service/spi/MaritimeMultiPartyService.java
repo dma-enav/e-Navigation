@@ -15,28 +15,20 @@
  */
 package dk.dma.enav.service.spi;
 
-import static java.util.Objects.requireNonNull;
-import dk.dma.enav.messaging.MaritimeMessage;
-
 /**
  * 
  * @author Kasper Nielsen
  */
-public abstract class MaritimeServiceMessage<T> extends MaritimeMessage {
+public class MaritimeMultiPartyService extends MaritimeService {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    private final Class<? extends MaritimeService> serviceType;
-
-    public MaritimeServiceMessage(Class<? extends MaritimeService> serviceType) {
-        this.serviceType = requireNonNull(serviceType);
-    }
-
     /**
-     * @return the serviceType
+     * @param name
      */
-    public Class<? extends MaritimeService> getServiceType() {
-        return serviceType;
+    protected MaritimeMultiPartyService(String name) {
+        super(name);
     }
+
 }

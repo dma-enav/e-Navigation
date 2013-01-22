@@ -20,17 +20,22 @@ import java.util.concurrent.TimeUnit;
 
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.PositionTime;
-import dk.dma.enav.model.geometry.Shape;
+import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.service.spi.InitiatingMessage;
 import dk.dma.enav.service.spi.MaritimeInformationMessage;
 import dk.dma.enav.service.spi.MaritimeService;
 import dk.dma.enav.service.spi.MaritimeServiceMessage;
 
+/**
+ * A connection to e-navigation network.
+ * 
+ * @author Kasper Nielsen
+ */
 public interface MaritimeNetworkConnection extends AutoCloseable {
 
     /**
-     * Blocks until the connection has reached the terminated state, or the timeout occurs, or the current thread is
-     * interrupted, whichever happens first.
+     * Blocks until the connection has been fully closed, or the timeout occurs, or the current thread is interrupted,
+     * whichever happens first.
      * 
      * @param timeout
      *            the maximum time to wait
@@ -39,10 +44,10 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      * @throws InterruptedException
      *             if interrupted while waiting
      */
-    boolean awaitTerminated(long timeout, TimeUnit unit) throws InterruptedException;
+    boolean awaitFullyClosed(long timeout, TimeUnit unit) throws InterruptedException;
 
     /**
-     * Asynchronously shutdowns this connection. use {@link #awaitTerminated(long, TimeUnit)} to await complete
+     * Asynchronously shutdowns this connection. use {@link #awaitFullyClosed(long, TimeUnit)} to await complete
      * termination.
      */
     void close();
@@ -54,14 +59,14 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      *            the shape to look for id's within
      * @return a future map
      */
-    NetworkFuture<Map<MaritimeId, PositionTime>> findAll(Shape shape);
+    NetworkFuture<Map<MaritimeId, PositionTime>> findAll(Area shape);
 
     NetworkFuture<Map<MaritimeId, Class<? extends MaritimeService>>> findServices(
             Class<? extends MaritimeService> serviceType);
 
-    boolean isShutdown();
+    boolean isClosed();
 
-    boolean isTerminated();
+    boolean isFullyClosed();
 
     /**
      * Registers the specified service.

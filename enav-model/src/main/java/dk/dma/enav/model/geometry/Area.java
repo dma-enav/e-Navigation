@@ -6,13 +6,13 @@ import static java.util.Objects.requireNonNull;
  * A shape has an area
  **/
 // TODO rename to area
-public abstract class Shape implements Element {
+public abstract class Area implements Element {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     final CoordinateSystem cs;
 
-    public Shape(CoordinateSystem cs) {
+    public Area(CoordinateSystem cs) {
         this.cs = requireNonNull(cs);
     }
 

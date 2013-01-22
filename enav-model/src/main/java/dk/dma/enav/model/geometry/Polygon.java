@@ -1,6 +1,6 @@
 package dk.dma.enav.model.geometry;
 
-public class Polygon extends Shape {
+public class Polygon extends Area {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,7 @@
 package dk.dma.enav.service.general.subscribe;
 
 import dk.dma.enav.model.MaritimeId;
-import dk.dma.enav.model.geometry.Shape;
+import dk.dma.enav.model.geometry.Area;
 
 /**
  * Ide'en er at
@@ -18,7 +18,7 @@ public class MessageSubscription {
     // Otherwise where is the center
     private MaritimeId relativeTo;
 
-    private Shape shape;
+    private Area shape;
 
     /**
      * @return the messageTypes
@@ -37,7 +37,7 @@ public class MessageSubscription {
     /**
      * @return the shape
      */
-    public Shape getShape() {
+    public Area getShape() {
         return shape;
     }
 
@@ -61,7 +61,7 @@ public class MessageSubscription {
      * @param shape
      *            the shape to set
      */
-    public void setShape(Shape shape) {
+    public void setShape(Area shape) {
         this.shape = shape;
     }
 }

@@ -15,19 +15,25 @@
  */
 package dk.dma.enav.service.spi;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.Serializable;
 
 /**
  * 
  * @author Kasper Nielsen
  */
+// Maaske skal den ikke vaere serializeable???
+// Serveren skal ikke bruge den. kun nogle informationer derfra
 public abstract class MaritimeService implements Serializable {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    protected MaritimeService(String name) {
+    private final String name;
 
+    protected MaritimeService(String name) {
+        this.name = requireNonNull(name);
     }
 
     /**
@@ -41,6 +47,6 @@ public abstract class MaritimeService implements Serializable {
      * @return the name
      */
     public String getName() {
-        return "";
+        return name;
     }
 }

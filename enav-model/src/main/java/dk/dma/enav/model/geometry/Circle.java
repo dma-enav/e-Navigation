@@ -6,7 +6,7 @@ import static java.util.Objects.requireNonNull;
  * A circle
  * 
  */
-public class Circle extends Shape {
+public class Circle extends Area {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
