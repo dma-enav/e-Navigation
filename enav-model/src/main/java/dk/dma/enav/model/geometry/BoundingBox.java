@@ -15,8 +15,7 @@
  */
 package dk.dma.enav.model.geometry;
 
-
-public class BoundingBox extends Polygon {
+public final class BoundingBox extends Polygon {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 

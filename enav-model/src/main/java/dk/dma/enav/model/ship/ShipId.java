@@ -21,7 +21,7 @@ import dk.dma.enav.model.MaritimeId;
 /**
  * Ideen er at kunne idenficere et skib paa en unik maade.
  */
-public class ShipId extends MaritimeId {
+public final class ShipId extends MaritimeId {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
