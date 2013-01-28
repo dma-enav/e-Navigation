@@ -1,5 +1,4 @@
-eNav-api
-========
+## e-Navigation ##
 
 A model and a service catalog for e-navigation:
 
@@ -11,8 +10,25 @@ The project consists of 3 main parts.
   <li>enav-util:      Various utility classes.</li>
 </ol>
 
-eNav-model
-==========
+## Prerequisites ##
+
+* Java JDK 1.7
+* Maven
+
+## Eclipse setup ##
+
+    mvn eclipse:eclipse
+
+Import into Eclipse
+
+## Building ##
+
+    mvn clean install
+
+## Modules ##
+
+### eNav-model ###
+
 The eNav-model sub-project is a conceptual model of many of the common topics in the maritime domain.
 It describes the various entities, their attribtues, roles and relationships.
 The main purpose of the model is to represent the vocabulary and key concepts of the maritime domain. 
@@ -24,8 +40,8 @@ We believe it can be effectively used to verify and validate the understanding o
 various stakeholders. Furthermore it defines the vocabulary and can be helpful as a communication tool. 
 It can also add precision and focus the discussion among business users as well as between the technical and business team.
 
-eNav-messages
-=============
+### eNav-messages ###
+
 We suggest an archicture in which various agents (such as ships, VTS centers or lighthouses) communicate with each others
 by exchanging a number of predifined messages.
 Essentially, a message is a structured piece of information sent from one agent to another over a communication channel.
@@ -40,10 +56,10 @@ Describe howto
 </ol>
 
 
-eNav-services
-=============
+### eNav-services ###
+
 eNav-services contains some of the services we suggest for the eNavigation service portfolio.
 
-eNav-util
-=============
+### eNav-util ###
+
 Various utilities
