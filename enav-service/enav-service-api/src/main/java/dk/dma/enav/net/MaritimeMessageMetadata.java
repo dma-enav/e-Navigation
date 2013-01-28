@@ -40,7 +40,6 @@ import dk.dma.enav.model.operator.OperatorId;
  * 
  * @author Kasper Nielsen
  */
-@Deprecated
 public class MaritimeMessageMetadata implements Serializable {
 
     /** serialVersionUID. */

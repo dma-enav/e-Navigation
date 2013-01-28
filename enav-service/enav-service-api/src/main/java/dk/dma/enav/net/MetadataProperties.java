@@ -19,7 +19,6 @@ package dk.dma.enav.net;
  * 
  * @author Kasper Nielsen
  */
-@Deprecated
 class MetadataProperties {
 
     static final String AUTHOR_ID = "author-id";
