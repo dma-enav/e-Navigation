@@ -5,17 +5,19 @@
 
   <parent>
     <groupId>dk.dma.enav</groupId>
-    <artifactId>enav-parent</artifactId>
+    <artifactId>enav-service-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>enav-service-parent</artifactId>
-  <name>eNav Service Parent</name>
-  <packaging>pom</packaging>
-
-  <modules>
-    <module>enav-service-api</module>
-    <module>enav-service-common</module>
-  </modules>
+  <artifactId>enav-service-common</artifactId>
+  <name>eNav Service Common</name>
+  
+  <dependencies>
+    <dependency>
+       <groupId>${project.groupId}</groupId>
+       <artifactId>enav-service-api</artifactId>
+       <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 </project>

@@ -5,10 +5,7 @@
 	<classpathentry kind="src" path="enav-model/src/test/java"/>
 	<classpathentry kind="src" path="enav-util/src/main/java"/>
 	<classpathentry kind="src" path="enav-service/enav-service-api/src/main/java"/>
-	<classpathentry kind="src" path="enav-service/enav-service-ship/src/main/java"/>
-	<classpathentry kind="src" path="enav-service/enav-service-shore/src/main/java"/>
-	<classpathentry kind="src" path="enav-service/enav-service-voyage/src/main/java"/>
-	<classpathentry kind="src" path="enav-network/enav-network-api/src/main/java"/>
+	<classpathentry kind="src" path="enav-service/enav-service-common/src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.9/junit-4.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="enav-model/src/main/resources"/>
