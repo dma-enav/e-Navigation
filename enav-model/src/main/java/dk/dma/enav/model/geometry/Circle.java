@@ -16,6 +16,7 @@
 package dk.dma.enav.model.geometry;
 
 import static java.util.Objects.requireNonNull;
+import dk.dma.enav.util.function.Predicate;
 
 /**
  * A circle
@@ -60,6 +61,14 @@ public class Circle extends Area {
             return center.distanceTo(c.center, cs) <= radius + c.radius;
         }
         return super.containedWithin(element);
+    }
+
+    public Predicate<Element> containedWithin() {
+        return new Predicate<Element>() {
+            public boolean test(Element element) {
+                return containedWithin(element);
+            }
+        };
     }
 
     public boolean equals(Circle other) {

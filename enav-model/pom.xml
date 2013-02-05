@@ -12,4 +12,13 @@
 
   <artifactId>enav-model</artifactId>
   <name>eNav Model</name>
+  
+    
+  <dependencies>
+    <dependency>
+       <groupId>${project.groupId}</groupId>
+       <artifactId>enav-util</artifactId>
+       <version>${project.version}</version>
+    </dependency>
+    </dependencies>
 </project>

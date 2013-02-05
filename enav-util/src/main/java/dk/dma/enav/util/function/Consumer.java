@@ -15,7 +15,6 @@
  */
 package dk.dma.enav.util.function;
 
-
 /**
  * An operation upon an input object. The operation may modify that object or external state (other objects).
  * 

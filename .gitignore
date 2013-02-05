@@ -1,5 +1,6 @@
 /bin
 target
+.checkstyle
 .settings
 .project
 .classpath
