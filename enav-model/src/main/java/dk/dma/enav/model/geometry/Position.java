@@ -222,7 +222,7 @@ public class Position implements Element {
         return "(" + getLatitudeAsString() + ", " + getLongitudeAsString() + ")";
     }
 
-    public Position withLatitude(double longitude) {
+    public Position withLatitude(double latitude) {
         return new Position(latitude, longitude);
     }
 
