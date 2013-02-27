@@ -29,4 +29,5 @@ public final class MaritimeServicePacket<T> {
     public Position getPosition() {
         return null;
     };
+
 }

@@ -21,10 +21,11 @@ import java.util.concurrent.TimeUnit;
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.geometry.PositionTime;
+import dk.dma.enav.net.broadcast.BroadcastMessage;
 import dk.dma.enav.service.spi.InitiatingMessage;
-import dk.dma.enav.service.spi.MaritimeBroadcastMessage;
 import dk.dma.enav.service.spi.MaritimeService;
 import dk.dma.enav.service.spi.MaritimeServiceMessage;
+import dk.dma.enav.util.function.Consumer;
 
 /**
  * A connection to e-navigation network.
@@ -44,12 +45,12 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      * @throws InterruptedException
      *             if interrupted while waiting
      */
-    boolean awaitFullyClosed(long timeout, TimeUnit unit) throws InterruptedException;
+    boolean awaitTerminated(long timeout, TimeUnit unit) throws InterruptedException;
 
-    NetworkFuture<Void> broadcast(MaritimeBroadcastMessage message);
+    NetworkFuture<Void> broadcast(BroadcastMessage message);
 
     /**
-     * Asynchronously shutdowns this connection. use {@link #awaitFullyClosed(long, TimeUnit)} to await complete
+     * Asynchronously shutdowns this connection. use {@link #awaitTerminated(long, TimeUnit)} to await complete
      * termination.
      */
     void close();
@@ -63,10 +64,7 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      */
     NetworkFuture<Map<MaritimeId, PositionTime>> findAll(Area shape);
 
-    // I expected the value to be replaced with some information class.
-    // Right now it does not really have any functionality
-    NetworkFuture<Map<MaritimeId, Class<? extends MaritimeService>>> findServices(
-            Class<? extends MaritimeService> serviceType);
+    NetworkFuture<Map<MaritimeId, String>> findServices(String name);
 
     /**
      * Invokes the specified service.
@@ -92,7 +90,7 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      * 
      * @return true the connection has been fully closed, following a call to {@link #close()}
      */
-    boolean isFullyClosed();
+    boolean isTerminated();
 
     /**
      * Registers the specified service.
@@ -105,6 +103,8 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      */
     <T extends MaritimeServiceMessage<?>, S extends MaritimeService, E extends MaritimeServiceMessage<T> & InitiatingMessage> ServiceRegistration registerService(
             S service, ServiceCallback<E, T> callback);
+
+    <T extends BroadcastMessage> void subscribe(Class<T> messageType, Consumer<T> consumer);
 
     /**
      * Subscribes to the specific type of information messages within the specified area.

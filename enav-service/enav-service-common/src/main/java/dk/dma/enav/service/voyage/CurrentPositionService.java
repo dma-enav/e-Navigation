@@ -16,8 +16,7 @@
 package dk.dma.enav.service.voyage;
 
 import dk.dma.enav.model.geometry.Position;
-import dk.dma.enav.model.ship.ShipId;
-import dk.dma.enav.service.spi.MaritimeBroadcastMessage;
+import dk.dma.enav.net.broadcast.BroadcastMessage;
 
 /**
  * 
@@ -29,10 +28,7 @@ public class CurrentPositionService {
      * Created by a ship to report its current position.
      * 
      */
-    public static class CurrentPositionReportMessage extends MaritimeBroadcastMessage {
-
-        /** serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+    public static class CurrentPositionReportMessage extends BroadcastMessage {
 
         /** The current course over ground. */
         // TODO unit???
@@ -47,14 +43,6 @@ public class CurrentPositionService {
         /** The current speed over ground. */
         // TODO unit???
         private Double speedOverGround;
-
-        public CurrentPositionReportMessage() {
-
-        }
-
-        public CurrentPositionReportMessage(ShipId id, Position point) {
-            setPosition(point);
-        }
 
         // COG is the direction the GPS receiver is moving and corresponds to the
         // direction of the black Compass arrow.

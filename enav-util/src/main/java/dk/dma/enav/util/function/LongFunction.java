@@ -20,6 +20,7 @@ package dk.dma.enav.util.function;
  * @author Kasper Nielsen
  */
 public abstract class LongFunction<T> extends Function<T, Long> {
+
     /** {@inheritDoc} */
     @Override
     public final Long apply(T t) {

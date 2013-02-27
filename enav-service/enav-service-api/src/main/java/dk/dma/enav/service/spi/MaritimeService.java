@@ -17,7 +17,7 @@ package dk.dma.enav.service.spi;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.Serializable;
+import java.util.ServiceConfigurationError;
 
 /**
  * 
@@ -25,12 +25,17 @@ import java.io.Serializable;
  */
 // Maaske skal den ikke vaere serializeable???
 // Serveren skal ikke bruge den. kun nogle informationer derfra
-public abstract class MaritimeService implements Serializable {
-
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+public abstract class MaritimeService {
 
     private final String name;
+
+    protected MaritimeService() {
+        try {
+            this.name = (String) getClass().getField("NAME").get(null);
+        } catch (ReflectiveOperationException e) {
+            throw new ServiceConfigurationError("oops", e);
+        }
+    }
 
     protected MaritimeService(String name) {
         this.name = requireNonNull(name);

@@ -28,9 +28,6 @@ import dk.dma.enav.service.spi.MaritimeServiceMessage;
  **/
 public class RouteSuggestionService extends MaritimeService {
 
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-
     public RouteSuggestionService() {
         super("imo.voyage.routesuggestion");
     }
@@ -38,13 +35,6 @@ public class RouteSuggestionService extends MaritimeService {
     public static class RequestSuggestion extends MaritimeServiceMessage<SuggestRoute> implements InitiatingMessage {
         /** serialVersionUID. */
         private static final long serialVersionUID = 1L;
-
-        /**
-         * @param serviceType
-         */
-        public RequestSuggestion() {
-            super(RouteSuggestionService.class);
-        }
     }
 
     public static class RouteAcceptance extends MaritimeServiceMessage<Void> {
@@ -52,13 +42,6 @@ public class RouteSuggestionService extends MaritimeService {
         private static final long serialVersionUID = 1L;
 
         RouteSuggestionAcceptance result;
-
-        /**
-         * @param serviceType
-         */
-        public RouteAcceptance() {
-            super(RouteSuggestionService.class);
-        }
     }
 
     public enum RouteSuggestionAcceptance {
@@ -77,13 +60,6 @@ public class RouteSuggestionService extends MaritimeService {
 
         // The route that is suggested
         Route route;
-
-        /**
-         * @param serviceType
-         */
-        public SuggestRoute() {
-            super(RouteSuggestionService.class);
-        }
     }
 
 }

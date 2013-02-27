@@ -16,6 +16,9 @@
 package dk.dma.enav.service.spi;
 
 import static java.util.Objects.requireNonNull;
+
+import java.util.ServiceConfigurationError;
+
 import dk.dma.enav.messaging.MaritimeMessage;
 
 /**
@@ -27,16 +30,30 @@ public abstract class MaritimeServiceMessage<T> extends MaritimeMessage {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    private final Class<? extends MaritimeService> serviceType;
+    private final transient Class<? extends MaritimeService> serviceType;
 
-    public MaritimeServiceMessage(Class<? extends MaritimeService> serviceType) {
-        this.serviceType = requireNonNull(serviceType);
+    @SuppressWarnings("unchecked")
+    public MaritimeServiceMessage() {
+        this.serviceType = (Class<? extends MaritimeService>) requireNonNull(getClass().getDeclaringClass());
+    }
+
+    public String messageName() {
+        String name = getClass().getSimpleName();
+        return name;
+    }
+
+    public String serviceName() {
+        try {
+            return (String) serviceType().getField("NAME").get(null);
+        } catch (ReflectiveOperationException e) {
+            throw new ServiceConfigurationError("oops", e);
+        }
     }
 
     /**
      * @return the serviceType
      */
-    public Class<? extends MaritimeService> getServiceType() {
+    public Class<? extends MaritimeService> serviceType() {
         return serviceType;
     }
 }

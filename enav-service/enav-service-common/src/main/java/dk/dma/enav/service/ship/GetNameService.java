@@ -26,20 +26,12 @@ import dk.dma.enav.service.spi.MaritimeServiceMessage;
  */
 public class GetNameService extends MaritimeService {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
-
-    public GetNameService() {
-        super("imo.ship.getname");
-    }
+    public static final String NAME = "imo.ship.getname";
 
     public static class GetName extends MaritimeServiceMessage<Reply> implements InitiatingMessage {
+
         /** serialVersionUID. */
         private static final long serialVersionUID = 1L;
-
-        public GetName() {
-            super(GetNameService.class);
-        }
     }
 
     public static class Reply extends MaritimeServiceMessage<Void> {
@@ -48,17 +40,27 @@ public class GetNameService extends MaritimeService {
         private static final long serialVersionUID = 1L;
 
         /** The name of the ship. */
-        private final String name;
+        private String name;
 
         public Reply(String name) {
-            super(GetNameService.class);
             this.name = requireNonNull(name);
         }
 
-        /**
-         * @return the name
-         */
+        /** @return the name of the service */
         public String getName() {
+            return name;
+        }
+
+        /**
+         * @param name
+         *            the name to set
+         */
+        protected void setName(String name) {
+            this.name = name;
+        }
+
+        /** {@inheritDoc} */
+        public String toString() {
             return name;
         }
     }
