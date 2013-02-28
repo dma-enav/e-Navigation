@@ -22,10 +22,11 @@ import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.geometry.PositionTime;
 import dk.dma.enav.net.broadcast.BroadcastMessage;
+import dk.dma.enav.net.broadcast.BroadcastProperties;
 import dk.dma.enav.service.spi.InitiatingMessage;
 import dk.dma.enav.service.spi.MaritimeService;
 import dk.dma.enav.service.spi.MaritimeServiceMessage;
-import dk.dma.enav.util.function.Consumer;
+import dk.dma.enav.util.function.BiConsumer;
 
 /**
  * A connection to e-navigation network.
@@ -104,7 +105,7 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
     <T extends MaritimeServiceMessage<?>, S extends MaritimeService, E extends MaritimeServiceMessage<T> & InitiatingMessage> ServiceRegistration registerService(
             S service, ServiceCallback<E, T> callback);
 
-    <T extends BroadcastMessage> void subscribe(Class<T> messageType, Consumer<T> consumer);
+    <T extends BroadcastMessage> void subscribe(Class<T> messageType, BiConsumer<BroadcastProperties, T> consumer);
 
     /**
      * Subscribes to the specific type of information messages within the specified area.
