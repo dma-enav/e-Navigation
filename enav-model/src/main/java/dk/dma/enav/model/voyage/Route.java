@@ -40,9 +40,9 @@ public class Route implements Iterable<Waypoint>, Serializable {
         return waypoints;
     }
 
-    public int getNumberOfPoints() {
-        return waypoints.size();
-    }
+//    public int getNumberOfPoints() {
+//        return waypoints.size();
+//    }
 
     @Override
     public Iterator<Waypoint> iterator() {
