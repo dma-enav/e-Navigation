@@ -16,11 +16,17 @@
 package dk.dma.enav.net.broadcast;
 
 /**
+ * Abstract class for a message that can be broadcast.
  * 
  * @author Kasper Nielsen
  */
 public abstract class BroadcastMessage {
 
+    /**
+     * Returns the broadcast channel on which the broadcast is sent. Defaults (for now) to the name of the class.
+     * 
+     * @return the broadcast channel on which the message should be sent
+     */
     public final String channel() {
         return getClass().getCanonicalName();
     }

@@ -20,18 +20,25 @@ import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.PositionTime;
 
 /**
+ * Properties conveyed to receivers of broadcast messages.
  * 
  * @author Kasper Nielsen
  */
 public class BroadcastProperties {
 
+    /** The id of the ship sending the broadcast. */
     private final MaritimeId id;
 
+    /** The position and time of the ship sending the broadcast. */
     private final PositionTime position;
 
     /**
-     * @param position
      * @param id
+     *            the id of the ship sending the broadcast
+     * @param position
+     *            the position and time of the ship sending the broadcast.
+     * @throws NullPointerException
+     *             if the id or position is null
      */
     public BroadcastProperties(MaritimeId id, PositionTime position) {
         this.position = requireNonNull(position);
@@ -39,14 +46,18 @@ public class BroadcastProperties {
     }
 
     /**
-     * @return the id
+     * Returns the id of the ship sending the broadcast.
+     * 
+     * @return the id of the ship sending the broadcast
      */
     public MaritimeId getId() {
         return id;
     }
 
     /**
-     * @return the position
+     * Returns the position and time of the ship sending the broadcast.
+     * 
+     * @return the position and time of the ship sending the broadcast
      */
     public PositionTime getPosition() {
         return position;

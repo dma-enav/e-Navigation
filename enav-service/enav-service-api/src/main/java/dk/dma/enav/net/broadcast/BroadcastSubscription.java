@@ -16,12 +16,19 @@
 package dk.dma.enav.net.broadcast;
 
 /**
+ * A subscription is created every time a {@link BroadcastListener} is registered.
  * 
  * @author Kasper Nielsen
  */
 public interface BroadcastSubscription {
 
-    long getNumberOfReceivedBroadcasts();
+    /**
+     * Returns the number of messages received for the registered listener.
+     * 
+     * @return the number of messages received
+     */
+    long getNumberOfReceivedMessages();
 
+    /** Stops receiving messages on the listener. */
     void cancel();
 }

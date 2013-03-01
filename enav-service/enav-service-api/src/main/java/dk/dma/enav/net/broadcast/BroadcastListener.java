@@ -16,9 +16,19 @@
 package dk.dma.enav.net.broadcast;
 
 /**
+ * A callback interface for receiving broadcast messages of a specific type.
  * 
  * @author Kasper Nielsen
  */
 public interface BroadcastListener<T extends BroadcastMessage> {
+
+    /**
+     * Invoked whenever a broadcast message was received.
+     * 
+     * @param properties
+     *            properties for the broadcast
+     * @param message
+     *            the message that was received
+     */
     void onMessage(BroadcastProperties properties, T message);
 }
