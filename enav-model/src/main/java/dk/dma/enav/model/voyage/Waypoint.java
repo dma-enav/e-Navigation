@@ -18,8 +18,6 @@ package dk.dma.enav.model.voyage;
 import java.io.Serializable;
 import java.util.Date;
 
-import dk.dma.enav.model.geometry.Line;
-
 public class Waypoint implements Serializable {
 
     
@@ -36,9 +34,9 @@ public class Waypoint implements Serializable {
     /** Mandatory latitude. */
     private double latitude;
 
-    Leg leg;
+//    Leg leg;
 
-    Line line;
+//    Line line;
     // Waypoint related
 
     /** Mandatory longitude. */
@@ -126,36 +124,18 @@ public class Waypoint implements Serializable {
     }
 
     
-    
-    
-    public Leg getLeg() {
-        return leg;
-    }
 
-    public void setLeg(Leg leg) {
-        this.leg = leg;
-    }
-
-    public Line getLine() {
-        return line;
-    }
-
-    public void setLine(Line line) {
-        this.line = line;
-    }
+//    public Line getLine() {
+//        return line;
+//    }
+//
+//    public void setLine(Line line) {
+//        this.line = line;
+//    }
 
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
 
-
-
-    public static class Leg {
-
-        public Leg(){
-            
-        }
-        
-    }
 }
