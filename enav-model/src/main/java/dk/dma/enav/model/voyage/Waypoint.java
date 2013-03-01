@@ -120,6 +120,32 @@ public class Waypoint implements Serializable {
         this.xtdStarboard = xtdStarboard;
     }
 
+    
+    
+    
+    public Leg getLeg() {
+        return leg;
+    }
+
+    public void setLeg(Leg leg) {
+        this.leg = leg;
+    }
+
+    public Line getLine() {
+        return line;
+    }
+
+    public void setLine(Line line) {
+        this.line = line;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+
+
+
     public static class Leg {
 
     }
