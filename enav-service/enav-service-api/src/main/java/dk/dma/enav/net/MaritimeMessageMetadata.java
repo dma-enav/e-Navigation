@@ -35,6 +35,8 @@ import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.operator.OperatorId;
 
+
+
 /**
  * MaritimeMessageMetadata is metadata information that is being sent around with a message.
  * 
