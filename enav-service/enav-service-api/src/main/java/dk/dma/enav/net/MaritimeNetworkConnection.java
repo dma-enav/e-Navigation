@@ -21,12 +21,12 @@ import java.util.concurrent.TimeUnit;
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.geometry.PositionTime;
+import dk.dma.enav.net.broadcast.BroadcastListener;
 import dk.dma.enav.net.broadcast.BroadcastMessage;
-import dk.dma.enav.net.broadcast.BroadcastProperties;
+import dk.dma.enav.net.broadcast.BroadcastSubscription;
 import dk.dma.enav.service.spi.InitiatingMessage;
 import dk.dma.enav.service.spi.MaritimeService;
 import dk.dma.enav.service.spi.MaritimeServiceMessage;
-import dk.dma.enav.util.function.BiConsumer;
 
 /**
  * A connection to e-navigation network.
@@ -48,7 +48,44 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      */
     boolean awaitTerminated(long timeout, TimeUnit unit) throws InterruptedException;
 
-    NetworkFuture<Void> broadcast(BroadcastMessage message);
+    /**
+     * Broadcasts the specified message. No guarantees are made to the delivery of the specified message.
+     * <p>
+     * NOTE: Currently the message is distributed to all clients that are connected to one server.
+     * 
+     * 
+     * @param message
+     *            the message to broadcast
+     * @throws NullPointerException
+     *             if the specified message is null
+     */
+    void broadcast(BroadcastMessage message);
+
+    /**
+     * Subscribes to the the specified type of broadcast messages.
+     * 
+     * @param messageType
+     *            the type of message to listen for
+     * @param consumer
+     *            the consumer of messages
+     * @return a subscription that can be used to cancel the subscription
+     */
+    <T extends BroadcastMessage> BroadcastSubscription broadcastListen(Class<T> messageType,
+            BroadcastListener<T> consumer);
+
+    // /**
+    // * Identical to {@link #broadcastSubscribe(Class, BiConsumer)} except that it will propagate the broadcast
+    // messages
+    // * as the string that was received.
+    // *
+    // * @param channel
+    // * the channel (classname for now) to listen to
+    // * @param consumer
+    // * the consumer of messages
+    // * @return a subscription that can be used to cancel the subscription
+    // */
+    // <T extends BroadcastMessage> BroadcastSubscription broadcastSubscribe(String channel,
+    // BiConsumer<BroadcastProperties, String> consumer);
 
     /**
      * Asynchronously shutdowns this connection. use {@link #awaitTerminated(long, TimeUnit)} to await complete
@@ -104,8 +141,6 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      */
     <T extends MaritimeServiceMessage<?>, S extends MaritimeService, E extends MaritimeServiceMessage<T> & InitiatingMessage> ServiceRegistration registerService(
             S service, ServiceCallback<E, T> callback);
-
-    <T extends BroadcastMessage> void subscribe(Class<T> messageType, BiConsumer<BroadcastProperties, T> consumer);
 
     /**
      * Subscribes to the specific type of information messages within the specified area.

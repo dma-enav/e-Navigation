@@ -21,14 +21,10 @@ package dk.dma.enav.service.spi;
  */
 public class MaritimeMultiPartyService extends MaritimeService {
 
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-
     /**
      * @param name
      */
     protected MaritimeMultiPartyService(String name) {
         super(name);
     }
-
 }

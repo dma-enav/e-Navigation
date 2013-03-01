@@ -25,9 +25,6 @@ import dk.dma.enav.service.NotificationMessage;
 @Deprecated
 public class AreaInformationMessage extends BroadcastMessage {
 
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-
     /** The area that is affected by this warning */
     Area area;
 }

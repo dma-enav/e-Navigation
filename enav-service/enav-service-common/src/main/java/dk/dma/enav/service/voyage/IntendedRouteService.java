@@ -25,9 +25,6 @@ public class IntendedRouteService {
 
     public static class IntendedRouteMessage extends CurrentPositionService.CurrentPositionReportMessage {
 
-        /** serialVersionUID. */
-        private static final long serialVersionUID = 1L;
-
         private Route route;
 
         private int activeWaypoint;
