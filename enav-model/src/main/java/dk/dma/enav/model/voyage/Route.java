@@ -26,6 +26,9 @@ public class Route implements Iterable<Waypoint>, Serializable {
     private final ArrayList<Waypoint> waypoints = new ArrayList<>();
 
     
+    public Route(){
+        
+    }
     
     // private Integer currentWaypoint;
 
@@ -45,4 +48,6 @@ public class Route implements Iterable<Waypoint>, Serializable {
     public Iterator<Waypoint> iterator() {
         return waypoints.iterator();
     }
+    
+    
 }

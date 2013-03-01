@@ -22,6 +22,11 @@ import dk.dma.enav.model.geometry.Line;
 
 public class Waypoint implements Serializable {
 
+    
+    public Waypoint(){
+        
+    }
+    
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
@@ -148,5 +153,9 @@ public class Waypoint implements Serializable {
 
     public static class Leg {
 
+        public Leg(){
+            
+        }
+        
     }
 }
