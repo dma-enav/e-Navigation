@@ -17,15 +17,14 @@ package dk.dma.enav.service.spi;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serializable;
 import java.util.ServiceConfigurationError;
-
-import dk.dma.enav.messaging.MaritimeMessage;
 
 /**
  * 
  * @author Kasper Nielsen
  */
-public abstract class MaritimeServiceMessage<T> extends MaritimeMessage {
+public abstract class MaritimeServiceMessage<T> implements Serializable {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
