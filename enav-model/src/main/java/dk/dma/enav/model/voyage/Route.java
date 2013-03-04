@@ -24,7 +24,7 @@ public class Route implements Iterable<Waypoint>, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final ArrayList<Waypoint> waypoints = new ArrayList<>();
-
+    private int activeWaypoint;
     
     public Route(){
         
@@ -48,6 +48,15 @@ public class Route implements Iterable<Waypoint>, Serializable {
     public Iterator<Waypoint> iterator() {
         return waypoints.iterator();
     }
+
+    public int getActiveWaypoint() {
+        return activeWaypoint;
+    }
+
+    public void setActiveWaypoint(int activeWaypoint) {
+        this.activeWaypoint = activeWaypoint;
+    }
+    
     
     
 }
