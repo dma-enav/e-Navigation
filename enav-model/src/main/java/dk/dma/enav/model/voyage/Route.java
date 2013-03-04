@@ -24,8 +24,11 @@ public class Route implements Iterable<Waypoint>, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final ArrayList<Waypoint> waypoints = new ArrayList<>();
-
+    private int activeWaypoint;
     
+    public Route(){
+        
+    }
     
     // private Integer currentWaypoint;
 
@@ -37,12 +40,23 @@ public class Route implements Iterable<Waypoint>, Serializable {
         return waypoints;
     }
 
-    public int getNumberOfPoints() {
-        return waypoints.size();
-    }
+//    public int getNumberOfPoints() {
+//        return waypoints.size();
+//    }
 
     @Override
     public Iterator<Waypoint> iterator() {
         return waypoints.iterator();
     }
+
+    public int getActiveWaypoint() {
+        return activeWaypoint;
+    }
+
+    public void setActiveWaypoint(int activeWaypoint) {
+        this.activeWaypoint = activeWaypoint;
+    }
+    
+    
+    
 }
