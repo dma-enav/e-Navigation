@@ -13,20 +13,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.shore;
+package dk.dma.enav.communication.broadcast;
 
-import dk.dma.enav.model.MaritimeId;
-
-public class MaritimeAuthorityId extends MaritimeId {
-
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+/**
+ * A subscription is created every time a {@link BroadcastListener} is registered.
+ * 
+ * @author Kasper Nielsen
+ */
+public interface BroadcastSubscription {
 
     /**
-     * @param scheme
+     * Returns the number of messages received for the registered listener.
+     * 
+     * @return the number of messages received
      */
-    public MaritimeAuthorityId() {
-        super("authority");
-    }
+    long getNumberOfReceivedMessages();
 
+    /** Stops receiving messages on the listener. */
+    void cancel();
 }

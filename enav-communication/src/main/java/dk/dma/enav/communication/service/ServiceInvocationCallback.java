@@ -13,20 +13,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.geometry;
+package dk.dma.enav.communication.service;
 
 /**
- * An object that has a boundary such as a route or a warning area.
  * 
- * @deprecated Anybody needs me? or else Im gone
+ * @author Kasper Nielsen
  */
-@Deprecated
-public interface GeometryBoundedObject {
+public interface ServiceInvocationCallback<E, T> {
 
     /**
-     * Returns the boundary.
+     * Processes the specified event.
      * 
-     * @return the boundary
+     * @param e
+     *            the message that was received
+     * @param context
      */
-    Element getBoundary();
+    void process(E message, Context<T> context);
+
+    interface Context<T> {
+
+        /**
+         * @param replyMessage
+         *            the reply message to the caller, if T is Void null is the only valid parameter to this method
+         */
+        void complete(T replyMessage);
+
+        void fail(FailureCode fc, String message);
+    }
+
+    enum FailureCode {
+        IllegalAccess(1), InternalFailure(1);
+
+        FailureCode(int code) {}
+    }
 }

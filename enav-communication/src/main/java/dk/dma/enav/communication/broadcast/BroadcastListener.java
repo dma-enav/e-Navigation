@@ -13,20 +13,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.shore;
+package dk.dma.enav.communication.broadcast;
 
-import dk.dma.enav.model.MaritimeId;
-
-public class MaritimeAuthorityId extends MaritimeId {
-
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+/**
+ * A callback interface for receiving broadcast messages of a specific type.
+ * 
+ * @author Kasper Nielsen
+ */
+public interface BroadcastListener<T extends BroadcastMessage> {
 
     /**
-     * @param scheme
+     * Invoked whenever a broadcast message was received.
+     * 
+     * @param header
+     *            header for the broadcast
+     * @param message
+     *            the message that was received
      */
-    public MaritimeAuthorityId() {
-        super("authority");
-    }
-
+    void onMessage(BroadcastMessageHeader header, T message);
 }

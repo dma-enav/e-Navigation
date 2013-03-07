@@ -13,20 +13,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.shore;
+package dk.dma.enav.communication.broadcast;
 
-import dk.dma.enav.model.MaritimeId;
-
-public class MaritimeAuthorityId extends MaritimeId {
-
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+/**
+ * Abstract class for a message that can be broadcast.
+ * 
+ * @author Kasper Nielsen
+ */
+public abstract class BroadcastMessage {
 
     /**
-     * @param scheme
+     * Returns the broadcast channel on which the broadcast is sent. Defaults (for now) to the name of the class.
+     * 
+     * @return the broadcast channel on which the message should be sent
      */
-    public MaritimeAuthorityId() {
-        super("authority");
+    public final String channel() {
+        return getClass().getCanonicalName();
     }
-
 }

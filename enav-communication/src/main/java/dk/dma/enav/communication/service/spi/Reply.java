@@ -13,20 +13,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.shore;
+package dk.dma.enav.communication.service.spi;
 
-import dk.dma.enav.model.MaritimeId;
+/**
+ * 
+ * @author Kasper Nielsen
+ */
+public interface Reply<T extends MaritimeServiceMessage<?>> {
 
-public class MaritimeAuthorityId extends MaritimeId {
+    T get();
 
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    MaritimeServicePacket<T> getPacket();
 
-    /**
-     * @param scheme
-     */
-    public MaritimeAuthorityId() {
-        super("authority");
-    }
-
+    Reply<?> reply(Object message);
 }

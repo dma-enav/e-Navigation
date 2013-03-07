@@ -237,7 +237,7 @@ public class Position implements Element {
     }
 
     /**
-     * Packs the position into a long (losing some precision). Can be read later by
+     * Packs the position into a long (losing some precision). Can be read later by {@link #fromPackedLong(long)}
      * 
      * @return the packet long
      */

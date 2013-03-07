@@ -13,20 +13,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.shore;
+package dk.dma.enav.communication.service.spi;
 
-import dk.dma.enav.model.MaritimeId;
-
-public class MaritimeAuthorityId extends MaritimeId {
-
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * @param scheme
-     */
-    public MaritimeAuthorityId() {
-        super("authority");
-    }
-
-}
+/**
+ * A simple marker interface to denote a {@link MaritimeServiceMessage} that initiates the service.
+ * 
+ * @author Kasper Nielsen
+ */
+public interface InitiatingMessage {}

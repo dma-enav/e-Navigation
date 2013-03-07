@@ -15,6 +15,8 @@
  */
 package dk.dma.enav.model.geometry;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public final class BoundingBox extends Polygon {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
@@ -50,6 +52,16 @@ public final class BoundingBox extends Polygon {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns a random position within the box.
+     * 
+     * @return a random position within the box
+     */
+    public Position getRandom() {
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        return Position.create(r.nextDouble(minLatitude, maxLatitude), r.nextDouble(minLongitude, maxLongitude));
     }
 
     public Position getCenterPoint() {
@@ -142,11 +154,6 @@ public final class BoundingBox extends Polygon {
 
     static BoundingBox create(double y1, double y2, double x1, double x2, CoordinateSystem cs) {
         return new BoundingBox(Math.min(y1, y2), Math.max(y1, y2), Math.min(x1, x2), Math.max(x1, x2), cs);
-    }
-
-    public static BoundingBox create(Position... locations) {
-        // check minimum size = 2
-        return null;
     }
 
     public static BoundingBox create(Position location, Position other, CoordinateSystem cs) {
