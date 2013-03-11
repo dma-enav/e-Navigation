@@ -21,41 +21,36 @@ import java.util.Date;
 public class Waypoint implements Serializable {
 
     
-    public Waypoint(){
-        
-    }
-    
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
+    
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
+    /** Waypoint name */
+    private String name;
+    
+    /** Out leg */
+    private RouteLeg routeLeg;
+    
     /** ETA at waypoint. */
     private Date eta;
-
+    
     /** Mandatory latitude. */
     private double latitude;
-
-//    Leg leg;
-
-//    Line line;
-    // Waypoint related
-
     /** Mandatory longitude. */
     private double longitude;
 
     /** Rate of turn . */
     private Double rot;
 
-    /** Speed in knots. */
-    private Double speed;
-
     /** Waypoint turn radius in nautical miles. */
     private Double turnRad;
-
-    /** Port XTD. */
-    private Double xtdPort;
-
-    /** Starboard XTD. */
-    private Double xtdStarboard;
+    
+    public Waypoint(){
+        
+    }
 
     public Date getEta() {
         return eta;
@@ -69,24 +64,20 @@ public class Waypoint implements Serializable {
         return longitude;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Double getRot() {
         return rot;
     }
 
-    public Double getSpeed() {
-        return speed;
+    public RouteLeg getRouteLeg() {
+        return routeLeg;
     }
 
     public Double getTurnRad() {
         return turnRad;
-    }
-
-    public Double getXtdPort() {
-        return xtdPort;
-    }
-
-    public Double getXtdStarboard() {
-        return xtdStarboard;
     }
 
     public void setEta(Date eta) {
@@ -101,40 +92,20 @@ public class Waypoint implements Serializable {
         this.longitude = longitude;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setRot(Double rot) {
         this.rot = rot;
     }
 
-    public void setSpeed(Double speed) {
-        this.speed = speed;
+    public void setRouteLeg(RouteLeg routeLeg) {
+        this.routeLeg = routeLeg;
     }
-
-    // Leaving leg related
 
     public void setTurnRad(Double turnRad) {
         this.turnRad = turnRad;
-    }
-
-    public void setXtdPort(Double xtdPort) {
-        this.xtdPort = xtdPort;
-    }
-
-    public void setXtdStarboard(Double xtdStarboard) {
-        this.xtdStarboard = xtdStarboard;
-    }
-
-    
-
-//    public Line getLine() {
-//        return line;
-//    }
-//
-//    public void setLine(Line line) {
-//        this.line = line;
-//    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
     }
 
 

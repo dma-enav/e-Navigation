@@ -23,40 +23,52 @@ public class Route implements Iterable<Waypoint>, Serializable {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
     private final ArrayList<Waypoint> waypoints = new ArrayList<>();
-    private int activeWaypoint;
-    
+    private String name;
+    private String Destination;
+    private String departure;
+
     public Route(){
         
     }
-    
-    // private Integer currentWaypoint;
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
+    public String getDeparture() {
+        return departure;
+    }
+
+    
+    public String getDestination() {
+        return Destination;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public ArrayList<Waypoint> getWaypoints() {
         return waypoints;
     }
 
-//    public int getNumberOfPoints() {
-//        return waypoints.size();
-//    }
-
     @Override
     public Iterator<Waypoint> iterator() {
         return waypoints.iterator();
     }
 
-    public int getActiveWaypoint() {
-        return activeWaypoint;
+    public void setDeparture(String departure) {
+        this.departure = departure;
     }
 
-    public void setActiveWaypoint(int activeWaypoint) {
-        this.activeWaypoint = activeWaypoint;
+    public void setDestination(String destination) {
+        Destination = destination;
     }
-    
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     
     
 }
