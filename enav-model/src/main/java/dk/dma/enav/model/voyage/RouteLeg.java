@@ -36,11 +36,11 @@ public class RouteLeg {
 
     }
 
-    public double getSFLen() {
+    public Double getSFLen() {
         return SFLen;
     }
 
-    public double getSFWidth() {
+    public Double getSFWidth() {
         return SFWidth;
     }
 
