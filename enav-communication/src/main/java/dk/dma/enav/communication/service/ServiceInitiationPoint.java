@@ -31,7 +31,7 @@ public class ServiceInitiationPoint<T> {
     }
 
     public String getName() {
-        return "foo";
+        return t.getName();
     }
 
     public Class<T> getType() {

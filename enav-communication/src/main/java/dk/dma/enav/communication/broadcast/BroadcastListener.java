@@ -27,8 +27,8 @@ public interface BroadcastListener<T extends BroadcastMessage> {
      * 
      * @param header
      *            header for the broadcast
-     * @param message
+     * @param broadcast
      *            the message that was received
      */
-    void onMessage(BroadcastMessageHeader header, T message);
+    void onMessage(BroadcastMessageHeader header, T broadcast);
 }

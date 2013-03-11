@@ -15,16 +15,17 @@
  */
 package dk.dma.enav.communication;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import dk.dma.enav.communication.broadcast.BroadcastListener;
 import dk.dma.enav.communication.broadcast.BroadcastMessage;
 import dk.dma.enav.communication.broadcast.BroadcastSubscription;
-import dk.dma.enav.communication.service.ServiceInvocationCallback;
+import dk.dma.enav.communication.service.InvocationCallback;
+import dk.dma.enav.communication.service.ServiceEndpoint;
 import dk.dma.enav.communication.service.ServiceInitiationPoint;
 import dk.dma.enav.communication.service.ServiceRegistration;
-import dk.dma.enav.communication.service.spi.InitiatingMessage;
 import dk.dma.enav.communication.service.spi.MaritimeServiceMessage;
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Area;
@@ -75,20 +76,6 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
     <T extends BroadcastMessage> BroadcastSubscription broadcastListen(Class<T> messageType,
             BroadcastListener<T> consumer);
 
-    // /**
-    // * Identical to {@link #broadcastSubscribe(Class, BiConsumer)} except that it will propagate the broadcast
-    // messages
-    // * as the string that was received.
-    // *
-    // * @param channel
-    // * the channel (classname for now) to listen to
-    // * @param consumer
-    // * the consumer of messages
-    // * @return a subscription that can be used to cancel the subscription
-    // */
-    // <T extends BroadcastMessage> BroadcastSubscription broadcastSubscribe(String channel,
-    // BiConsumer<BroadcastProperties, String> consumer);
-
     /**
      * Asynchronously shutdowns this connection. use {@link #awaitTerminated(long, TimeUnit)} to await complete
      * termination.
@@ -102,7 +89,7 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      *            the shape to look for id's within
      * @return a future map
      */
-    NetworkFuture<Map<MaritimeId, PositionTime>> findAll(Area shape);
+    NetworkFuture<Map<MaritimeId, PositionTime>> findAllPeers(Area shape);
 
     /**
      * Returns true if {@link #close()} has been invoked, otherwise false.
@@ -128,9 +115,28 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      * @return a service registration
      */
     <T, E extends MaritimeServiceMessage<T>> ServiceRegistration serviceRegister(ServiceInitiationPoint<E> sip,
-            ServiceInvocationCallback<E, T> callback);
+            InvocationCallback<E, T> callback);
 
-    NetworkFuture<Map<MaritimeId, String>> serviceFind(String name);
+    /**
+     * @param name
+     * @return
+     */
+    <T, E extends MaritimeServiceMessage<T>> NetworkFuture<ServiceEndpoint<E, T>> serviceFindOne(
+            ServiceInitiationPoint<E> sip);
+
+    /**
+     * @param name
+     * @return
+     */
+    <T, E extends MaritimeServiceMessage<T>> NetworkFuture<ServiceEndpoint<E, T>> serviceFindOne(
+            ServiceInitiationPoint<E> sip, MaritimeId id);
+
+    /**
+     * @param name
+     * @return
+     */
+    <T, E extends MaritimeServiceMessage<T>> NetworkFuture<List<ServiceEndpoint<E, T>>> serviceFind(
+            ServiceInitiationPoint<E> sip);
 
     /**
      * Invokes the specified service.
@@ -141,8 +147,7 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      *            the initiating service message
      * @return a future with the result
      */
-    <T, S extends MaritimeServiceMessage<T> & InitiatingMessage> NetworkFuture<T> serviceInvoke(MaritimeId id,
-            S initiatingServiceMessage);
+    <T, S extends MaritimeServiceMessage<T>> NetworkFuture<T> serviceInvoke(MaritimeId id, S initiatingServiceMessage);
 
     /**
      * Subscribes to the specific type of information messages within the specified area.
@@ -166,3 +171,17 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
 
 // Og close
 // findServices
+
+// /**
+// * Identical to {@link #broadcastSubscribe(Class, BiConsumer)} except that it will propagate the broadcast
+// messages
+// * as the string that was received.
+// *
+// * @param channel
+// * the channel (classname for now) to listen to
+// * @param consumer
+// * the consumer of messages
+// * @return a subscription that can be used to cancel the subscription
+// */
+// <T extends BroadcastMessage> BroadcastSubscription broadcastSubscribe(String channel,
+// BiConsumer<BroadcastProperties, String> consumer);

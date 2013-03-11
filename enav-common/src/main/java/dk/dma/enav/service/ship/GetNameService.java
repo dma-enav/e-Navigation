@@ -16,7 +16,7 @@
 package dk.dma.enav.service.ship;
 
 import static java.util.Objects.requireNonNull;
-import dk.dma.enav.communication.service.spi.InitiatingMessage;
+import dk.dma.enav.communication.service.ServiceInitiationPoint;
 import dk.dma.enav.communication.service.spi.MaritimeService;
 import dk.dma.enav.communication.service.spi.MaritimeServiceMessage;
 
@@ -26,16 +26,19 @@ import dk.dma.enav.communication.service.spi.MaritimeServiceMessage;
  */
 public class GetNameService extends MaritimeService {
 
+    /** An initiation point */
+    public static final ServiceInitiationPoint<GetName> GET_NAME = new ServiceInitiationPoint<>(GetName.class);
+
     public static final String NAME = "imo.ship.getname";
 
-    public static class GetName extends MaritimeServiceMessage<Reply> implements InitiatingMessage {
-
-    }
+    public static class GetName extends MaritimeServiceMessage<Reply> {}
 
     public static class Reply extends MaritimeServiceMessage<Void> {
 
         /** The name of the ship. */
         private String name;
+
+        public Reply() {}
 
         public Reply(String name) {
             this.name = requireNonNull(name);
@@ -50,7 +53,7 @@ public class GetNameService extends MaritimeService {
          * @param name
          *            the name to set
          */
-        protected void setName(String name) {
+        public void setName(String name) {
             this.name = name;
         }
 

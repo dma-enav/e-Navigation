@@ -19,7 +19,7 @@ package dk.dma.enav.communication.service;
  * 
  * @author Kasper Nielsen
  */
-public interface ServiceInvocationCallback<E, T> {
+public interface InvocationCallback<E, T> {
 
     /**
      * Processes the specified event.
