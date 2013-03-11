@@ -27,10 +27,10 @@ public class RouteLeg {
     private Double xtdStarboard;
 
     /** Safe Haven Width */
-    private double SFWidth;
+    private Double SFWidth;
 
     /** Safe Haven Length */
-    private double SFLen;
+    private Double SFLen;
 
     public RouteLeg() {
 
@@ -56,11 +56,11 @@ public class RouteLeg {
         return xtdStarboard;
     }
 
-    public void setSFLen(double sFLen) {
+    public void setSFLen(Double sFLen) {
         SFLen = sFLen;
     }
 
-    public void setSFWidth(double sFWidth) {
+    public void setSFWidth(Double sFWidth) {
         SFWidth = sFWidth;
     }
 
