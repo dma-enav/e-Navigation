@@ -22,13 +22,20 @@ package dk.dma.enav.communication.broadcast;
  */
 public interface BroadcastSubscription {
 
+    /** Stops receiving messages on the listener. */
+    void cancel();
+
+    /**
+     * Returns the channel we are listening on.
+     * 
+     * @return the channel we are listening on
+     */
+    String getChannel();
+
     /**
      * Returns the number of messages received for the registered listener.
      * 
      * @return the number of messages received
      */
     long getNumberOfReceivedMessages();
-
-    /** Stops receiving messages on the listener. */
-    void cancel();
 }

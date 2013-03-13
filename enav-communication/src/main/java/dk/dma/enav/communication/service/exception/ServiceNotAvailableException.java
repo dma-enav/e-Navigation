@@ -13,12 +13,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.communication.service.spi;
+package dk.dma.enav.communication.service.exception;
 
 /**
  * 
  * @author Kasper Nielsen
  */
-public class MaritimeMultiPartyService extends MaritimeService {
+public class ServiceNotAvailableException {
 
 }

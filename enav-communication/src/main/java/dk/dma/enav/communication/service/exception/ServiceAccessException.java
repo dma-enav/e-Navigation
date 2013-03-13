@@ -19,6 +19,6 @@ package dk.dma.enav.communication.service.exception;
  * 
  * @author Kasper Nielsen
  */
-public class ServiceNotAvailablException {
+public class ServiceAccessException {
 
 }

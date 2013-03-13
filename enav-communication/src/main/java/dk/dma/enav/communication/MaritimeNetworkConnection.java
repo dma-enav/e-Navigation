@@ -83,7 +83,7 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
     void close();
 
     /**
-     * Returns a future map with all id's within the specified shape.
+     * Returns a map with all id's within the specified shape.
      * 
      * @param shape
      *            the shape to look for id's within
@@ -118,11 +118,14 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
             InvocationCallback<E, T> callback);
 
     /**
-     * @param name
-     * @return
+     * Finds a single service with the specified initiation point.
+     * 
+     * @param endpoint
+     *            the endpoint
+     * @return a future with the endpoint
      */
     <T, E extends MaritimeServiceMessage<T>> NetworkFuture<ServiceEndpoint<E, T>> serviceFindOne(
-            ServiceInitiationPoint<E> sip);
+            ServiceInitiationPoint<E> endpoint);
 
     /**
      * @param name
@@ -156,6 +159,7 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      * @param area
      */
     // <T extends MaritimeInformationMessage> void subscribe(Class<T> messageType, Area area, Block<T> handler);
+
 }
 
 // Close skal virke ordentligt

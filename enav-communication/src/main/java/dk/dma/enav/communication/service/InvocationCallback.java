@@ -15,6 +15,8 @@
  */
 package dk.dma.enav.communication.service;
 
+import dk.dma.enav.model.MaritimeId;
+
 /**
  * 
  * @author Kasper Nielsen
@@ -33,17 +35,28 @@ public interface InvocationCallback<E, T> {
     interface Context<T> {
 
         /**
+         * Returns the caller id.
+         * 
+         * @return the id of the caller
+         */
+        MaritimeId getCaller();
+
+        /**
          * @param replyMessage
          *            the reply message to the caller, if T is Void null is the only valid parameter to this method
          */
         void complete(T replyMessage);
 
-        void fail(FailureCode fc, String message);
-    }
+        /**
+         * The invoker did not have sufficient permissions to invoke the specified service.
+         * 
+         * @param message
+         *            a helper message
+         */
+        void failWithIllegalAccess(String message);
 
-    enum FailureCode {
-        IllegalAccess(1), InternalFailure(1);
+        void failWithIllegalInput(String message);
 
-        FailureCode(int code) {}
+        void failWithInternalError(String message);
     }
 }

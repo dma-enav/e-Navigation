@@ -17,8 +17,6 @@ package dk.dma.enav.communication.service;
 
 import java.util.concurrent.TimeUnit;
 
-import dk.dma.enav.communication.service.exception.ServiceNotAvailablException;
-
 /**
  * 
  * @author Kasper Nielsen
@@ -41,6 +39,7 @@ public interface ServiceRegistration {
 
     /** The current state of the registration. */
     enum State {
+
         /**
          * The initial state of this registration. When created at the client but before the server has registered the
          * service registration.
