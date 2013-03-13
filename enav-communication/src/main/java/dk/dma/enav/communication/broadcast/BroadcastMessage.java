@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public abstract class BroadcastMessage {
 
-    final static ConcurrentHashMap<String, Class<? extends BroadcastMessage>> CACHE = new ConcurrentHashMap<>();
+    static final ConcurrentHashMap<String, Class<? extends BroadcastMessage>> CACHE = new ConcurrentHashMap<>();
 
     /**
      * Returns the broadcast channel on which the broadcast is sent. Defaults (for now) to the name of the class.
