@@ -42,6 +42,8 @@ public interface InvocationCallback<E, T> {
         MaritimeId getCaller();
 
         /**
+         * Completes succesfully.
+         * 
          * @param replyMessage
          *            the reply message to the caller, if T is Void null is the only valid parameter to this method
          */

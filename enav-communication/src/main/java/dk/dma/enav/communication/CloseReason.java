@@ -16,10 +16,19 @@
 package dk.dma.enav.communication;
 
 /**
+ * A enum
  * 
  * @author Kasper Nielsen
  */
 public enum CloseReason {
+
+    /**
+     * 1003 indicates that an endpoint is terminating the connection because it has received a type of data it cannot
+     * accept (e.g., an endpoint that understands only text data MAY send this if it receives a binary message).
+     * <p>
+     * See <a href="https://tools.ietf.org/html/rfc6455#section-7.4.1">RFC 6455, Section 7.4.1 Defined Status Codes</a>.
+     */
+    BAD_DATA(1003),
 
     /**
      * Another client connected with the same identify. Only one client can be connected with the same id. Whenever a
@@ -29,13 +38,6 @@ public enum CloseReason {
     DUPLICATE_CONNECT(4012);
 
     final int id;
-    /**
-     * 1003 indicates that an endpoint is terminating the connection because it has received a type of data it cannot
-     * accept (e.g., an endpoint that understands only text data MAY send this if it receives a binary message).
-     * <p>
-     * See <a href="https://tools.ietf.org/html/rfc6455#section-7.4.1">RFC 6455, Section 7.4.1 Defined Status Codes</a>.
-     */
-    public static final int BAD_DATA = 1003;
 
     CloseReason(int id) {
         this.id = id;

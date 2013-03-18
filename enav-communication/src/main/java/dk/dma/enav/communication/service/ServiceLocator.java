@@ -15,12 +15,40 @@
  */
 package dk.dma.enav.communication.service;
 
+import java.util.List;
+
+import dk.dma.enav.communication.NetworkFuture;
+import dk.dma.enav.communication.service.spi.ServiceMessage;
+
 /**
  * 
  * @author Kasper Nielsen
  */
-class ServiceLocator {
-    // ServiceInitiationPoint<T>
-    // Area area;
+public interface ServiceLocator<T, E extends ServiceMessage<T>> {
+
+    /**
+     * Limits the result to services with the specified distance
+     * 
+     * @param meters
+     *            the distance in meters
+     * @return a new service locator
+     */
+    ServiceLocator<T, E> withinDistanceOf(int meters);
+
+    /**
+     * Returns the nearest service end point to the clients current position.
+     * 
+     * @return the nearest service end point to the clients current position
+     */
+    NetworkFuture<ServiceEndpoint<E, T>> nearest();
+
+    /**
+     * Returns a list of multiple service end points to the clients current position.
+     * 
+     * @param limit
+     *            the maximum number of service end points to return
+     * @return a list of multiple service end points to the clients current position
+     */
+    NetworkFuture<List<ServiceEndpoint<E, T>>> nearest(int limit);
 
 }

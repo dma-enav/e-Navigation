@@ -22,11 +22,11 @@ package dk.dma.enav.communication.service.spi;
  */
 // Maaske skal den ikke vaere serializeable???
 // Serveren skal ikke bruge den. kun nogle informationer derfra
-public abstract class MaritimeService {
+public abstract class Service {
 
     private final String name;
 
-    protected MaritimeService() {
+    protected Service() {
         // try {
         // this.name = (String) getClass().getField("NAME").get(null);
         // } catch (ReflectiveOperationException e) {

@@ -15,9 +15,9 @@
  */
 package dk.dma.enav.service.voyage;
 
-import dk.dma.enav.communication.service.ServiceInitiationPoint;
-import dk.dma.enav.communication.service.spi.MaritimeService;
-import dk.dma.enav.communication.service.spi.MaritimeServiceMessage;
+import dk.dma.enav.communication.service.spi.Service;
+import dk.dma.enav.communication.service.spi.ServiceMessage;
+import dk.dma.enav.communication.service.spi.ServiceInitiationPoint;
 import dk.dma.enav.model.voyage.Route;
 
 /**
@@ -25,7 +25,7 @@ import dk.dma.enav.model.voyage.Route;
  * 
  * <img src="dk.dma.enav.model.geometry.png" height="900" width="1200"/>
  **/
-public class RouteSuggestionService extends MaritimeService {
+public class RouteSuggestionService extends Service {
 
     /** An initiation point */
     public static final ServiceInitiationPoint<RequestSuggestion> SHIP_REQUESTS_ROUTE = new ServiceInitiationPoint<>(
@@ -34,9 +34,9 @@ public class RouteSuggestionService extends MaritimeService {
     public static final ServiceInitiationPoint<SuggestRoute> SHORES_SUGGESTS_ROUTE = new ServiceInitiationPoint<>(
             SuggestRoute.class);
 
-    public static class RequestSuggestion extends MaritimeServiceMessage<SuggestRoute> {}
+    public static class RequestSuggestion extends ServiceMessage<SuggestRoute> {}
 
-    public static class RouteAcceptance extends MaritimeServiceMessage<Void> {
+    public static class RouteAcceptance extends ServiceMessage<Void> {
         RouteSuggestionAcceptance result;
     }
 
@@ -44,7 +44,7 @@ public class RouteSuggestionService extends MaritimeService {
         NOT_A_CHANCE, OK_I_WILL_TAKE_IT;
     }
 
-    public static class SuggestRoute extends MaritimeServiceMessage<RouteAcceptance> {
+    public static class SuggestRoute extends ServiceMessage<RouteAcceptance> {
 
         /** An optional message for the suggestion */
         private String message;

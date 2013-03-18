@@ -23,13 +23,13 @@ import java.util.ServiceConfigurationError;
  * 
  * @author Kasper Nielsen
  */
-public abstract class MaritimeServiceMessage<T> {
+public abstract class ServiceMessage<T> {
 
-    private final transient Class<? extends MaritimeService> serviceType;
+    private final transient Class<? extends Service> serviceType;
 
     @SuppressWarnings("unchecked")
-    public MaritimeServiceMessage() {
-        this.serviceType = (Class<? extends MaritimeService>) requireNonNull(getClass().getDeclaringClass());
+    public ServiceMessage() {
+        this.serviceType = (Class<? extends Service>) requireNonNull(getClass().getDeclaringClass());
     }
 
     public String messageName() {
@@ -48,7 +48,7 @@ public abstract class MaritimeServiceMessage<T> {
     /**
      * @return the serviceType
      */
-    public Class<? extends MaritimeService> serviceType() {
+    public Class<? extends Service> serviceType() {
         return serviceType;
     }
 }

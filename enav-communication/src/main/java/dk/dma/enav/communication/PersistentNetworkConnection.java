@@ -15,7 +15,6 @@
  */
 package dk.dma.enav.communication;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -23,20 +22,20 @@ import dk.dma.enav.communication.broadcast.BroadcastListener;
 import dk.dma.enav.communication.broadcast.BroadcastMessage;
 import dk.dma.enav.communication.broadcast.BroadcastSubscription;
 import dk.dma.enav.communication.service.InvocationCallback;
-import dk.dma.enav.communication.service.ServiceEndpoint;
-import dk.dma.enav.communication.service.ServiceInitiationPoint;
+import dk.dma.enav.communication.service.ServiceLocator;
 import dk.dma.enav.communication.service.ServiceRegistration;
-import dk.dma.enav.communication.service.spi.MaritimeServiceMessage;
+import dk.dma.enav.communication.service.spi.ServiceInitiationPoint;
+import dk.dma.enav.communication.service.spi.ServiceMessage;
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.geometry.PositionTime;
 
 /**
- * A connection to e-navigation network.
+ * A persistent connection to the e-navigation network.
  * 
  * @author Kasper Nielsen
  */
-public interface MaritimeNetworkConnection extends AutoCloseable {
+public interface PersistentNetworkConnection extends AutoCloseable {
 
     /**
      * Blocks until the connection has been fully closed, or the timeout occurs, or the current thread is interrupted,
@@ -91,6 +90,8 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      */
     NetworkFuture<Map<MaritimeId, PositionTime>> findAllPeers(Area shape);
 
+    MaritimeId getLocalId();
+
     /**
      * Returns true if {@link #close()} has been invoked, otherwise false.
      * 
@@ -106,40 +107,10 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
     boolean isTerminated();
 
     /**
-     * Registers the specified service.
-     * 
-     * @param service
-     *            the registered service
-     * @param callback
-     *            the callback
-     * @return a service registration
-     */
-    <T, E extends MaritimeServiceMessage<T>> ServiceRegistration serviceRegister(ServiceInitiationPoint<E> sip,
-            InvocationCallback<E, T> callback);
-
-    /**
-     * Finds a single service with the specified initiation point.
-     * 
-     * @param endpoint
-     *            the endpoint
-     * @return a future with the endpoint
-     */
-    <T, E extends MaritimeServiceMessage<T>> NetworkFuture<ServiceEndpoint<E, T>> serviceFindOne(
-            ServiceInitiationPoint<E> endpoint);
-
-    /**
      * @param name
      * @return
      */
-    <T, E extends MaritimeServiceMessage<T>> NetworkFuture<ServiceEndpoint<E, T>> serviceFindOne(
-            ServiceInitiationPoint<E> sip, MaritimeId id);
-
-    /**
-     * @param name
-     * @return
-     */
-    <T, E extends MaritimeServiceMessage<T>> NetworkFuture<List<ServiceEndpoint<E, T>>> serviceFind(
-            ServiceInitiationPoint<E> sip);
+    <T, E extends ServiceMessage<T>> ServiceLocator<T, E> serviceFind(ServiceInitiationPoint<E> sip);
 
     /**
      * Invokes the specified service.
@@ -150,7 +121,19 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      *            the initiating service message
      * @return a future with the result
      */
-    <T, S extends MaritimeServiceMessage<T>> NetworkFuture<T> serviceInvoke(MaritimeId id, S initiatingServiceMessage);
+    <T, S extends ServiceMessage<T>> NetworkFuture<T> serviceInvoke(MaritimeId id, S initiatingServiceMessage);
+
+    /**
+     * Registers the specified service.
+     * 
+     * @param service
+     *            the registered service
+     * @param callback
+     *            the callback
+     * @return a service registration
+     */
+    <T, E extends ServiceMessage<T>> ServiceRegistration serviceRegister(ServiceInitiationPoint<E> sip,
+            InvocationCallback<E, T> callback);
 
     /**
      * Subscribes to the specific type of information messages within the specified area.
@@ -159,7 +142,6 @@ public interface MaritimeNetworkConnection extends AutoCloseable {
      * @param area
      */
     // <T extends MaritimeInformationMessage> void subscribe(Class<T> messageType, Area area, Block<T> handler);
-
 }
 
 // Close skal virke ordentligt
