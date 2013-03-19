@@ -20,18 +20,13 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import dk.dma.enav.util.function.BiConsumer;
+
 /**
  * 
  * @author Kasper Nielsen
  */
 public interface NetworkFuture<T> {
-
-    /**
-     * Returns {@code true} if completed in any fashion: normally, exceptionally, or via cancellation.
-     * 
-     * @return {@code true} if completed
-     */
-    boolean isDone();
 
     /**
      * Waits if necessary for the computation to complete, and then retrieves its result.
@@ -79,6 +74,31 @@ public interface NetworkFuture<T> {
      */
     T getNow(T valueIfAbsent);
 
-    // Returns how long time this have been running
-    // long getLatency(TimeUnit unit);
+    /**
+     * The given function is invoked with the result (or {@code null} if none) and the exception (or {@code null} if
+     * none) of this NetworkFuture when complete.
+     * 
+     * @param fn
+     *            the composer used for processing the result
+     */
+    void handle(BiConsumer<T, Throwable> consumer);
+
+    /**
+     * Returns {@code true} if completed in any fashion: normally, exceptionally, or via cancellation.
+     * 
+     * @return {@code true} if completed
+     */
+    boolean isDone();
+
+    /**
+     * Creates a new NetworkFuture that will time out via {@link TimeoutException} if this task has not completed within
+     * the specified time.
+     * 
+     * @param timeout
+     *            the maximum time to wait
+     * @param unit
+     *            the time unit of the timeout argument
+     * @return the new network future
+     */
+    NetworkFuture<T> timeout(long timeout, TimeUnit unit);
 }
