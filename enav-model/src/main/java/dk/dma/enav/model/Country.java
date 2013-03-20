@@ -35,11 +35,11 @@ public class Country implements Serializable {
     private static final String LOCATION = Country.class.getPackage().getName().replace(".", "/")
             + "/country.properties";
 
-    static HashMap<Integer, Country> midCountryMap = new HashMap<>();
+    static final HashMap<Integer, Country> midCountryMap = new HashMap<>();
     private static final long serialVersionUID = 1L;
-    static HashMap<String, Country> threeLetterMap = new HashMap<>();
+    static final HashMap<String, Country> threeLetterMap = new HashMap<>();
 
-    static HashMap<String, Country> twoLetterMap = new HashMap<>();
+    static final HashMap<String, Country> twoLetterMap = new HashMap<>();
 
     static {
         Properties props = new Properties();
@@ -76,11 +76,11 @@ public class Country implements Serializable {
 
     private final HashSet<Integer> mids = new HashSet<>();
 
-    protected String name;
+    protected final String name;
 
-    protected String number;
-    protected String threeLetter;
-    protected String twoLetter;
+    protected final String number;
+    protected final String threeLetter;
+    protected final String twoLetter;
 
     protected Country(String name, String twoLetter, String threeLetter, String number) {
         this.name = name;
@@ -95,7 +95,7 @@ public class Country implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        return this.twoLetter.equals(((Country) obj).getTwoLetter());
+        return this.threeLetter.equals(((Country) obj).getThreeLetter());
     }
 
     public HashSet<Integer> getMids() {
