@@ -25,21 +25,20 @@ import java.util.HashSet;
 import java.util.Properties;
 
 /**
- * Class to represent a country by its assigned MID's (Maritime Identification Digits) in addition to its ISO 3166
- * identification.
+ * Class to represent a country by its assigned MID's (Maritime Identification Digits) in addition to its ISO 3166 identification.
  * 
  * See {@link http://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity}
  * 
  */
 public class Country implements Serializable {
-    private static final String LOCATION = Country.class.getPackage().getName().replace(".", "/")
-            + "/country.properties";
-
-    static final HashMap<Integer, Country> midCountryMap = new HashMap<>();
+    
     private static final long serialVersionUID = 1L;
-    static final HashMap<String, Country> threeLetterMap = new HashMap<>();
+    
+    private static final String LOCATION = Country.class.getPackage().getName().replace(".", "/") + "/country.properties";
 
-    static final HashMap<String, Country> twoLetterMap = new HashMap<>();
+    static final HashMap<Integer, Country> MID_COUNTRY_MAP = new HashMap<>();    
+    static final HashMap<String, Country> THREE_LETTER_MAP = new HashMap<>();
+    static final HashMap<String, Country> TWO_LETTER_MAP = new HashMap<>();
 
     static {
         Properties props = new Properties();
@@ -66,11 +65,11 @@ public class Country implements Serializable {
                 for (String strMid : strMids) {
                     Integer mid = Integer.parseInt(strMid);
                     country.addMid(mid);
-                    midCountryMap.put(mid, country);
+                    MID_COUNTRY_MAP.put(mid, country);
                 }
             }
-            twoLetterMap.put(country.getTwoLetter(), country);
-            threeLetterMap.put(country.getThreeLetter(), country);
+            TWO_LETTER_MAP.put(country.getTwoLetter(), country);
+            THREE_LETTER_MAP.put(country.getThreeLetter(), country);
         }
     }
 
@@ -152,9 +151,9 @@ public class Country implements Serializable {
      */
     public static Country getByCode(String code) {
         if (code.length() == 2) {
-            return twoLetterMap.get(code);
+            return TWO_LETTER_MAP.get(code);
         }
-        return threeLetterMap.get(code);
+        return THREE_LETTER_MAP.get(code);
     }
 
     /**
@@ -164,7 +163,7 @@ public class Country implements Serializable {
      * @return
      */
     public static Country getByMid(int mid) {
-        Country country = midCountryMap.get(mid);
+        Country country = MID_COUNTRY_MAP.get(mid);
         if (country == null) {
             // LOG.debug("Unknown MID " + mid);
         }
