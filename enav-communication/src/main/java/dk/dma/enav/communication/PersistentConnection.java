@@ -15,7 +15,6 @@
  */
 package dk.dma.enav.communication;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import dk.dma.enav.communication.broadcast.BroadcastListener;
@@ -27,9 +26,6 @@ import dk.dma.enav.communication.service.ServiceRegistration;
 import dk.dma.enav.communication.service.spi.ServiceInitiationPoint;
 import dk.dma.enav.communication.service.spi.ServiceMessage;
 import dk.dma.enav.model.MaritimeId;
-import dk.dma.enav.model.geometry.Area;
-import dk.dma.enav.model.geometry.PositionTime;
-import dk.dma.enav.util.function.Consumer;
 
 /**
  * A persistent connection to the e-navigation network.
@@ -37,17 +33,6 @@ import dk.dma.enav.util.function.Consumer;
  * @author Kasper Nielsen
  */
 public interface PersistentConnection extends AutoCloseable {
-
-    /**
-     * Adds a state listener that will be invoked whenever the state of the connection changes.
-     * 
-     * @param stateListener
-     *            the state listener
-     * @throws NullPointerException
-     *             if the specified listener is null
-     * @see #removeStateListener(Consumer)
-     */
-    void addStateListener(Consumer<State> stateListener);
 
     /**
      * Blocks until the connection has reached the specified state, or the timeout occurs, or the current thread is
@@ -63,19 +48,6 @@ public interface PersistentConnection extends AutoCloseable {
      *             if interrupted while waiting
      */
     boolean awaitState(State state, long timeout, TimeUnit unit) throws InterruptedException;
-
-    /**
-     * Blocks until the connection has been fully closed, or the timeout occurs, or the current thread is interrupted,
-     * whichever happens first.
-     * 
-     * @param timeout
-     *            the maximum time to wait
-     * @param unit
-     *            the time unit of the timeout argument
-     * @throws InterruptedException
-     *             if interrupted while waiting
-     */
-    boolean awaitTerminated(long timeout, TimeUnit unit) throws InterruptedException;
 
     /**
      * Broadcasts the specified message. No guarantees are made to the delivery of the specified message.
@@ -109,15 +81,6 @@ public interface PersistentConnection extends AutoCloseable {
     void close();
 
     /**
-     * Returns a map with all id's within the specified shape.
-     * 
-     * @param shape
-     *            the shape to look for id's within
-     * @return a future map
-     */
-    ConnectionFuture<Map<MaritimeId, PositionTime>> findAllPeers(Area shape);
-
-    /**
      * Returns the local id of this connection.
      * 
      * @return the local id of this connection
@@ -130,32 +93,6 @@ public interface PersistentConnection extends AutoCloseable {
      * @return the current state of the connection
      */
     State getState();
-
-    /**
-     * Returns true if {@link #close()} has been invoked, otherwise false.
-     * 
-     * @return true if {@link #close()} has been invoked, otherwise false
-     */
-    boolean isClosed();
-
-    /**
-     * Returns true the connection has been fully closed, following a call to {@link #close()}.
-     * 
-     * @return true the connection has been fully closed, following a call to {@link #close()}
-     */
-    boolean isTerminated();
-
-    /**
-     * Removes the specified state listener.
-     * 
-     * @param stateListener
-     *            the state listener.
-     * @return true if the specified listener was registered, otherwise false
-     * @throws NullPointerException
-     *             if the specified listener is null
-     * @see #addStateListener(Consumer)
-     */
-    boolean removeStateListener(Consumer<State> stateListener);
 
     /**
      * @param name
@@ -197,19 +134,36 @@ public interface PersistentConnection extends AutoCloseable {
     /** The current state of the connection. */
     public static enum State {
 
-        /** The connection is being shutdown, has not yet been fully acknowledge by the remote end. */
-        CLOSED,
+        /** The initial state of the connection. Will lazy connect */
+        INITIALIZED,
+
+        /** Trying to connect or reconnect. */
+        CONNECTING,
 
         /** The connection is in the normal state. */
         CONNECTED,
 
-        /** Trying to reconnect. */
-        RECONNECTING,
+        /** The connection is being shutdown, has not yet been fully acknowledge by the remote end. */
+        CLOSED,
 
         /** The connection has been fully closed by both ends. */
         TERMINATED;
+
+        public boolean isEnded() {
+            return this == State.TERMINATED || this == State.CLOSED;
+        }
     }
 }
+
+// /**
+// * Returns a map with all id's within the specified shape.
+// *
+// * @param shape
+// * the shape to look for id's within
+// * @return a future map
+// */
+// ConnectionFuture<Map<MaritimeId, PositionTime>> findAllPeers(Area shape);
+//
 
 // Close skal virke ordentligt
 
