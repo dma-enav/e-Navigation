@@ -19,7 +19,7 @@ package dk.dma.enav.communication;
  * 
  * @author Kasper Nielsen
  */
-public class CommunicationException extends Exception {
+public class ConnectionException extends Exception {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;

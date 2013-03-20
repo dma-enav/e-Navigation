@@ -26,7 +26,7 @@ import dk.dma.enav.util.function.BiConsumer;
  * 
  * @author Kasper Nielsen
  */
-public interface NetworkFuture<T> {
+public interface ConnectionFuture<T> {
 
     /**
      * Waits if necessary for the computation to complete, and then retrieves its result.
@@ -100,5 +100,5 @@ public interface NetworkFuture<T> {
      *            the time unit of the timeout argument
      * @return the new network future
      */
-    NetworkFuture<T> timeout(long timeout, TimeUnit unit);
+    ConnectionFuture<T> timeout(long timeout, TimeUnit unit);
 }

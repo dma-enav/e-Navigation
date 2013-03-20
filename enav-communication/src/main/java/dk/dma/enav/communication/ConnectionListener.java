@@ -21,5 +21,5 @@ package dk.dma.enav.communication;
  */
 public class ConnectionListener {
 
-    public void stateChanged(PersistentNetworkConnection.State previousState, PersistentNetworkConnection.State newState) {}
+    public void stateChanged(PersistentConnection.State previousState, PersistentConnection.State newState) {}
 }

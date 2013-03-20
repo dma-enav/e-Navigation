@@ -15,7 +15,7 @@
  */
 package dk.dma.enav.communication.service;
 
-import dk.dma.enav.communication.NetworkFuture;
+import dk.dma.enav.communication.ConnectionFuture;
 import dk.dma.enav.model.MaritimeId;
 
 /**
@@ -31,5 +31,5 @@ public interface ServiceEndpoint<E, T> {
      */
     MaritimeId getId();
 
-    NetworkFuture<T> invoke(E message);
+    ConnectionFuture<T> invoke(E message);
 }

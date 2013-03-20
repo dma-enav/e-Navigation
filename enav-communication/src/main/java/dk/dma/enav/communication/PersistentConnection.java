@@ -36,7 +36,7 @@ import dk.dma.enav.util.function.Consumer;
  * 
  * @author Kasper Nielsen
  */
-public interface PersistentNetworkConnection extends AutoCloseable {
+public interface PersistentConnection extends AutoCloseable {
 
     /**
      * Adds a state listener that will be invoked whenever the state of the connection changes.
@@ -115,7 +115,7 @@ public interface PersistentNetworkConnection extends AutoCloseable {
      *            the shape to look for id's within
      * @return a future map
      */
-    NetworkFuture<Map<MaritimeId, PositionTime>> findAllPeers(Area shape);
+    ConnectionFuture<Map<MaritimeId, PositionTime>> findAllPeers(Area shape);
 
     /**
      * Returns the local id of this connection.
@@ -172,7 +172,7 @@ public interface PersistentNetworkConnection extends AutoCloseable {
      *            the initiating service message
      * @return a future with the result
      */
-    <T, S extends ServiceMessage<T>> NetworkFuture<T> serviceInvoke(MaritimeId id, S initiatingServiceMessage);
+    <T, S extends ServiceMessage<T>> ConnectionFuture<T> serviceInvoke(MaritimeId id, S initiatingServiceMessage);
 
     /**
      * Subscribes to the specific type of information messages within the specified area.

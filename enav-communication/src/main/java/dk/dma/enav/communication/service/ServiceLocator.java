@@ -17,7 +17,7 @@ package dk.dma.enav.communication.service;
 
 import java.util.List;
 
-import dk.dma.enav.communication.NetworkFuture;
+import dk.dma.enav.communication.ConnectionFuture;
 import dk.dma.enav.communication.service.spi.ServiceMessage;
 
 /**
@@ -40,7 +40,7 @@ public interface ServiceLocator<T, E extends ServiceMessage<T>> {
      * 
      * @return the nearest service end point to the clients current position
      */
-    NetworkFuture<ServiceEndpoint<E, T>> nearest();
+    ConnectionFuture<ServiceEndpoint<E, T>> nearest();
 
     /**
      * Returns a list of multiple service end points to the clients current position.
@@ -49,6 +49,6 @@ public interface ServiceLocator<T, E extends ServiceMessage<T>> {
      *            the maximum number of service end points to return
      * @return a list of multiple service end points to the clients current position
      */
-    NetworkFuture<List<ServiceEndpoint<E, T>>> nearest(int limit);
+    ConnectionFuture<List<ServiceEndpoint<E, T>>> nearest(int limit);
 
 }
