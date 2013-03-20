@@ -29,6 +29,7 @@ import dk.dma.enav.communication.service.spi.ServiceMessage;
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.geometry.PositionTime;
+import dk.dma.enav.util.function.Consumer;
 
 /**
  * A persistent connection to the e-navigation network.
@@ -36,6 +37,32 @@ import dk.dma.enav.model.geometry.PositionTime;
  * @author Kasper Nielsen
  */
 public interface PersistentNetworkConnection extends AutoCloseable {
+
+    /**
+     * Adds a state listener that will be invoked whenever the state of the connection changes.
+     * 
+     * @param stateListener
+     *            the state listener
+     * @throws NullPointerException
+     *             if the specified listener is null
+     * @see #removeStateListener(Consumer)
+     */
+    void addStateListener(Consumer<State> stateListener);
+
+    /**
+     * Blocks until the connection has reached the specified state, or the timeout occurs, or the current thread is
+     * interrupted, whichever happens first.
+     * 
+     * @param state
+     *            the state to await on
+     * @param timeout
+     *            the maximum time to wait
+     * @param unit
+     *            the time unit of the timeout argument
+     * @throws InterruptedException
+     *             if interrupted while waiting
+     */
+    boolean awaitState(State state, long timeout, TimeUnit unit) throws InterruptedException;
 
     /**
      * Blocks until the connection has been fully closed, or the timeout occurs, or the current thread is interrupted,
@@ -90,7 +117,19 @@ public interface PersistentNetworkConnection extends AutoCloseable {
      */
     NetworkFuture<Map<MaritimeId, PositionTime>> findAllPeers(Area shape);
 
+    /**
+     * Returns the local id of this connection.
+     * 
+     * @return the local id of this connection
+     */
     MaritimeId getLocalId();
+
+    /**
+     * Returns the current state of the connection.
+     * 
+     * @return the current state of the connection
+     */
+    State getState();
 
     /**
      * Returns true if {@link #close()} has been invoked, otherwise false.
@@ -105,6 +144,18 @@ public interface PersistentNetworkConnection extends AutoCloseable {
      * @return true the connection has been fully closed, following a call to {@link #close()}
      */
     boolean isTerminated();
+
+    /**
+     * Removes the specified state listener.
+     * 
+     * @param stateListener
+     *            the state listener.
+     * @return true if the specified listener was registered, otherwise false
+     * @throws NullPointerException
+     *             if the specified listener is null
+     * @see #addStateListener(Consumer)
+     */
+    boolean removeStateListener(Consumer<State> stateListener);
 
     /**
      * @param name
@@ -124,6 +175,14 @@ public interface PersistentNetworkConnection extends AutoCloseable {
     <T, S extends ServiceMessage<T>> NetworkFuture<T> serviceInvoke(MaritimeId id, S initiatingServiceMessage);
 
     /**
+     * Subscribes to the specific type of information messages within the specified area.
+     * 
+     * @param informationType
+     * @param area
+     */
+    // <T extends MaritimeInformationMessage> void subscribe(Class<T> messageType, Area area, Block<T> handler);
+
+    /**
      * Registers the specified service.
      * 
      * @param service
@@ -135,13 +194,21 @@ public interface PersistentNetworkConnection extends AutoCloseable {
     <T, E extends ServiceMessage<T>> ServiceRegistration serviceRegister(ServiceInitiationPoint<E> sip,
             InvocationCallback<E, T> callback);
 
-    /**
-     * Subscribes to the specific type of information messages within the specified area.
-     * 
-     * @param informationType
-     * @param area
-     */
-    // <T extends MaritimeInformationMessage> void subscribe(Class<T> messageType, Area area, Block<T> handler);
+    /** The current state of the connection. */
+    public static enum State {
+
+        /** The connection is being shutdown, has not yet been fully acknowledge by the remote end. */
+        CLOSED,
+
+        /** The connection is in the normal state. */
+        CONNECTED,
+
+        /** Trying to reconnect. */
+        RECONNECTING,
+
+        /** The connection has been fully closed by both ends. */
+        TERMINATED;
+    }
 }
 
 // Close skal virke ordentligt
