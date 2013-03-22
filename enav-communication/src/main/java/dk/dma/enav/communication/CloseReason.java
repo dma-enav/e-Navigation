@@ -15,12 +15,14 @@
  */
 package dk.dma.enav.communication;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * A enum
  * 
  * @author Kasper Nielsen
  */
-public enum CloseReason {
+public final class CloseReason {
 
     /**
      * 1003 indicates that an endpoint is terminating the connection because it has received a type of data it cannot
@@ -28,25 +30,27 @@ public enum CloseReason {
      * <p>
      * See <a href="https://tools.ietf.org/html/rfc6455#section-7.4.1">RFC 6455, Section 7.4.1 Defined Status Codes</a>.
      */
-    BAD_DATA(1003),
+    public static final CloseReason BAD_DATA = new CloseReason(1003, "Bad data");
 
     /**
      * Another client connected with the same identify. Only one client can be connected with the same id. Whenever a
      * new client connects with the same identify as a client that is already connected. The connection to the existing
      * client is automatically closed with this reason.
      */
-    DUPLICATE_CONNECT(4012);
+    public static final CloseReason DUPLICATE_CONNECT = new CloseReason(4012, "Duplicate connect");
 
     final int id;
+    final String message;
 
-    CloseReason(int id) {
+    CloseReason(int id, String message) {
         this.id = id;
+        this.message = requireNonNull(message);
     }
 
     /**
      * @return the id
      */
-    public int getId() {
+    public final int getId() {
         return id;
     }
 

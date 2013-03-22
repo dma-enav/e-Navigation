@@ -21,5 +21,13 @@ package dk.dma.enav.communication;
  */
 public class ConnectionListener {
 
+    public void connected() {}
+
+    public void reconnected() {};
+
     public void stateChanged(PersistentConnection.State previousState, PersistentConnection.State newState) {}
+
+    public void disconnected(CloseReason closeReason) {}
+
+    public void closed(CloseReason closeReason) {}
 }
