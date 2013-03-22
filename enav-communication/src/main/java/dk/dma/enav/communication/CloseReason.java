@@ -15,9 +15,8 @@
  */
 package dk.dma.enav.communication;
 
-
 /**
- * A enum
+ * A class indicating a status code for the close. As well as an optional string message.
  * 
  * @author Kasper Nielsen
  */
@@ -42,30 +41,44 @@ public final class CloseReason {
 
     public static final CloseReason WRONG_MESSAGE = new CloseReason(4100, "Wrong msgtype");
 
-    final int id;
-    final String message;
+    /** The status code. */
+    private final int id;
 
-    CloseReason(int id, String message) {
+    /** An optional string message. */
+    private final String message;
+
+    private CloseReason(int id, String message) {
         this.id = id;
         this.message = message;
     }
 
     /**
+     * Returns the id
+     * 
      * @return the id
      */
-    public final int getId() {
+    public int getId() {
         return id;
     }
 
-    public CloseReason withMessage(String message) {
-        return new CloseReason(id, message);
-    }
-
     /**
-     * @return
+     * Returns an optional close reason.
+     * 
+     * @return an optional close reason
      */
     public String getMessage() {
         return message;
+    }
+
+    /**
+     * Returns a new CloseReason with the same status code, but with a different message.
+     * 
+     * @param message
+     *            the message of the returned close reason
+     * @return the new close reason
+     */
+    public CloseReason withMessage(String message) {
+        return new CloseReason(id, message);
     }
 
     public static CloseReason create(int id, String message) {
