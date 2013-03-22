@@ -24,6 +24,8 @@ import static java.util.Objects.requireNonNull;
  */
 public final class CloseReason {
 
+    public static final CloseReason NORMAL = new CloseReason(1000, "Normal closure");
+
     /**
      * 1003 indicates that an endpoint is terminating the connection because it has received a type of data it cannot
      * accept (e.g., an endpoint that understands only text data MAY send this if it receives a binary message).
