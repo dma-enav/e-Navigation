@@ -15,7 +15,6 @@
  */
 package dk.dma.enav.communication;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * A enum
@@ -41,12 +40,14 @@ public final class CloseReason {
      */
     public static final CloseReason DUPLICATE_CONNECT = new CloseReason(4012, "Duplicate connect");
 
+    public static final CloseReason WRONG_MESSAGE = new CloseReason(4100, "Wrong msgtype");
+
     final int id;
     final String message;
 
     CloseReason(int id, String message) {
         this.id = id;
-        this.message = requireNonNull(message);
+        this.message = message;
     }
 
     /**
@@ -56,4 +57,18 @@ public final class CloseReason {
         return id;
     }
 
+    public CloseReason withMessage(String message) {
+        return new CloseReason(id, message);
+    }
+
+    /**
+     * @return
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    public static CloseReason create(int id, String message) {
+        return new CloseReason(id, message);
+    }
 }
