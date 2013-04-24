@@ -15,12 +15,17 @@
  */
 package dk.dma.enav.communication;
 
+import java.io.Serializable;
+
 /**
  * A class indicating a status code for the close. As well as an optional string message.
  * 
  * @author Kasper Nielsen
  */
-public final class CloseReason {
+public final class CloseReason implements Serializable {
+
+    /** serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
     public static final CloseReason NORMAL = new CloseReason(1000, "Normal closure");
 
@@ -53,7 +58,7 @@ public final class CloseReason {
     }
 
     /**
-     * Returns the id
+     * Returns the id.
      * 
      * @return the id
      */

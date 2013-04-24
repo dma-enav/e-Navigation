@@ -88,6 +88,13 @@ public interface PersistentConnection extends AutoCloseable {
     MaritimeId getLocalId();
 
     /**
+     * Returns an unique connection id after the connection has been made. Returns <code>null</code> until connected.
+     * 
+     * @return an unique connection id
+     */
+    String getConnectionId();
+
+    /**
      * Returns the current state of the connection.
      * 
      * @return the current state of the connection

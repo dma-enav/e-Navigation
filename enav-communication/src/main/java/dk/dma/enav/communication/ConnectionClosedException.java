@@ -19,25 +19,9 @@ package dk.dma.enav.communication;
  * 
  * @author Kasper Nielsen
  */
-public abstract class ConnectionListener {
+public class ConnectionClosedException extends ConnectionException {
 
-    /** Invoked when the client has fully connected to the server. */
-    public void connected() {}
+    /** serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-    // not yet implemented
-    public final void reconnected() {};
-
-    // not yet implemented
-    public final void stateChanged(PersistentConnection.State previousState, PersistentConnection.State newState) {}
-
-    // not yet implemented
-    public final void connectionLost(CloseReason closeReason) {}
-
-    /**
-     * Invoked when the persistent has been fully closed
-     * 
-     * @param closeReason
-     *            the reason for the close
-     */
-    public void closed(CloseReason closeReason) {}
 }
