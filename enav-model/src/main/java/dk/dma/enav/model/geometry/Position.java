@@ -116,6 +116,14 @@ public class Position implements Element {
                 location.getLongitude(), VincentyCalculationType.INITIAL_BEARING);
     }
 
+    public int getCellInt(double degress) {
+        // bigger cellsize than 0.01 cannot be supported. unless we change the cellsize to long
+        if (degress < 0.01) {
+            throw new IllegalArgumentException("degress = " + degress);
+        }
+        return (int) getCell(degress);
+    }
+
     public long getCell(double degress) {
         if (degress < 0.0001) {
             throw new IllegalArgumentException("degress = " + degress);
