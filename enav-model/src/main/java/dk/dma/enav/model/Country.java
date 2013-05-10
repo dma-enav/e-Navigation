@@ -20,8 +20,10 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -178,6 +180,10 @@ public class Country implements Serializable {
             country = getByMid(Integer.parseInt(str));
         }
         return country;
+    }
+    
+    public static Map<Integer, Country> getMidMap() {
+        return Collections.unmodifiableMap(MID_COUNTRY_MAP);        
     }
 
 }
