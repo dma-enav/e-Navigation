@@ -16,6 +16,7 @@
 package dk.dma.enav.model.geometry;
 
 import static java.util.Objects.requireNonNull;
+import dk.dma.enav.util.function.Predicate;
 
 /**
  * A shape has an area
@@ -31,6 +32,14 @@ public abstract class Area implements Element {
         this.cs = requireNonNull(cs);
     }
 
+    public final Predicate<Element> contains() {
+        return new Predicate<Element>() {
+            public boolean test(Element element) {
+                return contains(element);
+            }
+        };
+    }
+
     /**
      * Returns <tt>true</tt> if the specified element is fully contained in the shape, otherwise <tt>false</tt>.
      * 
@@ -38,7 +47,7 @@ public abstract class Area implements Element {
      *            the element to test
      * @return true if the specified element is fully contained in the shape, otherwise false
      */
-    public boolean containedWithin(Element element) {
+    public boolean contains(Element element) {
         throw new UnsupportedOperationException();
     }
 
