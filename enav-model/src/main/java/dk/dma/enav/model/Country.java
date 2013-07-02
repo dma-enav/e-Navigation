@@ -20,9 +20,11 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -33,7 +35,7 @@ import java.util.Properties;
  * See {@link http://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity}
  * 
  */
-public final class Country implements Serializable {
+public final class Country implements Serializable, Comparable<Country> {
 
     private static final long serialVersionUID = 1L;
 
@@ -187,4 +189,22 @@ public final class Country implements Serializable {
         return Collections.unmodifiableMap(MID_COUNTRY_MAP);
     }
 
+    public static List<Country> findAllByCode(String... countries) {
+        final List<Country> c = new ArrayList<>();
+        for (String s : countries) {
+            Country co = Country.getByCode(s);
+            if (co == null) {
+                throw new IllegalArgumentException("Unknown country: " + s);
+            }
+            c.add(co);
+        }
+
+        return null;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int compareTo(Country o) {
+        return threeLetter.compareTo(o.threeLetter);
+    }
 }
