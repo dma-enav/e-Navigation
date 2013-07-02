@@ -45,6 +45,10 @@ public abstract class Predicate<T> {
             public boolean test(T element) {
                 return Predicate.this.test(element) && p.test(element);
             }
+
+            public String toString() {
+                return Predicate.this + " && " + p;
+            }
         };
     }
 
@@ -58,6 +62,10 @@ public abstract class Predicate<T> {
             @Override
             public boolean test(T element) {
                 return !Predicate.this.test(element);
+            }
+
+            public String toString() {
+                return "!" + Predicate.this;
             }
         };
     }
@@ -75,6 +83,10 @@ public abstract class Predicate<T> {
             public boolean test(T element) {
                 return Predicate.this.test(element) || p.test(element);
             }
+
+            public String toString() {
+                return Predicate.this + " || " + p;
+            }
         };
     }
 
@@ -91,6 +103,10 @@ public abstract class Predicate<T> {
             @Override
             public boolean test(T element) {
                 return Predicate.this.test(element) ^ p.test(element);
+            }
+
+            public String toString() {
+                return Predicate.this + " ^ " + p;
             }
         };
     }
