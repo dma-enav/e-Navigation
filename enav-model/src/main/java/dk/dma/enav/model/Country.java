@@ -198,8 +198,7 @@ public final class Country implements Serializable, Comparable<Country> {
             }
             c.add(co);
         }
-
-        return null;
+        return c;
     }
 
     /** {@inheritDoc} */
