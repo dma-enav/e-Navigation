@@ -75,8 +75,9 @@ public interface PersistentConnection extends AutoCloseable {
             BroadcastListener<T> consumer);
 
     /**
-     * Asynchronously shutdowns this connection. use {@link #awaitTerminated(long, TimeUnit)} to await complete
-     * termination.
+     * Asynchronously shutdowns this connection. use {@link #awaitState(State, long, TimeUnit)
+     * awaitState(State.TERMINATED, 1, TimeUnit.HOURS)} to await complete termination (acknowledgment by the remote
+     * side).
      */
     void close();
 
