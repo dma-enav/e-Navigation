@@ -23,14 +23,19 @@ import static java.util.Objects.requireNonNull;
  */
 public abstract class Predicate<T> {
 
-    /**
-     * Returns {@code true} if the input object matches some criteria.
-     * 
-     * @param t
-     *            the input object
-     * @return {@code true} if the input object matches some criteria, otherwise {@code false}
-     */
-    public abstract boolean test(T element);
+    /** A predicate that always returns false */
+    public static final Predicate<Object> FALSE = new Predicate<Object>() {
+        public boolean test(Object element) {
+            return false;
+        }
+    };
+
+    /** A predicate that always returns true */
+    public static final Predicate<Object> TRUE = new Predicate<Object>() {
+        public boolean test(Object element) {
+            return true;
+        }
+    };
 
     /**
      * Returns a predicate which evaluates to {@code true} only if this predicate and the provided predicate both
@@ -45,6 +50,10 @@ public abstract class Predicate<T> {
             public boolean test(T element) {
                 return Predicate.this.test(element) && p.test(element);
             }
+
+            public String toString() {
+                return Predicate.this + " && " + p;
+            }
         };
     }
 
@@ -58,6 +67,10 @@ public abstract class Predicate<T> {
             @Override
             public boolean test(T element) {
                 return !Predicate.this.test(element);
+            }
+
+            public String toString() {
+                return "!" + Predicate.this;
             }
         };
     }
@@ -75,8 +88,21 @@ public abstract class Predicate<T> {
             public boolean test(T element) {
                 return Predicate.this.test(element) || p.test(element);
             }
+
+            public String toString() {
+                return Predicate.this + " || " + p;
+            }
         };
     }
+
+    /**
+     * Returns {@code true} if the input object matches some criteria.
+     * 
+     * @param t
+     *            the input object
+     * @return {@code true} if the input object matches some criteria, otherwise {@code false}
+     */
+    public abstract boolean test(T element);
 
     /**
      * Returns a predicate that evaluates to {@code true} if all or none of the component predicates evaluate to
@@ -91,6 +117,10 @@ public abstract class Predicate<T> {
             @Override
             public boolean test(T element) {
                 return Predicate.this.test(element) ^ p.test(element);
+            }
+
+            public String toString() {
+                return Predicate.this + " ^ " + p;
             }
         };
     }

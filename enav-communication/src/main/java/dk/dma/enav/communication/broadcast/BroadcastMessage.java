@@ -73,23 +73,24 @@ public abstract class BroadcastMessage {
         try {
             f = type.getField("CHANNEL");
         } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("No field named CHANNEL found on " + type.getCanonicalName(), e);
         }
         if (!Modifier.isFinal(f.getModifiers())) {
-            throw new RuntimeException();
+            throw new RuntimeException("Field named CHANNEL on " + type.getCanonicalName() + " must be final");
         } else if (!Modifier.isStatic(f.getModifiers())) {
-            throw new RuntimeException();
+            throw new RuntimeException("Field named CHANNEL on " + type.getCanonicalName() + " must be static");
         } else if (!Modifier.isPublic(f.getModifiers())) {
-            throw new RuntimeException();
+            throw new RuntimeException("Field named CHANNEL on " + type.getCanonicalName() + " must be public");
         } else if (f.getType() != String.class) {
-            throw new RuntimeException();
+            throw new RuntimeException("Field named CHANNEL on " + type.getCanonicalName()
+                    + " must be of a String type");
         }
         try {
             return (String) f.get(null);
         } catch (IllegalArgumentException e) {
-            throw new Error("oops, should never since the field is a string", e);
+            throw new Error("oops, should never happen since the field is a string", e);
         } catch (IllegalAccessException e) {
-            throw new Error("oops, should never since the field is public", e);
+            throw new Error("oops, should never happen since the field is public", e);
         }
     }
 }

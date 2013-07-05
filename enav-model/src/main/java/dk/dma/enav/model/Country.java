@@ -20,23 +20,29 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
- * Class to represent a country by its assigned MID's (Maritime Identification Digits) in addition to its ISO 3166 identification.
+ * Class to represent a country by its assigned MID's (Maritime Identification Digits) in addition to its ISO 3166
+ * identification.
  * 
  * See {@link http://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity}
  * 
  */
-public class Country implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    private static final String LOCATION = Country.class.getPackage().getName().replace(".", "/") + "/country.properties";
+public final class Country implements Serializable, Comparable<Country> {
 
-    static final HashMap<Integer, Country> MID_COUNTRY_MAP = new HashMap<>();    
+    private static final long serialVersionUID = 1L;
+
+    private static final String LOCATION = Country.class.getPackage().getName().replace(".", "/")
+            + "/country.properties";
+
+    static final HashMap<Integer, Country> MID_COUNTRY_MAP = new HashMap<>();
     static final HashMap<String, Country> THREE_LETTER_MAP = new HashMap<>();
     static final HashMap<String, Country> TWO_LETTER_MAP = new HashMap<>();
 
@@ -171,13 +177,33 @@ public class Country implements Serializable {
     }
 
     public static Country getCountryForMmsi(Integer mmsi) {
-        Country country = null;
         String str = Integer.toString(mmsi);
         if (str.length() == 9) {
             str = str.substring(0, 3);
-            country = getByMid(Integer.parseInt(str));
+            return getByMid(Integer.parseInt(str));
         }
-        return country;
+        return null;
     }
 
+    public static Map<Integer, Country> getMidMap() {
+        return Collections.unmodifiableMap(MID_COUNTRY_MAP);
+    }
+
+    public static List<Country> findAllByCode(String... countries) {
+        final List<Country> c = new ArrayList<>();
+        for (String s : countries) {
+            Country co = Country.getByCode(s);
+            if (co == null) {
+                throw new IllegalArgumentException("Unknown country: " + s);
+            }
+            c.add(co);
+        }
+        return c;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int compareTo(Country o) {
+        return threeLetter.compareTo(o.threeLetter);
+    }
 }
