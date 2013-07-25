@@ -28,7 +28,7 @@ public class Route implements Iterable<Waypoint>, Serializable {
     }
     private final ArrayList<Waypoint> waypoints = new ArrayList<>();
     private String name;
-    private String Destination;
+    private String destination;
     private String departure;
 
     public Route(){
@@ -39,9 +39,8 @@ public class Route implements Iterable<Waypoint>, Serializable {
         return departure;
     }
 
-    
     public String getDestination() {
-        return Destination;
+        return destination;
     }
 
     public String getName() {
@@ -62,13 +61,10 @@ public class Route implements Iterable<Waypoint>, Serializable {
     }
 
     public void setDestination(String destination) {
-        Destination = destination;
+        this.destination = destination;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
-    
-    
 }
