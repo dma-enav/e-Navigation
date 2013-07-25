@@ -22,26 +22,26 @@ import static java.util.Objects.requireNonNull;
  * 
  * @author Kasper Nielsen
  */
-public abstract class EBlock<T> {
+public abstract class EConsumer<T> {
 
     public abstract void accept(T t) throws Exception;
 
-    public EBlock<T> chain(final EBlock<? super T> other) {
+    public EConsumer<T> chain(final EConsumer<? super T> other) {
         requireNonNull(other);
-        return new EBlock<T>() {
+        return new EConsumer<T>() {
             public void accept(T t) throws Exception {
-                EBlock.this.accept(t);
+                EConsumer.this.accept(t);
                 other.accept(t);
             }
         };
     }
 
-    public EBlock<T> filter(final Predicate<T> filter) {
+    public EConsumer<T> filter(final Predicate<T> filter) {
         requireNonNull(filter);
-        return new EBlock<T>() {
+        return new EConsumer<T>() {
             public void accept(T t) throws Exception {
                 if (filter.test(t)) {
-                    EBlock.this.accept(t);
+                    EConsumer.this.accept(t);
                 }
             }
         };
