@@ -23,6 +23,9 @@ public class RouteLeg {
     /** Port XTD. */
     private Double xtdPort;
 
+    /** Sail heading rhumb line or great circle */
+    private Heading heading;
+
     /** Starboard XTD. */
     private Double xtdStarboard;
 
@@ -36,6 +39,14 @@ public class RouteLeg {
 
     }
 
+    public RouteLeg(Double speed, Heading heading, Double xtdPort, Double xtdStarboard) {
+        super();
+        this.speed = speed;
+        this.heading = heading;
+        this.xtdPort = xtdPort;
+        this.xtdStarboard = xtdStarboard;
+    }
+
     public Double getSFLen() {
         return SFLen;
     }
@@ -46,6 +57,10 @@ public class RouteLeg {
 
     public Double getSpeed() {
         return speed;
+    }
+
+    public Heading getHeading() {
+        return heading;
     }
 
     public Double getXtdPort() {
@@ -75,5 +90,20 @@ public class RouteLeg {
     public void setXtdStarboard(Double xtdStarboard) {
         this.xtdStarboard = xtdStarboard;
     }
+
+    /**
+     * Enumeration for heading rhumb line or great circle
+     */
+    public static enum Heading {
+        GC, RL;
+
+        public static Heading valueOf(int serialNumber){
+            switch(serialNumber){
+            case 0: return GC;
+            case 1: return RL;
+            default: throw new IllegalArgumentException("Unknown value: " + serialNumber);
+            }
+        }
+    };
 
 }

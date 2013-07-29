@@ -20,23 +20,22 @@ import java.util.Date;
 
 public class Waypoint implements Serializable {
 
-    
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
-    
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
     /** Waypoint name */
     private String name;
-    
+
     /** Out leg */
     private RouteLeg routeLeg;
-    
+
     /** ETA at waypoint. */
     private Date eta;
-    
+
     /** Mandatory latitude. */
     private double latitude;
     /** Mandatory longitude. */
@@ -47,9 +46,18 @@ public class Waypoint implements Serializable {
 
     /** Waypoint turn radius in nautical miles. */
     private Double turnRad;
-    
-    public Waypoint(){
-        
+
+    public Waypoint() {
+
+    }
+
+    public Waypoint(String name, double latitude, double longitude, Double rot, Double turnRad) {
+        super();
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.rot = rot;
+        this.turnRad = turnRad;
     }
 
     public Date getEta() {
@@ -107,6 +115,5 @@ public class Waypoint implements Serializable {
     public void setTurnRad(Double turnRad) {
         this.turnRad = turnRad;
     }
-
 
 }
