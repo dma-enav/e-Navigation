@@ -69,5 +69,6 @@
     <module>enav-common</module>
     <module>enav-communication</module>
     <module>enav-util</module>
+    <module>enav-serialization</module>
   </modules>
 </project>

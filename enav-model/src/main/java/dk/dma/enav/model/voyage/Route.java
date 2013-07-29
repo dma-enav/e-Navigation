@@ -34,6 +34,13 @@ public class Route implements Iterable<Waypoint>, Serializable {
     public Route(){
         
     }
+    
+    public Route(String name, String departure, String destination) {
+        super();
+        this.name = name;
+        this.destination = destination;
+        this.departure = departure;
+    }
 
     public String getDeparture() {
         return departure;
