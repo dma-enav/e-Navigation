@@ -87,7 +87,7 @@ public final class Country implements Serializable, Comparable<Country> {
     protected final String threeLetter;
     protected final String twoLetter;
 
-    protected Country(String name, String twoLetter, String threeLetter, String number) {
+    private Country(String name, String twoLetter, String threeLetter, String number) {
         this.name = name;
         this.twoLetter = twoLetter;
         this.threeLetter = threeLetter;
