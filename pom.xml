@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <parent>
     <groupId>dk.dma</groupId>
     <artifactId>dma-root-pom</artifactId>
-    <version>8</version>
+    <version>9</version>
   </parent>
-  
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.dma.enav</groupId>
   <artifactId>enav-parent</artifactId>
@@ -14,7 +15,7 @@
   <packaging>pom</packaging>
   <name>eNav Parent</name>
   <description>eNav parent module</description>
-  
+
   <scm>
     <connection>scm:git:git@github.com:dma-dk/eNav-api.git</connection>
     <developerConnection>scm:git:git@github.com:dma-dk/eNav-api.git</developerConnection>
@@ -32,17 +33,9 @@
       <url>http://repository-dma.forge.cloudbees.com/release/</url>
     </repository>
   </repositories>
-  <dependencies>
-    <dependency>
-   <groupId>junit</groupId>
-   <artifactId>junit</artifactId>
-   <version>4.9</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  
 
-<build>
+
+  <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -51,14 +44,17 @@
         <configuration>
           <doctitle>e-Navigation ${project.version} API</doctitle>
           <windowtitle>e-Navigation API</windowtitle>
-          <aggregate>true</aggregate> 
+          <aggregate>true</aggregate>
           <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
           <docletArtifact>
             <groupId>org.umlgraph</groupId>
             <artifactId>doclet</artifactId>
             <version>5.1</version>
           </docletArtifact>
-           <additionalparam>-all -inferrel -inferdep -quiet -hide java.* -collpackages java.util.* -qualify -postfixpackage -nodefontsize 9 -nodefontpackagesize 7 -outputencoding utf8</additionalparam>
+          <additionalparam>
+            -all -inferrel -inferdep -quiet -hide java.* -collpackages java.util.* -qualify -postfixpackage
+              -nodefontsize 9 -nodefontpackagesize 7 -outputencoding utf8
+          </additionalparam>
         </configuration>
       </plugin>
     </plugins>
