@@ -28,5 +28,13 @@ public class Endpoint implements Serializable {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
-
+    
+    private String name;
+    
+    private String alias;
+    
+    private double latitude;
+    
+    private double longitude;
+    
 }
