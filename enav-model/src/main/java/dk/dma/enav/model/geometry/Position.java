@@ -116,14 +116,6 @@ public class Position implements Element {
                 location.getLongitude(), VincentyCalculationType.INITIAL_BEARING);
     }
 
-    public int getCellInt(double degress) {
-        // bigger cellsize than 0.01 cannot be supported. unless we change the cellsize to long
-        if (degress < 0.01) {
-            throw new IllegalArgumentException("degress = " + degress);
-        }
-        return (int) getCell(degress);
-    }
-
     public long getCell(double degress) {
         if (degress < 0.0001) {
             throw new IllegalArgumentException("degress = " + degress);
@@ -132,6 +124,14 @@ public class Position implements Element {
         }
         return (long) (Math.floor(getLatitude() / degress) * (360.0 / degress))
                 + (long) ((360.0 + getLongitude()) / degress) - (long) (360L / degress);
+    }
+
+    public int getCellInt(double degress) {
+        // bigger cellsize than 0.01 cannot be supported. unless we change the cellsize to long
+        if (degress < 0.01) {
+            throw new IllegalArgumentException("degress = " + degress);
+        }
+        return (int) getCell(degress);
     }
 
     /**
@@ -225,25 +225,6 @@ public class Position implements Element {
         return other.rhumbLineDistanceTo(this);
     }
 
-    @Override
-    public String toString() {
-        return "(" + getLatitudeAsString() + ", " + getLongitudeAsString() + ")";
-    }
-
-    public Position withLatitude(double latitude) {
-        return new Position(latitude, longitude);
-    }
-
-    public Position withLongitude(double longitude) {
-        return new Position(latitude, longitude);
-    }
-
-    // we lose some pression
-
-    public static Position fromPackedLong(long l) {
-        return new Position(Float.intBitsToFloat((int) (l >> 32)), Float.intBitsToFloat((int) l));
-    }
-
     /**
      * Packs the position into a long (losing some precision). Can be read later by {@link #fromPackedLong(long)}
      * 
@@ -253,6 +234,25 @@ public class Position implements Element {
         float lat = (float) getLatitude();
         float lon = (float) getLongitude();
         return ((long) Float.floatToRawIntBits(lat) << 32) + Float.floatToRawIntBits(lon);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + getLatitudeAsString() + ", " + getLongitudeAsString() + ")";
+    }
+
+    public Position withLatitude(double latitude) {
+        return new Position(latitude, longitude);
+    }
+
+    // we lose some pression
+
+    public Position withLongitude(double longitude) {
+        return new Position(latitude, longitude);
+    }
+
+    public PositionTime withTime(long time) {
+        return PositionTime.create(this, time);
     }
 
     /**
@@ -270,8 +270,11 @@ public class Position implements Element {
         return new Position(latitude, longitude);
     }
 
+    public static Position fromPackedLong(long l) {
+        return new Position(Float.intBitsToFloat((int) (l >> 32)), Float.intBitsToFloat((int) l));
+    }
+
     public static boolean isValid(double latitude, double longitude) {
         return latitude <= 90 && latitude >= -90 && longitude <= 180 && longitude >= -180;
     }
-
 }

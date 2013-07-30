@@ -15,14 +15,12 @@
  */
 package dk.dma.enav.model.geometry.grid;
 
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import dk.dma.enav.model.geometry.Area;
 import dk.dma.enav.model.geometry.BoundingBox;
 import dk.dma.enav.model.geometry.CoordinateSystem;
-import dk.dma.enav.model.geometry.Line;
 import dk.dma.enav.model.geometry.Position;
 
 /**
@@ -31,19 +29,35 @@ import dk.dma.enav.model.geometry.Position;
  */
 public final class Grid {
 
-    public static final Grid CELL1 = new Grid();
+    /** A grid where each cell have a radius of 1 degree. */
+    public static final Grid GRID_1_DEGREE = new Grid(1);
 
-    // Kan maaske have nogle statiske GRID_1 <-
-    // Kan maaske have nogle statiske GRID_1 <-
+    /** A grid where each cell have a radius of 10 degrees. */
+    public static final Grid GRID_10_DEGREES = new Grid(10);
 
     // Laver man et grid udfra et coordinat system?
     // Angiv f.eks. minSize, eller maxSize i x - DistanceUnit, bare meters syntes jeg
     // ahh det skal vel vaere kvadrat kilometere taenker jeg??
-    private Grid() {}
 
-    public Cell getCell(Position position) {
-        throw new UnsupportedOperationException();
+    private final double resolution;
+
+    private Grid(double resolution) {
+        this.resolution = resolution;
     }
+
+    //
+    // public Cell getCell(Position position) {
+    // throw new UnsupportedOperationException();
+    // }
+    //
+    // /**
+    // * Returns a map of all cells, where the key is the id of the cell, and the value is the actual cell.
+    // *
+    // * @return all cells
+    // */
+    // public Map<Integer, Cell> getCells() {
+    // return null;
+    // }
 
     /**
      * Returns a list of cells that the specified area is contained in.
@@ -55,13 +69,14 @@ public final class Grid {
         if (area instanceof BoundingBox) {
             return getCells((BoundingBox) area);
         }
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Only bounding boxes are supported");
     }
 
     Set<Cell> getCells(BoundingBox box) {
         Set<Long> cells = new TreeSet<>();
+        // 100000 sampling points is enough for grids with a maximum resolution of 1
         for (int i = 0; i < 100000; i++) {
-            cells.add(box.getRandom().getCell(1));
+            cells.add(box.getRandom().getCell(resolution));
         }
         Set<Cell> result = new TreeSet<>();
         for (Long l : cells) {
@@ -70,9 +85,10 @@ public final class Grid {
         return result;
     }
 
-    List<Cell> getCells(Line line) {
-        throw new UnsupportedOperationException();
-    }
+    //
+    // List<Cell> getCells(Line line) {
+    // throw new UnsupportedOperationException();
+    // }
 
     public static void main(String[] args) {
         BoundingBox bb = BoundingBox.create(Position.create(-40, 15), Position.create(12, 77),
