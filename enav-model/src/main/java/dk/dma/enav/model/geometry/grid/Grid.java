@@ -74,9 +74,18 @@ public final class Grid {
 
     Set<Cell> getCells(BoundingBox box) {
         Set<Long> cells = new TreeSet<>();
-        // 100000 sampling points is enough for grids with a maximum resolution of 1
-        for (int i = 0; i < 100000; i++) {
-            cells.add(box.getRandom().getCell(resolution));
+        int steps = 64;
+        int prev = 0;
+        // TODO fix it to be fast
+        for (;;) {
+            for (int i = 0; i < steps; i++) {
+                cells.add(box.getRandom().getCell(resolution));
+            }
+            if (cells.size() == prev) {
+                break;
+            }
+            prev = cells.size();
+            steps *= 2;
         }
         Set<Cell> result = new TreeSet<>();
         for (Long l : cells) {
