@@ -13,28 +13,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.voyage.endpoint;
+package dk.dma.enav.serialization;
 
-import java.io.Serializable;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
-import dk.dma.enav.model.voyage.Voyage;
+import dk.dma.enav.model.voyage.Route;
 
 /**
- * The starting or ending point of a {@link Voyage}.
  * 
- * @author Kasper Nielsen
+ * @author Jesper Tejlgaard
+ *
  */
-public class Endpoint implements Serializable {
+public abstract class RouteParser {
+    
+    
+    public static SimpleRouteParser getSimpleRouteParser(File file) throws FileNotFoundException{
+        return new SimpleRouteParser(file);
+    }
 
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    
-    private String name;
-    
-    private String alias;
-    
-    private double latitude;
-    
-    private double longitude;
+    public static  SimpleRouteParser getSimpleRouteParser(InputStream io) {
+        return new SimpleRouteParser(io);
+    }
+
+    public abstract Route parse()throws IOException;
     
 }

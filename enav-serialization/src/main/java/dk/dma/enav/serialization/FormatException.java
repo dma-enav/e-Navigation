@@ -13,28 +13,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.voyage.endpoint;
-
-import java.io.Serializable;
-
-import dk.dma.enav.model.voyage.Voyage;
+package dk.dma.enav.serialization;
 
 /**
- * The starting or ending point of a {@link Voyage}.
+ * Exception class for failed parsing
  * 
- * @author Kasper Nielsen
+ * @author Jesper Tejlgaard
  */
-public class Endpoint implements Serializable {
+public class FormatException extends Exception {
 
-    /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
     
-    private String name;
-    
-    private String alias;
-    
-    private double latitude;
-    
-    private double longitude;
-    
+    public FormatException() {    
+    }
+
+    public FormatException(String msg) {
+        super(msg);
+    }
+
+    public FormatException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 }
