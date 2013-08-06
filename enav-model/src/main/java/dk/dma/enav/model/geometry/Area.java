@@ -21,7 +21,6 @@ import dk.dma.enav.util.function.Predicate;
 /**
  * A shape has an area
  **/
-// TODO rename to area
 public abstract class Area implements Element {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;

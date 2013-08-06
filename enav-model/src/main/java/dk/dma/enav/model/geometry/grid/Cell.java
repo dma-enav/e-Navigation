@@ -30,8 +30,6 @@ public class Cell implements Comparable<Cell> {
         return (int) id;
     }
 
-    // En cell i et grid
-
     /** {@inheritDoc} */
     @Override
     public int compareTo(Cell o) {
