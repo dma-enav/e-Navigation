@@ -42,6 +42,21 @@ public class Route implements Iterable<Waypoint>, Serializable {
     public Route(String id){
         this.id = id;
     }
+    
+    /**
+     * Constructor generating an id
+     * 
+     * @param name
+     * @param departure
+     * @param destination
+     */
+    public Route(String name, String departure, String destination) {
+        super();
+        // TODO generate id
+        this.name = name;
+        this.destination = destination;
+        this.departure = departure;
+    }
 
     public Route(String id, String name, String departure, String destination) {
         super();
