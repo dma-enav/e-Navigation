@@ -116,4 +116,11 @@ public class Waypoint implements Serializable {
         this.turnRad = turnRad;
     }
 
+    @Override
+    public String toString() {
+        return "Waypoint [name=" + name + ", routeLeg=" + routeLeg + ", eta=" + eta + ", latitude=" + latitude
+                + ", longitude=" + longitude + ", rot=" + rot + ", turnRad=" + turnRad + "]";
+    }
+
+    
 }
