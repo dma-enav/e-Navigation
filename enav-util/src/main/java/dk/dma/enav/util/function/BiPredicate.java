@@ -13,20 +13,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.enav.model.geometry;
+package dk.dma.enav.util.function;
 
 /**
- * An object that has a boundary such as a route or a warning area.
  * 
- * @deprecated Anybody needs me? or else Im gone
+ * @author Kasper Nielsen
  */
-@Deprecated
-public interface GeometryBoundedObject {
+public interface BiPredicate<T, U> {
 
     /**
-     * Returns the boundary.
+     * Returns <code>true</code> if the inputs match some criteria, otherwise false.
      * 
-     * @return the boundary
+     * @param t
+     *            the first argument
+     * @param u
+     *            the second argument
+     * @return <code>true</code> if the inputs match some criteria
      */
-    Element getBoundary();
+    boolean test(T t, U u);
 }
