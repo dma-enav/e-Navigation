@@ -18,7 +18,7 @@ package dk.dma.enav.serialization;
 import java.io.IOException;
 import java.io.InputStream;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 
@@ -48,39 +48,39 @@ public class SimpleRouteParserTest {
         Assert.assertEquals(13, r.getWaypoints().size());
 
         Assert.assertEquals(13, r.getWaypoints().size());
-
+        
         //Checking first waypoint
         Waypoint waypoint = r.getWaypoints().get(0);
         Assert.assertEquals("WP_001", waypoint.getName());
         Assert.assertEquals("55 42.510N", Position.create(waypoint.getLatitude(), 0).getLatitudeAsString());
         Assert.assertEquals("012 36.724E", Position.create(0, waypoint.getLongitude()).getLongitudeAsString());
-        Assert.assertEquals(0.500, waypoint.getTurnRad());
-        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed());
+        Assert.assertEquals(0.500, waypoint.getTurnRad(), 0.0);
+        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed(), 0.0);
         Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
-        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdPort());
-        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdStarboard());
+        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdPort(), 0.0);
+        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
 
         //Checking second waypoint
         waypoint = r.getWaypoints().get(1);
         Assert.assertEquals("WP_002", waypoint.getName());
         Assert.assertEquals("55 45.920N", Position.create(waypoint.getLatitude(), 0).getLatitudeAsString());
         Assert.assertEquals("012 40.554E", Position.create(0, waypoint.getLongitude()).getLongitudeAsString());
-        Assert.assertEquals(0.500, waypoint.getTurnRad());
-        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed());
+        Assert.assertEquals(0.500, waypoint.getTurnRad(), 0.0);
+        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed(), 0.0);
         Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
-        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdPort());
-        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdStarboard());
+        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdPort(), 0.0);
+        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
 
         //Checking last waypoint
         waypoint = r.getWaypoints().get(r.getWaypoints().size()-1);
         Assert.assertEquals("WP_013", waypoint.getName());
         Assert.assertEquals("56 09.755N", Position.create(waypoint.getLatitude(), 0).getLatitudeAsString());
         Assert.assertEquals("010 14.404E", Position.create(0, waypoint.getLongitude()).getLongitudeAsString());
-        Assert.assertEquals(0.500, waypoint.getTurnRad());
-        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed());
+        Assert.assertEquals(0.500, waypoint.getTurnRad(), 0.0);
+        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed(), 0.0);
         Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
-        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdPort());
-        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdStarboard());
+        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdPort(), 0.0);
+        Assert.assertEquals(0.100, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
     }
     
 }

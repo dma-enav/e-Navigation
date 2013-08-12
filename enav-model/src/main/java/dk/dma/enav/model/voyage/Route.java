@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import dk.dma.enav.model.MaritimeId;
+
 public class Route implements Iterable<Waypoint>, Serializable {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
@@ -30,13 +32,35 @@ public class Route implements Iterable<Waypoint>, Serializable {
     private String name;
     private String destination;
     private String departure;
+    
+    /** Should this be implemented as a {@link MaritimeId} ? */
+    private String id;
 
     public Route(){
-        
+    }
+
+    public Route(String id){
+        this.id = id;
     }
     
+    /**
+     * Constructor generating an id
+     * 
+     * @param name
+     * @param departure
+     * @param destination
+     */
     public Route(String name, String departure, String destination) {
         super();
+        // TODO generate id
+        this.name = name;
+        this.destination = destination;
+        this.departure = departure;
+    }
+
+    public Route(String id, String name, String departure, String destination) {
+        super();
+        this.id = id;
         this.name = name;
         this.destination = destination;
         this.departure = departure;
@@ -52,6 +76,10 @@ public class Route implements Iterable<Waypoint>, Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public ArrayList<Waypoint> getWaypoints() {
@@ -74,4 +102,11 @@ public class Route implements Iterable<Waypoint>, Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Route [waypoints=" + waypoints + ", id=" + id + ", name=" + name + ", destination=" + destination + ", departure="
+                + departure + "]";
+    }
+    
 }
