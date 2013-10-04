@@ -90,6 +90,10 @@ public class RouteLeg {
     public void setXtdStarboard(Double xtdStarboard) {
         this.xtdStarboard = xtdStarboard;
     }
+    
+    public void setHeading(Heading heading) {
+        this.heading = heading;
+    }
 
     /**
      * Enumeration for heading rhumb line or great circle
