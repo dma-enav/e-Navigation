@@ -15,7 +15,11 @@
  */
 package dk.dma.enav.model.voyage;
 
-public class RouteLeg {
+import java.io.Serializable;
+
+public class RouteLeg implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /** Speed in knots. */
     private Double speed;
