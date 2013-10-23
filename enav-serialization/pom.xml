@@ -12,13 +12,18 @@
 
   <artifactId>enav-serialization</artifactId>
   <name>eNav Serialization</name>
-  
-    
+
+
   <dependencies>
     <dependency>
-       <groupId>${project.groupId}</groupId>
-       <artifactId>enav-model</artifactId>
-       <version>${project.version}</version>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>enav-model</artifactId>
+      <version>${project.version}</version>
     </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
+  </dependencies>
 </project>

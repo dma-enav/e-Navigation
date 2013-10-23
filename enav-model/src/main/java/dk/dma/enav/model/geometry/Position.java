@@ -48,11 +48,8 @@ public class Position implements Element {
      */
 
     Position(double latitude, double longitude) {
-        if (latitude > 90 || latitude < -90) {
-            throw new IllegalArgumentException("Illegal latitude must be between -90 and 90, was " + latitude);
-        } else if (longitude > 180 || longitude < -180) {
-            throw new IllegalArgumentException("Longitude must be between -180 and 180, was " + longitude);
-        }
+        verifyLatitude(latitude);
+        verifyLongitude(longitude);
         // We want simple equals and hashCode implementation. So we make sure
         // that
         // positions are never constructed with -0.0 as latitude or longitude.
@@ -276,5 +273,28 @@ public class Position implements Element {
 
     public static boolean isValid(double latitude, double longitude) {
         return latitude <= 90 && latitude >= -90 && longitude <= 180 && longitude >= -180;
+    }
+
+
+    /**
+     * Verify that latitude is within the interval [-90:90]. 
+     * @param latitude
+     * @throws IllegalArgumentException
+     */
+    public static void verifyLatitude(double latitude)throws IllegalArgumentException{
+        if (latitude > 90 || latitude < -90) {
+            throw new IllegalArgumentException("Illegal latitude must be between -90 and 90, was " + latitude);
+        }
+    }
+
+    /**
+     * Verify that longitude is within the interval [-180:180]. 
+     * @param longitude
+     * @throws IllegalArgumentException when value 
+     */
+    public static void verifyLongitude(double longitude) throws IllegalArgumentException {
+        if (longitude > 180 || longitude < -180) {
+            throw new IllegalArgumentException("Longitude must be between -180 and 180, was " + longitude);
+        }
     }
 }
