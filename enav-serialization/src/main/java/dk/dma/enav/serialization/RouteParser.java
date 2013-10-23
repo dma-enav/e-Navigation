@@ -25,19 +25,56 @@ import dk.dma.enav.model.voyage.Route;
 /**
  * 
  * @author Jesper Tejlgaard
- *
+ * 
  */
 public abstract class RouteParser {
+
+    RouteDefaults defaults = new RouteDefaults(); 
     
-    
-    public static SimpleRouteParser getSimpleRouteParser(File file) throws FileNotFoundException{
-        return new SimpleRouteParser(file);
+    public static RouteParser getRouteParser(File file) throws FileNotFoundException {
+        String ext = getExtension(file.getName());
+        switch (ext) {
+        case "TXT":
+            return new SimpleRouteParser(file);
+        case "ROU":
+            return new RouRouteParser(file);
+//        case "RT3":
+//            return new Rt3RouteParser(file);
+        default:
+            throw new IllegalArgumentException("Unknown file extension. Known extensions are 'TXT' and 'ROU'.");
+//            return new PertinaciousRouteParser(file);
+        }
     }
 
-    public static  SimpleRouteParser getSimpleRouteParser(InputStream io) {
-        return new SimpleRouteParser(io);
+    public static RouteParser getRouteParser(String fileName, InputStream io) {
+        String ext = getExtension(fileName);
+        switch (ext) {
+        case "TXT":
+            return new SimpleRouteParser(io);
+        case "ROU":
+            return new RouRouteParser(io);
+//        case "RT3":
+//            return new Rt3RouteParser(file);
+        default:
+            throw new IllegalArgumentException("Unknown file extension. Known extensions are 'TXT' and 'ROU'.");
+//            return new PertinaciousRouteParser(file);
+        }
     }
-
-    public abstract Route parse()throws IOException;
     
+    private static String getExtension(String fileName){
+        int position = fileName.lastIndexOf('.');
+        return fileName.substring(position + 1).trim().toUpperCase();        
+    }
+    
+    public RouteParser defaults(RouteDefaults defaults){
+        this.defaults = defaults;
+        return this;
+    }
+    
+    public RouteDefaults getDefaults(){
+        return defaults;
+    }
+    
+    public abstract Route parse() throws IOException;
+
 }
