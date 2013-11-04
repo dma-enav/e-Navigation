@@ -19,6 +19,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Locale;
 
+import dk.dma.enav.model.dto.PositionDTO;
 import dk.dma.enav.model.geometry.CoordinateSystem.VincentyCalculationType;
 
 /**
@@ -299,5 +300,9 @@ public class Position implements Element {
         if (longitude > 180 || longitude < -180) {
             throw new IllegalArgumentException("Longitude must be between -180 and 180, was " + longitude);
         }
+    }
+    
+    public PositionDTO getDTO(){
+        return new PositionDTO(this.latitude, this.longitude);
     }
 }
