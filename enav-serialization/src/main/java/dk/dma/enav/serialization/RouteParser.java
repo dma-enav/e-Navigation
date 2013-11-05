@@ -38,8 +38,8 @@ public abstract class RouteParser {
             return new SimpleRouteParser(file);
         case "ROU":
             return new RouRouteParser(file);
-//        case "RT3":
-//            return new Rt3RouteParser(file);
+        case "RT3":
+            return new Rt3RouteParser(file);
         default:
             throw new IllegalArgumentException("Unknown file extension. Known extensions are 'TXT' and 'ROU'.");
 //            return new PertinaciousRouteParser(file);
@@ -53,8 +53,8 @@ public abstract class RouteParser {
             return new SimpleRouteParser(io);
         case "ROU":
             return new RouRouteParser(io);
-//        case "RT3":
-//            return new Rt3RouteParser(file);
+        case "RT3":
+            return new Rt3RouteParser(io);
         default:
             throw new IllegalArgumentException("Unknown file extension. Known extensions are 'TXT' and 'ROU'.");
 //            return new PertinaciousRouteParser(file);
