@@ -112,6 +112,13 @@ public class RouteLeg implements Serializable {
             default: throw new IllegalArgumentException("Unknown value: " + serialNumber);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "RouteLeg [speed=" + speed + ", xtdPort=" + xtdPort + ", heading=" + heading + ", xtdStarboard="
+                + xtdStarboard + ", SFWidth=" + SFWidth + ", SFLen=" + SFLen + "]";
     };
 
+    
 }
