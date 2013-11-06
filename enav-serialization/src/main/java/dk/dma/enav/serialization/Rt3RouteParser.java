@@ -39,18 +39,18 @@ import dk.dma.enav.model.voyage.RouteLeg.Heading;
 import dk.dma.enav.model.voyage.Waypoint;
 
 /**
- * Parser for reading routes in RT3 format. RT3 format is among others used by Transas ECDIS. 
+ * Parser for reading routes in RT3 format. RT3 format is among others used by Transas ECDIS.
  * 
  * @author Jesper Tejlgaard
  */
 public class Rt3RouteParser extends RouteParser {
 
-    // private static final Logger LOG = LoggerFactory.getLogger(RouteLoader.class);
+    // private static final Logger LOGGER = LoggerFactory.getLogger(RouteLoader.class);
 
     private BufferedReader reader;
-    
+
     RouteDefaults defaults = new RouteDefaults();
-    
+
     public Rt3RouteParser(Reader reader) {
         if (reader instanceof BufferedReader) {
             this.reader = (BufferedReader) reader;
@@ -63,84 +63,114 @@ public class Rt3RouteParser extends RouteParser {
         this(new FileReader(file));
     }
 
-    public Rt3RouteParser(InputStream io)  {
+    public Rt3RouteParser(InputStream io) {
         this(new InputStreamReader(io));
     }
 
     public Route parse() throws IOException {
-        
+
         Route route = new Route();
-        
+
         try {
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(new InputSource(reader));
             // Normalize text representation
             doc.getDocumentElement().normalize();
-            
+
             // Get name
             route.setName(doc.getDocumentElement().getAttribute("RtName"));
             if (route.getName() == null) {
                 route.setName("NO NAME");
             }
-            
+
             // Get waypoints
             NodeList waypointsList = doc.getElementsByTagName("WayPoints");
             if (waypointsList == null || waypointsList.getLength() < 1) {
                 throw new IOException("Failed to parse RT3, no WayPoints node");
             }
-            Element waypointsNode = (Element)waypointsList.item(0);
+            Element waypointsNode = (Element) waypointsList.item(0);
             NodeList waypoints = waypointsNode.getElementsByTagName("WayPoint");
             if (waypoints == null || waypoints.getLength() == 0) {
                 throw new IOException("Failed to parse RT3, no WayPoint nodes");
             }
-            
-            // Iterate thorugh waypoints
-            for(int i = 0; i < waypoints.getLength(); i++) {
+
+            NodeList wpsExList = null;
+            NodeList calculationsList = doc.getElementsByTagName("Calculations");
+            if (calculationsList != null && calculationsList.getLength() >= 1) {
+                Element calculationsNode = (Element) calculationsList.item(0);
+                NodeList calculationList = calculationsNode.getElementsByTagName("Calculation");
+                if (calculationList != null) {
+                    for (int i = 0; i < calculationList.getLength(); i++) {
+                        Element calculationElem = (Element) calculationList.item(i);
+                        
+                        System.out.println(calculationElem.getTagName());
+                        System.out.println(calculationElem.getAttributes());
+                        
+
+                        
+                        String name = calculationElem.getAttribute("CalcName");
+
+                        if (!"Base Calculation".equals(name) && !"BaseCalc".equals(name)) {
+                            wpsExList = calculationElem.getElementsByTagName("WayPointEx");
+                            break;
+                        }
+                    }
+                }
+            }
+            // Log "No <Calculations> element. Assuming default values for Speed, Heading"
+
+            // Iterate thorugh Waypoints/Waypoint && Calculations/Calculation[name="x"]/WaypointExs/waypointEx
+            for (int i = 0; i < waypoints.getLength(); i++) {
                 // Get waypoint element
-                Element wpElem = (Element)waypoints.item(i);
-                
+                Element wpElem = (Element) waypoints.item(i);
                 // Create route objects
                 Waypoint wp = new Waypoint();
-                
+
                 // Set defaults
                 wp.setTurnRad(getDefaults().getDefaultTurnRad());
                 wp.setName(String.format("WP_%03d", i + 1));
-                                
+
                 // Wp name
                 String name = wpElem.getAttribute("WPName");
                 if (name != null && name.length() > 0) {
                     wp.setName(name);
                 }
-                
+
                 // Lat and lon
                 Double lat = ParseUtils.parseDouble(wpElem.getAttribute("Lat"));
                 Double lon = ParseUtils.parseDouble(wpElem.getAttribute("Lon"));
                 if (lat == null || lon == null) {
                     throw new IOException("Missing latitude/longitude for WP " + wp.getName());
                 }
-                
+
                 // RT3 position are given in minutes. Transform to degrees
-                lat = lat/60;
-                lon = lon/60;
-                
+                lat = lat / 60;
+                lon = lon / 60;
+
                 Position pos = Position.create(lat, lon);
-                
+
                 wp.setLatitude(pos.getLatitude());
                 wp.setLongitude(pos.getLongitude());
-                
+
                 // Turn rad
                 String turnRad = wpElem.getAttribute("TurnRadius");
                 if (turnRad != null && turnRad.length() > 0) {
                     wp.setTurnRad(ParseUtils.parseDouble(turnRad));
                 }
-                
-                if(i < waypoints.getLength()){
+
+                if (i < waypoints.getLength()) {
                     RouteLeg leg = new RouteLeg();
                     wp.setRouteLeg(leg);
                     leg.setSpeed(getDefaults().getDefaultSpeed());
                     leg.setXtdPort(getDefaults().getDefaultXtd());
                     leg.setXtdStarboard(getDefaults().getDefaultXtd());
+
+                    if (wpsExList != null && i < wpsExList.getLength()) {
+                        Element wpsEx = (Element)wpsExList.item(i);
+                        String speedStr = wpsEx.getAttribute("Speed");
+                        leg.setSpeed(Double.valueOf(speedStr));
+                    }
 
                     // XTE
                     String xte = wpElem.getAttribute("PortXTE");
@@ -151,7 +181,7 @@ public class Rt3RouteParser extends RouteParser {
                     if (xte != null && xte.length() > 0) {
                         leg.setXtdStarboard(ParseUtils.parseDouble(xte));
                     }
-                    
+
                     // Leg type
                     String legType = wpElem.getAttribute("LegType");
                     if (legType != null && !legType.equals("0")) {
@@ -162,15 +192,15 @@ public class Rt3RouteParser extends RouteParser {
                 }
                 route.getWaypoints().add(wp);
             }
-            
+
         } catch (IOException e) {
-//            LOG.error("Failed to load RT3 route file: " + e.getMessage());
+            // LOG.error("Failed to load RT3 route file: " + e.getMessage());
             throw new IOException("Error reading route file", e);
         } catch (Exception e) {
-//            LOG.error("Failed to parse RT3 route file: " + e.getMessage());
+            // LOG.error("Failed to parse RT3 route file: " + e.getMessage());
             throw new IOException("Error parsing RT3 route file", e);
         }
-        
+
         return route;
     }
 }

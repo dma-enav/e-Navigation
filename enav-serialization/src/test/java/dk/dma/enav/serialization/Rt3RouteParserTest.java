@@ -99,7 +99,7 @@ public class Rt3RouteParserTest {
         // Assert.assertEquals("55 42.510N", Position.create(waypoint.getLatitude(), 0).getLatitudeAsString());
         // Assert.assertEquals("012 36.724E", Position.create(0, waypoint.getLongitude()).getLongitudeAsString());
         Assert.assertEquals(0.0, waypoint.getTurnRad(), 0.0);
-        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed(), 0.0);
+        Assert.assertEquals(0.00, waypoint.getRouteLeg().getSpeed(), 0.0);
         Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdPort(), 0.0);
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
@@ -110,7 +110,7 @@ public class Rt3RouteParserTest {
         // Assert.assertEquals("55 42.510N", Position.create(waypoint.getLatitude(), 0).getLatitudeAsString());
         // Assert.assertEquals("012 36.724E", Position.create(0, waypoint.getLongitude()).getLongitudeAsString());
         Assert.assertEquals(0.0, waypoint.getTurnRad(), 0.0);
-        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed(), 0.0);
+        Assert.assertEquals(0.00, waypoint.getRouteLeg().getSpeed(), 0.0);
         Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdPort(), 0.0);
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
@@ -121,7 +121,7 @@ public class Rt3RouteParserTest {
         // Assert.assertEquals("55 42.510N", Position.create(waypoint.getLatitude(), 0).getLatitudeAsString());
         // Assert.assertEquals("012 36.724E", Position.create(0, waypoint.getLongitude()).getLongitudeAsString());
         Assert.assertEquals(0.0, waypoint.getTurnRad(), 0.0);
-        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed(), 0.0);
+        Assert.assertEquals(0.00, waypoint.getRouteLeg().getSpeed(), 0.0);
         Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdPort(), 0.0);
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
@@ -132,10 +132,58 @@ public class Rt3RouteParserTest {
         // Assert.assertEquals("55 42.510N", Position.create(waypoint.getLatitude(), 0).getLatitudeAsString());
         // Assert.assertEquals("012 36.724E", Position.create(0, waypoint.getLongitude()).getLongitudeAsString());
         Assert.assertEquals(0.0, waypoint.getTurnRad(), 0.0);
-        Assert.assertEquals(10.00, waypoint.getRouteLeg().getSpeed(), 0.0);
+        Assert.assertEquals(0.00, waypoint.getRouteLeg().getSpeed(), 0.0);
         Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdPort(), 0.0);
         Assert.assertEquals(0.100000, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
+    }
+
+    @Test
+    public void testParseWithSpeeds() throws IOException {
+        // SETUP DATA
+        InputStream is = getClass().getResourceAsStream("/routes/GOT to KIEL via South Channel 1,0N.RT3");
+        // EXECUTE
+        RouteParser parser = new Rt3RouteParser(is);
+        Route r = parser.parse();
+
+        System.out.println(r);
+
+        // TEST ASSERTIONS
+        Assert.assertEquals("GOT to KIEL via South Channel 1,0N", r.getName());
+        Assert.assertEquals(56, r.getWaypoints().size());
+
+        // TEST FIRST WAYPOINT
+        Waypoint waypoint = r.getWaypoints().get(0);
+        Assert.assertEquals("Majnabbe", waypoint.getName());
+        Assert.assertEquals(3461.627474 / 60, waypoint.getLatitude(), 0.0);
+        Assert.assertEquals(714.459258/60, waypoint.getLongitude(), 0.0);
+        Assert.assertEquals(0.0, waypoint.getTurnRad(), 0.0);
+        Assert.assertEquals(00.00, waypoint.getRouteLeg().getSpeed(), 0.0);
+        Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
+        Assert.assertEquals(0.0, waypoint.getRouteLeg().getXtdPort(), 0.0);
+        Assert.assertEquals(0.0, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
+
+        // TEST SECOND WAYPOINT
+        waypoint = r.getWaypoints().get(1);
+        Assert.assertEquals("Alvsborgsbron", waypoint.getName());
+        Assert.assertEquals(3461.459000 / 60, waypoint.getLatitude(), 0.0);
+        Assert.assertEquals(714.090000/60, waypoint.getLongitude(), 0.0);
+        Assert.assertEquals(1.0, waypoint.getTurnRad(), 0.0);
+        Assert.assertEquals(3.0, waypoint.getRouteLeg().getSpeed(), 0.0);
+        Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
+        Assert.assertEquals(0.034064, waypoint.getRouteLeg().getXtdPort(), 0.0);
+        Assert.assertEquals(0.036514, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
+
+        // TEST LAST WAYPOINT
+        waypoint = r.getWaypoints().get(r.getWaypoints().size() - 1);
+        Assert.assertEquals("Kiel", waypoint.getName());
+        Assert.assertEquals(3259.078728 / 60, waypoint.getLatitude(), 0.0);
+        Assert.assertEquals(608.216024/60, waypoint.getLongitude(), 0.0);
+        Assert.assertEquals(0.0, waypoint.getTurnRad(), 0.0);
+        Assert.assertEquals(1.00, waypoint.getRouteLeg().getSpeed(), 0.0);
+        Assert.assertEquals(Heading.RL, waypoint.getRouteLeg().getHeading());
+        Assert.assertEquals(0.020000, waypoint.getRouteLeg().getXtdPort(), 0.0);
+        Assert.assertEquals(0.020000, waypoint.getRouteLeg().getXtdStarboard(), 0.0);
     }
 
 }
