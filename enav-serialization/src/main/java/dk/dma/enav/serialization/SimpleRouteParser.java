@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Date;
+import java.util.Map;
 
 import dk.dma.enav.model.voyage.Route;
 import dk.dma.enav.model.voyage.RouteLeg;
@@ -58,7 +59,7 @@ public class SimpleRouteParser extends RouteParser {
         this(new FileReader(file));
     }
 
-    public SimpleRouteParser(InputStream io)  {
+    public SimpleRouteParser(InputStream io, Map<String, String> config)  {
         this(new InputStreamReader(io));
     }
 

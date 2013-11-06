@@ -17,12 +17,12 @@ package dk.dma.enav.serialization;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
-import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.voyage.Route;
 import dk.dma.enav.model.voyage.RouteLeg.Heading;
 import dk.dma.enav.model.voyage.Waypoint;
@@ -36,8 +36,9 @@ public class RouRouteParserTest {
     @Test
     public void testParseValidStream() throws IOException {
         // Data
+        Map<String, String> config = new HashMap<>();
         InputStream is = getClass().getResourceAsStream("/routes/Gdynia-Aarhus via The Sound.rou");
-        RouteParser parser = new RouRouteParser(is);
+        RouteParser parser = new RouRouteParser(is, config);
 
         // Execute
         Route r = parser.parse();

@@ -17,8 +17,11 @@ package dk.dma.enav.serialization;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import dk.dma.enav.model.voyage.Route;
@@ -30,12 +33,20 @@ import dk.dma.enav.model.voyage.Waypoint;
  * @author Jesper Tejlgaard
  */
 public class Rt3RouteParserTest {
+    
+    Map<String, String> config = null;
+
+    @Before
+    public void setup(){
+        config = new HashMap<>();
+    }
 
     @Test
     public void testParseValidStream() throws IOException {
         // SETUP DATA
+        
         InputStream is = getClass().getResourceAsStream("/routes/Malmoe - Karlshavn.rt3");
-        RouteParser parser = new Rt3RouteParser(is);
+        RouteParser parser = new Rt3RouteParser(is, config);
 
         // EXECUTE
         Route r = parser.parse();
@@ -81,13 +92,12 @@ public class Rt3RouteParserTest {
     @Test
     public void testParseWithNames() throws IOException {
         // SETUP DATA
+        config.put("schedule", "Schedule1");
         InputStream is = getClass().getResourceAsStream("/routes/Nuuk-Paamiut 008.rt3");
-        RouteParser parser = new Rt3RouteParser(is);
+        RouteParser parser = new Rt3RouteParser(is, config);
 
         // EXECUTE
         Route r = parser.parse();
-
-        System.out.println(r);
 
         // TEST ASSERTIONS
         Assert.assertEquals("Nuuk-Paamiut 008", r.getName());
@@ -141,12 +151,12 @@ public class Rt3RouteParserTest {
     @Test
     public void testParseWithSpeeds() throws IOException {
         // SETUP DATA
+        config.put("schedule", "Dep 1930");
         InputStream is = getClass().getResourceAsStream("/routes/GOT to KIEL via South Channel 1,0N.RT3");
         // EXECUTE
-        RouteParser parser = new Rt3RouteParser(is);
+        RouteParser parser = new Rt3RouteParser(is, config);
         Route r = parser.parse();
 
-        System.out.println(r);
 
         // TEST ASSERTIONS
         Assert.assertEquals("GOT to KIEL via South Channel 1,0N", r.getName());

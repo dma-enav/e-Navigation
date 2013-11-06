@@ -17,6 +17,8 @@ package dk.dma.enav.serialization;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
 
@@ -36,8 +38,9 @@ public class SimpleRouteParserTest {
     @Test
     public void testParseValidStream() throws IOException {
         // Data
+        Map<String, String> config = new HashMap<>();
         InputStream is = getClass().getResourceAsStream("/routes/CPH-AAH.txt");
-        SimpleRouteParser parser = new SimpleRouteParser(is);
+        SimpleRouteParser parser = new SimpleRouteParser(is, config);
 
         // Execute
         Route r = parser.parse();

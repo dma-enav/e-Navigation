@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -62,7 +63,7 @@ public class RouRouteParser extends RouteParser {
         this(new FileReader(file));
     }
 
-    public RouRouteParser(InputStream io) {
+    public RouRouteParser(InputStream io, Map<String, String> config) {
         this(new InputStreamReader(io));
     }
 

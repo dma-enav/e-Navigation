@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -47,7 +48,9 @@ public class Rt3RouteParser extends RouteParser {
 
     // private static final Logger LOGGER = LoggerFactory.getLogger(RouteLoader.class);
 
+    private boolean closeReader;
     private BufferedReader reader;
+    private String scheduleName;
 
     RouteDefaults defaults = new RouteDefaults();
 
@@ -61,10 +64,13 @@ public class Rt3RouteParser extends RouteParser {
 
     public Rt3RouteParser(File file) throws FileNotFoundException {
         this(new FileReader(file));
+        closeReader = true;
     }
 
-    public Rt3RouteParser(InputStream io) {
+    public Rt3RouteParser(InputStream io, Map<String, String> config) {
         this(new InputStreamReader(io));
+        
+        scheduleName = config.get("schedule");
     }
 
     public Route parse() throws IOException {
@@ -103,15 +109,8 @@ public class Rt3RouteParser extends RouteParser {
                 if (calculationList != null) {
                     for (int i = 0; i < calculationList.getLength(); i++) {
                         Element calculationElem = (Element) calculationList.item(i);
-                        
-                        System.out.println(calculationElem.getTagName());
-                        System.out.println(calculationElem.getAttributes());
-                        
-
-                        
                         String name = calculationElem.getAttribute("CalcName");
-
-                        if (!"Base Calculation".equals(name) && !"BaseCalc".equals(name)) {
+                        if (scheduleName != null && scheduleName.equals(name)) {
                             wpsExList = calculationElem.getElementsByTagName("WayPointEx");
                             break;
                         }
@@ -167,7 +166,7 @@ public class Rt3RouteParser extends RouteParser {
                     leg.setXtdStarboard(getDefaults().getDefaultXtd());
 
                     if (wpsExList != null && i < wpsExList.getLength()) {
-                        Element wpsEx = (Element)wpsExList.item(i);
+                        Element wpsEx = (Element) wpsExList.item(i);
                         String speedStr = wpsEx.getAttribute("Speed");
                         leg.setSpeed(Double.valueOf(speedStr));
                     }
@@ -181,7 +180,6 @@ public class Rt3RouteParser extends RouteParser {
                     if (xte != null && xte.length() > 0) {
                         leg.setXtdStarboard(ParseUtils.parseDouble(xte));
                     }
-
                     // Leg type
                     String legType = wpElem.getAttribute("LegType");
                     if (legType != null && !legType.equals("0")) {
@@ -199,6 +197,10 @@ public class Rt3RouteParser extends RouteParser {
         } catch (Exception e) {
             // LOG.error("Failed to parse RT3 route file: " + e.getMessage());
             throw new IOException("Error parsing RT3 route file", e);
+        } finally{
+            if(closeReader){
+                reader.close();
+            }
         }
 
         return route;

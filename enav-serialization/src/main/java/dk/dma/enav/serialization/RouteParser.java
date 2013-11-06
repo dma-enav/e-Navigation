@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import dk.dma.enav.model.voyage.Route;
 
@@ -46,15 +47,15 @@ public abstract class RouteParser {
         }
     }
 
-    public static RouteParser getRouteParser(String fileName, InputStream io) {
+    public static RouteParser getRouteParser(String fileName, InputStream io, Map<String, String> config) {
         String ext = getExtension(fileName);
         switch (ext) {
         case "TXT":
-            return new SimpleRouteParser(io);
+            return new SimpleRouteParser(io, config);
         case "ROU":
-            return new RouRouteParser(io);
+            return new RouRouteParser(io, config);
         case "RT3":
-            return new Rt3RouteParser(io);
+            return new Rt3RouteParser(io, config);
         default:
             throw new IllegalArgumentException("Unknown file extension. Known extensions are 'TXT' and 'ROU'.");
 //            return new PertinaciousRouteParser(file);
