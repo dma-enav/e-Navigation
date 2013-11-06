@@ -17,6 +17,7 @@ package dk.dma.enav.model.voct;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import dk.dma.enav.model.dto.PositionDTO;
 
@@ -45,6 +46,8 @@ public class SARModelDTO implements Serializable{
     private double safetyFactor;
     
     private int searchObject;
+    
+    private List<WeatherDataDTO> weatherData;
 
     public SARModelDTO(){
         super();
@@ -52,7 +55,7 @@ public class SARModelDTO implements Serializable{
     
     public SARModelDTO(String sarID, Date lKPDate, Date cSSDate, PositionDTO lKP,
             PositionDTO cSP, double x, double y, double safetyFactor,
-            int searchObject) {
+            int searchObject, List<WeatherDataDTO> weatherData) {
         super();
         this.sarID = sarID;
         LKPDate = lKPDate;
@@ -63,6 +66,7 @@ public class SARModelDTO implements Serializable{
         this.y = y;
         this.safetyFactor = safetyFactor;
         this.searchObject = searchObject;
+        this.weatherData = weatherData;
     }
 
     /**
@@ -191,18 +195,33 @@ public class SARModelDTO implements Serializable{
         this.searchObject = searchObject;
     }
 
+    /**
+     * @return the weatherData
+     */
+    public List<WeatherDataDTO> getWeatherData() {
+        return weatherData;
+    }
+
+    /**
+     * @param weatherData the weatherData to set
+     */
+    public void setWeatherData(List<WeatherDataDTO> weatherData) {
+        this.weatherData = weatherData;
+    }
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "SARModelData [sarID=" + sarID + ", LKPDate=" + LKPDate
+        return "SARModelDTO [sarID=" + sarID + ", LKPDate=" + LKPDate
                 + ", CSSDate=" + CSSDate + ", LKP=" + LKP + ", CSP=" + CSP
                 + ", x=" + x + ", y=" + y + ", safetyFactor=" + safetyFactor
-                + ", searchObject=" + searchObject + "]";
+                + ", searchObject=" + searchObject + ", weatherData="
+                + weatherData + "]";
     }
-    
-    
+
+
     
 
     
