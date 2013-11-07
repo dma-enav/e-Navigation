@@ -34,7 +34,7 @@ import dk.dma.enav.model.voyage.Waypoint;
  */
 public class Rt3RouteParserTest {
     
-    Map<String, String> config = null;
+    Map<String, String> config;
 
     @Before
     public void setup(){
