@@ -39,6 +39,15 @@ public final class BoundingBox extends Polygon {
         return point.getLatitude() >= minLatitude && point.getLongitude() >= minLongitude
                 && point.getLatitude() <= maxLatitude && point.getLongitude() <= maxLongitude;
     }
+    
+    @Override
+    public boolean contains(Element element) {
+        if (element instanceof Position) {
+            return contains((Position)element);
+        } else {
+            return super.contains(element);
+        }
+    }
 
     @Override
     public boolean equals(Object obj) {
