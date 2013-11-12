@@ -51,8 +51,12 @@ public final class Grid {
     public double getResolution() {
         return resolution;
     }
+    
+    public Cell getCell(Position pos) {
+        return getCell(pos.getLatitude(), pos.getLongitude());
+    }
 
-    public Cell getCell(double _lat, double _lon) {
+    public Cell getCell(double lat, double lon) {
         // We use floor(), not truncation (cast) to handle negative latitudes correctly.
         // Negative longitudes are handled by adding 360 (for backwards compatibility).
         //
@@ -61,7 +65,7 @@ public final class Grid {
         // static_cast<long>(360.0 / GEO_CELL_SIZE) Constant = 7200
         // Result of last two lines Range -3600..3600, span 7200
 
-        return new Cell((long) (Math.floor(_lat / resolution) * multiplier) + (long) ((360.0 + _lon) / resolution)
+        return new Cell((long) (Math.floor(lat / resolution) * multiplier) + (long) ((360.0 + lon) / resolution)
                 - (long) (360.0 / resolution));
     }
 
@@ -171,6 +175,26 @@ public final class Grid {
             result.add(new Cell(l));
         }
         return result;
+    }
+    
+    /**
+     * Create Grid with degrees size
+     * E.g. using 0.0045: 40.075.000 m / (360 / 0.0045)  = 500 m cell size
+     * E.g. using 0.0008983: 100 m cell size   
+     * @param resolution in degrees
+     * @return
+     */
+    public static Grid create(double resolution) {
+        return new Grid(resolution);
+    }
+    
+    /**
+     * Create a grid with approximately cell size in meters
+     * @param approxSize cell size in meters
+     * @return
+     */
+    public static Grid createSize(double approxSize) {
+        return create((360.0 * approxSize) / 40075000.0);        
     }
 
     //

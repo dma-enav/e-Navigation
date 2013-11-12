@@ -35,4 +35,15 @@ public class Cell implements Comparable<Cell> {
     public int compareTo(Cell o) {
         return o.getCellId() - getCellId();
     }
+
+    @Override
+    public int hashCode() {
+        return Long.valueOf(id).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return id == ((Cell) obj).id;
+    }
+
 }
