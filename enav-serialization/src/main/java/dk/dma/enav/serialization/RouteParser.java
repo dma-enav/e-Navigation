@@ -41,6 +41,8 @@ public abstract class RouteParser {
             return new RouRouteParser(file);
         case "RT3":
             return new Rt3RouteParser(file);
+        case "ROUTE":
+            return new RouteRouteParser(file);
         default:
             throw new IllegalArgumentException("Unknown file extension. Known extensions are 'TXT' and 'ROU'.");
 //            return new PertinaciousRouteParser(file);
@@ -56,6 +58,8 @@ public abstract class RouteParser {
             return new RouRouteParser(io, config);
         case "RT3":
             return new Rt3RouteParser(io, config);
+        case "ROUTE":
+            return new RouteRouteParser(io, config);
         default:
             throw new IllegalArgumentException("Unknown file extension. Known extensions are 'TXT' and 'ROU'.");
 //            return new PertinaciousRouteParser(file);
@@ -76,6 +80,14 @@ public abstract class RouteParser {
         return defaults;
     }
     
+    protected String waypointName(String readValue, Integer waypointCount){
+        if(readValue != null && readValue.trim().length() > 0){
+            return readValue;
+        }
+        
+        return String.format("WP_%03d", waypointCount);
+    }
+
     public abstract Route parse() throws IOException;
 
 }

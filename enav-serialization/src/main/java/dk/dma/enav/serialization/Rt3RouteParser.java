@@ -128,13 +128,10 @@ public class Rt3RouteParser extends RouteParser {
 
                 // Set defaults
                 wp.setTurnRad(getDefaults().getDefaultTurnRad());
-                wp.setName(String.format("WP_%03d", i + 1));
 
                 // Wp name
                 String name = wpElem.getAttribute("WPName");
-                if (name != null && name.length() > 0) {
-                    wp.setName(name);
-                }
+                wp.setName(waypointName(name, i+1));
 
                 // Lat and lon
                 Double lat = ParseUtils.parseDouble(wpElem.getAttribute("Lat"));
