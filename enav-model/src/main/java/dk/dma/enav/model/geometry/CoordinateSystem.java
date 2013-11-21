@@ -49,13 +49,13 @@ public enum CoordinateSystem {
             final double earthRadius = EARTH_MEAN_RADIUS_KM * 1000.0;
 
             double endLat = Math.asin(Math.sin(startLatDegrees)
-                    * Math.cos((distanceMeters / earthRadius)) + Math.cos(startLatDegrees)
-                    * Math.sin((distanceMeters / earthRadius)) * Math.cos(bearingDegrees));
+                    * Math.cos(distanceMeters / earthRadius) + Math.cos(startLatDegrees)
+                    * Math.sin(distanceMeters / earthRadius) * Math.cos(bearingDegrees));
             double endLon = startLonDegrees
                     + Math.atan2(
-                            Math.sin(bearingDegrees) * Math.sin((distanceMeters / earthRadius))
+                            Math.sin(bearingDegrees) * Math.sin(distanceMeters / earthRadius)
                                     * Math.cos(startLatDegrees),
-                            Math.cos((distanceMeters / earthRadius)) - Math.sin(startLatDegrees)
+                            Math.cos(distanceMeters / earthRadius) - Math.sin(startLatDegrees)
                                     * Math.sin(endLat));
             return Position.create(endLat, endLon);
         }
