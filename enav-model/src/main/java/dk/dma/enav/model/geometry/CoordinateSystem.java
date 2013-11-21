@@ -57,7 +57,7 @@ public enum CoordinateSystem {
                                     * Math.cos(startLatDegrees),
                             Math.cos(distanceMeters / earthRadius) - Math.sin(startLatDegrees)
                                     * Math.sin(endLat));
-            return Position.create(endLat, endLon);
+            return Position.create(Math.toDegrees(endLat), Math.toDegrees(endLon));
         }
     },
     GEODETIC {
