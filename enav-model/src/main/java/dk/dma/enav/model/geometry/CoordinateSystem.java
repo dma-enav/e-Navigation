@@ -40,10 +40,24 @@ public enum CoordinateSystem {
         }
 
         @Override
-        Position pointOnBearing0(double latitude, double longitude, double distance, double bearing) {
-            double bearingRAD = Math.toRadians(bearing);
-            return Position.create(latitude + Math.sin(bearingRAD) * distance, longitude + Math.cos(bearingRAD)
-                    * distance);
+        Position pointOnBearing0(double startLatDegrees, double startLonDegrees, double distanceMeters, double bearingDegrees) {
+            // Convert to radians
+            startLatDegrees = Math.toRadians(startLatDegrees);
+            startLonDegrees = Math.toRadians(startLonDegrees);
+            bearingDegrees = Math.toRadians(bearingDegrees);
+            // the earth's radius in meters
+            final double earthRadius = EARTH_MEAN_RADIUS_KM * 1000.0;
+
+            double endLat = Math.asin(Math.sin(startLatDegrees)
+                    * Math.cos(distanceMeters / earthRadius) + Math.cos(startLatDegrees)
+                    * Math.sin(distanceMeters / earthRadius) * Math.cos(bearingDegrees));
+            double endLon = startLonDegrees
+                    + Math.atan2(
+                            Math.sin(bearingDegrees) * Math.sin(distanceMeters / earthRadius)
+                                    * Math.cos(startLatDegrees),
+                            Math.cos(distanceMeters / earthRadius) - Math.sin(startLatDegrees)
+                                    * Math.sin(endLat));
+            return Position.create(Math.toDegrees(endLat), Math.toDegrees(endLon));
         }
     },
     GEODETIC {
