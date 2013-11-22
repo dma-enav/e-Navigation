@@ -41,6 +41,7 @@ public final class Grid {
     // ahh det skal vel vaere kvadrat kilometere taenker jeg??
 
     private final double resolution;
+
     private final double multiplier;
 
     private Grid(double resolution) {
@@ -51,7 +52,7 @@ public final class Grid {
     public double getResolution() {
         return resolution;
     }
-    
+
     public Cell getCell(Position pos) {
         return getCell(pos.getLatitude(), pos.getLongitude());
     }
@@ -72,11 +73,11 @@ public final class Grid {
     public Position getGeoPosOfCell(Cell cell) {
         // Make lonPart range be 0..7200
         long id = cell.getCellId();
-        id += (long) ((360 / resolution) / 2);
+        id += (long) (360 / resolution / 2);
         // Cut off lonPart
-        long latPart = (long) (Math.floor(id / multiplier));
+        long latPart = (long) Math.floor(id / multiplier);
         // Move lonPart range back again
-        id -= (long) ((360 / resolution) / 2);
+        id -= (long) (360 / resolution / 2);
         long lonPart = (long) (id - latPart * multiplier);
 
         return Position.create(resolution * latPart, resolution * lonPart);
@@ -105,7 +106,7 @@ public final class Grid {
     }
 
     public Set<Cell> getNearbyCells(Position position, double radius) {
-        Set<Cell> cells = new HashSet<Cell>();
+        Set<Cell> cells = new HashSet<>();
 
         double latN = position.getLatitude() + radius;
         double latS = position.getLatitude() - radius;
@@ -176,25 +177,28 @@ public final class Grid {
         }
         return result;
     }
-    
+
     /**
-     * Create Grid with degrees size
-     * E.g. using 0.0045: 40.075.000 m / (360 / 0.0045)  = 500 m cell size
-     * E.g. using 0.0008983: 100 m cell size   
-     * @param resolution in degrees
+     * Create Grid with degrees size E.g. using 0.0045: 40.075.000 m / (360 / 0.0045) = 500 m cell size E.g. using
+     * 0.0008983: 100 m cell size
+     * 
+     * @param resolution
+     *            in degrees
      * @return
      */
     public static Grid create(double resolution) {
         return new Grid(resolution);
     }
-    
+
     /**
      * Create a grid with approximately cell size in meters
-     * @param approxSize cell size in meters
+     * 
+     * @param approxSize
+     *            cell size in meters
      * @return
      */
     public static Grid createSize(double approxSize) {
-        return create((360.0 * approxSize) / 40075000.0);        
+        return create(360.0 * approxSize / 40075000.0);
     }
 
     //
@@ -203,7 +207,8 @@ public final class Grid {
     // }
 
     public static void main(String[] args) {
-        BoundingBox bb = BoundingBox.create(Position.create(-40, 15), Position.create(12, 77), CoordinateSystem.CARTESIAN);
+        BoundingBox bb = BoundingBox.create(Position.create(-40, 15), Position.create(12, 77),
+                CoordinateSystem.CARTESIAN);
         Set<Long> cells = new TreeSet<>();
         for (int i = 0; i < 100000; i++) {
             cells.add(bb.getRandom().getCell(1));
