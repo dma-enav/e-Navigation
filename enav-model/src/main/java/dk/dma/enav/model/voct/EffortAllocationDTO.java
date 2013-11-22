@@ -15,35 +15,44 @@
  */
 package dk.dma.enav.model.voct;
 
-import dk.dma.enav.model.dto.PositionDTO;
-import dk.dma.enav.model.geometry.Position;
+import java.io.Serializable;
 
-public class EffortAllocationDTO {
+import dk.dma.enav.model.dto.PositionDTO;
+
+public class EffortAllocationDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     private double w;
+
     private double groundSpeed;
+
     private double pod;
+
     private double trackSpacing;
+
     private int searchTime;
+
     private double effectiveAreaSize;
 
     // private double effectiveAreaWidth;
     // private double effectiveAreaHeight;
 
     private PositionDTO effectiveAreaA;
+
     private PositionDTO effectiveAreaB;
+
     private PositionDTO effectiveAreaC;
+
     private PositionDTO effectiveAreaD;
-    
-    
-    public EffortAllocationDTO(){
+
+
+    public EffortAllocationDTO() {
         super();
     }
 
-    public EffortAllocationDTO(double w, double groundSpeed, double pod,
-            double trackSpacing, int searchTime, double effectiveAreaSize,
-            PositionDTO effectiveAreaA, PositionDTO effectiveAreaB,
+    public EffortAllocationDTO(double w, double groundSpeed, double pod, double trackSpacing, int searchTime,
+            double effectiveAreaSize, PositionDTO effectiveAreaA, PositionDTO effectiveAreaB,
             PositionDTO effectiveAreaC, PositionDTO effectiveAreaD) {
         super();
         this.w = w;
@@ -208,21 +217,18 @@ public class EffortAllocationDTO {
         this.effectiveAreaD = effectiveAreaD;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "EffortAllocationModelData [w=" + w + ", groundSpeed="
-                + groundSpeed + ", pod=" + pod + ", trackSpacing="
-                + trackSpacing + ", searchTime=" + searchTime
-                + ", effectiveAreaSize=" + effectiveAreaSize
-                + ", effectiveAreaA=" + effectiveAreaA + ", effectiveAreaB="
-                + effectiveAreaB + ", effectiveAreaC=" + effectiveAreaC
-                + ", effectiveAreaD=" + effectiveAreaD + "]";
+        return "EffortAllocationModelData [w=" + w + ", groundSpeed=" + groundSpeed + ", pod=" + pod
+                + ", trackSpacing=" + trackSpacing + ", searchTime=" + searchTime + ", effectiveAreaSize="
+                + effectiveAreaSize + ", effectiveAreaA=" + effectiveAreaA + ", effectiveAreaB=" + effectiveAreaB
+                + ", effectiveAreaC=" + effectiveAreaC + ", effectiveAreaD=" + effectiveAreaD + "]";
     }
 
-    
-    
-    
+
 }
