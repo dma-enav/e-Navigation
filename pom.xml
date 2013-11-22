@@ -5,7 +5,7 @@
   <parent>
     <groupId>dk.dma</groupId>
     <artifactId>dma-root-pom</artifactId>
-    <version>10</version>
+    <version>11</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -63,7 +63,7 @@
   <modules>
     <module>enav-model</module>
     <module>enav-common</module>
-    <module>enav-communication</module>
+    <module>enav-maritimecloud</module>
     <module>enav-util</module>
     <module>enav-serialization</module>
   </modules>

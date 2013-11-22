@@ -15,7 +15,7 @@
  */
 package dk.dma.enav.service.voyage;
 
-import dk.dma.enav.communication.broadcast.BroadcastMessage;
+import dk.dma.enav.maritimecloud.broadcast.BroadcastMessage;
 import dk.dma.enav.model.geometry.Position;
 
 /**

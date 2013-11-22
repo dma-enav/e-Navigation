@@ -15,12 +15,15 @@
  */
 package dk.dma.enav.util.function;
 
+
 /**
  * An operation upon an input object. The operation may modify that object or external state (other objects).
  * 
  * @author Kasper Nielsen
  */
 public interface Consumer<T> {
+    public Consumer<Object> NOOP = new DummyConsumer();
+
     void accept(T t);
 
     // public Consumer<T> chain(final Consumer<? super T> other) {
@@ -43,4 +46,13 @@ public interface Consumer<T> {
     // }
     // };
     // }
+
+}
+
+class DummyConsumer implements Consumer<Object> {
+
+    /** {@inheritDoc} */
+    @Override
+    public void accept(Object t) {}
+
 }

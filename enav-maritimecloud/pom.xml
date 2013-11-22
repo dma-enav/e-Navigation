@@ -10,14 +10,13 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>enav-common</artifactId>
-  <name>eNav Common Api</name>
-  
+  <artifactId>enav-maritimecloud</artifactId>
+  <name>eNav Maritime Cloud Api</name>
   <dependencies>
     <dependency>
        <groupId>${project.groupId}</groupId>
-       <artifactId>enav-maritimecloud</artifactId>
-       <version>${project.version}</version>
+       <artifactId>enav-model</artifactId>
+       <version>0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
