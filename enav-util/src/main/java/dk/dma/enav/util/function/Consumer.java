@@ -22,7 +22,8 @@ package dk.dma.enav.util.function;
  * @author Kasper Nielsen
  */
 public interface Consumer<T> {
-    public Consumer<Object> NOOP = new DummyConsumer();
+    
+    Consumer<Object> NOOP = new DummyConsumer();
 
     void accept(T t);
 
