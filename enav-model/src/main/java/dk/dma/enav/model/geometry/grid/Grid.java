@@ -105,6 +105,49 @@ public final class Grid {
         return new Cell(cell.getCellId() + 1);
     }
 
+    /**
+     * Compute the geographical bounding box of a cell.
+     * @todo Note that the computation is only approximate and highly inefficient - it needs enhancement
+     * @param cell the cell to have its bounding box computed.
+     * @return the bounding box of the given cell.
+     */
+    public BoundingBox getBoundingBoxOfCell(Cell cell) {
+        final Position positionInsideCell = getGeoPosOfCell(cell);
+
+        double northBorder = positionInsideCell.getLatitude();
+        double southBorder = positionInsideCell.getLatitude();
+        double eastBorder = positionInsideCell.getLongitude();
+        double westBorder = positionInsideCell.getLongitude();
+
+        double step = 1e-4;
+
+        // Expand north till we meet another cell
+        while (getCell(northBorder, positionInsideCell.getLongitude()).getCellId() == cell.getCellId()) {
+            northBorder = northBorder + step;
+        }
+
+        // Expand south till we meet another cell
+        while (getCell(southBorder, positionInsideCell.getLongitude()).getCellId() == cell.getCellId()) {
+            southBorder = southBorder - step;
+        }
+
+        // Expand east till we meet another cell
+        while (getCell(positionInsideCell.getLatitude(), eastBorder).getCellId() == cell.getCellId()) {
+            eastBorder = eastBorder + step;
+        }
+
+        // Expand west till we meet another cell
+        while (getCell(positionInsideCell.getLatitude(), westBorder).getCellId() == cell.getCellId()) {
+            westBorder = westBorder - step;
+        }
+
+        final Position northWestCorner = Position.create(northBorder, westBorder);
+        final Position southEastCorner = Position.create(southBorder, eastBorder);
+        final BoundingBox boundingBox = BoundingBox.create(northWestCorner, southEastCorner, CoordinateSystem.GEODETIC);
+
+        return boundingBox;
+    }
+
     public Set<Cell> getNearbyCells(Position position, double radius) {
         Set<Cell> cells = new HashSet<>();
 
