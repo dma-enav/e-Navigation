@@ -57,6 +57,10 @@ public final class Grid {
         return getCell(pos.getLatitude(), pos.getLongitude());
     }
 
+    public Cell getCell(long cellId) {
+        return new Cell(cellId);
+    }
+
     public Cell getCell(double lat, double lon) {
         // We use floor(), not truncation (cast) to handle negative latitudes correctly.
         // Negative longitudes are handled by adding 360 (for backwards compatibility).

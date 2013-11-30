@@ -32,6 +32,14 @@ public class GridTest {
     }
 
     @Test
+    public void testGetCellFromCellId() {
+        Cell cell1 = grid.getCell(1L);
+        assertEquals(1L, cell1.getCellId());
+        Cell cell2 = grid.getCell(6034900978L);
+        assertEquals(6034900978L, cell2.getCellId());
+    }
+
+    @Test
     public void testGetGeoPosOfCell() {
         Cell cell = grid.getCell(Position.create(56.0, 12.0));
         Position geoPosOfCell = grid.getGeoPosOfCell(cell);
