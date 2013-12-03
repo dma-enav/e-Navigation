@@ -53,12 +53,12 @@ public final class Grid {
         return resolution;
     }
 
-    public Cell getCell(Position pos) {
-        return getCell(pos.getLatitude(), pos.getLongitude());
-    }
-
     public Cell getCell(long cellId) {
         return new Cell(cellId);
+    }
+
+    public Cell getCell(Position pos) {
+        return getCell(pos.getLatitude(), pos.getLongitude());
     }
 
     public Cell getCell(double lat, double lon) {
@@ -74,6 +74,11 @@ public final class Grid {
                 - (long) (360.0 / resolution));
     }
 
+    /**
+     * Compute south-west corner of cell.
+     * @param cell the cell.
+     * @return Position of south-west corner of cell.
+     */
     public Position getGeoPosOfCell(Cell cell) {
         // Make lonPart range be 0..7200
         long id = cell.getCellId();
@@ -111,45 +116,13 @@ public final class Grid {
 
     /**
      * Compute the geographical bounding box of a cell.
-     * @todo Note that the computation is only approximate and highly inefficient - it needs enhancement
      * @param cell the cell to have its bounding box computed.
      * @return the bounding box of the given cell.
      */
     public BoundingBox getBoundingBoxOfCell(Cell cell) {
-        final Position positionInsideCell = getGeoPosOfCell(cell);
-
-        double northBorder = positionInsideCell.getLatitude();
-        double southBorder = positionInsideCell.getLatitude();
-        double eastBorder = positionInsideCell.getLongitude();
-        double westBorder = positionInsideCell.getLongitude();
-
-        double step = 1e-4;
-
-        // Expand north till we meet another cell
-        while (getCell(northBorder, positionInsideCell.getLongitude()).getCellId() == cell.getCellId()) {
-            northBorder = northBorder + step;
-        }
-
-        // Expand south till we meet another cell
-        while (getCell(southBorder, positionInsideCell.getLongitude()).getCellId() == cell.getCellId()) {
-            southBorder = southBorder - step;
-        }
-
-        // Expand east till we meet another cell
-        while (getCell(positionInsideCell.getLatitude(), eastBorder).getCellId() == cell.getCellId()) {
-            eastBorder = eastBorder + step;
-        }
-
-        // Expand west till we meet another cell
-        while (getCell(positionInsideCell.getLatitude(), westBorder).getCellId() == cell.getCellId()) {
-            westBorder = westBorder - step;
-        }
-
-        final Position northWestCorner = Position.create(northBorder, westBorder);
-        final Position southEastCorner = Position.create(southBorder, eastBorder);
-        final BoundingBox boundingBox = BoundingBox.create(northWestCorner, southEastCorner, CoordinateSystem.GEODETIC);
-
-        return boundingBox;
+        final Position southWestCorner = getGeoPosOfCell(cell);
+        final Position northEastCorner = Position.create(southWestCorner.getLatitude() + resolution, southWestCorner.getLongitude() + resolution);
+        return BoundingBox.create(southWestCorner, northEastCorner, CoordinateSystem.GEODETIC);
     }
 
     public Set<Cell> getNearbyCells(Position position, double radius) {

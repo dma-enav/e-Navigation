@@ -42,9 +42,9 @@ public class GridTest {
     @Test
     public void testGetGeoPosOfCell() {
         Cell cell = grid.getCell(Position.create(56.0, 12.0));
-        Position geoPosOfCell = grid.getGeoPosOfCell(cell);
-        assertEquals(56.0, geoPosOfCell.getLatitude(), 1e-3);
-        assertEquals(12.0, geoPosOfCell.getLongitude(), 1e-3);
+        Position southWestCorner = grid.getGeoPosOfCell(cell);
+        assertEquals(55.999201497192765d, southWestCorner.getLatitude(), 1e-10);
+        assertEquals(11.999700561447286d, southWestCorner.getLongitude(), 1e-10);
     }
 
     @Test
@@ -54,32 +54,32 @@ public class GridTest {
 
         BoundingBox boundingBox1 = grid.getBoundingBoxOfCell(cell1);
 
-        assertEquals(56.001001497192824, boundingBox1.getMaxLat(), 1e-3);
-        assertEquals(55.999101497192760, boundingBox1.getMinLat(), 1e-3);
-        assertEquals(12.001500561447282, boundingBox1.getMaxLon(), 1e-3);
-        assertEquals(11.999600561447286, boundingBox1.getMinLon(), 1e-3);
+        assertEquals(56.000998128509046d, boundingBox1.getMaxLat(), 1e-10);
+        assertEquals(55.999201497192765d, boundingBox1.getMinLat(), 1e-10);
+        assertEquals(12.001497192763567d, boundingBox1.getMaxLon(), 1e-10);
+        assertEquals(11.999700561447286d, boundingBox1.getMinLon(), 1e-10);
     }
 
     @Test
     public void testGetCellEastOf() {
-        final double commonLatitudeNorth = 56.001001497192824;
-        final double commonLatitudeSouth = 55.999101497192760;
+        final double commonLatitudeNorth = 56.000998128509046d;
+        final double commonLatitudeSouth = 55.999201497192765d;
 
         Cell cell1 = grid.getCell(Position.create(56.0, 12.0));
         BoundingBox boundingBox1 = grid.getBoundingBoxOfCell(cell1);
 
-        assertEquals(commonLatitudeNorth, boundingBox1.getMaxLat(), 1e-3);
-        assertEquals(commonLatitudeSouth, boundingBox1.getMinLat(), 1e-3);
-        assertEquals(12.001500561447282, boundingBox1.getMaxLon(), 1e-3);
-        assertEquals(11.999600561447286, boundingBox1.getMinLon(), 1e-3);
+        assertEquals(commonLatitudeNorth, boundingBox1.getMaxLat(), 1e-10);
+        assertEquals(commonLatitudeSouth, boundingBox1.getMinLat(), 1e-10);
+        assertEquals(12.001497192763567d, boundingBox1.getMaxLon(), 1e-10);
+        assertEquals(11.999700561447286d, boundingBox1.getMinLon(), 1e-10);
 
         Cell cell2 = grid.getCellEastOf(cell1);
         BoundingBox boundingBox2 = grid.getBoundingBoxOfCell(cell2);
 
         assertEquals(cell1.getCellId() + 1, cell2.getCellId());
-        assertEquals(commonLatitudeNorth, boundingBox2.getMaxLat(), 1e-3);
-        assertEquals(commonLatitudeSouth, boundingBox2.getMinLat(), 1e-3);
-        assertEquals(12.003297192763563, boundingBox2.getMaxLon(), 1e-3);
-        assertEquals(12.001397192763568, boundingBox2.getMinLon(), 1e-3);
+        assertEquals(commonLatitudeNorth, boundingBox2.getMaxLat(), 1e-10);
+        assertEquals(commonLatitudeSouth, boundingBox2.getMinLat(), 1e-10);
+        assertEquals(12.003293824079849d, boundingBox2.getMaxLon(), 1e-10);
+        assertEquals(12.001497192763567d, boundingBox2.getMinLon(), 1e-10);
     }
 }
