@@ -53,6 +53,10 @@ public final class Grid {
         return resolution;
     }
 
+    public Cell getCell(long cellId) {
+        return new Cell(cellId);
+    }
+
     public Cell getCell(Position pos) {
         return getCell(pos.getLatitude(), pos.getLongitude());
     }
@@ -70,6 +74,11 @@ public final class Grid {
                 - (long) (360.0 / resolution));
     }
 
+    /**
+     * Compute south-west corner of cell.
+     * @param cell the cell.
+     * @return Position of south-west corner of cell.
+     */
     public Position getGeoPosOfCell(Cell cell) {
         // Make lonPart range be 0..7200
         long id = cell.getCellId();
@@ -103,6 +112,17 @@ public final class Grid {
             return new Cell((long) (cell.getCellId() - multiplier + 1));
         }
         return new Cell(cell.getCellId() + 1);
+    }
+
+    /**
+     * Compute the geographical bounding box of a cell.
+     * @param cell the cell to have its bounding box computed.
+     * @return the bounding box of the given cell.
+     */
+    public BoundingBox getBoundingBoxOfCell(Cell cell) {
+        final Position southWestCorner = getGeoPosOfCell(cell);
+        final Position northEastCorner = Position.create(southWestCorner.getLatitude() + resolution, southWestCorner.getLongitude() + resolution);
+        return BoundingBox.create(southWestCorner, northEastCorner, CoordinateSystem.GEODETIC);
     }
 
     public Set<Cell> getNearbyCells(Position position, double radius) {

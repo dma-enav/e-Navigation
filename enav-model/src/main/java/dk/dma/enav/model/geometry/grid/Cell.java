@@ -16,24 +16,24 @@
 package dk.dma.enav.model.geometry.grid;
 
 /**
- * 
+ *
  * @author Kasper Nielsen
  */
 public class Cell implements Comparable<Cell> {
-    long id;
+    final long id;
 
     Cell(long id) {
         this.id = id;
     }
 
-    public int getCellId() {
-        return (int) id;
+    public long getCellId() {
+        return id;
     }
 
     /** {@inheritDoc} */
     @Override
     public int compareTo(Cell o) {
-        return o.getCellId() - getCellId();
+        return Long.valueOf(o.getCellId()).compareTo(Long.valueOf(getCellId()));
     }
 
     @Override
@@ -45,5 +45,4 @@ public class Cell implements Comparable<Cell> {
     public boolean equals(Object obj) {
         return id == ((Cell) obj).id;
     }
-
 }
