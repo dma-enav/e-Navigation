@@ -13,11 +13,12 @@
   <artifactId>enav-common</artifactId>
   <name>eNav Common Api</name>
   
+  <version>0.2-SNAPSHOT</version>
   <dependencies>
     <dependency>
        <groupId>${project.groupId}</groupId>
-       <artifactId>enav-communication</artifactId>
-       <version>${project.version}</version>
+       <artifactId>enav-maritimecloud</artifactId>
+       <version>0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>

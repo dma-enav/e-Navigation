@@ -15,9 +15,9 @@
  */
 package dk.dma.enav.service.voyage;
 
-import dk.dma.enav.communication.service.spi.Service;
-import dk.dma.enav.communication.service.spi.ServiceInitiationPoint;
-import dk.dma.enav.communication.service.spi.ServiceMessage;
+import dk.dma.enav.maritimecloud.service.spi.Service;
+import dk.dma.enav.maritimecloud.service.spi.ServiceInitiationPoint;
+import dk.dma.enav.maritimecloud.service.spi.ServiceMessage;
 import dk.dma.enav.model.voyage.Route;
 
 /**

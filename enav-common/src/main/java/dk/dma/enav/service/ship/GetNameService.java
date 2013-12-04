@@ -16,9 +16,9 @@
 package dk.dma.enav.service.ship;
 
 import static java.util.Objects.requireNonNull;
-import dk.dma.enav.communication.service.spi.Service;
-import dk.dma.enav.communication.service.spi.ServiceInitiationPoint;
-import dk.dma.enav.communication.service.spi.ServiceMessage;
+import dk.dma.enav.maritimecloud.service.spi.Service;
+import dk.dma.enav.maritimecloud.service.spi.ServiceInitiationPoint;
+import dk.dma.enav.maritimecloud.service.spi.ServiceMessage;
 
 /**
  * 
