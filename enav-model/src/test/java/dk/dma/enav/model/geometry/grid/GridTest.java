@@ -18,17 +18,31 @@ package dk.dma.enav.model.geometry.grid;
 import dk.dma.enav.model.geometry.BoundingBox;
 import dk.dma.enav.model.geometry.Position;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 public class GridTest {
+
+    private static final int GRID_SIZE = 200;
 
     static Grid grid;
 
     @BeforeClass
     public static void setup() {
-        grid = Grid.createSize(200);
+        grid = Grid.createSize(GRID_SIZE);
+    }
+
+    @Test
+    public void testGetResolution() {
+        assertEquals(0.0017966313162819712, grid.getResolution(), 1e-18);
     }
 
     @Test
@@ -65,21 +79,143 @@ public class GridTest {
         final double commonLatitudeNorth = 56.000998128509046d;
         final double commonLatitudeSouth = 55.999201497192765d;
 
-        Cell cell1 = grid.getCell(Position.create(56.0, 12.0));
-        BoundingBox boundingBox1 = grid.getBoundingBoxOfCell(cell1);
+        Cell startCell = grid.getCell(Position.create(56.0, 12.0));
+        BoundingBox boundingBox1 = grid.getBoundingBoxOfCell(startCell);
 
         assertEquals(commonLatitudeNorth, boundingBox1.getMaxLat(), 1e-10);
         assertEquals(commonLatitudeSouth, boundingBox1.getMinLat(), 1e-10);
         assertEquals(12.001497192763567d, boundingBox1.getMaxLon(), 1e-10);
         assertEquals(11.999700561447286d, boundingBox1.getMinLon(), 1e-10);
 
-        Cell cell2 = grid.getCellEastOf(cell1);
-        BoundingBox boundingBox2 = grid.getBoundingBoxOfCell(cell2);
+        Cell eastCell = grid.getCellEastOf(startCell);
+        BoundingBox boundingBox2 = grid.getBoundingBoxOfCell(eastCell);
 
-        assertEquals(cell1.getCellId() + 1, cell2.getCellId());
+        assertEquals(startCell.getCellId() + 1, eastCell.getCellId());
         assertEquals(commonLatitudeNorth, boundingBox2.getMaxLat(), 1e-10);
         assertEquals(commonLatitudeSouth, boundingBox2.getMinLat(), 1e-10);
         assertEquals(12.003293824079849d, boundingBox2.getMaxLon(), 1e-10);
         assertEquals(12.001497192763567d, boundingBox2.getMinLon(), 1e-10);
+    }
+
+    @Test
+    public void testGetCellEastWestOfCellWithWestBorderAtGreenwichLine() {
+        // This cell is a border cell along the east side of the Greenwich line (longitude 0) where the
+        // cell-id changes with +1 to the east, and +multiplier-1 to the west (counting all way round the globe).
+        final long greenwichCellId = 6011250000L; // cellId % multiplier == 0
+
+        Cell greenwichCell = grid.getCell(greenwichCellId);
+        System.out.println("greenwichCell: " + grid.getBoundingBoxOfCell(greenwichCell).toString());
+        assertEquals(0.0000000000000000000, grid.getBoundingBoxOfCell(greenwichCell).getMinLon(), 1e-18);
+        assertEquals(0.0017966313162819712, grid.getBoundingBoxOfCell(greenwichCell).getMaxLon(), 1e-18);
+
+        // Test that cell east of greenwich cell has id +1
+        Cell eastOfGreenwich = grid.getCellEastOf(greenwichCell);
+        System.out.println("eastOfGreenwich: " + grid.getBoundingBoxOfCell(eastOfGreenwich));
+        assertEquals(greenwichCellId + 1L, eastOfGreenwich.getCellId());
+
+        // Test that cell west of greenwich has id +multiplier-1
+        Cell westOfGreenwich = grid.getCellWestOf(greenwichCell);
+        System.out.println("westOfGreenwich: " + grid.getBoundingBoxOfCell(westOfGreenwich).toString());
+        assertEquals(greenwichCellId + (long) grid.multiplier - 1, westOfGreenwich.getCellId());
+    }
+
+    @Test
+    public void testGetCellEastWestOfCellWithEastBorderAtGreenwichLine() {
+        // This cell is a border cell along the west side of the Greenwich line (longitude 0) where the
+        // cell-id changes with +multiplier+1 to the east, and -1 to the west.
+        final long greenwichCellId = 6011250000L - 1;
+        Cell greenwichCell = grid.getCell(greenwichCellId);
+        System.out.println("greenwichCell: " + grid.getBoundingBoxOfCell(greenwichCell).toString());
+        assertEquals(-0.0017966313162819712, grid.getBoundingBoxOfCell(greenwichCell).getMinLon(), 1e-18);
+        assertEquals( 0.0000000000000000000, grid.getBoundingBoxOfCell(greenwichCell).getMaxLon(), 1e-18);
+
+        // Test that cell east of greenwich cell has id +multiplier+1
+        Cell eastOfGreenwichCell = grid.getCellEastOf(greenwichCell);
+        System.out.println("eastOfGreenwich: " + grid.getBoundingBoxOfCell(eastOfGreenwichCell).toString());
+        assertEquals(greenwichCellId - (long) grid.multiplier + 1, eastOfGreenwichCell.getCellId());
+
+        // Test that cell west of greenwich has id -1
+        Cell westOfGreenwichCell = grid.getCellWestOf(greenwichCell);
+        System.out.println("westOfGreenwich: " + grid.getBoundingBoxOfCell(westOfGreenwichCell).toString());
+        assertEquals(greenwichCellId - 1, westOfGreenwichCell.getCellId());
+    }
+
+    @Test
+    public void testGetCellWestOf() {
+        final double commonLatitudeNorth = 56.000998128509046d;
+        final double commonLatitudeSouth = 55.999201497192765d;
+
+        Cell startCell = grid.getCell(Position.create(56.0, 12.0));
+        BoundingBox boundingBox1 = grid.getBoundingBoxOfCell(startCell);
+
+        assertEquals(commonLatitudeNorth, boundingBox1.getMaxLat(), 1e-10);
+        assertEquals(commonLatitudeSouth, boundingBox1.getMinLat(), 1e-10);
+        assertEquals(12.001497192763567d, boundingBox1.getMaxLon(), 1e-10);
+        assertEquals(11.999700561447286d, boundingBox1.getMinLon(), 1e-10);
+
+        Cell westCell = grid.getCellWestOf(startCell);
+        BoundingBox boundingBox2 = grid.getBoundingBoxOfCell(westCell);
+
+        assertEquals(startCell.getCellId() - 1, westCell.getCellId());
+        assertEquals(commonLatitudeNorth, boundingBox2.getMaxLat(), 1e-10);
+        assertEquals(commonLatitudeSouth, boundingBox2.getMinLat(), 1e-10);
+        assertEquals(11.999700561447286d, boundingBox2.getMaxLon(), 1e-10);
+        assertEquals(11.997903930131004d, boundingBox2.getMinLon(), 1e-10);
+    }
+
+    @Test
+    public void testGetCellNorthOf() {
+        Cell southCell = grid.getCell(Position.create(56.0, 12.0));
+        Cell northCell = grid.getCell(Position.create(56.0 + grid.getResolution()*1.1, 12.0));
+        Cell furtherNorthCell = grid.getCell(Position.create(56.0 + grid.getResolution()*2.1, 12.0));
+        System.out.println("southCell: " + southCell.getCellId() + ", northCell: " + northCell.getCellId() + ", furtherNorthCell: " + furtherNorthCell.getCellId());
+
+        assertEquals(northCell.getCellId(), grid.getCellNorthOf(southCell).getCellId());
+        assertEquals(furtherNorthCell.getCellId(), grid.getCellNorthOf(northCell).getCellId());
+    }
+
+    @Test
+    public void testGetCellSouthOf() {
+        Cell northCell = grid.getCell(Position.create(56.0, 12.0));
+        Cell southCell = grid.getCell(Position.create(56.0 - grid.getResolution()*1.1, 12.0));
+        Cell furtherSouthCell = grid.getCell(Position.create(56.0 - grid.getResolution()*2.1, 12.0));
+        System.out.println("northCell: " + northCell.getCellId() + ", southCell: " + southCell.getCellId() + ", furtherSouthCell: " + furtherSouthCell.getCellId());
+
+        assertEquals(southCell.getCellId(), grid.getCellSouthOf(northCell).getCellId());
+        assertEquals(furtherSouthCell.getCellId(), grid.getCellSouthOf(southCell).getCellId());
+    }
+
+    @Test
+    public void testGetCellsInBoundingBox() {
+        Cell cell1 = grid.getCell(Position.create(56.0, 12.0));
+        assertEquals(6245495054L, cell1.getCellId());
+
+        // Test for small area
+        BoundingBox smallArea = grid.getBoundingBoxOfCell(cell1);
+        Set<Cell> cells = grid.getCells(smallArea);
+        assertNotNull(cells);
+        assertEquals(1, cells.size());
+        Cell cell = cells.iterator().next();
+        assertEquals(6245495054L, cell.getCellId());
+
+        // Test for larger area (but still somewhat small....)
+        Cell cell2 = grid.getCell(Position.create(55.99, 11.99));
+        BoundingBox largerArea = grid.getBoundingBoxOfCell(cell1).include(grid.getBoundingBoxOfCell(cell2));
+
+        cells = grid.getCells(largerArea);
+
+        assertNotNull(cells);
+        assertEquals(49, cells.size());
+        Iterator<Cell> iterator = cells.iterator();
+        while (iterator.hasNext()) {
+            cell = iterator.next();
+            Position geoPosOfCell = grid.getGeoPosOfCell(cell);
+            assertTrue(largerArea.contains(geoPosOfCell));
+            assertTrue(geoPosOfCell.getLatitude() <= largerArea.getMaxLat());
+            assertTrue(geoPosOfCell.getLatitude() >= largerArea.getMinLat());
+            assertTrue(geoPosOfCell.getLongitude() <= largerArea.getMaxLon());
+            assertTrue(geoPosOfCell.getLongitude() >= largerArea.getMinLon());
+            System.out.println("Cell id " + cell.getCellId() + " " + geoPosOfCell +" is inside bounding box " + largerArea);
+        }
     }
 }
