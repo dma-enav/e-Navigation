@@ -46,6 +46,20 @@ public class GridTest {
     }
 
     @Test
+    public void testGetSize() {
+        // Test #1
+        assertEquals(GRID_SIZE, grid.getSize(), 1e-18);
+
+        // Test #2
+        Grid grid2 = Grid.createSize(50);
+        assertEquals(50, grid2.getSize(), 1e-18);
+
+        // Test #3
+        Grid grid3 = Grid.createSize(250);
+        assertEquals(250, grid3.getSize(), 1e-18);
+    }
+
+    @Test
     public void testGetCellFromCellId() {
         Cell cell1 = grid.getCell(1L);
         assertEquals(1L, cell1.getCellId());

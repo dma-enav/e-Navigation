@@ -53,6 +53,10 @@ public final class Grid {
         return resolution;
     }
 
+    public double getSize() {
+        return 40075000.0 * resolution / 360.0;
+    }
+
     public Cell getCell(long cellId) {
         return new Cell(cellId);
     }
