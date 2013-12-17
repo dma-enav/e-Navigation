@@ -21,9 +21,8 @@ import dk.dma.enav.maritimecloud.MaritimeCloudClient;
 import dk.dma.enav.util.function.Consumer;
 
 /**
- * A broad future is created every time a broadcast is sent via
- * {@link MaritimeCloudClient#broadcast(BroadcastMessage)} or
- * {@link MaritimeCloudClient#broadcast(BroadcastMessage, BroadcastOptions)}.
+ * A broad future is created every time a broadcast is sent via {@link MaritimeCloudClient#broadcast(BroadcastMessage)}
+ * or {@link MaritimeCloudClient#broadcast(BroadcastMessage, BroadcastOptions)}.
  * 
  * @author Kasper Nielsen
  */
@@ -48,5 +47,11 @@ public interface BroadcastFuture {
      */
     void onAck(Consumer<? super BroadcastMessage.Ack> consumer);
 
-    // void onFinished(Consumer<Integer> onFinished);
+    /**
+     * Invoked whenever the broadcast has finished being delivered to remote parties. Either because the broadcast has
+     * been delivered to all available parties. Or because a timeout occurred.
+     * <p>
+     * {@link #onAck(Consumer)} will not be invoked anymore after this method has been invoked.
+     */
+    void onFinish();
 }
