@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <parent>
     <groupId>dk.dma</groupId>
@@ -11,15 +10,16 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.dma.enav</groupId>
   <artifactId>enav-parent</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <packaging>pom</packaging>
   <name>eNav Parent</name>
   <description>eNav parent module</description>
 
   <scm>
-    <connection>scm:git:git@github.com:dma-dk/eNav-api.git</connection>
-    <developerConnection>scm:git:git@github.com:dma-dk/eNav-api.git</developerConnection>
-    <url>git@github.com:dma-dk/eNav-api.git</url>
+    <connection>scm:git:git@github.com:dma-enav/e-Navigation.git</connection>
+    <developerConnection>scm:git:git@github.com:dma-enav/e-Navigation.git</developerConnection>
+    <url>git@github.com:dma-enav/e-Navigation.git</url>
+    <tag>enav-parent-0.1</tag>
   </scm>
 
   <repositories>
