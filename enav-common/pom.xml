@@ -5,19 +5,19 @@
   <parent>
     <groupId>dk.dma.enav</groupId>
     <artifactId>enav-parent</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>enav-common</artifactId>
   <name>eNav Common Api</name>
   
-  <version>0.2</version>
+  <version>0.3-SNAPSHOT</version>
   <dependencies>
     <dependency>
        <groupId>${project.groupId}</groupId>
        <artifactId>enav-maritimecloud</artifactId>
-       <version>0.1</version>
+       <version>0.2-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
