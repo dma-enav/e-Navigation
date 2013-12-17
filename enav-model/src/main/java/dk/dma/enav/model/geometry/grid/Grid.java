@@ -42,7 +42,7 @@ public final class Grid {
 
     private final double resolution;
 
-    private final double multiplier;
+    final double multiplier;
 
     private Grid(double resolution) {
         this.resolution = resolution;
@@ -51,6 +51,10 @@ public final class Grid {
 
     public double getResolution() {
         return resolution;
+    }
+
+    public double getSize() {
+        return 40075000.0 * resolution / 360.0;
     }
 
     public Cell getCell(long cellId) {
@@ -101,14 +105,14 @@ public final class Grid {
     }
 
     public Cell getCellWestOf(Cell cell) {
-        if (cell.getCellId() % multiplier == 1) {
+        if (cell.getCellId() % multiplier == 0) {
             return new Cell((long) (cell.getCellId() + multiplier - 1));
         }
         return new Cell(cell.getCellId() - 1);
     }
 
     public Cell getCellEastOf(Cell cell) {
-        if (cell.getCellId() % multiplier == 0) {
+        if (cell.getCellId() % multiplier == multiplier-1) {
             return new Cell((long) (cell.getCellId() - multiplier + 1));
         }
         return new Cell(cell.getCellId() + 1);
