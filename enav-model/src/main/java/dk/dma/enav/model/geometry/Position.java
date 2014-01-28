@@ -15,12 +15,10 @@
  */
 package dk.dma.enav.model.geometry;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.Locale;
-
 import dk.dma.enav.model.dto.PositionDTO;
 import dk.dma.enav.model.geometry.CoordinateSystem.VincentyCalculationType;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Representation of a WGS84 position and methods for calculating range and bearing between positions.
@@ -143,19 +141,21 @@ public class Position implements Element {
 
     public String getLatitudeAsString() {
         double lat = latitude;
-        String ns = "N";
         if (lat < 0) {
-            ns = "S";
             lat *= -1;
         }
         int hours = (int) lat;
         lat -= hours;
         lat *= 60;
-        String latStr = String.format(Locale.US, "%3.3f", lat);
-        while (latStr.indexOf('.') < 2) {
-            latStr = "0" + latStr;
-        }
-        return String.format(Locale.US, "%02d %s%s", hours, latStr, ns);
+
+        StringBuilder latitudeAsString = new StringBuilder(16);
+        latitudeAsString.append(format00(hours));
+        latitudeAsString.append(" ");
+        latitudeAsString.append(format00((int) lat));
+        latitudeAsString.append(".");
+        latitudeAsString.append(format000((int) Math.round(1000 * (lat - (int) lat))));
+        latitudeAsString.append(latitude < 0 ? "S": "N");
+        return latitudeAsString.toString();
     }
 
     /**
@@ -169,19 +169,47 @@ public class Position implements Element {
 
     public String getLongitudeAsString() {
         double lon = longitude;
-        String ns = "E";
         if (lon < 0) {
-            ns = "W";
             lon *= -1;
         }
         int hours = (int) lon;
         lon -= hours;
         lon *= 60;
-        String lonStr = String.format(Locale.US, "%3.3f", lon);
-        while (lonStr.indexOf('.') < 2) {
-            lonStr = "0" + lonStr;
+
+        StringBuilder longitudeAsString = new StringBuilder(16);
+        longitudeAsString.append(format000(hours));
+        longitudeAsString.append(" ");
+        longitudeAsString.append(format00((int) lon));
+        longitudeAsString.append(".");
+        longitudeAsString.append(format000((int) Math.round(1000 * (lon - (int) lon))));
+        longitudeAsString.append(longitude < 0 ? "W" : "E");
+        return longitudeAsString.toString();
+    }
+
+    /**
+     * Format the given integer value as a String of length 3 with leading zeros.
+     * @param value
+     * @return
+     */
+    private static String format000(int value) {
+        if (value < 10) {
+            return "00" + value;
+        } else if (value < 100) {
+            return "0" + value;
         }
-        return String.format(Locale.US, "%03d %s%s", hours, lonStr, ns);
+        return Integer.toString(value);
+    }
+
+    /**
+     * Format the given integer value as a String of length 2 with leading zeros.
+     * @param value
+     * @return
+     */
+    private static String format00(int value) {
+        if (value < 10) {
+            return "0" + value;
+        }
+        return Integer.toString(value);
     }
 
     /**
