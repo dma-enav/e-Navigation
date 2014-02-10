@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.SortedMap;
-import java.util.SortedSet;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -38,19 +37,22 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.voyage.Route;
 import dk.dma.enav.model.voyage.RouteLeg;
 import dk.dma.enav.model.voyage.RouteLeg.Heading;
 import dk.dma.enav.model.voyage.Waypoint;
 
 /**
- * Parser for reading routes in ROUTE format. ROUTE format is among others used by Transas ECDIS.
+ * Parser for reading routes in ROUTE format. ROUTE format is exported using a 'VisionMaster FT' ECDIS from 'Sperry
+ * Marine'. This parser was developed for a VisionMaster FT ECDIS with Software Version 4.1.
  * 
  * @author Jesper Tejlgaard
  */
+/*
+ * More information may be found at: https://dma-enav.atlassian.net/browse/EMBRYO-129
+ */
 public class RouteRouteParser extends RouteParser {
-    
+
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
     // private static final Logger LOGGER = LoggerFactory.getLogger(RouteLoader.class);
@@ -77,7 +79,7 @@ public class RouteRouteParser extends RouteParser {
     public RouteRouteParser(InputStream io, Map<String, String> config) {
         this(new InputStreamReader(io));
 
-        summaryName = config.get("summary");
+        summaryName = config.get("name");
     }
 
     private Element getSummariesElement(Document doc) throws IOException {
@@ -99,7 +101,7 @@ public class RouteRouteParser extends RouteParser {
 
     private String getChildElementText(Element controlPointsElement, String name) {
         NodeList routeNameElements = controlPointsElement.getElementsByTagName(name);
-        if(routeNameElements.getLength() == 0){
+        if (routeNameElements.getLength() == 0) {
             return null;
         }
         Element routeNameElement = (Element) routeNameElements.item(0);
@@ -135,14 +137,14 @@ public class RouteRouteParser extends RouteParser {
             doc.getDocumentElement().normalize();
 
             Element summariesElement = getSummariesElement(doc);
-            String name = getChildElementText(summariesElement, "Name"); 
-            String departureTime = getChildElementText(summariesElement, "DepartureTime"); 
+            String name = getChildElementText(summariesElement, "Name");
+            String departureTime = getChildElementText(summariesElement, "DepartureTime");
             SortedMap<Integer, Element> controlPointsElements = getControlPointsElements(doc, name);
 
             route.setName(name);
-            
-            for(Entry<Integer, Element> entry : controlPointsElements.entrySet()){
-                
+
+            for (Entry<Integer, Element> entry : controlPointsElements.entrySet()) {
+
                 Element controlPointsElement = entry.getValue();
                 String controlPointsName = getChildElementText(controlPointsElement, "Name");
                 String sequenceNumber = getChildElementText(controlPointsElement, "SequenceNumber");
@@ -150,42 +152,43 @@ public class RouteRouteParser extends RouteParser {
                 String longitude = getChildElementText(controlPointsElement, "Longitude");
                 String turnRadius = getChildElementText(controlPointsElement, "TurnRadius");
                 String departingControlLineType = getChildElementText(controlPointsElement, "DepartingControlLineType");
-                String turnSpeed = getChildElementText(controlPointsElement, "TurnSpeed");
+                String turnSpeed = getChildElementText(controlPointsElement, "DepartingTrackSpeed");
 
                 Waypoint wp = new Waypoint();
                 RouteLeg leg = new RouteLeg();
                 wp.setRouteLeg(leg);
                 route.getWaypoints().add(wp);
                 
+                Double turningRadius = Double.parseDouble(turnRadius);
+                turningRadius = turningRadius/(1.852 * 1000);
+
                 wp.setName(waypointName(controlPointsName, Integer.parseInt(sequenceNumber)));
-                wp.setTurnRad(Double.parseDouble(turnRadius));
+                wp.setTurnRad(turningRadius);
                 wp.setLatitude(Math.toDegrees(Double.parseDouble(latitude)));
                 wp.setLongitude(Math.toDegrees(Double.parseDouble(longitude)));
-                
+
                 leg.setHeading("RhumbLine".equals(departingControlLineType.trim()) ? Heading.RL : Heading.GC);
-                leg.setSpeed(Double.parseDouble(turnSpeed));
-                
+                leg.setSpeed(Double.parseDouble(turnSpeed) * 1.943844492);
+
                 // default values
                 leg.setXtdPort(defaults.getDefaultXtd());
                 leg.setXtdStarboard(defaults.getDefaultXtd());
 
-//                leg.setSFWidth(sFWidth);
-//                leg.setSFLen(sFLen);
-                
+                // leg.setSFWidth(sFWidth);
+                // leg.setSFLen(sFLen);
+
             }
 
-            if(route.getWaypoints().size() > 0){
+            if (route.getWaypoints().size() > 0) {
                 route.getWaypoints().get(0).setEta(DATE_FORMAT.parse(departureTime));
             }
 
         } catch (IOException e) {
-            // LOG.error("Failed to load RT3 route file: " + e.getMessage());
             throw new IOException("Error reading ROUTE file", e);
         } catch (Exception e) {
-            // LOG.error("Failed to parse RT3 route file: " + e.getMessage());
             throw new IOException("Error parsing ROUTE file", e);
-        } finally{
-            if(closeReader){
+        } finally {
+            if (closeReader) {
                 reader.close();
             }
         }
