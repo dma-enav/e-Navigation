@@ -92,7 +92,7 @@ public class Rt3RouteParserTest {
     @Test
     public void testParseWithNames() throws IOException {
         // SETUP DATA
-        config.put("schedule", "Schedule1");
+        config.put("name", "Schedule1");
         InputStream is = getClass().getResourceAsStream("/routes/Nuuk-Paamiut 008.rt3");
         RouteParser parser = new Rt3RouteParser(is, config);
 
@@ -151,7 +151,7 @@ public class Rt3RouteParserTest {
     @Test
     public void testParseWithSpeeds() throws IOException {
         // SETUP DATA
-        config.put("schedule", "Dep 1930");
+        config.put("name", "Dep 1930");
         InputStream is = getClass().getResourceAsStream("/routes/GOT to KIEL via South Channel 1,0N.RT3");
         // EXECUTE
         RouteParser parser = new Rt3RouteParser(is, config);

@@ -70,7 +70,7 @@ public class Rt3RouteParser extends RouteParser {
     public Rt3RouteParser(InputStream io, Map<String, String> config) {
         this(new InputStreamReader(io));
         
-        scheduleName = config.get("schedule");
+        scheduleName = config.get("name");
     }
 
     public Route parse() throws IOException {
