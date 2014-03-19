@@ -56,6 +56,9 @@ public class Position implements Element {
         this.longitude = longitude == -0.0 ? 0.0 : longitude;
     }
 
+    /**
+     * Distance in meters
+     */
     public double distanceTo(Element other, CoordinateSystem system) {
         return requireNonNull(system) == CoordinateSystem.CARTESIAN ? rhumbLineDistanceTo(other)
                 : geodesicDistanceTo(other);
