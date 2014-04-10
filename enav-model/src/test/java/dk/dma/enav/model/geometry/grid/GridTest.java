@@ -18,14 +18,12 @@ package dk.dma.enav.model.geometry.grid;
 import dk.dma.enav.model.geometry.BoundingBox;
 import dk.dma.enav.model.geometry.Position;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 
