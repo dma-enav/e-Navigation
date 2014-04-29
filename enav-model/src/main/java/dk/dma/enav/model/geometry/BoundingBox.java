@@ -151,6 +151,17 @@ public final class BoundingBox extends Polygon {
         return changed ? new BoundingBox(minLat, maxLat, minLon, maxLon, cs) : this;
     }
 
+    /**
+     * Returns a new bounding box that includes the specified position.
+     *
+     * @param position
+     *            the position to include
+     * @return a bounding box
+     */
+    public BoundingBox include(Position position) {
+        return include(BoundingBox.create(position, position, CoordinateSystem.CARTESIAN));
+    }
+
     public boolean intersects(BoundingBox other) {
         return !(other.minLongitude > maxLongitude || other.maxLongitude < minLongitude
                 || other.minLatitude > maxLatitude || other.maxLatitude < minLatitude);
