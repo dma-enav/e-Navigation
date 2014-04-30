@@ -15,6 +15,10 @@
  */
 package dk.dma.enav.model.geometry;
 
+import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
+
 /**
  * 
  * @author Kasper Nielsen
@@ -90,5 +94,37 @@ public class PositionTime extends Position {
      */
     public static PositionTime create(double latitude, double longitude, long time) {
         return new PositionTime(latitude, longitude, time);
+    }
+
+    /**
+     * Calculate - using linear interpolation - a position between two positions augmented with
+     * timestamps. Assuming constant speed between the two positions.
+     *
+     * @param pt1 the earlier position to use in the interpolation.
+     * @param pt2 the later position to use in the interpolation.
+     * @param time the time at which the interpolated position should be calculated.
+     * @return a new PositionTime instance containing the interpolated position at time t.
+     */
+    public static PositionTime createInterpolated(PositionTime pt1, PositionTime pt2, long time) {
+        requireNonNull(pt1);
+        requireNonNull(pt2);
+        if (pt2.getTime() <= pt1.getTime()) {
+            throw new IllegalArgumentException("Provided position 2 must be later than position 1.");
+        }
+        if (time < pt1.getTime()) {
+            throw new IllegalArgumentException("time parameter must be later than position 1's.");
+        }
+        if (time > pt2.getTime()) {
+            throw new IllegalArgumentException("time parameter must be earlier than position 2's.");
+        }
+
+        double interpolatedLatitude = linearInterpolation(pt1.getLatitude(), pt1.getTime(), pt2.getLatitude(), pt2.getTime(), time);
+        double interpolatedLongitude = linearInterpolation(pt1.getLongitude(), pt1.getTime(), pt2.getLongitude(), pt2.getTime(), time);
+
+        return PositionTime.create(interpolatedLatitude, interpolatedLongitude, time);
+    }
+
+    static final double linearInterpolation(double y1, long x1, double y2, long x2, long x) {
+        return y1 + (y2 - y1) / (x2 - x1) * (x - x1);
     }
 }
