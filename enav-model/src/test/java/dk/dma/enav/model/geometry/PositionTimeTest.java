@@ -33,4 +33,52 @@ public class PositionTimeTest {
         assertEquals(2.5, PositionTime.linearInterpolation(0, 0, 5, 10, 5), 1e-16);
         assertEquals(4.5, PositionTime.linearInterpolation(0, 0, 5, 10, 9), 1e-16);
     }
+
+    @Test
+    public void testCreateExtrapolated() {
+        long t0 = 1000L;
+        PositionTime pt1 = PositionTime.create(56.0, 12.0, t0);
+
+        PositionTime extrapolated = PositionTime.createExtrapolated(pt1, 90, 1, t0 + 60000L);
+        assertEquals(61000L, extrapolated.getTime());
+        assertEquals(56.000000, extrapolated.getLatitude(), 1e-6);
+        assertEquals(12.000497, extrapolated.getLongitude(), 1e-6);
+
+        extrapolated = PositionTime.createExtrapolated(pt1, 90, 1, t0 + 2*60000L);
+        assertEquals(121000L, extrapolated.getTime());
+        assertEquals(56.000000, extrapolated.getLatitude(), 1e-6);
+        assertEquals(12.000994, extrapolated.getLongitude(), 1e-6);
+
+        extrapolated = PositionTime.createExtrapolated(pt1, 180, 1, t0 + 60000L);
+        assertEquals(61000L, extrapolated.getTime());
+        assertEquals(55.999721, extrapolated.getLatitude(), 1e-6);
+        assertEquals(12.000000, extrapolated.getLongitude(), 1e-6);
+
+        extrapolated = PositionTime.createExtrapolated(pt1, 180, 10, t0 + 60000L);
+        assertEquals(61000L, extrapolated.getTime());
+        assertEquals(55.997218, extrapolated.getLatitude(), 1e-6);
+        assertEquals(12.000000, extrapolated.getLongitude(), 1e-6);
+    }
+
+    @Test
+    public void testCreateInterpolated() {
+        PositionTime pt1 = PositionTime.create(56.0, 12.0, 1000L);
+        PositionTime pt2 = PositionTime.create(57.0, 13.0, 2000L);
+
+        PositionTime interpolated = PositionTime.createInterpolated(pt1, pt2, 1500L);
+        assertEquals(1500L, interpolated.getTime());
+        assertEquals(56.5, interpolated.getLatitude(), 1e-16);
+        assertEquals(12.5, interpolated.getLongitude(), 1e-16);
+
+        interpolated = PositionTime.createInterpolated(pt1, pt2, 1000L);
+        assertEquals(1000L, interpolated.getTime());
+        assertEquals(56.0, interpolated.getLatitude(), 1e-16);
+        assertEquals(12.0, interpolated.getLongitude(), 1e-16);
+
+        interpolated = PositionTime.createInterpolated(pt1, pt2, 2000L);
+        assertEquals(2000L, interpolated.getTime());
+        assertEquals(57.0, interpolated.getLatitude(), 1e-16);
+        assertEquals(13.0, interpolated.getLongitude(), 1e-16);
+    }
+
 }
