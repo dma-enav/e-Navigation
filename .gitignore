@@ -5,3 +5,6 @@ target
 .project
 .classpath
 /_old
+*.iml
+.idea/
+.DS_Store
