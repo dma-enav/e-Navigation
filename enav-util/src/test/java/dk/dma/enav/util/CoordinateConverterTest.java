@@ -16,7 +16,6 @@
 
 package dk.dma.enav.util;
 
-import dk.dma.enav.util.CoordinateConverter;
 import org.junit.Before;
 import org.junit.Test;
 
