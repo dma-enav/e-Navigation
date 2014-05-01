@@ -14,8 +14,9 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dk.dma.enav.model.geometry.util;
+package dk.dma.enav.util;
 
+import dk.dma.enav.util.CoordinateConverter;
 import org.junit.Before;
 import org.junit.Test;
 

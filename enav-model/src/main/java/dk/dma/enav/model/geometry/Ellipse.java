@@ -16,7 +16,7 @@
 
 package dk.dma.enav.model.geometry;
 
-import dk.dma.enav.model.geometry.util.CoordinateConverter;
+import dk.dma.enav.util.CoordinateConverter;
 
 import static java.lang.StrictMath.cos;
 import static java.lang.StrictMath.sin;

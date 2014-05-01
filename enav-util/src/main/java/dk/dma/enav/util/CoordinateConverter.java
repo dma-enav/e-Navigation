@@ -14,7 +14,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dk.dma.enav.model.geometry.util;
+package dk.dma.enav.util;
 
 import static java.lang.StrictMath.asin;
 import static java.lang.StrictMath.atan;
