@@ -27,8 +27,7 @@ import static java.lang.StrictMath.toRadians;
  */
 @Immutable
 public final class Point {
-    private final double x;
-    private final double y;
+    public static final Point ORIGIN = new Point(0.0, 0.0);
 
     public Point(double x, double y) {
         this.x = x;
@@ -58,4 +57,27 @@ public final class Point {
 
         return new Point(xr, yr);
     }
+
+    /**
+     * Translate this point by vector (dx, dy) and return the translated point.
+     *
+     * @param dx the no. of units to transate along the x-axis.
+     * @param dy the no. of units to transate along the y-axis.
+     * @return the translated point.
+     */
+    public Point translate(double dx, double dy) {
+        return new Point(x + dx, y + dy);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Point{");
+        sb.append("x=").append(x);
+        sb.append(", y=").append(y);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    private final double x;
+    private final double y;
 }

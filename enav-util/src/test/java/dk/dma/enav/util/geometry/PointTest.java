@@ -22,7 +22,40 @@ import static org.junit.Assert.assertEquals;
 
 public class PointTest {
     @Test
-    public void testRotate() {
+    public void testRotateAroundOrigin() {
+        Point pr;
+
+        pr = new Point(1,0).rotate(Point.ORIGIN, 0);
+        assertEquals(1.0, pr.getX(), 1e-15);
+        assertEquals(0.0, pr.getY(), 1e-15);
+
+        pr = new Point(1,0).rotate(Point.ORIGIN, 90);
+        assertEquals(0.0, pr.getX(), 1e-15);
+        assertEquals(1.0, pr.getY(), 1e-15);
+
+        pr = new Point(1,0).rotate(Point.ORIGIN, 180);
+        assertEquals(-1.0, pr.getX(), 1e-15);
+        assertEquals(0.0, pr.getY(), 1e-15);
+
+        pr = new Point(1,0).rotate(Point.ORIGIN, 270);
+        assertEquals(0.0, pr.getX(), 1e-15);
+        assertEquals(-1.0, pr.getY(), 1e-15);
+
+        pr = new Point(1,0).rotate(Point.ORIGIN, 45.0);
+        assertEquals(.7071067811865476, pr.getX(), 1e-15);
+        assertEquals(.7071067811865476, pr.getY(), 1e-15);
+
+        pr = new Point(184.0, 0.0).rotate(Point.ORIGIN, 45.0);
+        assertEquals(184 * .7071067811865476, pr.getX(), 1e-15);
+        assertEquals(184 * .7071067811865476, pr.getY(), 1e-15);
+
+        pr = new Point(184.0, 0.0).rotate(Point.ORIGIN, 31.5);
+        assertEquals(156.885790241153, pr.getX(), 1e-15);
+        assertEquals(96.13973590773458, pr.getY(), 1e-15);
+    }
+
+    @Test
+    public void testRotateAroundPoint() {
         Point p0 = new Point(1.0, 3.0);
         Point p = new Point(1.0, 4.0);
 
