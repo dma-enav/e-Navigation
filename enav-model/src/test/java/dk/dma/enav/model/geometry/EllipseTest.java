@@ -18,10 +18,14 @@ package dk.dma.enav.model.geometry;
 
 import org.junit.Test;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class EllipseTest {
+
     @Test
     public void testIntersectsSame() {
         Ellipse ellipse1 = new Ellipse(null, 0.0f, 0.0f, 5.0, 2.5f, 0.0f, CoordinateSystem.CARTESIAN);
@@ -83,6 +87,18 @@ public class EllipseTest {
 
         assertFalse(ellipse1.intersects(ellipse2));
         assertFalse(ellipse2.intersects(ellipse1));
+    }
+
+    @Test
+    public void testSamplePerimeter() {
+        Ellipse ellipse = new Ellipse(Position.create(57.700633, 11.673650), -70.52481315529923, -54.37141463499117, 184.0, 40.0, 215.6999969482422, CoordinateSystem.CARTESIAN);
+
+        List<Position> positions = ellipse.samplePerimeter(4);
+        assertEquals(4, positions.size());
+        assertEquals(Position.create(57.699175095853860, 11.669940032389967), positions.get(0));
+        assertEquals(Position.create(57.699850143182594, 11.672854124920430), positions.get(1));
+        assertEquals(Position.create(57.701110703232146, 11.674980889575464), positions.get(2));
+        assertEquals(Position.create(57.700435704758796, 11.672066655989266), positions.get(3));
     }
 
 }

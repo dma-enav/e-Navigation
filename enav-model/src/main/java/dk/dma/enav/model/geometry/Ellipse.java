@@ -17,6 +17,10 @@
 package dk.dma.enav.model.geometry;
 
 import dk.dma.enav.util.CoordinateConverter;
+import dk.dma.enav.util.geometry.Point;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.StrictMath.cos;
 import static java.lang.StrictMath.sin;
@@ -44,8 +48,10 @@ public final class Ellipse extends Area {
     /** Length of half axis in direction orthogonal to theta (in meters) */
     private final double beta;
 
-    /** Direction of half axis alpha measured in degrees; 0 degrees is parallel with the increasing direction of the X axis. */
+    /** Direction of half axis alpha measured in Cartesian degrees; 0 degrees is parallel with the increasing direction of the X axis. */
     private final double thetaDeg;
+
+    private final CoordinateConverter coordinateConverter;
 
     /**
      * Create an ellipse with center in the geodetic reference point.
@@ -59,6 +65,7 @@ public final class Ellipse extends Area {
     public Ellipse(Position geodeticReference, double alpha, double beta, double thetaDeg, CoordinateSystem cs) {
         super(cs);
         this.geodeticReference = geodeticReference;
+        this.coordinateConverter = geodeticReference == null ? null : new CoordinateConverter(geodeticReference.longitude, geodeticReference.latitude);
         this.dx = 0.0;
         this.dy = 0.0;
         this.alpha = alpha;
@@ -80,11 +87,25 @@ public final class Ellipse extends Area {
     public Ellipse(Position geodeticReference, double dx, double dy, double alpha, double beta, double thetaDeg, CoordinateSystem cs) {
         super(cs);
         this.geodeticReference = geodeticReference;
+        this.coordinateConverter = geodeticReference == null ? null : new CoordinateConverter(geodeticReference.longitude, geodeticReference.latitude);
         this.dx = dx;
         this.dy = dy;
         this.alpha = alpha;
         this.beta = beta;
         this.thetaDeg = thetaDeg;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Ellipse{");
+        sb.append("geodeticReference=").append(geodeticReference);
+        sb.append(", dx=").append(dx);
+        sb.append(", dy=").append(dy);
+        sb.append(", alpha=").append(alpha);
+        sb.append(", beta=").append(beta);
+        sb.append(", thetaDeg=").append(thetaDeg);
+        sb.append('}');
+        return sb.toString();
     }
 
     public Position getGeodeticReference() {
@@ -150,6 +171,42 @@ public final class Ellipse extends Area {
         }
 
         return intersects;
+    }
+
+    /**
+     * Sample the perimeter along the ellipse in 'n' points, and return a list of positions all located and evenly
+     * distributed on the perimeter. This is useful e.g. to draw the perimeter on a chart using geodetic coordinates.
+     *
+     * @param n the number of perimeter samples to return.
+     * @return a list of positions on the perimeter.
+     */
+    public List<Position> samplePerimeter(int n) {
+        // Sample ellipse scaled to meters
+        List<Point> unitPerimeter = new ArrayList<>(n);
+        double pi2 = 2*Math.PI;
+        double dtheta = pi2 / n;
+        double theta = 0.0;
+        do {
+            unitPerimeter.add(new Point(alpha*cos(theta), beta*sin(theta)));
+            theta += dtheta;
+        } while(theta < pi2);
+
+        // Rotate ellipse to thetaDeg
+        List<Point> rotatedPerimeter = new ArrayList<>(n);
+        for (Point point : unitPerimeter) {
+            Point pr = point.rotate(Point.ORIGIN, thetaDeg).translate(dx, dy);
+            rotatedPerimeter.add(pr);
+        }
+
+        // Convert to geodetic
+        List<Position> perimeter = new ArrayList<>(n);
+        for (Point point : rotatedPerimeter) {
+            double lon = coordinateConverter.x2Lon(point.getX(), point.getY());
+            double lat = coordinateConverter.y2Lat(point.getX(), point.getY());
+            perimeter.add(Position.create(lat, lon));
+        }
+
+        return perimeter;
     }
 
     public double getMajorAxisGeodeticHeading() {
