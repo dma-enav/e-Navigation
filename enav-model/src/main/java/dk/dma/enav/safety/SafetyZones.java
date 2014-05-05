@@ -35,15 +35,15 @@ public final class SafetyZones {
      * Compute the an elliptic zone which roughly corresponds to the vessel's physical extent.
      *
      * @param position The reported position of the vessel.
-     * @param cog Course over ground in compass degrees.
+     * @param hdg heading measured in compass degrees.
      * @param loa The vessel's length-overall (in meters).
      * @param beam The vessel's beam (in meters).
      * @param dimStern Distance from GPS antenna to vessel's stern (in meters).
      * @param dimStarboard Distance from GPS antenne to vessel's starboard beam (in meters).
      * @return an Ellipse approximately covering the vessel's extent.
      */
-    public static Ellipse vesselExtent(Position position, float cog, float loa, float beam, float dimStern, float dimStarboard) {
-        return vesselExtent(position, position, cog, loa, beam, dimStern, dimStarboard);
+    public static Ellipse vesselExtent(Position position, float hdg, float loa, float beam, float dimStern, float dimStarboard) {
+        return vesselExtent(position, position, hdg, loa, beam, dimStern, dimStarboard);
     }
 
     /**
@@ -54,15 +54,15 @@ public final class SafetyZones {
      *
      * @param geodeticReference the geodetic reference needed to compare the returned Ellipse with other Ellipses.
      * @param position The reported position of the vessel.
-     * @param cog Course over ground in compass degrees.
+     * @param hdg heading measured in compass degrees.
      * @param loa The vessel's length-overall (in meters).
      * @param beam The vessel's beam (in meters).
      * @param dimStern Distance from GPS antenna to vessel's stern (in meters).
      * @param dimStarboard Distance from GPS antenne to vessel's starboard beam (in meters).
      * @return an Ellipse approximately covering the vessel's extent.
      */
-    public static Ellipse vesselExtent(Position geodeticReference, Position position, float cog, float loa, float beam, float dimStern, float dimStarboard) {
-        return computeZone(geodeticReference, position, cog, loa, beam, dimStern, dimStarboard, 1.0, 1.0, 0.5);
+    public static Ellipse vesselExtent(Position geodeticReference, Position position, float hdg, float loa, float beam, float dimStern, float dimStarboard) {
+        return computeZone(geodeticReference, position, hdg, loa, beam, dimStern, dimStarboard, 1.0, 1.0, 0.5);
     }
 
     /**
