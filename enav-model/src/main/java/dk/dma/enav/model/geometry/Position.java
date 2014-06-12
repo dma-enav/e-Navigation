@@ -15,14 +15,18 @@
  */
 package dk.dma.enav.model.geometry;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import dk.dma.enav.model.dto.PositionDTO;
 import dk.dma.enav.model.geometry.CoordinateSystem.VincentyCalculationType;
-
 import static java.util.Objects.requireNonNull;
 
 /**
  * Representation of a WGS84 position and methods for calculating range and bearing between positions.
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Position implements Element {
 
     /** The mean radius of the earth in meters. */
@@ -295,7 +299,8 @@ public class Position implements Element {
      * @throws IllegalArgumentException
      *             if the
      */
-    public static Position create(double latitude, double longitude) {
+    @JsonCreator
+    public static Position create(@JsonProperty("latitude") double latitude, @JsonProperty("longitude") double longitude) {
         return new Position(latitude, longitude);
     }
 
