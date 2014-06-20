@@ -15,6 +15,8 @@
  */
 package dk.dma.enav.model.geometry;
 
+import dk.dma.enav.util.geometry.Point;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class BoundingBox extends Polygon {
@@ -71,6 +73,19 @@ public final class BoundingBox extends Polygon {
     public Position getRandom() {
         ThreadLocalRandom r = ThreadLocalRandom.current();
         return Position.create(r.nextDouble(minLatitude, maxLatitude), r.nextDouble(minLongitude, maxLongitude));
+    }
+
+    /**
+     * Calculate the area size of this bounding box.
+     * @return Area size in square kilometers.
+     */
+    public double getArea() {
+        final Position a = new Position(maxLatitude, minLongitude);
+        final Position b = new Position(maxLatitude, maxLongitude);
+        final Position c = new Position(minLatitude, minLongitude);
+        final double ab = a.rhumbLineDistanceTo(b) /* meters */ / 1e3 ; // kilometers
+        final double ac = a.rhumbLineDistanceTo(c) /* meters */ / 1e3 ; // kilometers
+        return ab*ac;
     }
 
     public Position getCenterPoint() {
