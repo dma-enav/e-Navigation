@@ -32,7 +32,7 @@ public class SafetyZonesTest {
     @Test
     public void safetyZoneXYAreTranslatedForwardX() {
         Ellipse ellipse = SafetyZones.safetyZone(position, position, 90.0f, 0.0f, 100.0f, 15.0f, 33, 6);
-        assertEquals(117.0, ellipse.getX(), 1e-6);
+        assertEquals(42.0, ellipse.getX(), 1e-6);
         assertEquals(-1.5, ellipse.getY(), 1e-6);
     }
 
@@ -40,7 +40,7 @@ public class SafetyZonesTest {
     public void safetyZoneXYAreTranslatedForwardY() {
         Ellipse ellipse = SafetyZones.safetyZone(position, position, 0.0f, 0.0f, 100.0f, 15.0f, 33, 6);
         assertEquals(1.5, ellipse.getX(), 1e-6);    // Small number
-        assertEquals(117.0, ellipse.getY(), 1e-6);  // Large number
+        assertEquals(42.0, ellipse.getY(), 1e-6);  // Large number
     }
 
     @Test @Ignore
@@ -68,10 +68,10 @@ public class SafetyZonesTest {
     public void testComputeSafetyZone() {
         Ellipse safetyEllipse = SafetyZones.safetyZone(position, position, 90.0f, 0.0f, 100.0f, 15.0f, 65.0f, 5.5f);
 
-        assertEquals(85.0, safetyEllipse.getX(), 1e-6);
+        assertEquals(10.0, safetyEllipse.getX(), 1e-6);
         assertEquals(-2.0, safetyEllipse.getY(), 1e-6);
-        assertEquals(37.5, safetyEllipse.getBeta(), 1e-6);
-        assertEquals(200.0, safetyEllipse.getAlpha(), 1e-6);
+        assertEquals(22.5, safetyEllipse.getBeta(), 1e-6);
+        assertEquals(100.0, safetyEllipse.getAlpha(), 1e-6);
         assertEquals(0.0, safetyEllipse.getThetaDeg(), 1e-6);
     }
 

@@ -83,9 +83,9 @@ public final class SafetyZones {
      * @return an Ellipse approximately covering the vessel's extent.
      */
     public static Ellipse safetyZone(Position geodeticReference, Position position, float cog, float sog, float loa, float beam, float dimStern, float dimStarboard) {
-        final double safetyEllipseLength = 4;
-        final double safetyEllipseBreadth = 5;
-        final double safetyEllipseBehind = 0.5;
+        final double safetyEllipseLength = 2;
+        final double safetyEllipseBreadth = 3;
+        final double safetyEllipseBehind = 0.25;
         final double v = 1.0;  /* TODO should depend on sog */
         final double l1 = max(safetyEllipseLength*v, 1.0 + safetyEllipseBehind*v*2.0);
         final double b1 = max(safetyEllipseBreadth*v, 1.5);
