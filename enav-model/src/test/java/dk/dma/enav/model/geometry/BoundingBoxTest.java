@@ -25,8 +25,8 @@ public class BoundingBoxTest {
     @Test
     public void getArea() {
         // http://www.movable-type.co.uk/scripts/latlong.html
-        assertEquals(1.853*1.036, BoundingBox.create(Position.create(56.0, 10.0), Position.create(56.016667, 10.016667), CoordinateSystem.CARTESIAN).getArea(), 1e-3);
-        assertEquals(1.853*1.848, BoundingBox.create(Position.create(56.0, 10.0), Position.create(56.016667, 10.029722), CoordinateSystem.CARTESIAN).getArea(), 1e-3);
+        assertEquals(1919819.125 /* ~ 1.853*1.036*1e6 */, BoundingBox.create(Position.create(56.0, 10.0), Position.create(56.016667, 10.016667), CoordinateSystem.CARTESIAN).getArea(), 1e-3);
+        assertEquals(3423583.500 /* ~ 1.853*1.848*1e6 */, BoundingBox.create(Position.create(56.0, 10.0), Position.create(56.016667, 10.029722), CoordinateSystem.CARTESIAN).getArea(), 1e-3);
     }
 
 }

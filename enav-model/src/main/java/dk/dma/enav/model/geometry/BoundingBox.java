@@ -77,14 +77,14 @@ public final class BoundingBox extends Polygon {
 
     /**
      * Calculate the area size of this bounding box.
-     * @return Area size in square kilometers.
+     * @return Area size in square meters.
      */
-    public double getArea() {
+    public float getArea() {
         final Position a = new Position(maxLatitude, minLongitude);
         final Position b = new Position(maxLatitude, maxLongitude);
         final Position c = new Position(minLatitude, minLongitude);
-        final double ab = a.rhumbLineDistanceTo(b) /* meters */ / 1e3 ; // kilometers
-        final double ac = a.rhumbLineDistanceTo(c) /* meters */ / 1e3 ; // kilometers
+        final float ab = (float) a.rhumbLineDistanceTo(b); // meters
+        final float ac = (float) a.rhumbLineDistanceTo(c); // meters
         return ab*ac;
     }
 
