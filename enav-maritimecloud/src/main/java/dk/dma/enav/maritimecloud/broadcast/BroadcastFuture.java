@@ -14,10 +14,11 @@
  */
 package dk.dma.enav.maritimecloud.broadcast;
 
+import java.util.function.Consumer;
+
 import dk.dma.enav.maritimecloud.ConnectionClosedException;
 import dk.dma.enav.maritimecloud.ConnectionFuture;
 import dk.dma.enav.maritimecloud.MaritimeCloudClient;
-import dk.dma.enav.util.function.Consumer;
 
 /**
  * A broad future is created every time a broadcast is sent via {@link MaritimeCloudClient#broadcast(BroadcastMessage)}

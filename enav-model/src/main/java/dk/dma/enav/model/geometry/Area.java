@@ -15,7 +15,8 @@
 package dk.dma.enav.model.geometry;
 
 import static java.util.Objects.requireNonNull;
-import dk.dma.enav.util.function.Predicate;
+
+import java.util.function.Predicate;
 
 /**
  * A shape has an area

@@ -21,12 +21,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import dk.dma.enav.maritimecloud.broadcast.BroadcastOptions;
 import dk.dma.enav.model.MaritimeId;
 import dk.dma.enav.model.geometry.PositionTime;
-import dk.dma.enav.util.function.Consumer;
-import dk.dma.enav.util.function.Supplier;
 
 /**
  * 

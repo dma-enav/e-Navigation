@@ -15,11 +15,11 @@
 package dk.dma.enav.maritimecloud;
 
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import dk.dma.enav.util.function.BiConsumer;
+import java.util.function.BiConsumer;
 
 /**
  * 

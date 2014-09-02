@@ -16,6 +16,9 @@ package dk.dma.enav.util.function;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
 /**
  * A {@link Consumer} that can throw an exception.
  * 
