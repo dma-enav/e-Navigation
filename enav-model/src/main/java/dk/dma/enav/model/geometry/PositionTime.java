@@ -16,7 +16,7 @@ package dk.dma.enav.model.geometry;
 
 import dk.dma.enav.util.CoordinateConverter;
 
-import static dk.dma.enav.util.CoordinateConverter.compass2cartesian;
+import static dk.dma.enav.util.compass.CompassUtils.compass2cartesian;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.util.Objects.requireNonNull;

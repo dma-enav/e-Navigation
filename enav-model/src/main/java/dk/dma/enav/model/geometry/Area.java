@@ -32,11 +32,11 @@ public abstract class Area implements Element {
     }
 
     public final Predicate<Element> contains() {
-        return new Predicate<Element>() {
-            public boolean test(Element element) {
-                return contains(element);
-            }
-        };
+        return this::contains;
+    }
+
+    public final Predicate<Element> intersects() {
+        return this::intersects;
     }
 
     /**
@@ -49,6 +49,15 @@ public abstract class Area implements Element {
     public boolean contains(Element element) {
         throw new UnsupportedOperationException();
     }
+
+    /**
+     * Returns <tt>true</tt> if the specified element is fully or partially contained in the shape, otherwise <tt>false</tt>.
+     *
+     * @param element
+     *            the element to test
+     * @return true if the specified element is fully or partially contained in the shape, otherwise false
+     */
+    public boolean intersects(Element element) { throw new UnsupportedOperationException(); }
 
     @Override
     public final double distanceTo(Element other, CoordinateSystem system) {

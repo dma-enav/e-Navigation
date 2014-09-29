@@ -21,7 +21,9 @@ import dk.dma.enav.util.geometry.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dk.dma.enav.util.compass.CompassUtils.cartesian2compass;
 import static java.lang.StrictMath.cos;
+import static java.lang.StrictMath.pow;
 import static java.lang.StrictMath.sin;
 import static java.lang.StrictMath.sqrt;
 import static java.lang.StrictMath.toRadians;
@@ -132,12 +134,21 @@ public final class Ellipse extends Area {
     }
 
     /**
-     * Returns true if two safety zones intersect.
+     * Returns true if another element intersects this ellipse.
      *
-     * @param otherEllipse the other safety zone.
+     * @param otherElement the other safety zone.
      * @return
      */
-    public boolean intersects(Ellipse otherEllipse) {
+    @Override
+    public boolean intersects(Element otherElement) {
+        if (otherElement instanceof Ellipse) {
+            return intersects((Ellipse) otherElement);
+        } else {
+            throw new UnsupportedOperationException("Can not compute intersection between ellipse and " + otherElement.getClass().getSimpleName() + ".");
+        }
+    }
+
+    private boolean intersects(Ellipse otherEllipse) {
         // TODO must have equal geodeticReference to compare
 
         final double h1x = cos(toRadians(thetaDeg));
@@ -149,19 +160,19 @@ public final class Ellipse extends Area {
         final double vx = otherEllipse.dx - dx;
         final double vy = otherEllipse.dy - dy;
 
-        final double d = sqrt(vx * vx + vy * vy);
+        final double d = sqrt(vx*vx + vy*vy);
 
         boolean intersects = true;
 
         final double SMALL_NUM = 0.1;
 
         if (d > SMALL_NUM) {
-            final double cosb1 = (h1x * vx + h1y * vy) / (sqrt(h1x * h1x + h1y * h1y) * d);
-            final double sinb1 = (h1x * vy - h1y * vx) / (sqrt(h1x * h1x + h1y * h1y) * d);
-            final double d1 = sqrt((alpha * alpha * beta * beta) / (alpha * alpha * sinb1 * sinb1 + beta * beta * cosb1 * cosb1));
-            final double cosb2 = (h2x * vx + h2y * vy) / (sqrt(h2x * h2x + h2y * h2y) * d);
-            final double sinb2 = (h2x * vy - h2y * vx) / (sqrt(h2x * h2x + h2y * h2y) * d);
-            final double d2 = sqrt((otherEllipse.alpha * otherEllipse.alpha * otherEllipse.beta * otherEllipse.beta) / (otherEllipse.alpha * otherEllipse.alpha * sinb2 * sinb2 + otherEllipse.beta * otherEllipse.beta * cosb2 * cosb2));
+            final double cosb1 = (h1x*vx + h1y*vy)/(sqrt(h1x*h1x + h1y*h1y)*d);
+            final double sinb1 = (h1x*vy - h1y*vx)/(sqrt(h1x*h1x + h1y*h1y)*d);
+            final double d1 = sqrt((alpha*alpha*beta*beta)/(alpha*alpha*sinb1*sinb1 + beta*beta*cosb1*cosb1));
+            final double cosb2 = (h2x*vx + h2y*vy)/(sqrt(h2x*h2x + h2y*h2y)*d);
+            final double sinb2 = (h2x*vy - h2y*vx)/(sqrt(h2x*h2x + h2y*h2y)*d);
+            final double d2 = sqrt((otherEllipse.alpha*otherEllipse.alpha*otherEllipse.beta*otherEllipse.beta)/(otherEllipse.alpha*otherEllipse.alpha*sinb2*sinb2 + otherEllipse.beta*otherEllipse.beta*cosb2*cosb2));
             if (d - d1 - d2 < 0.0) {
                 intersects = true;
             } else {
@@ -170,6 +181,29 @@ public final class Ellipse extends Area {
         }
 
         return intersects;
+    }
+
+    /**
+     * Returns true if another element is contained in this ellipse.
+     *
+     * @param otherElement the other element.
+     * @return
+     */
+    @Override
+    public boolean contains(Element otherElement) {
+        if (otherElement instanceof Position) {
+            return contains((Position) otherElement);
+        } else {
+            throw new UnsupportedOperationException("Can not compute whether ellipse contains a " + otherElement.getClass().getSimpleName() + ".");
+        }
+    }
+
+    private boolean contains(Position position) {
+        // Convert position to cartesian
+        final double x = coordinateConverter.lon2x(position.getLongitude(), position.getLatitude());
+        final double y = coordinateConverter.lat2y(position.getLongitude(), position.getLatitude());
+
+        return pow(x, 2.0)/pow(alpha, 2) + pow(y, 2.0)/pow(beta, 2.0) <= 1.0;
     }
 
     /**
@@ -209,6 +243,6 @@ public final class Ellipse extends Area {
     }
 
     public double getMajorAxisGeodeticHeading() {
-        return CoordinateConverter.cartesian2compass(thetaDeg);
+        return cartesian2compass(thetaDeg);
     }
 }

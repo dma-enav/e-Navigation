@@ -17,9 +17,21 @@ package dk.dma.enav.model.geometry;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import dk.dma.enav.model.dto.PositionDTO;
 import dk.dma.enav.model.geometry.CoordinateSystem.VincentyCalculationType;
+
+import static java.lang.Math.PI;
+import static java.lang.Math.abs;
+import static java.lang.Math.asin;
+import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.floor;
+import static java.lang.Math.log;
+import static java.lang.Math.round;
+import static java.lang.Math.sin;
+import static java.lang.Math.tan;
+import static java.lang.Math.toDegrees;
+import static java.lang.Math.toRadians;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -28,7 +40,7 @@ import static java.util.Objects.requireNonNull;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Position implements Element {
 
-    /** The mean radius of the earth in meters. */
+    /** The mean radius of the earth in kilometers. */
     static final double EARTH_RADIUS = 6371;
 
     /** serialVersionUID. */
@@ -84,7 +96,7 @@ public class Position implements Element {
     /**
      * Get great circle distance to location
      * 
-     * @param location
+     * @param other
      * @return distance in meters
      */
     public double geodesicDistanceTo(Element other) {
@@ -97,7 +109,7 @@ public class Position implements Element {
     /**
      * Calculate final bearing for great circle route to location using Thaddeus Vincenty's</a> inverse formula.
      * 
-     * @param the
+     * @param location
      *            second location
      * @return bearing in degrees
      */
@@ -109,7 +121,7 @@ public class Position implements Element {
     /**
      * Calculate initial bearing for great circle route to location using Thaddeus Vincenty's</a> inverse formula.
      * 
-     * @param the
+     * @param location
      *            second location
      * @return bearing in degrees
      */
@@ -124,16 +136,16 @@ public class Position implements Element {
         } else if (degress > 100) {
             throw new IllegalArgumentException("degress = " + degress);
         }
-        return (long) (Math.floor(getLatitude() / degress) * (360.0 / degress))
+        return (long) (floor(getLatitude()/degress) * (360.0 / degress))
                 + (long) ((360.0 + getLongitude()) / degress) - (long) (360L / degress);
     }
 
-    public int getCellInt(double degress) {
+    public int getCellInt(double degrees) {
         // bigger cellsize than 0.01 cannot be supported. unless we change the cellsize to long
-        if (degress < 0.01) {
-            throw new IllegalArgumentException("degress = " + degress);
+        if (degrees < 0.01) {
+            throw new IllegalArgumentException("degrees = " + degrees);
         }
-        return (int) getCell(degress);
+        return (int) getCell(degrees);
     }
 
     /**
@@ -159,7 +171,7 @@ public class Position implements Element {
         latitudeAsString.append(" ");
         latitudeAsString.append(format00((int) lat));
         latitudeAsString.append(".");
-        latitudeAsString.append(format000((int) Math.round(1000 * (lat - (int) lat))));
+        latitudeAsString.append(format000((int) round(1000*(lat - (int) lat))));
         latitudeAsString.append(latitude < 0 ? "S": "N");
         return latitudeAsString.toString();
     }
@@ -187,7 +199,7 @@ public class Position implements Element {
         longitudeAsString.append(" ");
         longitudeAsString.append(format00((int) lon));
         longitudeAsString.append(".");
-        longitudeAsString.append(format000((int) Math.round(1000 * (lon - (int) lon))));
+        longitudeAsString.append(format000((int) round(1000*(lon - (int) lon))));
         longitudeAsString.append(longitude < 0 ? "W" : "E");
         return longitudeAsString.toString();
     }
@@ -238,16 +250,16 @@ public class Position implements Element {
      * @return the rhumb line bearing in degrees
      */
     public double rhumbLineBearingTo(Position position) {
-        double lat1 = Math.toRadians(latitude);
-        double lat2 = Math.toRadians(position.latitude);
-        double dPhi = Math.log(Math.tan(lat2 / 2 + Math.PI / 4) / Math.tan(lat1 / 2 + Math.PI / 4));
+        double lat1 = toRadians(latitude);
+        double lat2 = toRadians(position.latitude);
+        double dPhi = log(tan(lat2/2 + PI/4)/tan(lat1/2 + PI/4));
 
-        double dLon = Math.toRadians(position.longitude - longitude);
-        if (Math.abs(dLon) > Math.PI) {
-            dLon = dLon > 0 ? -(2 * Math.PI - dLon) : 2 * Math.PI + dLon;
+        double dLon = toRadians(position.longitude - longitude);
+        if (abs(dLon) > PI) {
+            dLon = dLon > 0 ? -(2 * PI - dLon) : 2 * PI + dLon;
         }
-        double brng = Math.atan2(dLon, dPhi);
-        return (Math.toDegrees(brng) + 360) % 360;
+        double brng = atan2(dLon, dPhi);
+        return (toDegrees(brng) + 360) % 360;
     }
 
     public double rhumbLineDistanceTo(Element other) {
@@ -255,6 +267,31 @@ public class Position implements Element {
             return CoordinateSystem.CARTESIAN.distanceBetween(this, (Position) other);
         }
         return other.rhumbLineDistanceTo(this);
+    }
+
+    /**
+     * Calculates the position following a rhumb line with the given bearing for the specified distance.
+     *
+     * @param bearing
+     *            the bearing (in compass degrees)
+     * @param distance
+     *            the distance (in meters)
+     * @return    the position
+     */
+    public Position positionAt(double bearing, double distance) {
+        final double d = distance / (EARTH_RADIUS*1e3);
+        final double bearingRad = toRadians(bearing);
+        final double lat1Rad = toRadians(this.latitude);
+        final double lon1Rad = toRadians(this.longitude);
+
+        final double lat2Rad = asin(sin(lat1Rad)*cos(d) + cos(lat1Rad)*sin(d)*cos(bearingRad));
+        final double a = atan2(sin(bearingRad)*sin(d)*cos(lat1Rad), cos(d) - sin(lat1Rad)*sin(lat2Rad));
+        final double lon2Rad = (lon1Rad + a + 3*PI) % (2*PI) - PI;
+
+        final double lat2 = toDegrees(lat2Rad);
+        final double lon2 = toDegrees(lon2Rad);
+
+        return create(lat2, lon2);
     }
 
     /**

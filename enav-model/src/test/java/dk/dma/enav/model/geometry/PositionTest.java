@@ -21,6 +21,27 @@ import static org.junit.Assert.assertEquals;
 public class PositionTest {
 
     @Test
+    public void testPositionAt() {
+        Position p0 = Position.create(56, 12);
+
+        Position pn = p0.positionAt(0, 1000); // 1km north
+        assertEquals(359.99, p0.rhumbLineBearingTo(pn), 0.01);
+        assertEquals(1000, p0.rhumbLineDistanceTo(pn), 0.01);
+
+        Position pe = p0.positionAt(90, 1000); // 1km east
+        assertEquals(90.0, p0.rhumbLineBearingTo(pe), 0.01);
+        assertEquals(1000, p0.rhumbLineDistanceTo(pe), 0.01);
+
+        Position ps = p0.positionAt(180, 1000); // 1km south
+        assertEquals(180.0, p0.rhumbLineBearingTo(ps), 0.01);
+        assertEquals(1000, p0.rhumbLineDistanceTo(ps), 0.01);
+
+        Position pw = p0.positionAt(270, 1000); // 1km west
+        assertEquals(270.0, p0.rhumbLineBearingTo(pw), 0.01);
+        assertEquals(1000, p0.rhumbLineDistanceTo(pw), 0.01);
+    }
+
+    @Test
     public void testGetLatitudeAsString() {
         // Extremes
         assertEquals("00 00.000N", Position.create(0.0, 0.0).getLatitudeAsString());

@@ -89,6 +89,18 @@ public class EllipseTest {
     }
 
     @Test
+    public void testContainsPosition() {
+        Position position = Position.create(57.700633, 11.673650);
+        Ellipse ellipse = new Ellipse(position, 0f,  0f, 100.0f,  40.0f,  0f, CoordinateSystem.CARTESIAN);
+
+        assertTrue(ellipse.contains(position.positionAt(90, 99f)));
+        assertFalse(ellipse.contains(position.positionAt(90, 101f)));
+
+        assertTrue(ellipse.contains(position.positionAt(0, 39f)));
+        assertFalse(ellipse.contains(position.positionAt(0, 41f)));
+    }
+
+    @Test
     public void testSamplePerimeter() {
         Ellipse ellipse = new Ellipse(Position.create(57.700633, 11.673650), -70.52481315529923, -54.37141463499117, 184.0, 40.0, 215.6999969482422, CoordinateSystem.CARTESIAN);
 

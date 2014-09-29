@@ -21,6 +21,7 @@ import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.util.CoordinateConverter;
 import dk.dma.enav.util.geometry.Point;
 
+import static dk.dma.enav.util.compass.CompassUtils.compass2cartesian;
 import static java.lang.Math.max;
 
 /**
@@ -62,7 +63,7 @@ public final class SafetyZones {
      * @return an Ellipse approximately covering the vessel's extent.
      */
     public static Ellipse vesselExtent(Position geodeticReference, Position position, float hdg, float loa, float beam, float dimStern, float dimStarboard) {
-        return computeZone(geodeticReference, position, hdg, loa, beam, dimStern, dimStarboard, 1.0, 1.0, 0.5);
+        return createEllipse(geodeticReference, position, hdg, loa, beam, dimStern, dimStarboard, 1.0, 1.0, 0.5);
     }
 
     /**
@@ -90,7 +91,7 @@ public final class SafetyZones {
         final double l1 = max(safetyEllipseLength*v, 1.0 + safetyEllipseBehind*v*2.0);
         final double b1 = max(safetyEllipseBreadth*v, 1.5);
         final double xc = -safetyEllipseBehind*v + 0.5*l1;
-        return computeZone(geodeticReference, position, cog, loa, beam, dimStern, dimStarboard, l1, b1, xc);
+        return createEllipse(geodeticReference, position, cog, loa, beam, dimStern, dimStarboard, l1, b1, xc);
     }
 
 
@@ -112,9 +113,9 @@ public final class SafetyZones {
      * @return
      */
     @SuppressWarnings("unused")
-    public static Ellipse computeZone(Position geodeticReference, Position position, float direction, float loa, float beam, float dimStern, float dimStarboard, double l1, double b1, double xc) {
+    public static Ellipse createEllipse(Position geodeticReference, Position position, float direction, float loa, float beam, float dimStern, float dimStarboard, double l1, double b1, double xc) {
         // Compute direction of half axis alpha
-        final double thetaDeg = CoordinateConverter.compass2cartesian(direction);
+        final double thetaDeg = compass2cartesian(direction);
 
         // Transform latitude/longitude to cartesian coordinates
         final double centerLatitude = geodeticReference.getLatitude();
