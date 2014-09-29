@@ -32,11 +32,19 @@ public abstract class Area implements Element {
     }
 
     public final Predicate<Element> contains() {
-        return this::contains;
+        return new Predicate<Element>() {
+            public boolean test(Element element) {
+                return contains(element);
+            }
+        };
     }
 
     public final Predicate<Element> intersects() {
-        return this::intersects;
+        return new Predicate<Element>() {
+            public boolean test(Element element) {
+                return intersects(element);
+            }
+        };
     }
 
     /**
