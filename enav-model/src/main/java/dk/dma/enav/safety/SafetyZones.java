@@ -30,6 +30,7 @@ import static java.lang.Math.max;
  * @author Thomas Borg Salling <tbsalling@tbsalling.dk>
  */
 public final class SafetyZones {
+
     /**
      * Compute the an elliptic zone which roughly corresponds to the vessel's physical extent.
      *
@@ -92,12 +93,28 @@ public final class SafetyZones {
         return computeZone(geodeticReference, position, cog, loa, beam, dimStern, dimStarboard, l1, b1, xc);
     }
 
+
     /**
-     * Compute an Ellipse around a track
+     * Compute an ellipse surrounding.
+     *
+     * The position, offset, orientation and scale of the ellipse will follow characteristics of properties of a track.
+     *
+     * @param geodeticReference geodetic reference point for geographic->cartesian mappings
+     * @param position Initial position of ellipse center.
+     * @param direction Direction of ellipse's major axis (in compass degrees).
+     * @param loa Length of the related vessel's major axis (in meters).
+     * @param beam Length of the ellipse's minor axis (in meters)
+     * @param dimStern Offset of ellipse's center along major axis (in meters).
+     * @param dimStarboard Offset of ellipse's center along minor axis (in meters).
+     * @param l1
+     * @param b1
+     * @param xc
+     * @return
      */
-    private static Ellipse computeZone(Position geodeticReference, Position position, float cog, float loa, float beam, float dimStern, float dimStarboard, double l1, double b1, double xc) {
+    @SuppressWarnings("unused")
+    public static Ellipse computeZone(Position geodeticReference, Position position, float direction, float loa, float beam, float dimStern, float dimStarboard, double l1, double b1, double xc) {
         // Compute direction of half axis alpha
-        final double thetaDeg = CoordinateConverter.compass2cartesian(cog);
+        final double thetaDeg = CoordinateConverter.compass2cartesian(direction);
 
         // Transform latitude/longitude to cartesian coordinates
         final double centerLatitude = geodeticReference.getLatitude();
@@ -109,7 +126,7 @@ public final class SafetyZones {
         final double x = CoordinateConverter.lon2x(trackLongitude, trackLatitude);
         final double y = CoordinateConverter.lat2y(trackLongitude, trackLatitude);
 
-        // Compute center of safety zone
+        // Compute center of ellipse
         final Point pt0 = new Point(x, y);
         Point pt1 = new Point(pt0.getX() - dimStern + loa*xc, pt0.getY() + dimStarboard - beam/2.0);
         pt1 = pt1.rotate(pt0, thetaDeg);
@@ -122,4 +139,5 @@ public final class SafetyZones {
 
         return new Ellipse(geodeticReference, pt1.getX(), pt1.getY(), alpha, beta, thetaDeg, CoordinateSystem.CARTESIAN);
     }
+
 }
