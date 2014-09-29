@@ -91,13 +91,26 @@ public class EllipseTest {
     @Test
     public void testContainsPosition() {
         Position position = Position.create(57.700633, 11.673650);
-        Ellipse ellipse = new Ellipse(position, 0f,  0f, 100.0f,  40.0f,  0f, CoordinateSystem.CARTESIAN);
 
+        Ellipse ellipse = new Ellipse(position, 0f, 0f, 100.0f, 40.0f, 0f, CoordinateSystem.CARTESIAN);
+        System.out.println("ellipse: " + ellipse);
         assertTrue(ellipse.contains(position.positionAt(90, 99f)));
         assertFalse(ellipse.contains(position.positionAt(90, 101f)));
-
         assertTrue(ellipse.contains(position.positionAt(0, 39f)));
         assertFalse(ellipse.contains(position.positionAt(0, 41f)));
+        ellipse = null;
+
+        Ellipse rotatedEllipse = new Ellipse(position, 0f, 0f, 100.0f, 40f, 45f, CoordinateSystem.CARTESIAN);
+        System.out.println("rotatedEllipse: " + rotatedEllipse);
+        List<Position> positions = rotatedEllipse.samplePerimeter(32);
+        for (Position pos : positions) {
+            double v = pos.rhumbLineBearingTo(position);
+            Position posInside = pos.positionAt(v, 1);
+            Position posOutside = pos.positionAt(v+180, 1);
+            System.out.println("pos: " + pos + ", v: " + v + ", posIn: " + posInside.getLatitude() + " " + posInside.getLongitude() + ", posOut: " + posOutside.getLatitude() + " " + posOutside.getLongitude());
+            assertTrue(rotatedEllipse.contains(posInside));
+            assertFalse(rotatedEllipse.contains(posOutside));
+        }
     }
 
     @Test

@@ -199,11 +199,10 @@ public final class Ellipse extends Area {
     }
 
     private boolean contains(Position position) {
-        // Convert position to cartesian
         final double x = coordinateConverter.lon2x(position.getLongitude(), position.getLatitude());
         final double y = coordinateConverter.lat2y(position.getLongitude(), position.getLatitude());
-
-        return pow(x, 2.0)/pow(alpha, 2) + pow(y, 2.0)/pow(beta, 2.0) <= 1.0;
+        final Point p = new Point(x, y).rotate(Point.ORIGIN, -thetaDeg); // Small hack: Rotate p minus Theta instead of ellipse theta.
+        return pow(p.getX(), 2.0)/pow(alpha, 2) + pow(p.getY(), 2.0)/pow(beta, 2.0) <= 1.0;
     }
 
     /**
