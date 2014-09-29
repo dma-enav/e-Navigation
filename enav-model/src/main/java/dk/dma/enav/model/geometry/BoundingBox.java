@@ -14,8 +14,6 @@
  */
 package dk.dma.enav.model.geometry;
 
-import dk.dma.enav.util.geometry.Point;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class BoundingBox extends Polygon {
