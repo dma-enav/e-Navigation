@@ -69,34 +69,6 @@ public final class CoordinateConverter {
     }
 
     /**
-     * Converts a compass heading (0-360 degrees, 0 north) to a
-     * cartesian angle (0-360, 0 along x-axis).
-     *
-     * @param a
-     * @return
-     */
-    public static double compass2cartesian(double a) {
-        double cartesianAngle;
-
-        if ((a >= 0.0) && (a <= 90.0)) {
-            cartesianAngle = 90.0 - a;
-        } else {
-            cartesianAngle = 450.0 - a;
-        }
-        return cartesianAngle;
-    }
-
-    /**
-     * The opposite transformation of compass2cartesian.
-     *
-     * @param a
-     * @return
-     */
-    public static double cartesian2compass(double a) {
-        return compass2cartesian(a);
-    }
-
-    /**
      * Calculate x-coordinate of the cartesian point corresponding to geodetic point (lon, lat).
      *
      * @param lon

@@ -18,6 +18,8 @@ package dk.dma.enav.util.compass;
 import org.junit.Test;
 
 import static dk.dma.enav.util.compass.CompassUtils.absoluteDirectionalDifference;
+import static dk.dma.enav.util.compass.CompassUtils.cartesian2compass;
+import static dk.dma.enav.util.compass.CompassUtils.compass2cartesian;
 import static dk.dma.enav.util.compass.CompassUtils.directionInCompassRange;
 import static org.junit.Assert.assertEquals;
 
@@ -48,6 +50,25 @@ public class CompassUtilsTest {
         assertEquals(0f, directionInCompassRange(720f), 1e-16);
         assertEquals(315f, directionInCompassRange(-45f), 1e-16);
         assertEquals(270f, directionInCompassRange(-90f), 1e-16);
+    }
+
+    @Test
+    public void testCompass2cartesianAndCartesian2compass() {
+        assertEquals(90.0, compass2cartesian(0.0), 1e-10);
+        assertEquals(0.0, compass2cartesian( 90.0), 1e-10);
+        assertEquals(270.0, compass2cartesian(180.0), 1e-10);
+        assertEquals(180.0, compass2cartesian(270.0), 1e-10);
+
+        assertEquals(90.0, cartesian2compass(  0.0), 1e-10);
+        assertEquals(0.0, cartesian2compass( 90.0), 1e-10);
+        assertEquals(270.0, cartesian2compass(180.0), 1e-10);
+        assertEquals(180.0, cartesian2compass(270.0), 1e-10);
+
+        assertEquals(37.0, compass2cartesian(cartesian2compass(37.0)), 1e-10);
+        assertEquals(117.0, compass2cartesian(cartesian2compass(117.0)), 1e-10);
+        assertEquals(273.0, compass2cartesian(cartesian2compass(273.0)), 1e-10);
+        assertEquals(92.0, compass2cartesian(cartesian2compass(92.0)), 1e-10);
+        assertEquals(359.0, compass2cartesian(cartesian2compass(359.0)), 1e-10);
     }
 
 }

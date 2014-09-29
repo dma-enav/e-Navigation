@@ -65,22 +65,4 @@ public class CoordinateConverterTest {
         assertEquals(55.9, transformer.y2Lat(0.0, -11094.628553220642), 1e-10);
     }
 
-    @Test
-    public void testCompass() {
-        assertEquals(90.0, CoordinateConverter.compass2cartesian(  0.0), 1e-10);
-        assertEquals(0.0, CoordinateConverter.compass2cartesian( 90.0), 1e-10);
-        assertEquals(270.0, CoordinateConverter.compass2cartesian(180.0), 1e-10);
-        assertEquals(180.0, CoordinateConverter.compass2cartesian(270.0), 1e-10);
-
-        assertEquals(90.0, CoordinateConverter.cartesian2compass(  0.0), 1e-10);
-        assertEquals(0.0, CoordinateConverter.cartesian2compass( 90.0), 1e-10);
-        assertEquals(270.0, CoordinateConverter.cartesian2compass(180.0), 1e-10);
-        assertEquals(180.0, CoordinateConverter.cartesian2compass(270.0), 1e-10);
-
-        assertEquals(37.0, CoordinateConverter.compass2cartesian(CoordinateConverter.cartesian2compass(37.0)), 1e-10);
-        assertEquals(117.0, CoordinateConverter.compass2cartesian(CoordinateConverter.cartesian2compass(117.0)), 1e-10);
-        assertEquals(273.0, CoordinateConverter.compass2cartesian(CoordinateConverter.cartesian2compass(273.0)), 1e-10);
-        assertEquals(92.0, CoordinateConverter.compass2cartesian(CoordinateConverter.cartesian2compass(92.0)), 1e-10);
-        assertEquals(359.0, CoordinateConverter.compass2cartesian(CoordinateConverter.cartesian2compass(359.0)), 1e-10);
-    }
 }
