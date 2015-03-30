@@ -62,8 +62,6 @@
 
   <modules>
     <module>enav-model</module>
-    <module>enav-common</module>
-    <module>enav-maritimecloud</module>
     <module>enav-util</module>
     <module>enav-serialization</module>
   </modules>
