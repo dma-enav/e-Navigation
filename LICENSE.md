@@ -2,7 +2,7 @@ Copyright (c) 2016 MarkLogic
 
 For a list of derivations from original work from the Danish Maritime Authority
 
-https://github.com/sastafford/AisLib/commits/master
+https://github.com/sastafford/e-Navigation/commits/master
 
 Original work: Danish Maritime Authority
 Copyright (c) 2011 Danish Maritime Authority.
