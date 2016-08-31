@@ -1,0 +1,74 @@
+allprojects {
+    task wrapper(type: Wrapper) {
+        gradleVersion = '2.14'
+    }
+}
+
+subprojects {
+    /*
+     * Not applying the bintray plugin. Couldn't get it working properly when declared
+     * in subprojects, and when declared at root level of this script, it caused an httpcomponents
+     * classpath issue with ml-gradle in the core project. So for now, each project has to
+     * duplicate bintray publishing configuration.
+     */
+
+    apply plugin: "java"
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+    apply plugin: "maven-publish"
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        compile "com.fasterxml.jackson.core:jackson-annotations:2.4.0"
+        compile "net.jcip:jcip-annotations:1.0"
+        compile "commons-lang:commons-lang:2.6"
+        testCompile "junit:junit:4+"
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        baseName = artifactId
+        version = project.version
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    jar {
+        baseName = artifactId
+        version = project.version
+    }
+
+    /*
+     * Assumes each project has a single publication.
+     */
+    publishing {
+        publications {
+            mainJavaWithSources(MavenPublication) {
+                groupId group
+                artifactId project.property("artifactId")
+                version project.version
+                from components.java
+                artifact sourcesJar
+            }
+        }
+    }
+
+    sourceSets.test.resources.srcDir 'src/test/java'
+}
+
+project(':enav-model') {
+
+    dependencies {
+        compile project(':enav-util')
+    }
+}
+
+project(':enav-serialization') {
+
+    dependencies {
+        compile project(':enav-model')
+    }
+
+}

@@ -8,3 +8,7 @@ target
 *.iml
 .idea/
 .DS_Store
+.gradle/
+enav-model/build/
+enav-serialization/build/
+enav-util/build/
