@@ -175,11 +175,34 @@ public final class Country implements Serializable, Comparable<Country> {
         return country;
     }
 
+    public static Integer getMidFromMMSI(Integer mmsi) {
+        String mid = null;
+        if (mmsi != null) {
+            String mmsiString = mmsi.toString();
+            try {
+                if (mmsiString.startsWith("111")) {
+                    // Search and Rescue (SAR) aircrafts, used to assist in search and rescue operations, use MMSI's
+                    // with the block 111 as the leading three digits, followed by the country MID
+                    mid = mmsiString.substring(3, 6);
+                } else if (mmsiString.startsWith("99")) {
+                    // Navigation aids, like light ships and beacons have a MMSI with 99 as the leading digits, followed
+                    // by the country MID and then 4 digits.
+                    mid = mmsiString.substring(2, 5);
+                } else {
+                    // Default is that the first three chars is mid
+                    mid = mmsiString.substring(0, 3);
+                }
+            } catch (StringIndexOutOfBoundsException | NullPointerException e) {
+                // LOG.debug("Failed to get MID from mmsi: {}", mmsi, e);
+            }
+        }
+        return mid == null ? null : Integer.parseInt(mid);
+    }
+
     public static Country getCountryForMmsi(Integer mmsi) {
-        String str = Integer.toString(mmsi);
-        if (str.length() == 9) {
-            str = str.substring(0, 3);
-            return getByMid(Integer.parseInt(str));
+        Integer mid = getMidFromMMSI(mmsi);
+        if (mid != null) {
+            return getByMid(mid);
         }
         return null;
     }
