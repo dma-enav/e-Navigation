@@ -58,8 +58,8 @@ public final class CoordinateConverter {
      * Create and configure a new CoordinateConverter with the tangential plane touching
      * in the provided geodetic coordinates.
      *
-     * @param centralLongitude
-     * @param centralLatitude
+     * @param centralLongitude central longitude
+     * @param centralLatitude central latitude
      */
     public CoordinateConverter(double centralLongitude, double centralLatitude) {
         this.lon0 = centralLongitude;
@@ -71,9 +71,9 @@ public final class CoordinateConverter {
     /**
      * Calculate x-coordinate of the cartesian point corresponding to geodetic point (lon, lat).
      *
-     * @param lon
-     * @param lat
-     * @return
+     * @param lon geodetic point longitude
+     * @param lat geodetic point latitude
+     * @return  x-coordinate of the cartesian point 
      */
     public double lon2x(double lon, double lat)
     {
@@ -93,9 +93,9 @@ public final class CoordinateConverter {
     /**
      * Calculate y-coordinate of the cartesian point corresponding to geodetic point (lon, lat).
      *
-     * @param lon
-     * @param lat
-     * @return
+     * @param lon geodetic point longitude
+     * @param lat geodetic point latitude
+     * @return double y-coordinate 
      */
     public double lat2y(double lon, double lat) {
         double lonRad = toRadians(lon);
@@ -113,6 +113,10 @@ public final class CoordinateConverter {
 
     /**
      * Calculate longitude of the geodetic point corresponding to cartesian point (x, y).
+     * 
+     * @param x x of cartesian point
+     * @param y y of cartesian point
+     * @return longitude of the geodetic point
      */
     public double x2Lon(double x, double y) {
         double ro = sqrt(x*x + y*y);
@@ -130,6 +134,10 @@ public final class CoordinateConverter {
 
     /**
      * Calculate latitude of the geodetic point corresponding to cartesian point (x, y).
+     * 
+     * @param x x of cartesian point
+     * @param y y of cartesian point
+     * @return latitude of the geodetic point 
      */
     public double y2Lat(double x, double y)
     {

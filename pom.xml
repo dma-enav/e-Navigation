@@ -34,32 +34,6 @@
     </repository>
   </repositories>
 
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9</version>
-        <configuration>
-          <doctitle>e-Navigation ${project.version} API</doctitle>
-          <windowtitle>e-Navigation API</windowtitle>
-          <aggregate>true</aggregate>
-          <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-          <docletArtifact>
-            <groupId>org.umlgraph</groupId>
-            <artifactId>doclet</artifactId>
-            <version>5.1</version>
-          </docletArtifact>
-          <additionalparam>
-            -all -inferrel -inferdep -quiet -hide java.* -collpackages java.util.* -qualify -postfixpackage
-              -nodefontsize 9 -nodefontpackagesize 7 -outputencoding utf8
-          </additionalparam>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
   <modules>
     <module>enav-model</module>
     <module>enav-util</module>
