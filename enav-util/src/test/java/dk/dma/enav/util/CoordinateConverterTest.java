@@ -32,7 +32,7 @@ public class CoordinateConverterTest {
     @Test
     public void testLon2x() throws Exception {
         assertEquals(0.0, transformer.lon2x(12, 56), 1e-10);
-        assertEquals(6204.034306340757, transformer.lon2x(12.1, 56), 1e-10);
+        assertEquals(6204.03430634056, transformer.lon2x(12.1, 56), 1e-10); // 
         assertEquals(0.0, transformer.lon2x(12, 56.1), 1e-10);
         assertEquals(-6204.034306340658, transformer.lon2x(11.9, 56), 1e-10);
         assertEquals(0.0, transformer.lon2x(12, 55.9), 1e-10);
@@ -42,9 +42,9 @@ public class CoordinateConverterTest {
     public void testLat2y() throws Exception {
         assertEquals(0.0, transformer.lat2y(12, 56), 1e-10);
         assertEquals(4.4884447780805115, transformer.lat2y(12.1, 56), 1e-10);
-        assertEquals(11094.62855321888, transformer.lat2y(12, 56.1), 1e-10);
+        assertEquals(11094.628553219938, transformer.lat2y(12, 56.1), 1e-10); // 
         assertEquals(4.4884447780805115, transformer.lat2y(11.9, 56), 1e-10);
-        assertEquals(-11094.628553220642, transformer.lat2y(12, 55.9), 1e-10);
+        assertEquals(-11094.628553220291, transformer.lat2y(12, 55.9), 1e-10);
     }
 
     @Test
