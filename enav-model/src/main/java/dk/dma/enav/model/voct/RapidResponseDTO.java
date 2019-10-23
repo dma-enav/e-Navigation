@@ -19,6 +19,9 @@ import java.util.List;
 
 import dk.dma.enav.model.dto.PositionDTO;
 
+/**
+ * The type Rapid response dto.
+ */
 public class RapidResponseDTO extends SARModelDTO {
 
     private static final long serialVersionUID = 1L;
@@ -43,10 +46,41 @@ public class RapidResponseDTO extends SARModelDTO {
     private PositionDTO C;
     private PositionDTO D;
 
+    /**
+     * Instantiates a new Rapid response dto.
+     */
     public RapidResponseDTO() {
         super();
     }
 
+    /**
+     * Instantiates a new Rapid response dto.
+     *
+     * @param sarID            the sar id
+     * @param lKPDate          the l kp date
+     * @param cSSDate          the c ss date
+     * @param lKP              the l kp
+     * @param cSP              the c sp
+     * @param x                the x
+     * @param y                the y
+     * @param safetyFactor     the safety factor
+     * @param searchObject     the search object
+     * @param currentList      the current list
+     * @param windList         the wind list
+     * @param datum            the datum
+     * @param radius           the radius
+     * @param timeElasped      the time elasped
+     * @param rdvDirection     the rdv direction
+     * @param rdvDistance      the rdv distance
+     * @param rdvSpeed         the rdv speed
+     * @param rdvDirectionLast the rdv direction last
+     * @param rdvSpeedLast     the rdv speed last
+     * @param a                the a
+     * @param b                the b
+     * @param c                the c
+     * @param d                the d
+     * @param weatherData      the weather data
+     */
     public RapidResponseDTO(String sarID, Date lKPDate, Date cSSDate,
             PositionDTO lKP, PositionDTO cSP, double x, double y,
             double safetyFactor, int searchObject,
@@ -75,6 +109,8 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
+     * Gets current list.
+     *
      * @return the currentList
      */
     public List<PositionDTO> getCurrentList() {
@@ -82,14 +118,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param currentList
-     *            the currentList to set
+     * Sets current list.
+     *
+     * @param currentList the currentList to set
      */
     public void setCurrentList(List<PositionDTO> currentList) {
         this.currentList = currentList;
     }
 
     /**
+     * Gets wind list.
+     *
      * @return the windList
      */
     public List<PositionDTO> getWindList() {
@@ -97,14 +136,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param windList
-     *            the windList to set
+     * Sets wind list.
+     *
+     * @param windList the windList to set
      */
     public void setWindList(List<PositionDTO> windList) {
         this.windList = windList;
     }
 
     /**
+     * Gets datum.
+     *
      * @return the datum
      */
     public PositionDTO getDatum() {
@@ -112,14 +154,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param datum
-     *            the datum to set
+     * Sets datum.
+     *
+     * @param datum the datum to set
      */
     public void setDatum(PositionDTO datum) {
         this.datum = datum;
     }
 
     /**
+     * Gets radius.
+     *
      * @return the radius
      */
     public double getRadius() {
@@ -127,14 +172,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param radius
-     *            the radius to set
+     * Sets radius.
+     *
+     * @param radius the radius to set
      */
     public void setRadius(double radius) {
         this.radius = radius;
     }
 
     /**
+     * Gets time elasped.
+     *
      * @return the timeElasped
      */
     public double getTimeElasped() {
@@ -142,14 +190,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param timeElasped
-     *            the timeElasped to set
+     * Sets time elasped.
+     *
+     * @param timeElasped the timeElasped to set
      */
     public void setTimeElasped(double timeElasped) {
         this.timeElasped = timeElasped;
     }
 
     /**
+     * Gets rdv direction.
+     *
      * @return the rdvDirection
      */
     public double getRdvDirection() {
@@ -157,14 +208,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvDirection
-     *            the rdvDirection to set
+     * Sets rdv direction.
+     *
+     * @param rdvDirection the rdvDirection to set
      */
     public void setRdvDirection(double rdvDirection) {
         this.rdvDirection = rdvDirection;
     }
 
     /**
+     * Gets rdv distance.
+     *
      * @return the rdvDistance
      */
     public double getRdvDistance() {
@@ -172,14 +226,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvDistance
-     *            the rdvDistance to set
+     * Sets rdv distance.
+     *
+     * @param rdvDistance the rdvDistance to set
      */
     public void setRdvDistance(double rdvDistance) {
         this.rdvDistance = rdvDistance;
     }
 
     /**
+     * Gets rdv speed.
+     *
      * @return the rdvSpeed
      */
     public double getRdvSpeed() {
@@ -187,14 +244,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvSpeed
-     *            the rdvSpeed to set
+     * Sets rdv speed.
+     *
+     * @param rdvSpeed the rdvSpeed to set
      */
     public void setRdvSpeed(double rdvSpeed) {
         this.rdvSpeed = rdvSpeed;
     }
 
     /**
+     * Gets rdv direction last.
+     *
      * @return the rdvDirectionLast
      */
     public double getRdvDirectionLast() {
@@ -202,14 +262,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvDirectionLast
-     *            the rdvDirectionLast to set
+     * Sets rdv direction last.
+     *
+     * @param rdvDirectionLast the rdvDirectionLast to set
      */
     public void setRdvDirectionLast(double rdvDirectionLast) {
         this.rdvDirectionLast = rdvDirectionLast;
     }
 
     /**
+     * Gets rdv speed last.
+     *
      * @return the rdvSpeedLast
      */
     public double getRdvSpeedLast() {
@@ -217,14 +280,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvSpeedLast
-     *            the rdvSpeedLast to set
+     * Sets rdv speed last.
+     *
+     * @param rdvSpeedLast the rdvSpeedLast to set
      */
     public void setRdvSpeedLast(double rdvSpeedLast) {
         this.rdvSpeedLast = rdvSpeedLast;
     }
 
     /**
+     * Gets a.
+     *
      * @return the a
      */
     public PositionDTO getA() {
@@ -232,14 +298,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param a
-     *            the a to set
+     * Sets a.
+     *
+     * @param a the a to set
      */
     public void setA(PositionDTO a) {
         A = a;
     }
 
     /**
+     * Gets b.
+     *
      * @return the b
      */
     public PositionDTO getB() {
@@ -247,14 +316,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param b
-     *            the b to set
+     * Sets b.
+     *
+     * @param b the b to set
      */
     public void setB(PositionDTO b) {
         B = b;
     }
 
     /**
+     * Gets c.
+     *
      * @return the c
      */
     public PositionDTO getC() {
@@ -262,14 +334,17 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param c
-     *            the c to set
+     * Sets c.
+     *
+     * @param c the c to set
      */
     public void setC(PositionDTO c) {
         C = c;
     }
 
     /**
+     * Gets d.
+     *
      * @return the d
      */
     public PositionDTO getD() {
@@ -277,8 +352,9 @@ public class RapidResponseDTO extends SARModelDTO {
     }
 
     /**
-     * @param d
-     *            the d to set
+     * Sets d.
+     *
+     * @param d the d to set
      */
     public void setD(PositionDTO d) {
         D = d;

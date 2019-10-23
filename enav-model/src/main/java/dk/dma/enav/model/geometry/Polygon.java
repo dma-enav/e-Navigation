@@ -14,10 +14,18 @@
  */
 package dk.dma.enav.model.geometry;
 
+/**
+ * The type Polygon.
+ */
 public class Polygon extends Area {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Instantiates a new Polygon.
+     *
+     * @param cs the cs
+     */
     public Polygon(CoordinateSystem cs) {
         super(cs);
         // TODO Auto-generated constructor stub

@@ -16,6 +16,9 @@ package dk.dma.enav.model.geometry;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * The type Bounding box.
+ */
 public final class BoundingBox extends Polygon {
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
@@ -34,6 +37,12 @@ public final class BoundingBox extends Polygon {
         this.maxLongitude = maxLongitude;
     }
 
+    /**
+     * Contains boolean.
+     *
+     * @param point the point
+     * @return the boolean
+     */
     public boolean contains(Position point) {
         return point.getLatitude() >= minLatitude && point.getLongitude() >= minLongitude
                 && point.getLatitude() <= maxLatitude && point.getLongitude() <= maxLongitude;
@@ -64,7 +73,7 @@ public final class BoundingBox extends Polygon {
 
     /**
      * Returns a random position within the box.
-     * 
+     *
      * @return a random position within the box
      */
     public Position getRandom() {
@@ -74,6 +83,7 @@ public final class BoundingBox extends Polygon {
 
     /**
      * Calculate the area size of this bounding box.
+     *
      * @return Area size in square meters.
      */
     public float getArea() {
@@ -85,38 +95,83 @@ public final class BoundingBox extends Polygon {
         return ab*ac;
     }
 
+    /**
+     * Gets center point.
+     *
+     * @return the center point
+     */
     public Position getCenterPoint() {
         return Position.create((minLatitude + maxLatitude) / 2, (minLongitude + maxLongitude) / 2);
     }
 
+    /**
+     * Gets latitude size.
+     *
+     * @return the latitude size
+     */
     public double getLatitudeSize() {
         return maxLatitude - minLatitude;
     }
 
+    /**
+     * Gets longitude size.
+     *
+     * @return the longitude size
+     */
     public double getLongitudeSize() {
         return maxLongitude - minLongitude;
     }
 
+    /**
+     * Gets lower right.
+     *
+     * @return the lower right
+     */
     public Position getLowerRight() {
         return Position.create(minLatitude, maxLongitude);
     }
 
+    /**
+     * Gets max lat.
+     *
+     * @return the max lat
+     */
     public double getMaxLat() {
         return maxLatitude;
     }
 
+    /**
+     * Gets max lon.
+     *
+     * @return the max lon
+     */
     public double getMaxLon() {
         return maxLongitude;
     }
 
+    /**
+     * Gets min lat.
+     *
+     * @return the min lat
+     */
     public double getMinLat() {
         return minLatitude;
     }
 
+    /**
+     * Gets min lon.
+     *
+     * @return the min lon
+     */
     public double getMinLon() {
         return minLongitude;
     }
 
+    /**
+     * Gets upper left.
+     *
+     * @return the upper left
+     */
     public Position getUpperLeft() {
         return Position.create(maxLatitude, minLongitude);
     }
@@ -133,9 +188,8 @@ public final class BoundingBox extends Polygon {
 
     /**
      * Returns a new bounding box that includes the specified bounding box.
-     * 
-     * @param other
-     *            the bounding box to include
+     *
+     * @param other the bounding box to include
      * @return a bounding box
      */
     public BoundingBox include(BoundingBox other) {
@@ -166,14 +220,19 @@ public final class BoundingBox extends Polygon {
     /**
      * Returns a new bounding box that includes the specified position.
      *
-     * @param position
-     *            the position to include
+     * @param position the position to include
      * @return a bounding box
      */
     public BoundingBox include(Position position) {
         return include(BoundingBox.create(position, position, CoordinateSystem.CARTESIAN));
     }
 
+    /**
+     * Intersects boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
     public boolean intersects(BoundingBox other) {
         return !(other.minLongitude > maxLongitude || other.maxLongitude < minLongitude
                 || other.minLatitude > maxLatitude || other.maxLatitude < minLatitude);
@@ -184,10 +243,28 @@ public final class BoundingBox extends Polygon {
         return getUpperLeft() + " -> " + getLowerRight();
     }
 
+    /**
+     * Create bounding box.
+     *
+     * @param y1 the y 1
+     * @param y2 the y 2
+     * @param x1 the x 1
+     * @param x2 the x 2
+     * @param cs the cs
+     * @return the bounding box
+     */
     static BoundingBox create(double y1, double y2, double x1, double x2, CoordinateSystem cs) {
         return new BoundingBox(Math.min(y1, y2), Math.max(y1, y2), Math.min(x1, x2), Math.max(x1, x2), cs);
     }
 
+    /**
+     * Create bounding box.
+     *
+     * @param location the location
+     * @param other    the other
+     * @param cs       the cs
+     * @return the bounding box
+     */
     public static BoundingBox create(Position location, Position other, CoordinateSystem cs) {
         return create(location.getLatitude(), other.getLatitude(), location.getLongitude(), other.getLongitude(), cs);
     }

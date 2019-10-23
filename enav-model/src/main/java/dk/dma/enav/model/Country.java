@@ -30,9 +30,8 @@ import java.util.Properties;
 /**
  * Class to represent a country by its assigned MID's (Maritime Identification Digits) in addition to its ISO 3166
  * identification.
- * 
- * See {@link http://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity}
- * 
+ * <p>
+ * @see  <a href="http://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity">http://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity</a>
  */
 public final class Country implements Serializable, Comparable<Country> {
 
@@ -41,8 +40,17 @@ public final class Country implements Serializable, Comparable<Country> {
     private static final String LOCATION = Country.class.getPackage().getName().replace(".", "/")
             + "/country.properties";
 
+    /**
+     * The Mid country map.
+     */
     static final HashMap<Integer, Country> MID_COUNTRY_MAP = new HashMap<>();
+    /**
+     * The Three letter map.
+     */
     static final HashMap<String, Country> THREE_LETTER_MAP = new HashMap<>();
+    /**
+     * The Two letter map.
+     */
     static final HashMap<String, Country> TWO_LETTER_MAP = new HashMap<>();
 
     static {
@@ -80,10 +88,22 @@ public final class Country implements Serializable, Comparable<Country> {
 
     private final HashSet<Integer> mids = new HashSet<>();
 
+    /**
+     * The Name.
+     */
     protected final String name;
 
+    /**
+     * The Number.
+     */
     protected final String number;
+    /**
+     * The Three letter.
+     */
     protected final String threeLetter;
+    /**
+     * The Two letter.
+     */
     protected final String twoLetter;
 
     private Country(String name, String twoLetter, String threeLetter, String number) {
@@ -93,6 +113,11 @@ public final class Country implements Serializable, Comparable<Country> {
         this.number = number;
     }
 
+    /**
+     * Add mid.
+     *
+     * @param mid the mid
+     */
     void addMid(int mid) {
         mids.add(mid);
     }
@@ -102,22 +127,47 @@ public final class Country implements Serializable, Comparable<Country> {
         return this.threeLetter.equals(((Country) obj).getThreeLetter());
     }
 
+    /**
+     * Gets mids.
+     *
+     * @return the mids
+     */
     public HashSet<Integer> getMids() {
         return mids;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets number.
+     *
+     * @return the number
+     */
     public String getNumber() {
         return number;
     }
 
+    /**
+     * Gets three letter.
+     *
+     * @return the three letter
+     */
     public String getThreeLetter() {
         return threeLetter;
     }
 
+    /**
+     * Gets two letter.
+     *
+     * @return the two letter
+     */
     public String getTwoLetter() {
         return twoLetter;
     }
@@ -127,6 +177,12 @@ public final class Country implements Serializable, Comparable<Country> {
         return twoLetter.hashCode();
     }
 
+    /**
+     * Match mid boolean.
+     *
+     * @param mid the mid
+     * @return the boolean
+     */
     public boolean matchMid(int mid) {
         return mids.contains(mid);
     }
@@ -150,9 +206,9 @@ public final class Country implements Serializable, Comparable<Country> {
 
     /**
      * Get MidCountry by ISO 3166 two or three letter code
-     * 
-     * @param code
-     * @return
+     *
+     * @param code the code
+     * @return by code
      */
     public static Country getByCode(String code) {
         if (code.length() == 2) {
@@ -163,9 +219,9 @@ public final class Country implements Serializable, Comparable<Country> {
 
     /**
      * Get MidCountry by MID
-     * 
-     * @param mid
-     * @return
+     *
+     * @param mid the mid
+     * @return by mid
      */
     public static Country getByMid(int mid) {
         Country country = MID_COUNTRY_MAP.get(mid);
@@ -175,6 +231,12 @@ public final class Country implements Serializable, Comparable<Country> {
         return country;
     }
 
+    /**
+     * Gets country for mmsi.
+     *
+     * @param mmsi the mmsi
+     * @return the country for mmsi
+     */
     public static Country getCountryForMmsi(Integer mmsi) {
         String str = Integer.toString(mmsi);
         if (str.length() == 9) {
@@ -184,10 +246,21 @@ public final class Country implements Serializable, Comparable<Country> {
         return null;
     }
 
+    /**
+     * Gets mid map.
+     *
+     * @return the mid map
+     */
     public static Map<Integer, Country> getMidMap() {
         return Collections.unmodifiableMap(MID_COUNTRY_MAP);
     }
 
+    /**
+     * Find all by code list.
+     *
+     * @param countries the countries
+     * @return the list
+     */
     public static List<Country> findAllByCode(String... countries) {
         final List<Country> c = new ArrayList<>();
         for (String s : countries) {

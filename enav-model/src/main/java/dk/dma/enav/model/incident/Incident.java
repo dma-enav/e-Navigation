@@ -14,6 +14,9 @@
  */
 package dk.dma.enav.model.incident;
 
+/**
+ * The type Incident.
+ */
 public class Incident {
 
 }

@@ -22,7 +22,8 @@ import static java.lang.Math.sin;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 
+ * The type Position time.
+ *
  * @author Kasper Nielsen
  */
 public class PositionTime extends Position {
@@ -33,9 +34,11 @@ public class PositionTime extends Position {
     private final long time;
 
     /**
-     * @param latitude
-     * @param longitude
-     * @param time
+     * Instantiates a new Position time.
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     * @param time      the time
      */
     public PositionTime(double latitude, double longitude, long time) {
         super(latitude, longitude);
@@ -54,11 +57,23 @@ public class PositionTime extends Position {
         return other instanceof PositionTime && equals((PositionTime) other);
     }
 
+    /**
+     * Position equals boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
     public boolean positionEquals(Position other) {
         return super.equals(other);
     }
 
-    // We probably want another function that also takes a precision.
+    /**
+     * Equals boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
+// We probably want another function that also takes a precision.
     public boolean equals(PositionTime other) {
         return super.equals(other) && time == other.time;
     }
@@ -75,24 +90,34 @@ public class PositionTime extends Position {
         return (int) (time ^ latLong ^ latLong >>> 32) ^ (int) (time ^ lonLong ^ lonLong >>> 32);
     }
 
+    /**
+     * Gets time.
+     *
+     * @return the time
+     */
     public long getTime() {
         return time;
     }
 
+    /**
+     * Create position time.
+     *
+     * @param position the position
+     * @param time     the time
+     * @return the position time
+     */
     public static PositionTime create(Position position, long time) {
         return create(position.latitude, position.longitude, time);
     }
 
     /**
      * Creates a new position from the specified latitude and longitude.
-     * 
-     * @param latitude
-     *            the latitude
-     * @param longitude
-     *            the longitude
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     * @param time      the time
      * @return the new position
-     * @throws IllegalArgumentException
-     *             if the
+     * @throws IllegalArgumentException if the
      */
     public static PositionTime create(double latitude, double longitude, long time) {
         return new PositionTime(latitude, longitude, time);
@@ -102,13 +127,12 @@ public class PositionTime extends Position {
      * Calculate - using linear extrapolation (or dead reckoning) - a position based on known speed
      * and course from the given position.
      *
-     * @see <a href="http://en.wikipedia.org/wiki/Dead_reckoning">Dead reckoning</a>
-     *
-     * @param pt1 the position to extrapolate from.
-     * @param cog is the course over ground.
-     * @param sog is the speed over ground in knots.
+     * @param pt1  the position to extrapolate from.
+     * @param cog  is the course over ground.
+     * @param sog  is the speed over ground in knots.
      * @param time the absolute time (in millis since Epoch) to extrapolate to.
      * @return a new PositionTime instance containing the dead reckoned position at time t.
+     * @see <a href="http://en.wikipedia.org/wiki/Dead_reckoning">Dead reckoning</a>
      */
     public static PositionTime createExtrapolated(PositionTime pt1, float cog, float sog, long time) {
         requireNonNull(pt1);
@@ -136,8 +160,8 @@ public class PositionTime extends Position {
      * Calculate - using linear interpolation - a position between two positions augmented with
      * timestamps. Assuming constant speed between the two positions.
      *
-     * @param pt1 the earlier position to use in the interpolation.
-     * @param pt2 the later position to use in the interpolation.
+     * @param pt1  the earlier position to use in the interpolation.
+     * @param pt2  the later position to use in the interpolation.
      * @param time the time at which the interpolated position should be calculated.
      * @return a new PositionTime instance containing the interpolated position at absolute time t.
      */
@@ -160,6 +184,16 @@ public class PositionTime extends Position {
         return PositionTime.create(interpolatedLatitude, interpolatedLongitude, time);
     }
 
+    /**
+     * Linear interpolation double.
+     *
+     * @param y1 the y 1
+     * @param x1 the x 1
+     * @param y2 the y 2
+     * @param x2 the x 2
+     * @param x  the x
+     * @return the double
+     */
     static final double linearInterpolation(double y1, long x1, double y2, long x2, long x) {
         return y1 + (y2 - y1) / (x2 - x1) * (x - x1);
     }

@@ -18,7 +18,6 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * A line
- * 
  */
 // TODO: Should it be called something else??
 
@@ -28,14 +27,28 @@ public class Line implements Element {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * The Cs.
+     */
     final CoordinateSystem cs;
 
-    /** The end of the line. */
+    /**
+     * The end of the line.
+     */
     final Position end;
 
-    /** The start of the line. */
+    /**
+     * The start of the line.
+     */
     final Position start;
 
+    /**
+     * Instantiates a new Line.
+     *
+     * @param start  the start
+     * @param end    the end
+     * @param system the system
+     */
     Line(Position start, Position end, CoordinateSystem system) {
         this.start = requireNonNull(start, "start is null");
         this.end = requireNonNull(end, "end is null");
@@ -47,6 +60,12 @@ public class Line implements Element {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
     public boolean equals(Line other) {
         return other == this || other != null && start.equals(other.start) && start.equals(other.start)
                 && cs == other.cs;
@@ -65,13 +84,18 @@ public class Line implements Element {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Gets coordinate system.
+     *
+     * @return the coordinate system
+     */
     public final CoordinateSystem getCoordinateSystem() {
         return cs;
     }
 
     /**
      * Returns the end position of the line.
-     * 
+     *
      * @return the end position of the line
      */
     public Position getEnd() {
@@ -80,7 +104,7 @@ public class Line implements Element {
 
     /**
      * Returns the length of the line in meters.
-     * 
+     *
      * @return the length of the line in meters
      */
     public double getLength() {
@@ -89,7 +113,7 @@ public class Line implements Element {
 
     /**
      * Returns the start position of the line.
-     * 
+     *
      * @return the start position of the line
      */
     public Position getStart() {

@@ -17,6 +17,9 @@ package dk.dma.enav.model.fal;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * The type Fal report.
+ */
 public class FALReport implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,14 +30,27 @@ public class FALReport implements Serializable {
     private String reportOwner = "";
     private Date sentDate;
 
+    /**
+     * Instantiates a new Fal report.
+     */
     public FALReport() {
 
     }
 
+    /**
+     * Instantiates a new Fal report.
+     *
+     * @param id the id
+     */
     public FALReport(long id) {
         this.id = id;
     }
 
+    /**
+     * Instantiates a new Fal report.
+     *
+     * @param copy the copy
+     */
     public FALReport(FALReport copy) {
 
         this.id = System.currentTimeMillis();
@@ -46,6 +62,8 @@ public class FALReport implements Serializable {
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public long getId() {
@@ -53,14 +71,17 @@ public class FALReport implements Serializable {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * Sets id.
+     *
+     * @param id the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
 
     /**
+     * Gets falform 1.
+     *
      * @return the falform1
      */
     public FALForm1 getFalform1() {
@@ -68,14 +89,17 @@ public class FALReport implements Serializable {
     }
 
     /**
-     * @param falform1
-     *            the falform1 to set
+     * Sets falform 1.
+     *
+     * @param falform1 the falform1 to set
      */
     public void setFalform1(FALForm1 falform1) {
         this.falform1 = falform1;
     }
 
     /**
+     * Gets fal report name.
+     *
      * @return the falReportName
      */
     public String getFalReportName() {
@@ -83,14 +107,17 @@ public class FALReport implements Serializable {
     }
 
     /**
-     * @param falReportName
-     *            the falReportName to set
+     * Sets fal report name.
+     *
+     * @param falReportName the falReportName to set
      */
     public void setFalReportName(String falReportName) {
         this.falReportName = falReportName;
     }
 
     /**
+     * Gets report owner.
+     *
      * @return the reportOwner
      */
     public String getReportOwner() {
@@ -98,17 +125,18 @@ public class FALReport implements Serializable {
     }
 
     /**
-     * @param reportOwner
-     *            the reportOwner to set
+     * Sets report owner.
+     *
+     * @param reportOwner the reportOwner to set
      */
     public void setReportOwner(String reportOwner) {
         this.reportOwner = reportOwner;
     }
 
-    
-    
-    
+
     /**
+     * Gets sent date.
+     *
      * @return the sentDate
      */
     public Date getSentDate() {
@@ -116,6 +144,8 @@ public class FALReport implements Serializable {
     }
 
     /**
+     * Sets sent date.
+     *
      * @param sentDate the sentDate to set
      */
     public void setSentDate(Date sentDate) {

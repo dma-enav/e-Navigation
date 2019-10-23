@@ -14,6 +14,9 @@
  */
 package dk.dma.enav.model.voyage.cargo;
 
+/**
+ * The type Cargo.
+ */
 public class Cargo {
 
 }

@@ -14,7 +14,17 @@
  */
 package dk.dma.enav.model.msi;
 
+/**
+ * The enum Specific category.
+ */
 public enum SpecificCategory {
-    BUOY, WRECK;
+    /**
+     * Buoy specific category.
+     */
+    BUOY,
+    /**
+     * Wreck specific category.
+     */
+    WRECK;
     // TODO
 }

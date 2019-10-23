@@ -14,6 +14,9 @@
  */
 package dk.dma.enav.model.voyage;
 
+/**
+ * The type Active route.
+ */
 public class ActiveRoute extends Route {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;

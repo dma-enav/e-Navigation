@@ -21,11 +21,15 @@ import java.util.List;
 import dk.dma.enav.model.dto.PositionDTO;
 
 
-
-
+/**
+ * The type Sar model dto.
+ */
 public class SARModelDTO implements Serializable{
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The Sar id.
+     */
     String sarID;
     private Date LKPDate;
     private Date CSSDate;
@@ -48,10 +52,27 @@ public class SARModelDTO implements Serializable{
     
     private List<WeatherDataDTO> weatherData;
 
+    /**
+     * Instantiates a new Sar model dto.
+     */
     public SARModelDTO(){
         super();
     }
-    
+
+    /**
+     * Instantiates a new Sar model dto.
+     *
+     * @param sarID        the sar id
+     * @param lKPDate      the l kp date
+     * @param cSSDate      the c ss date
+     * @param lKP          the l kp
+     * @param cSP          the c sp
+     * @param x            the x
+     * @param y            the y
+     * @param safetyFactor the safety factor
+     * @param searchObject the search object
+     * @param weatherData  the weather data
+     */
     public SARModelDTO(String sarID, Date lKPDate, Date cSSDate, PositionDTO lKP,
             PositionDTO cSP, double x, double y, double safetyFactor,
             int searchObject, List<WeatherDataDTO> weatherData) {
@@ -69,6 +90,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets sar id.
+     *
      * @return the sarID
      */
     public String getSarID() {
@@ -76,6 +99,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets sar id.
+     *
      * @param sarID the sarID to set
      */
     public void setSarID(String sarID) {
@@ -83,6 +108,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets lkp date.
+     *
      * @return the lKPDate
      */
     public Date getLKPDate() {
@@ -90,6 +117,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets lkp date.
+     *
      * @param lKPDate the lKPDate to set
      */
     public void setLKPDate(Date lKPDate) {
@@ -97,6 +126,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets css date.
+     *
      * @return the cSSDate
      */
     public Date getCSSDate() {
@@ -104,6 +135,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets css date.
+     *
      * @param cSSDate the cSSDate to set
      */
     public void setCSSDate(Date cSSDate) {
@@ -111,6 +144,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets lkp.
+     *
      * @return the lKP
      */
     public PositionDTO getLKP() {
@@ -118,6 +153,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets lkp.
+     *
      * @param lKP the lKP to set
      */
     public void setLKP(PositionDTO lKP) {
@@ -125,6 +162,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets csp.
+     *
      * @return the cSP
      */
     public PositionDTO getCSP() {
@@ -132,6 +171,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets csp.
+     *
      * @param cSP the cSP to set
      */
     public void setCSP(PositionDTO cSP) {
@@ -139,6 +180,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets x.
+     *
      * @return the x
      */
     public double getX() {
@@ -146,6 +189,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets x.
+     *
      * @param x the x to set
      */
     public void setX(double x) {
@@ -153,6 +198,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets y.
+     *
      * @return the y
      */
     public double getY() {
@@ -160,6 +207,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets y.
+     *
      * @param y the y to set
      */
     public void setY(double y) {
@@ -167,6 +216,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets safety factor.
+     *
      * @return the safetyFactor
      */
     public double getSafetyFactor() {
@@ -174,6 +225,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets safety factor.
+     *
      * @param safetyFactor the safetyFactor to set
      */
     public void setSafetyFactor(double safetyFactor) {
@@ -181,6 +234,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets search object.
+     *
      * @return the searchObject
      */
     public int getSearchObject() {
@@ -188,6 +243,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets search object.
+     *
      * @param searchObject the searchObject to set
      */
     public void setSearchObject(int searchObject) {
@@ -195,6 +252,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Gets weather data.
+     *
      * @return the weatherData
      */
     public List<WeatherDataDTO> getWeatherData() {
@@ -202,6 +261,8 @@ public class SARModelDTO implements Serializable{
     }
 
     /**
+     * Sets weather data.
+     *
      * @param weatherData the weatherData to set
      */
     public void setWeatherData(List<WeatherDataDTO> weatherData) {

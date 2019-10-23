@@ -22,7 +22,8 @@ import dk.dma.enav.model.MaritimeId;
 public class OperatorId extends MaritimeId {
 
     /**
-     * @param scheme
+     * Instantiates a new Operator id.
+     *
      */
     public OperatorId() {
         super("operator");

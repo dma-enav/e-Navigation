@@ -16,13 +16,17 @@ package dk.dma.enav.model.shore;
 
 import dk.dma.enav.model.MaritimeId;
 
+/**
+ * The type Maritime authority id.
+ */
 public class MaritimeAuthorityId extends MaritimeId {
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param scheme
+     * Instantiates a new Maritime authority id.
+     *
      */
     public MaritimeAuthorityId() {
         super("authority");

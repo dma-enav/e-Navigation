@@ -17,10 +17,109 @@ package dk.dma.enav.model.ship;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The enum Ship type.
+ */
 public enum ShipType {
 
-    ANTI_POLLUTION, CARGO, DIVING, DREDGING, FISHING, HSC, LAW_ENFORCEMENT, MEDICAL, MILITARY, PASSENGER, CRUISE_SHIP, PILOT, PLEASURE, PORT_TENDER, SAILING, SAR, TANKER, TOWING, TOWING_LONG_WIDE, TUG, UNDEFINED, UNKNOWN, WIG;
+    /**
+     * Anti pollution ship type.
+     */
+    ANTI_POLLUTION,
+    /**
+     * Cargo ship type.
+     */
+    CARGO,
+    /**
+     * Diving ship type.
+     */
+    DIVING,
+    /**
+     * Dredging ship type.
+     */
+    DREDGING,
+    /**
+     * Fishing ship type.
+     */
+    FISHING,
+    /**
+     * Hsc ship type.
+     */
+    HSC,
+    /**
+     * Law enforcement ship type.
+     */
+    LAW_ENFORCEMENT,
+    /**
+     * Medical ship type.
+     */
+    MEDICAL,
+    /**
+     * Military ship type.
+     */
+    MILITARY,
+    /**
+     * Passenger ship type.
+     */
+    PASSENGER,
+    /**
+     * Cruise ship ship type.
+     */
+    CRUISE_SHIP,
+    /**
+     * Pilot ship type.
+     */
+    PILOT,
+    /**
+     * Pleasure ship type.
+     */
+    PLEASURE,
+    /**
+     * Port tender ship type.
+     */
+    PORT_TENDER,
+    /**
+     * Sailing ship type.
+     */
+    SAILING,
+    /**
+     * Sar ship type.
+     */
+    SAR,
+    /**
+     * Tanker ship type.
+     */
+    TANKER,
+    /**
+     * Towing ship type.
+     */
+    TOWING,
+    /**
+     * Towing long wide ship type.
+     */
+    TOWING_LONG_WIDE,
+    /**
+     * Tug ship type.
+     */
+    TUG,
+    /**
+     * Undefined ship type.
+     */
+    UNDEFINED,
+    /**
+     * Unknown ship type.
+     */
+    UNKNOWN,
+    /**
+     * Wig ship type.
+     */
+    WIG;
 
+    /**
+     * Gets string list.
+     *
+     * @return the string list
+     */
     public static List<String> getStringList() {
         List<String> list = new ArrayList<>();
         for (ShipType type : values()) {

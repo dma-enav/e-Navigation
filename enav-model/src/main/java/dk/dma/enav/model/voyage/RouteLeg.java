@@ -16,6 +16,9 @@ package dk.dma.enav.model.voyage;
 
 import java.io.Serializable;
 
+/**
+ * The type Route leg.
+ */
 public class RouteLeg implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,10 +41,21 @@ public class RouteLeg implements Serializable {
     /** Safe Haven Length */
     private Double SFLen;
 
+    /**
+     * Instantiates a new Route leg.
+     */
     public RouteLeg() {
 
     }
 
+    /**
+     * Instantiates a new Route leg.
+     *
+     * @param speed        the speed
+     * @param heading      the heading
+     * @param xtdPort      the xtd port
+     * @param xtdStarboard the xtd starboard
+     */
     public RouteLeg(Double speed, Heading heading, Double xtdPort, Double xtdStarboard) {
         super();
         this.speed = speed;
@@ -50,50 +64,110 @@ public class RouteLeg implements Serializable {
         this.xtdStarboard = xtdStarboard;
     }
 
+    /**
+     * Gets sf len.
+     *
+     * @return the sf len
+     */
     public Double getSFLen() {
         return SFLen;
     }
 
+    /**
+     * Gets sf width.
+     *
+     * @return the sf width
+     */
     public Double getSFWidth() {
         return SFWidth;
     }
 
+    /**
+     * Gets speed.
+     *
+     * @return the speed
+     */
     public Double getSpeed() {
         return speed;
     }
 
+    /**
+     * Gets heading.
+     *
+     * @return the heading
+     */
     public Heading getHeading() {
         return heading;
     }
 
+    /**
+     * Gets xtd port.
+     *
+     * @return the xtd port
+     */
     public Double getXtdPort() {
         return xtdPort;
     }
 
+    /**
+     * Gets xtd starboard.
+     *
+     * @return the xtd starboard
+     */
     public Double getXtdStarboard() {
         return xtdStarboard;
     }
 
+    /**
+     * Sets sf len.
+     *
+     * @param sFLen the s f len
+     */
     public void setSFLen(Double sFLen) {
         SFLen = sFLen;
     }
 
+    /**
+     * Sets sf width.
+     *
+     * @param sFWidth the s f width
+     */
     public void setSFWidth(Double sFWidth) {
         SFWidth = sFWidth;
     }
 
+    /**
+     * Sets speed.
+     *
+     * @param speed the speed
+     */
     public void setSpeed(Double speed) {
         this.speed = speed;
     }
 
+    /**
+     * Sets xtd port.
+     *
+     * @param xtdPort the xtd port
+     */
     public void setXtdPort(Double xtdPort) {
         this.xtdPort = xtdPort;
     }
 
+    /**
+     * Sets xtd starboard.
+     *
+     * @param xtdStarboard the xtd starboard
+     */
     public void setXtdStarboard(Double xtdStarboard) {
         this.xtdStarboard = xtdStarboard;
     }
-    
+
+    /**
+     * Sets heading.
+     *
+     * @param heading the heading
+     */
     public void setHeading(Heading heading) {
         this.heading = heading;
     }
@@ -102,8 +176,21 @@ public class RouteLeg implements Serializable {
      * Enumeration for heading rhumb line or great circle
      */
     public static enum Heading {
-        GC, RL;
+        /**
+         * Gc heading.
+         */
+        GC,
+        /**
+         * Rl heading.
+         */
+        RL;
 
+        /**
+         * Value of heading.
+         *
+         * @param serialNumber the serial number
+         * @return the heading
+         */
         public static Heading valueOf(int serialNumber){
             switch(serialNumber){
             case 0: return GC;

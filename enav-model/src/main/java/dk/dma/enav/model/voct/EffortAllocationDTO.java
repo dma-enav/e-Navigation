@@ -18,6 +18,9 @@ import java.io.Serializable;
 
 import dk.dma.enav.model.dto.PositionDTO;
 
+/**
+ * The type Effort allocation dto.
+ */
 public class EffortAllocationDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,10 +49,27 @@ public class EffortAllocationDTO implements Serializable {
     private PositionDTO effectiveAreaD;
 
 
+    /**
+     * Instantiates a new Effort allocation dto.
+     */
     public EffortAllocationDTO() {
         super();
     }
 
+    /**
+     * Instantiates a new Effort allocation dto.
+     *
+     * @param w                 the w
+     * @param groundSpeed       the ground speed
+     * @param pod               the pod
+     * @param trackSpacing      the track spacing
+     * @param searchTime        the search time
+     * @param effectiveAreaSize the effective area size
+     * @param effectiveAreaA    the effective area a
+     * @param effectiveAreaB    the effective area b
+     * @param effectiveAreaC    the effective area c
+     * @param effectiveAreaD    the effective area d
+     */
     public EffortAllocationDTO(double w, double groundSpeed, double pod, double trackSpacing, int searchTime,
             double effectiveAreaSize, PositionDTO effectiveAreaA, PositionDTO effectiveAreaB,
             PositionDTO effectiveAreaC, PositionDTO effectiveAreaD) {
@@ -67,6 +87,8 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
+     * Gets w.
+     *
      * @return the w
      */
     public double getW() {
@@ -74,14 +96,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param w
-     *            the w to set
+     * Sets w.
+     *
+     * @param w the w to set
      */
     public void setW(double w) {
         this.w = w;
     }
 
     /**
+     * Gets ground speed.
+     *
      * @return the groundSpeed
      */
     public double getGroundSpeed() {
@@ -89,14 +114,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param groundSpeed
-     *            the groundSpeed to set
+     * Sets ground speed.
+     *
+     * @param groundSpeed the groundSpeed to set
      */
     public void setGroundSpeed(double groundSpeed) {
         this.groundSpeed = groundSpeed;
     }
 
     /**
+     * Gets pod.
+     *
      * @return the pod
      */
     public double getPod() {
@@ -104,14 +132,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param pod
-     *            the pod to set
+     * Sets pod.
+     *
+     * @param pod the pod to set
      */
     public void setPod(double pod) {
         this.pod = pod;
     }
 
     /**
+     * Gets track spacing.
+     *
      * @return the trackSpacing
      */
     public double getTrackSpacing() {
@@ -119,14 +150,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param trackSpacing
-     *            the trackSpacing to set
+     * Sets track spacing.
+     *
+     * @param trackSpacing the trackSpacing to set
      */
     public void setTrackSpacing(double trackSpacing) {
         this.trackSpacing = trackSpacing;
     }
 
     /**
+     * Gets search time.
+     *
      * @return the searchTime
      */
     public int getSearchTime() {
@@ -134,14 +168,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param searchTime
-     *            the searchTime to set
+     * Sets search time.
+     *
+     * @param searchTime the searchTime to set
      */
     public void setSearchTime(int searchTime) {
         this.searchTime = searchTime;
     }
 
     /**
+     * Gets effective area size.
+     *
      * @return the effectiveAreaSize
      */
     public double getEffectiveAreaSize() {
@@ -149,14 +186,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param effectiveAreaSize
-     *            the effectiveAreaSize to set
+     * Sets effective area size.
+     *
+     * @param effectiveAreaSize the effectiveAreaSize to set
      */
     public void setEffectiveAreaSize(double effectiveAreaSize) {
         this.effectiveAreaSize = effectiveAreaSize;
     }
 
     /**
+     * Gets effective area a.
+     *
      * @return the effectiveAreaA
      */
     public PositionDTO getEffectiveAreaA() {
@@ -164,14 +204,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param effectiveAreaA
-     *            the effectiveAreaA to set
+     * Sets effective area a.
+     *
+     * @param effectiveAreaA the effectiveAreaA to set
      */
     public void setEffectiveAreaA(PositionDTO effectiveAreaA) {
         this.effectiveAreaA = effectiveAreaA;
     }
 
     /**
+     * Gets effective area b.
+     *
      * @return the effectiveAreaB
      */
     public PositionDTO getEffectiveAreaB() {
@@ -179,14 +222,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param effectiveAreaB
-     *            the effectiveAreaB to set
+     * Sets effective area b.
+     *
+     * @param effectiveAreaB the effectiveAreaB to set
      */
     public void setEffectiveAreaB(PositionDTO effectiveAreaB) {
         this.effectiveAreaB = effectiveAreaB;
     }
 
     /**
+     * Gets effective area c.
+     *
      * @return the effectiveAreaC
      */
     public PositionDTO getEffectiveAreaC() {
@@ -194,14 +240,17 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param effectiveAreaC
-     *            the effectiveAreaC to set
+     * Sets effective area c.
+     *
+     * @param effectiveAreaC the effectiveAreaC to set
      */
     public void setEffectiveAreaC(PositionDTO effectiveAreaC) {
         this.effectiveAreaC = effectiveAreaC;
     }
 
     /**
+     * Gets effective area d.
+     *
      * @return the effectiveAreaD
      */
     public PositionDTO getEffectiveAreaD() {
@@ -209,8 +258,9 @@ public class EffortAllocationDTO implements Serializable {
     }
 
     /**
-     * @param effectiveAreaD
-     *            the effectiveAreaD to set
+     * Sets effective area d.
+     *
+     * @param effectiveAreaD the effectiveAreaD to set
      */
     public void setEffectiveAreaD(PositionDTO effectiveAreaD) {
         this.effectiveAreaD = effectiveAreaD;

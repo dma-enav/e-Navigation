@@ -14,6 +14,28 @@
  */
 package dk.dma.enav.model.msi;
 
+/**
+ * The enum Notice verb.
+ */
 public enum NoticeVerb {
-    INSERT, DELETE, AMEND, REPLACE, MOVE
+    /**
+     * Insert notice verb.
+     */
+    INSERT,
+    /**
+     * Delete notice verb.
+     */
+    DELETE,
+    /**
+     * Amend notice verb.
+     */
+    AMEND,
+    /**
+     * Replace notice verb.
+     */
+    REPLACE,
+    /**
+     * Move notice verb.
+     */
+    MOVE
 }

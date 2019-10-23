@@ -17,7 +17,8 @@ package dk.dma.enav.model;
 import java.io.Serializable;
 
 /**
- * 
+ * The type Maritime peer.
+ *
  * @author Kasper Nielsen
  */
 public abstract class MaritimePeer implements Serializable {
@@ -25,6 +26,11 @@ public abstract class MaritimePeer implements Serializable {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public abstract MaritimeId getId();
 
 }

@@ -28,6 +28,14 @@ public class MessageSeriesIdentifier implements Serializable {
     private final int messageYear;
     private final String messageAuthority;
 
+    /**
+     * Instantiates a new Message series identifier.
+     *
+     * @param messageType      the message type
+     * @param messageNumber    the message number
+     * @param messageYear      the message year
+     * @param messageAuthority the message authority
+     */
     public MessageSeriesIdentifier(MessageType messageType, int messageNumber, int messageYear, String messageAuthority) {
         super();
         this.messageType = messageType;
@@ -36,18 +44,38 @@ public class MessageSeriesIdentifier implements Serializable {
         this.messageAuthority = messageAuthority;
     }
 
+    /**
+     * Gets message type.
+     *
+     * @return the message type
+     */
     public MessageType getMessageType() {
         return messageType;
     }
 
+    /**
+     * Gets message number.
+     *
+     * @return the message number
+     */
     public int getMessageNumber() {
         return messageNumber;
     }
 
+    /**
+     * Gets message year.
+     *
+     * @return the message year
+     */
     public int getMessageYear() {
         return messageYear;
     }
 
+    /**
+     * Gets message authority.
+     *
+     * @return the message authority
+     */
     public String getMessageAuthority() {
         return messageAuthority;
     }

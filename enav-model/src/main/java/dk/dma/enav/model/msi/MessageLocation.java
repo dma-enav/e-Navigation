@@ -26,10 +26,20 @@ public class MessageLocation {
      */
     private final Element element;
 
+    /**
+     * Instantiates a new Message location.
+     *
+     * @param element the element
+     */
     public MessageLocation(Element element) {
         this.element = element;
     }
 
+    /**
+     * Gets element.
+     *
+     * @return the element
+     */
     public Element getElement() {
         return element;
     }

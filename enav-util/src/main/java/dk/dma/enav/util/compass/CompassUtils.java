@@ -42,7 +42,7 @@ public final class CompassUtils {
 
     /**
      * Convert the input to a number of degrees lying inside the compass
-     * circle. E.g. -45 -> 315 or 370 -> 10.
+     * circle. E.g. -45 to 315 or 370 to 10.
      *
      * Or: Map any float point number into the set [0; 360).
      *
@@ -62,8 +62,8 @@ public final class CompassUtils {
      * Converts a compass heading (0-360 degrees, 0 north) to a
      * cartesian angle (0-360, 0 along x-axis).
      *
-     * @param a
-     * @return
+     * @param a compass heading (0-360 degrees, 0 north) to a cartesian angle (0-360, 0 along x-axis).
+     * @return a cartesian angle (0-360, 0 along x-axis).
      */
     public static double compass2cartesian(double a) {
         double cartesianAngle;
@@ -79,8 +79,8 @@ public final class CompassUtils {
     /**
      * The opposite transformation of compass2cartesian.
      *
-     * @param a
-     * @return
+     * @param a degrees
+     * @return The opposite transformation of compass2cartesian.
      */
     public static double cartesian2compass(double a) {
         return compass2cartesian(a);

@@ -23,7 +23,7 @@ public interface PositionalObject {
 
     /**
      * Returns the current position of the object.
-     * 
+     *
      * @return the current position of the object
      */
     Position getPosition();

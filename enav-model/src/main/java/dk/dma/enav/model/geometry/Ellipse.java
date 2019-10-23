@@ -30,7 +30,7 @@ import static java.lang.StrictMath.toRadians;
 
 /**
  * This class holds the defining parameters for en ellipse.
- *
+ * <p>
  * The location of the ellipse can optionally be offset from the geodetic reference point by dx, dy meters.
  */
 public final class Ellipse extends Area {
@@ -58,10 +58,10 @@ public final class Ellipse extends Area {
      * Create an ellipse with center in the geodetic reference point.
      *
      * @param geodeticReference The center point of the ellipse
-     * @param alpha Length of half axis in direction theta (in meters)
-     * @param beta Length of half axis in direction orthogonal to theta (in meters)
-     * @param thetaDeg Direction of half axis alpha measured in degrees; 0 degrees is parallel with the increasing direction of the cartesian X axis.
-     * @param cs
+     * @param alpha             Length of half axis in direction theta (in meters)
+     * @param beta              Length of half axis in direction orthogonal to theta (in meters)
+     * @param thetaDeg          Direction of half axis alpha measured in degrees; 0 degrees is parallel with the increasing direction of the cartesian X axis.
+     * @param cs                the cs
      */
     public Ellipse(Position geodeticReference, double alpha, double beta, double thetaDeg, CoordinateSystem cs) {
         super(cs);
@@ -78,12 +78,12 @@ public final class Ellipse extends Area {
      * Create an ellipse offset dx, dy meters from the geodetic reference point.
      *
      * @param geodeticReference The position, from which the center of the ellipse is offset by (dx, dy) meters.
-     * @param dx
-     * @param dy
-     * @param alpha Length of half axis in direction theta (in meters)
-     * @param beta Length of half axis in direction orthogonal to theta (in meters)
-     * @param thetaDeg Direction of half axis alpha measured in degrees; 0 degrees is parallel with the increasing direction of the cartesian X axis.
-     * @param cs
+     * @param dx                the dx
+     * @param dy                the dy
+     * @param alpha             Length of half axis in direction theta (in meters)
+     * @param beta              Length of half axis in direction orthogonal to theta (in meters)
+     * @param thetaDeg          Direction of half axis alpha measured in degrees; 0 degrees is parallel with the increasing direction of the cartesian X axis.
+     * @param cs                the cs
      */
     public Ellipse(Position geodeticReference, double dx, double dy, double alpha, double beta, double thetaDeg, CoordinateSystem cs) {
         super(cs);
@@ -109,26 +109,56 @@ public final class Ellipse extends Area {
         return sb.toString();
     }
 
+    /**
+     * Gets geodetic reference.
+     *
+     * @return the geodetic reference
+     */
     public Position getGeodeticReference() {
         return geodeticReference;
     }
 
+    /**
+     * Gets x.
+     *
+     * @return the x
+     */
     public double getX() {
         return dx;
     }
 
+    /**
+     * Gets y.
+     *
+     * @return the y
+     */
     public double getY() {
         return dy;
     }
 
+    /**
+     * Gets alpha.
+     *
+     * @return the alpha
+     */
     public double getAlpha() {
         return alpha;
     }
 
+    /**
+     * Gets beta.
+     *
+     * @return the beta
+     */
     public double getBeta() {
         return beta;
     }
 
+    /**
+     * Gets theta deg.
+     *
+     * @return the theta deg
+     */
     public double getThetaDeg() {
         return thetaDeg;
     }
@@ -137,7 +167,7 @@ public final class Ellipse extends Area {
      * Returns true if another element intersects this ellipse.
      *
      * @param otherElement the other safety zone.
-     * @return
+     * @return true or false
      */
     @Override
     public boolean intersects(Element otherElement) {
@@ -187,7 +217,7 @@ public final class Ellipse extends Area {
      * Returns true if another element is contained in this ellipse.
      *
      * @param otherElement the other element.
-     * @return
+     * @return true or false
      */
     @Override
     public boolean contains(Element otherElement) {
@@ -241,6 +271,11 @@ public final class Ellipse extends Area {
         return perimeter;
     }
 
+    /**
+     * Gets major axis geodetic heading.
+     *
+     * @return the major axis geodetic heading
+     */
     public double getMajorAxisGeodeticHeading() {
         return cartesian2compass(thetaDeg);
     }

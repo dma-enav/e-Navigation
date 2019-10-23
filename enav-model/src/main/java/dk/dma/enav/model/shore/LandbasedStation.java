@@ -16,6 +16,9 @@ package dk.dma.enav.model.shore;
 
 import dk.dma.enav.model.MaritimePeer;
 
+/**
+ * The type Landbased station.
+ */
 public class LandbasedStation extends MaritimePeer {
 
     /** serialVersionUID. */

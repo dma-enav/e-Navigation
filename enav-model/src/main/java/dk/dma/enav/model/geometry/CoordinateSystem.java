@@ -14,8 +14,14 @@
  */
 package dk.dma.enav.model.geometry;
 
+/**
+ * The enum Coordinate system.
+ */
 public enum CoordinateSystem {
 
+    /**
+     * The Cartesian.
+     */
     CARTESIAN {
 
         @Override
@@ -59,6 +65,9 @@ public enum CoordinateSystem {
             return Position.create(Math.toDegrees(endLat), Math.toDegrees(endLon));
         }
     },
+    /**
+     * The Geodetic.
+     */
     GEODETIC {
 
         @Override
@@ -79,20 +88,55 @@ public enum CoordinateSystem {
         }
 
     };
+    /**
+     * The constant EARTH_EQUATORIAL_RADIUS_KM.
+     */
     public static final double EARTH_EQUATORIAL_RADIUS_KM = 6378.1370;
     /**
      * Earth's mean radius in KM according to The International Union of Geodesy and Gephysics.
      */
     public static final double EARTH_MEAN_RADIUS_KM = 6371.0087714;
 
+    /**
+     * Area circle double.
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     * @param radius    the radius
+     * @return the double
+     */
     abstract double areaCircle(double latitude, double longitude, double radius);
 
+    /**
+     * Distance between double.
+     *
+     * @param latitude1  the latitude 1
+     * @param longitude1 the longitude 1
+     * @param latitude2  the latitude 2
+     * @param longitude2 the longitude 2
+     * @return the double
+     */
     abstract double distanceBetween(double latitude1, double longitude1, double latitude2, double longitude2);
 
+    /**
+     * Distance between double.
+     *
+     * @param p1 the p 1
+     * @param p2 the p 2
+     * @return the double
+     */
     public double distanceBetween(Position p1, Position p2) {
         return distanceBetween(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
     }
 
+    /**
+     * Point on bearing position.
+     *
+     * @param position the position
+     * @param distance the distance
+     * @param bearing  the bearing
+     * @return the position
+     */
     public Position pointOnBearing(Position position, double distance, double bearing) {
         if (distance < 0) {
             throw new IllegalArgumentException("distance must be positive, was " + distance);
@@ -103,10 +147,26 @@ public enum CoordinateSystem {
         }
     }
 
+    /**
+     * Point on bearing 0 position.
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     * @param distance  the distance
+     * @param bearing   the bearing
+     * @return the position
+     */
     abstract Position pointOnBearing0(double latitude, double longitude, double distance, double bearing);
 
     /**
      * Vincenty formula
+     *
+     * @param latitude1  the latitude 1
+     * @param longitude1 the longitude 1
+     * @param latitude2  the latitude 2
+     * @param longitude2 the longitude 2
+     * @param type       the type
+     * @return the double
      */
     static double vincentyFormula(double latitude1, double longitude1, double latitude2, double longitude2,
             VincentyCalculationType type) {
@@ -178,7 +238,21 @@ public enum CoordinateSystem {
         return Math.toDegrees(Math.atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda));
     }
 
+    /**
+     * The enum Vincenty calculation type.
+     */
     static enum VincentyCalculationType {
-        DISTANCE, FINAL_BEARING, INITIAL_BEARING;
+        /**
+         * Distance vincenty calculation type.
+         */
+        DISTANCE,
+        /**
+         * Final bearing vincenty calculation type.
+         */
+        FINAL_BEARING,
+        /**
+         * Initial bearing vincenty calculation type.
+         */
+        INITIAL_BEARING;
     }
 }

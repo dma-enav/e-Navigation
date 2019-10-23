@@ -16,7 +16,6 @@ package dk.dma.enav.model.operator;
 
 /**
  * The human factor (onboard navigator, vts center operator, ...)
- * 
  */
 public class Operator {
 

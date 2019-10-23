@@ -19,6 +19,9 @@ import java.util.List;
 
 import dk.dma.enav.model.dto.PositionDTO;
 
+/**
+ * The type Datum point sarisdto.
+ */
 public class DatumPointSARISDTO extends SARModelDTO {
 
     private static final long serialVersionUID = 1L;
@@ -40,10 +43,37 @@ public class DatumPointSARISDTO extends SARModelDTO {
     private List<SARISTarget> sarisTarget;
     private List<SARAreaData> sarAreaDat;
 
+    /**
+     * Instantiates a new Datum point sarisdto.
+     */
     public DatumPointSARISDTO() {
         super();
     }
 
+    /**
+     * Instantiates a new Datum point sarisdto.
+     *
+     * @param sarID            the sar id
+     * @param lKPDate          the l kp date
+     * @param cSSDate          the c ss date
+     * @param lKP              the l kp
+     * @param cSP              the c sp
+     * @param x                the x
+     * @param y                the y
+     * @param safetyFactor     the safety factor
+     * @param searchObject     the search object
+     * @param datum            the datum
+     * @param radius           the radius
+     * @param timeElasped      the time elasped
+     * @param rdvDirection     the rdv direction
+     * @param rdvDistance      the rdv distance
+     * @param rdvSpeed         the rdv speed
+     * @param rdvDirectionLast the rdv direction last
+     * @param rdvSpeedLast     the rdv speed last
+     * @param weatherData      the weather data
+     * @param sarisTarget      the saris target
+     * @param sarAreaData      the sar area data
+     */
     public DatumPointSARISDTO(String sarID, Date lKPDate, Date cSSDate, PositionDTO lKP, PositionDTO cSP, double x, double y,
             double safetyFactor, int searchObject, PositionDTO datum, double radius, double timeElasped, double rdvDirection,
             double rdvDistance, double rdvSpeed, double rdvDirectionLast, double rdvSpeedLast, List<WeatherDataDTO> weatherData,
@@ -65,6 +95,8 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
+     * Gets datum.
+     *
      * @return the datum
      */
     public PositionDTO getDatum() {
@@ -72,14 +104,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param datum
-     *            the datum to set
+     * Sets datum.
+     *
+     * @param datum the datum to set
      */
     public void setDatum(PositionDTO datum) {
         this.datum = datum;
     }
 
     /**
+     * Gets radius.
+     *
      * @return the radius
      */
     public double getRadius() {
@@ -87,14 +122,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param radius
-     *            the radius to set
+     * Sets radius.
+     *
+     * @param radius the radius to set
      */
     public void setRadius(double radius) {
         this.radius = radius;
     }
 
     /**
+     * Gets time elasped.
+     *
      * @return the timeElasped
      */
     public double getTimeElasped() {
@@ -102,14 +140,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param timeElasped
-     *            the timeElasped to set
+     * Sets time elasped.
+     *
+     * @param timeElasped the timeElasped to set
      */
     public void setTimeElasped(double timeElasped) {
         this.timeElasped = timeElasped;
     }
 
     /**
+     * Gets rdv direction.
+     *
      * @return the rdvDirection
      */
     public double getRdvDirection() {
@@ -117,14 +158,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvDirection
-     *            the rdvDirection to set
+     * Sets rdv direction.
+     *
+     * @param rdvDirection the rdvDirection to set
      */
     public void setRdvDirection(double rdvDirection) {
         this.rdvDirection = rdvDirection;
     }
 
     /**
+     * Gets rdv distance.
+     *
      * @return the rdvDistance
      */
     public double getRdvDistance() {
@@ -132,14 +176,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvDistance
-     *            the rdvDistance to set
+     * Sets rdv distance.
+     *
+     * @param rdvDistance the rdvDistance to set
      */
     public void setRdvDistance(double rdvDistance) {
         this.rdvDistance = rdvDistance;
     }
 
     /**
+     * Gets rdv speed.
+     *
      * @return the rdvSpeed
      */
     public double getRdvSpeed() {
@@ -147,14 +194,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvSpeed
-     *            the rdvSpeed to set
+     * Sets rdv speed.
+     *
+     * @param rdvSpeed the rdvSpeed to set
      */
     public void setRdvSpeed(double rdvSpeed) {
         this.rdvSpeed = rdvSpeed;
     }
 
     /**
+     * Gets rdv direction last.
+     *
      * @return the rdvDirectionLast
      */
     public double getRdvDirectionLast() {
@@ -162,14 +212,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvDirectionLast
-     *            the rdvDirectionLast to set
+     * Sets rdv direction last.
+     *
+     * @param rdvDirectionLast the rdvDirectionLast to set
      */
     public void setRdvDirectionLast(double rdvDirectionLast) {
         this.rdvDirectionLast = rdvDirectionLast;
     }
 
     /**
+     * Gets rdv speed last.
+     *
      * @return the rdvSpeedLast
      */
     public double getRdvSpeedLast() {
@@ -177,8 +230,9 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param rdvSpeedLast
-     *            the rdvSpeedLast to set
+     * Sets rdv speed last.
+     *
+     * @param rdvSpeedLast the rdvSpeedLast to set
      */
     public void setRdvSpeedLast(double rdvSpeedLast) {
         this.rdvSpeedLast = rdvSpeedLast;
@@ -200,6 +254,8 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
+     * Gets saris target.
+     *
      * @return the sarisTarget
      */
     public List<SARISTarget> getSarisTarget() {
@@ -207,14 +263,17 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param sarisTarget
-     *            the sarisTarget to set
+     * Sets saris target.
+     *
+     * @param sarisTarget the sarisTarget to set
      */
     public void setSarisTarget(List<SARISTarget> sarisTarget) {
         this.sarisTarget = sarisTarget;
     }
 
     /**
+     * Gets sar area dat.
+     *
      * @return the sarAreaDat
      */
     public List<SARAreaData> getSarAreaDat() {
@@ -222,8 +281,9 @@ public class DatumPointSARISDTO extends SARModelDTO {
     }
 
     /**
-     * @param sarAreaDat
-     *            the sarAreaDat to set
+     * Sets sar area dat.
+     *
+     * @param sarAreaDat the sarAreaDat to set
      */
     public void setSarAreaDat(List<SARAreaData> sarAreaDat) {
         this.sarAreaDat = sarAreaDat;

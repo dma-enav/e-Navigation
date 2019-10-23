@@ -18,7 +18,6 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * A circle
- * 
  */
 public class Circle extends Area {
 
@@ -31,10 +30,25 @@ public class Circle extends Area {
     /** The radius of the circle. */
     private final double radius;
 
+    /**
+     * Instantiates a new Circle.
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     * @param radius    the radius
+     * @param cs        the cs
+     */
     public Circle(double latitude, double longitude, double radius, CoordinateSystem cs) {
         this(Position.create(latitude, longitude), radius, cs);
     }
 
+    /**
+     * Instantiates a new Circle.
+     *
+     * @param center the center
+     * @param radius the radius
+     * @param cs     the cs
+     */
     public Circle(Position center, double radius, CoordinateSystem cs) {
         super(cs);
         this.center = requireNonNull(center, "center is null");
@@ -61,6 +75,12 @@ public class Circle extends Area {
         return super.contains(element);
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
     public boolean equals(Circle other) {
         return other == this || other != null && center.equals(other.center) && radius == other.radius;
     }
@@ -83,7 +103,7 @@ public class Circle extends Area {
 
     /**
      * Return the center of the circle.
-     * 
+     *
      * @return the center of the circle
      */
     public Position getCenter() {
@@ -92,7 +112,7 @@ public class Circle extends Area {
 
     /**
      * Returns the radius of the circle.
-     * 
+     *
      * @return the radius of the circle
      */
     public double getRadius() {
@@ -115,9 +135,8 @@ public class Circle extends Area {
 
     /**
      * Returns a new circle with the same radius as this circle but with the new position as the center
-     * 
-     * @param center
-     *            the new center of the circle
+     *
+     * @param center the new center of the circle
      * @return a new circle
      */
     public Circle withCenter(Position center) {
@@ -126,9 +145,8 @@ public class Circle extends Area {
 
     /**
      * Returns a new circle with the same center as this circle but with the new radius.
-     * 
-     * @param radius
-     *            the new radius of the circle
+     *
+     * @param radius the new radius of the circle
      * @return a new circle
      */
     public Circle withRadius(double radius) {

@@ -35,17 +35,32 @@ public class Language {
         }
     }
 
+    /**
+     * Instantiates a new Language.
+     *
+     * @param code the code
+     */
     public Language(String code) {
         if (!CODE_NAME_MAP.containsKey(code)) {
             throw new IllegalArgumentException("Unknown language code: " + code);
         }
         this.code = code;
     }
-    
+
+    /**
+     * Gets code.
+     *
+     * @return the code
+     */
     public String getCode() {
         return code;
     }
-    
+
+    /**
+     * Gets code map.
+     *
+     * @return the code map
+     */
     public static Map<String, String> getCodeMap() {
         return Collections.unmodifiableMap(CODE_NAME_MAP);
     }

@@ -14,8 +14,30 @@
  */
 package dk.dma.enav.model.voyage.cargo;
 
+/**
+ * The enum Cargo type.
+ */
 public enum CargoType {
-    A, B, C, D, UNDEFINED;
+    /**
+     * A cargo type.
+     */
+    A,
+    /**
+     * B cargo type.
+     */
+    B,
+    /**
+     * C cargo type.
+     */
+    C,
+    /**
+     * D cargo type.
+     */
+    D,
+    /**
+     * Undefined cargo type.
+     */
+    UNDEFINED;
 
     public String toString() {
         return this == UNDEFINED ? "Undefined" : "Category " + name();
@@ -23,7 +45,8 @@ public enum CargoType {
 
     /**
      * Returns a navigation status from an ais int on a best effort.
-     * 
+     *
+     * @param aisNavStatus the ais nav status
      * @return the navigation status.
      */
     public static CargoType fromAIS(int aisNavStatus) {
