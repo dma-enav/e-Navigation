@@ -17,7 +17,8 @@ package dk.dma.enav.model.ship;
 import dk.dma.enav.model.MaritimeId;
 
 /**
- * 
+ * The type Mmsi id.
+ *
  * @author Kasper Nielsen
  */
 public class MmsiId extends MaritimeId {
@@ -28,7 +29,9 @@ public class MmsiId extends MaritimeId {
     private final int mmsi;
 
     /**
-     * @param scheme
+     * Instantiates a new Mmsi id.
+     *
+     * @param mmsi the mmsi
      */
     public MmsiId(int mmsi) {
         super("mmsi");
@@ -47,7 +50,11 @@ public class MmsiId extends MaritimeId {
         return obj instanceof MmsiId && equals((MmsiId) obj);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} @param other the other
+     *
+     * @return the boolean
+     */
     public boolean equals(MmsiId other) {
         return mmsi == other.mmsi;
     }

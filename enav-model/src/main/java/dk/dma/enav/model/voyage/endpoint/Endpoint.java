@@ -20,7 +20,7 @@ import dk.dma.enav.model.voyage.Voyage;
 
 /**
  * The starting or ending point of a {@link Voyage}.
- * 
+ *
  * @author Kasper Nielsen
  */
 public class Endpoint implements Serializable {
@@ -28,12 +28,24 @@ public class Endpoint implements Serializable {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * The Name.
+     */
     String name;
 
+    /**
+     * The Alias.
+     */
     String alias;
 
+    /**
+     * The Latitude.
+     */
     double latitude;
 
+    /**
+     * The Longitude.
+     */
     double longitude;
 
 }

@@ -40,27 +40,30 @@ import static java.util.Objects.requireNonNull;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Position implements Element {
 
-    /** The mean radius of the earth in kilometers. */
+    /**
+     * The mean radius of the earth in kilometers.
+     */
     static final double EARTH_RADIUS = 6371;
 
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The latitude part of the position. */
+    /**
+     * The latitude part of the position.
+     */
     final double latitude;
 
-    /** The longitude part of the position. */
+    /**
+     * The longitude part of the position.
+     */
     final double longitude;
 
     /**
      * Constructor given position and timezone
-     * 
-     * @param latitude
-     *            Negative south of equator
-     * @param longitude
-     *            Negative east of Prime Meridian
+     *
+     * @param latitude  Negative south of equator
+     * @param longitude Negative east of Prime Meridian
      */
-
     Position(double latitude, double longitude) {
         verifyLatitude(latitude);
         verifyLongitude(longitude);
@@ -87,7 +90,13 @@ public class Position implements Element {
         return other instanceof Position && equals((Position) other);
     }
 
-    // We probably want another function that also takes a precision.
+    /**
+     * Equals boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
+// We probably want another function that also takes a precision.
     public boolean equals(Position other) {
         // id longitude 180 == - 180???
         return other == this || other != null && latitude == other.latitude && longitude == other.longitude;
@@ -96,8 +105,8 @@ public class Position implements Element {
     /**
      * Get great circle distance to location
      * 
-     * @param other
-     * @return distance in meters
+     * @param other position.
+     * @return distance in meters.
      */
     public double geodesicDistanceTo(Element other) {
         if (other instanceof Position) {
@@ -107,10 +116,9 @@ public class Position implements Element {
     }
 
     /**
-     * Calculate final bearing for great circle route to location using Thaddeus Vincenty's</a> inverse formula.
-     * 
-     * @param location
-     *            second location
+     * Calculate final bearing for great circle route to location using Thaddeus Vincenty's inverse formula.
+     *
+     * @param location second location
      * @return bearing in degrees
      */
     public double geodesicFinalBearingTo(Position location) {
@@ -119,10 +127,9 @@ public class Position implements Element {
     }
 
     /**
-     * Calculate initial bearing for great circle route to location using Thaddeus Vincenty's</a> inverse formula.
-     * 
-     * @param location
-     *            second location
+     * Calculate initial bearing for great circle route to location using Thaddeus Vincenty's inverse formula.
+     *
+     * @param location second location
      * @return bearing in degrees
      */
     public double geodesicInitialBearingTo(Position location) {
@@ -130,6 +137,12 @@ public class Position implements Element {
                 location.getLongitude(), VincentyCalculationType.INITIAL_BEARING);
     }
 
+    /**
+     * Gets cell.
+     *
+     * @param degress the degress
+     * @return the cell
+     */
     public long getCell(double degress) {
         if (degress < 0.0001) {
             throw new IllegalArgumentException("degress = " + degress);
@@ -140,6 +153,12 @@ public class Position implements Element {
                 + (long) ((360.0 + getLongitude()) / degress) - (long) (360L / degress);
     }
 
+    /**
+     * Gets cell int.
+     *
+     * @param degrees the degrees
+     * @return the cell int
+     */
     public int getCellInt(double degrees) {
         // bigger cellsize than 0.01 cannot be supported. unless we change the cellsize to long
         if (degrees < 0.01) {
@@ -150,13 +169,18 @@ public class Position implements Element {
 
     /**
      * Returns the latitude part of this position.
-     * 
+     *
      * @return the latitude part of this position
      */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * Gets latitude as string.
+     *
+     * @return the latitude as string
+     */
     public String getLatitudeAsString() {
         double lat = latitude;
         if (lat < 0) {
@@ -178,13 +202,18 @@ public class Position implements Element {
 
     /**
      * Returns the longitude part of this position.
-     * 
+     *
      * @return the longitude part of this position
      */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Gets longitude as string.
+     *
+     * @return the longitude as string
+     */
     public String getLongitudeAsString() {
         double lon = longitude;
         if (lon < 0) {
@@ -244,9 +273,8 @@ public class Position implements Element {
 
     /**
      * Calculates the rhumb line bearing to the specified position
-     * 
-     * @param position
-     *            the position
+     *
+     * @param position the position
      * @return the rhumb line bearing in degrees
      */
     public double rhumbLineBearingTo(Position position) {
@@ -272,11 +300,9 @@ public class Position implements Element {
     /**
      * Calculates the position following a rhumb line with the given bearing for the specified distance.
      *
-     * @param bearing
-     *            the bearing (in compass degrees)
-     * @param distance
-     *            the distance (in meters)
-     * @return    the position
+     * @param bearing  the bearing (in compass degrees)
+     * @param distance the distance (in meters)
+     * @return the position
      */
     public Position positionAt(double bearing, double distance) {
         final double d = distance / (EARTH_RADIUS*1e3);
@@ -296,7 +322,7 @@ public class Position implements Element {
 
     /**
      * Packs the position into a long (losing some precision). Can be read later by {@link #fromPackedLong(long)}
-     * 
+     *
      * @return the packet long
      */
     public long toPackedLong() {
@@ -310,50 +336,77 @@ public class Position implements Element {
         return "(" + getLatitudeAsString() + ", " + getLongitudeAsString() + ")";
     }
 
+    /**
+     * With latitude position.
+     *
+     * @param latitude the latitude
+     * @return the position
+     */
     public Position withLatitude(double latitude) {
         return new Position(latitude, longitude);
     }
 
     // we lose some pression
 
+    /**
+     * With longitude position.
+     *
+     * @param longitude the longitude
+     * @return the position
+     */
     public Position withLongitude(double longitude) {
         return new Position(latitude, longitude);
     }
 
+    /**
+     * With time position time.
+     *
+     * @param time the time
+     * @return the position time
+     */
     public PositionTime withTime(long time) {
         return PositionTime.create(this, time);
     }
 
     /**
      * Creates a new position from the specified latitude and longitude.
-     * 
-     * @param latitude
-     *            the latitude
-     * @param longitude
-     *            the longitude
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
      * @return the new position
-     * @throws IllegalArgumentException
-     *             if the
+     * @throws IllegalArgumentException if the
      */
     @JsonCreator
     public static Position create(@JsonProperty("latitude") double latitude, @JsonProperty("longitude") double longitude) {
         return new Position(latitude, longitude);
     }
 
+    /**
+     * From packed long position.
+     *
+     * @param l the l
+     * @return the position
+     */
     public static Position fromPackedLong(long l) {
         return new Position(Float.intBitsToFloat((int) (l >> 32)), Float.intBitsToFloat((int) l));
     }
 
+    /**
+     * Is valid boolean.
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     * @return the boolean
+     */
     public static boolean isValid(double latitude, double longitude) {
         return latitude <= 90 && latitude >= -90 && longitude <= 180 && longitude >= -180;
     }
 
     /**
      * Verify that latitude is within the interval [-90:90].
-     * 
-     * @param latitude
-     * @throws IllegalArgumentException
-     *             When latitude is invalid
+     *
+     * @param latitude the latitude
+     * @throws IllegalArgumentException When latitude is invalid
      */
     public static void verifyLatitude(double latitude) {
         if (latitude > 90 || latitude < -90) {
@@ -363,17 +416,21 @@ public class Position implements Element {
 
     /**
      * Verify that longitude is within the interval [-180:180].
-     * 
-     * @param longitude
-     * @throws IllegalArgumentException
-     *             When longitude is invalid
+     *
+     * @param longitude the longitude
+     * @throws IllegalArgumentException When longitude is invalid
      */
     public static void verifyLongitude(double longitude) {
         if (longitude > 180 || longitude < -180) {
             throw new IllegalArgumentException("Longitude must be between -180 and 180, was " + longitude);
         }
     }
-    
+
+    /**
+     * Get dto position dto.
+     *
+     * @return the position dto
+     */
     public PositionDTO getDTO(){
         return new PositionDTO(this.latitude, this.longitude);
     }

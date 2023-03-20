@@ -18,12 +18,20 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.regex.Pattern;
 
+/**
+ * The type Un locode.
+ */
 public final class UnLocode {
 
     private static final Pattern PATTERN = Pattern.compile("[a-zA-Z]{2}[a-zA-z2-9]{3}");
 
     private final String unlocode;
 
+    /**
+     * Instantiates a new Un locode.
+     *
+     * @param unlocode the unlocode
+     */
     public UnLocode(String unlocode) {
         this.unlocode = requireNonNull(unlocode, "unlocode is null").toUpperCase();
         if (!PATTERN.matcher(unlocode).matches()) {
@@ -39,6 +47,12 @@ public final class UnLocode {
         return other instanceof UnLocode && equals((UnLocode) other);
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
     public boolean equals(UnLocode other) {
         return other == this || (other != null && unlocode.equals(other.unlocode));
     }

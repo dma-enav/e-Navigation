@@ -16,11 +16,17 @@ package dk.dma.enav.model.fal;
 
 import java.io.Serializable;
 
+/**
+ * The type Fal form 1.
+ */
 public class FALForm1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // If false is depature
+    /**
+     * The Arrival.
+     */
+// If false is depature
     boolean arrival;
 
     private String nameAndTypeOfShip = "";
@@ -53,39 +59,44 @@ public class FALForm1 implements Serializable {
     private String shipWasteRequirements;
     private String signature;
 
+    /**
+     * Instantiates a new Fal form 1.
+     */
     public FALForm1() {
 
     }
 
     /**
-     * @param arrival
-     * @param nameAndTypeOfShip
-     * @param imoNumber
-     * @param callSign
-     * @param voyageNumber
-     * @param portOfArrivalDeapture
-     * @param dateAndTimeOfArrivalDepature
-     * @param flagStateOfShip
-     * @param nameOfMaster
-     * @param lastPortOfCall
-     * @param certificateOfRegistry
-     * @param grossTonnage
-     * @param nameAndContactDetalsOfShipsAgent
-     * @param netTonnage
-     * @param positionOfTheShip
-     * @param briefParticulars
-     * @param briefDescriptionOfCargo
-     * @param numberOfCrew
-     * @param numberOfPassengers
-     * @param remarks
-     * @param cargoDeclarationCount
-     * @param shipStoresDeclarationCount
-     * @param crewListCount
-     * @param passengerListCount
-     * @param crewEffectsDeclarationCount
-     * @param maritimeDeclarationOfHealthCount
-     * @param shipWasteRequirements
-     * @param signature
+     * Instantiates a new Fal form 1.
+     *
+     * @param arrival                          the arrival
+     * @param nameAndTypeOfShip                the name and type of ship
+     * @param imoNumber                        the imo number
+     * @param callSign                         the call sign
+     * @param voyageNumber                     the voyage number
+     * @param portOfArrivalDeapture            the port of arrival deapture
+     * @param dateAndTimeOfArrivalDepature     the date and time of arrival depature
+     * @param flagStateOfShip                  the flag state of ship
+     * @param nameOfMaster                     the name of master
+     * @param lastPortOfCall                   the last port of call
+     * @param certificateOfRegistry            the certificate of registry
+     * @param grossTonnage                     the gross tonnage
+     * @param nameAndContactDetalsOfShipsAgent the name and contact detals of ships agent
+     * @param netTonnage                       the net tonnage
+     * @param positionOfTheShip                the position of the ship
+     * @param briefParticulars                 the brief particulars
+     * @param briefDescriptionOfCargo          the brief description of cargo
+     * @param numberOfCrew                     the number of crew
+     * @param numberOfPassengers               the number of passengers
+     * @param remarks                          the remarks
+     * @param cargoDeclarationCount            the cargo declaration count
+     * @param shipStoresDeclarationCount       the ship stores declaration count
+     * @param crewListCount                    the crew list count
+     * @param passengerListCount               the passenger list count
+     * @param crewEffectsDeclarationCount      the crew effects declaration count
+     * @param maritimeDeclarationOfHealthCount the maritime declaration of health count
+     * @param shipWasteRequirements            the ship waste requirements
+     * @param signature                        the signature
      */
     public FALForm1(boolean arrival, String nameAndTypeOfShip, String imoNumber, String callSign, String voyageNumber,
             String portOfArrivalDeapture, String dateAndTimeOfArrivalDepature, String flagStateOfShip, String nameOfMaster,
@@ -125,6 +136,8 @@ public class FALForm1 implements Serializable {
     }
 
     /**
+     * Is arrival boolean.
+     *
      * @return the arrival
      */
     public boolean isArrival() {
@@ -132,14 +145,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param arrival
-     *            the arrival to set
+     * Sets arrival.
+     *
+     * @param arrival the arrival to set
      */
     public void setArrival(boolean arrival) {
         this.arrival = arrival;
     }
 
     /**
+     * Gets name and type of ship.
+     *
      * @return the nameAndTypeOfShip
      */
     public String getNameAndTypeOfShip() {
@@ -147,14 +163,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param nameAndTypeOfShip
-     *            the nameAndTypeOfShip to set
+     * Sets name and type of ship.
+     *
+     * @param nameAndTypeOfShip the nameAndTypeOfShip to set
      */
     public void setNameAndTypeOfShip(String nameAndTypeOfShip) {
         this.nameAndTypeOfShip = nameAndTypeOfShip;
     }
 
     /**
+     * Gets imo number.
+     *
      * @return the imoNumber
      */
     public String getImoNumber() {
@@ -162,14 +181,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param imoNumber
-     *            the imoNumber to set
+     * Sets imo number.
+     *
+     * @param imoNumber the imoNumber to set
      */
     public void setImoNumber(String imoNumber) {
         this.imoNumber = imoNumber;
     }
 
     /**
+     * Gets call sign.
+     *
      * @return the callSign
      */
     public String getCallSign() {
@@ -177,14 +199,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param callSign
-     *            the callSign to set
+     * Sets call sign.
+     *
+     * @param callSign the callSign to set
      */
     public void setCallSign(String callSign) {
         this.callSign = callSign;
     }
 
     /**
+     * Gets voyage number.
+     *
      * @return the voyageNumber
      */
     public String getVoyageNumber() {
@@ -192,14 +217,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param voyageNumber
-     *            the voyageNumber to set
+     * Sets voyage number.
+     *
+     * @param voyageNumber the voyageNumber to set
      */
     public void setVoyageNumber(String voyageNumber) {
         this.voyageNumber = voyageNumber;
     }
 
     /**
+     * Gets port of arrival deapture.
+     *
      * @return the portOfArrivalDeapture
      */
     public String getPortOfArrivalDeapture() {
@@ -207,14 +235,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param portOfArrivalDeapture
-     *            the portOfArrivalDeapture to set
+     * Sets port of arrival deapture.
+     *
+     * @param portOfArrivalDeapture the portOfArrivalDeapture to set
      */
     public void setPortOfArrivalDeapture(String portOfArrivalDeapture) {
         this.portOfArrivalDeapture = portOfArrivalDeapture;
     }
 
     /**
+     * Gets date and time of arrival depature.
+     *
      * @return the dateAndTimeOfArrivalDepature
      */
     public String getDateAndTimeOfArrivalDepature() {
@@ -222,14 +253,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param dateAndTimeOfArrivalDepature
-     *            the dateAndTimeOfArrivalDepature to set
+     * Sets date and time of arrival depature.
+     *
+     * @param dateAndTimeOfArrivalDepature the dateAndTimeOfArrivalDepature to set
      */
     public void setDateAndTimeOfArrivalDepature(String dateAndTimeOfArrivalDepature) {
         DateAndTimeOfArrivalDepature = dateAndTimeOfArrivalDepature;
     }
 
     /**
+     * Gets flag state of ship.
+     *
      * @return the flagStateOfShip
      */
     public String getFlagStateOfShip() {
@@ -237,14 +271,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param flagStateOfShip
-     *            the flagStateOfShip to set
+     * Sets flag state of ship.
+     *
+     * @param flagStateOfShip the flagStateOfShip to set
      */
     public void setFlagStateOfShip(String flagStateOfShip) {
         this.flagStateOfShip = flagStateOfShip;
     }
 
     /**
+     * Gets name of master.
+     *
      * @return the nameOfMaster
      */
     public String getNameOfMaster() {
@@ -252,14 +289,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param nameOfMaster
-     *            the nameOfMaster to set
+     * Sets name of master.
+     *
+     * @param nameOfMaster the nameOfMaster to set
      */
     public void setNameOfMaster(String nameOfMaster) {
         this.nameOfMaster = nameOfMaster;
     }
 
     /**
+     * Gets last port of call.
+     *
      * @return the lastPortOfCall
      */
     public String getLastPortOfCall() {
@@ -267,14 +307,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param lastPortOfCall
-     *            the lastPortOfCall to set
+     * Sets last port of call.
+     *
+     * @param lastPortOfCall the lastPortOfCall to set
      */
     public void setLastPortOfCall(String lastPortOfCall) {
         this.lastPortOfCall = lastPortOfCall;
     }
 
     /**
+     * Gets certificate of registry.
+     *
      * @return the certificateOfRegistry
      */
     public String getCertificateOfRegistry() {
@@ -282,14 +325,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param certificateOfRegistry
-     *            the certificateOfRegistry to set
+     * Sets certificate of registry.
+     *
+     * @param certificateOfRegistry the certificateOfRegistry to set
      */
     public void setCertificateOfRegistry(String certificateOfRegistry) {
         this.certificateOfRegistry = certificateOfRegistry;
     }
 
     /**
+     * Gets gross tonnage.
+     *
      * @return the grossTonnage
      */
     public String getGrossTonnage() {
@@ -297,14 +343,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param grossTonnage
-     *            the grossTonnage to set
+     * Sets gross tonnage.
+     *
+     * @param grossTonnage the grossTonnage to set
      */
     public void setGrossTonnage(String grossTonnage) {
         this.grossTonnage = grossTonnage;
     }
 
     /**
+     * Gets name and contact detals of ships agent.
+     *
      * @return the nameAndContactDetalsOfShipsAgent
      */
     public String getNameAndContactDetalsOfShipsAgent() {
@@ -312,14 +361,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param nameAndContactDetalsOfShipsAgent
-     *            the nameAndContactDetalsOfShipsAgent to set
+     * Sets name and contact detals of ships agent.
+     *
+     * @param nameAndContactDetalsOfShipsAgent the nameAndContactDetalsOfShipsAgent to set
      */
     public void setNameAndContactDetalsOfShipsAgent(String nameAndContactDetalsOfShipsAgent) {
         this.nameAndContactDetalsOfShipsAgent = nameAndContactDetalsOfShipsAgent;
     }
 
     /**
+     * Gets net tonnage.
+     *
      * @return the netTonnage
      */
     public String getNetTonnage() {
@@ -327,14 +379,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param netTonnage
-     *            the netTonnage to set
+     * Sets net tonnage.
+     *
+     * @param netTonnage the netTonnage to set
      */
     public void setNetTonnage(String netTonnage) {
         this.netTonnage = netTonnage;
     }
 
     /**
+     * Gets position of the ship.
+     *
      * @return the positionOfTheShip
      */
     public String getPositionOfTheShip() {
@@ -342,14 +397,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param positionOfTheShip
-     *            the positionOfTheShip to set
+     * Sets position of the ship.
+     *
+     * @param positionOfTheShip the positionOfTheShip to set
      */
     public void setPositionOfTheShip(String positionOfTheShip) {
         this.positionOfTheShip = positionOfTheShip;
     }
 
     /**
+     * Gets brief particulars.
+     *
      * @return the briefParticulars
      */
     public String getBriefParticulars() {
@@ -357,14 +415,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param briefParticulars
-     *            the briefParticulars to set
+     * Sets brief particulars.
+     *
+     * @param briefParticulars the briefParticulars to set
      */
     public void setBriefParticulars(String briefParticulars) {
         this.briefParticulars = briefParticulars;
     }
 
     /**
+     * Gets brief description of cargo.
+     *
      * @return the briefDescriptionOfCargo
      */
     public String getBriefDescriptionOfCargo() {
@@ -372,14 +433,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param briefDescriptionOfCargo
-     *            the briefDescriptionOfCargo to set
+     * Sets brief description of cargo.
+     *
+     * @param briefDescriptionOfCargo the briefDescriptionOfCargo to set
      */
     public void setBriefDescriptionOfCargo(String briefDescriptionOfCargo) {
         this.briefDescriptionOfCargo = briefDescriptionOfCargo;
     }
 
     /**
+     * Gets number of crew.
+     *
      * @return the numberOfCrew
      */
     public String getNumberOfCrew() {
@@ -387,14 +451,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param numberOfCrew
-     *            the numberOfCrew to set
+     * Sets number of crew.
+     *
+     * @param numberOfCrew the numberOfCrew to set
      */
     public void setNumberOfCrew(String numberOfCrew) {
         this.numberOfCrew = numberOfCrew;
     }
 
     /**
+     * Gets number of passengers.
+     *
      * @return the numberOfPassengers
      */
     public String getNumberOfPassengers() {
@@ -402,14 +469,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param numberOfPassengers
-     *            the numberOfPassengers to set
+     * Sets number of passengers.
+     *
+     * @param numberOfPassengers the numberOfPassengers to set
      */
     public void setNumberOfPassengers(String numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
     }
 
     /**
+     * Gets remarks.
+     *
      * @return the remarks
      */
     public String getRemarks() {
@@ -417,14 +487,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param remarks
-     *            the remarks to set
+     * Sets remarks.
+     *
+     * @param remarks the remarks to set
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
 
     /**
+     * Gets cargo declaration count.
+     *
      * @return the cargoDeclarationCount
      */
     public int getCargoDeclarationCount() {
@@ -432,14 +505,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param cargoDeclarationCount
-     *            the cargoDeclarationCount to set
+     * Sets cargo declaration count.
+     *
+     * @param cargoDeclarationCount the cargoDeclarationCount to set
      */
     public void setCargoDeclarationCount(int cargoDeclarationCount) {
         this.cargoDeclarationCount = cargoDeclarationCount;
     }
 
     /**
+     * Gets ship stores declaration count.
+     *
      * @return the shipStoresDeclarationCount
      */
     public int getShipStoresDeclarationCount() {
@@ -447,14 +523,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param shipStoresDeclarationCount
-     *            the shipStoresDeclarationCount to set
+     * Sets ship stores declaration count.
+     *
+     * @param shipStoresDeclarationCount the shipStoresDeclarationCount to set
      */
     public void setShipStoresDeclarationCount(int shipStoresDeclarationCount) {
         this.shipStoresDeclarationCount = shipStoresDeclarationCount;
     }
 
     /**
+     * Gets crew list count.
+     *
      * @return the crewListCount
      */
     public int getCrewListCount() {
@@ -462,14 +541,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param crewListCount
-     *            the crewListCount to set
+     * Sets crew list count.
+     *
+     * @param crewListCount the crewListCount to set
      */
     public void setCrewListCount(int crewListCount) {
         this.crewListCount = crewListCount;
     }
 
     /**
+     * Gets passenger list count.
+     *
      * @return the passengerListCount
      */
     public int getPassengerListCount() {
@@ -477,14 +559,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param passengerListCount
-     *            the passengerListCount to set
+     * Sets passenger list count.
+     *
+     * @param passengerListCount the passengerListCount to set
      */
     public void setPassengerListCount(int passengerListCount) {
         this.passengerListCount = passengerListCount;
     }
 
     /**
+     * Gets crew effects declaration count.
+     *
      * @return the crewEffectsDeclarationCount
      */
     public int getCrewEffectsDeclarationCount() {
@@ -492,14 +577,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param crewEffectsDeclarationCount
-     *            the crewEffectsDeclarationCount to set
+     * Sets crew effects declaration count.
+     *
+     * @param crewEffectsDeclarationCount the crewEffectsDeclarationCount to set
      */
     public void setCrewEffectsDeclarationCount(int crewEffectsDeclarationCount) {
         this.crewEffectsDeclarationCount = crewEffectsDeclarationCount;
     }
 
     /**
+     * Gets maritime declaration of health count.
+     *
      * @return the maritimeDeclarationOfHealthCount
      */
     public int getMaritimeDeclarationOfHealthCount() {
@@ -507,14 +595,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param maritimeDeclarationOfHealthCount
-     *            the maritimeDeclarationOfHealthCount to set
+     * Sets maritime declaration of health count.
+     *
+     * @param maritimeDeclarationOfHealthCount the maritimeDeclarationOfHealthCount to set
      */
     public void setMaritimeDeclarationOfHealthCount(int maritimeDeclarationOfHealthCount) {
         this.maritimeDeclarationOfHealthCount = maritimeDeclarationOfHealthCount;
     }
 
     /**
+     * Gets ship waste requirements.
+     *
      * @return the shipWasteRequirements
      */
     public String getShipWasteRequirements() {
@@ -522,14 +613,17 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param shipWasteRequirements
-     *            the shipWasteRequirements to set
+     * Sets ship waste requirements.
+     *
+     * @param shipWasteRequirements the shipWasteRequirements to set
      */
     public void setShipWasteRequirements(String shipWasteRequirements) {
         this.shipWasteRequirements = shipWasteRequirements;
     }
 
     /**
+     * Gets signature.
+     *
      * @return the signature
      */
     public String getSignature() {
@@ -537,8 +631,9 @@ public class FALForm1 implements Serializable {
     }
 
     /**
-     * @param signature
-     *            the signature to set
+     * Sets signature.
+     *
+     * @param signature the signature to set
      */
     public void setSignature(String signature) {
         this.signature = signature;

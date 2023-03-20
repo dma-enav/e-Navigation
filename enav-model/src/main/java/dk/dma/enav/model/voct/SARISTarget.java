@@ -14,6 +14,9 @@
  */
 package dk.dma.enav.model.voct;
 
+/**
+ * The type Saris target.
+ */
 public class SARISTarget {
 
     private String name;
@@ -21,15 +24,20 @@ public class SARISTarget {
     private double divergenceAngle;
     private String type;
 
+    /**
+     * Instantiates a new Saris target.
+     */
     public SARISTarget() {
 
     }
 
     /**
-     * @param name
-     * @param formula
-     * @param divergenceAngle
-     * @param type
+     * Instantiates a new Saris target.
+     *
+     * @param name            the name
+     * @param formula         the formula
+     * @param divergenceAngle the divergence angle
+     * @param type            the type
      */
     public SARISTarget(String name, String formula, double divergenceAngle, String type) {
         this.name = name;
@@ -39,6 +47,8 @@ public class SARISTarget {
     }
 
     /**
+     * Gets name.
+     *
      * @return the name
      */
     public String getName() {
@@ -46,14 +56,17 @@ public class SARISTarget {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * Sets name.
+     *
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
+     * Gets formula.
+     *
      * @return the formula
      */
     public String getFormula() {
@@ -61,14 +74,17 @@ public class SARISTarget {
     }
 
     /**
-     * @param formula
-     *            the formula to set
+     * Sets formula.
+     *
+     * @param formula the formula to set
      */
     public void setFormula(String formula) {
         this.formula = formula;
     }
 
     /**
+     * Gets divergence angle.
+     *
      * @return the divergenceAngle
      */
     public double getDivergenceAngle() {
@@ -76,14 +92,17 @@ public class SARISTarget {
     }
 
     /**
-     * @param divergenceAngle
-     *            the divergenceAngle to set
+     * Sets divergence angle.
+     *
+     * @param divergenceAngle the divergenceAngle to set
      */
     public void setDivergenceAngle(double divergenceAngle) {
         this.divergenceAngle = divergenceAngle;
     }
 
     /**
+     * Gets type.
+     *
      * @return the type
      */
     public String getType() {
@@ -91,8 +110,9 @@ public class SARISTarget {
     }
 
     /**
-     * @param type
-     *            the type to set
+     * Sets type.
+     *
+     * @param type the type to set
      */
     public void setType(String type) {
         this.type = type;

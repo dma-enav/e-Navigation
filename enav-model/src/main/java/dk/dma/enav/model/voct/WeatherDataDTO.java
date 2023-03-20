@@ -17,6 +17,9 @@ package dk.dma.enav.model.voct;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * The type Weather data dto.
+ */
 public class WeatherDataDTO implements Serializable {
 
   
@@ -28,11 +31,24 @@ public class WeatherDataDTO implements Serializable {
     private double LWHeading;
     private double downWind;
     private Date date;
-    
+
+    /**
+     * Instantiates a new Weather data dto.
+     */
     public WeatherDataDTO(){
         
     }
-    
+
+    /**
+     * Instantiates a new Weather data dto.
+     *
+     * @param tWCHeading the t wc heading
+     * @param tWCknots   the t w cknots
+     * @param lWknots    the l wknots
+     * @param lWHeading  the l w heading
+     * @param downWind   the down wind
+     * @param date       the date
+     */
     public WeatherDataDTO(double tWCHeading, double tWCknots, double lWknots,
             double lWHeading, double downWind, Date date) {
         super();
@@ -45,6 +61,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Gets twc heading.
+     *
      * @return the tWCHeading
      */
     public double getTWCHeading() {
@@ -52,6 +70,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Sets twc heading.
+     *
      * @param tWCHeading the tWCHeading to set
      */
     public void setTWCHeading(double tWCHeading) {
@@ -59,6 +79,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Gets tw cknots.
+     *
      * @return the tWCknots
      */
     public double getTWCknots() {
@@ -66,6 +88,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Sets tw cknots.
+     *
      * @param tWCknots the tWCknots to set
      */
     public void setTWCknots(double tWCknots) {
@@ -73,6 +97,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Gets l wknots.
+     *
      * @return the lWknots
      */
     public double getLWknots() {
@@ -80,6 +106,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Sets l wknots.
+     *
      * @param lWknots the lWknots to set
      */
     public void setLWknots(double lWknots) {
@@ -87,6 +115,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Gets lw heading.
+     *
      * @return the lWHeading
      */
     public double getLWHeading() {
@@ -94,6 +124,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Sets lw heading.
+     *
      * @param lWHeading the lWHeading to set
      */
     public void setLWHeading(double lWHeading) {
@@ -101,6 +133,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Gets down wind.
+     *
      * @return the downWind
      */
     public double getDownWind() {
@@ -108,6 +142,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Sets down wind.
+     *
      * @param downWind the downWind to set
      */
     public void setDownWind(double downWind) {
@@ -115,6 +151,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Gets date.
+     *
      * @return the date
      */
     public Date getDate() {
@@ -122,6 +160,8 @@ public class WeatherDataDTO implements Serializable {
     }
 
     /**
+     * Sets date.
+     *
      * @param date the date to set
      */
     public void setDate(Date date) {

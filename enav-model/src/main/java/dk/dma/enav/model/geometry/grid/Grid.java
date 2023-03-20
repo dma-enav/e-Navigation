@@ -24,15 +24,20 @@ import dk.dma.enav.model.geometry.CoordinateSystem;
 import dk.dma.enav.model.geometry.Position;
 
 /**
- * 
+ * The type Grid.
+ *
  * @author Kasper Nielsen
  */
 public final class Grid {
 
-    /** A grid where each cell have a radius of 1 degree. */
+    /**
+     * A grid where each cell have a radius of 1 degree.
+     */
     public static final Grid GRID_1_DEGREE = new Grid(1);
 
-    /** A grid where each cell have a radius of 10 degrees. */
+    /**
+     * A grid where each cell have a radius of 10 degrees.
+     */
     public static final Grid GRID_10_DEGREES = new Grid(10);
 
     // Laver man et grid udfra et coordinat system?
@@ -41,6 +46,9 @@ public final class Grid {
 
     private final double resolution;
 
+    /**
+     * The Multiplier.
+     */
     final double multiplier;
 
     private Grid(double resolution) {
@@ -48,22 +56,51 @@ public final class Grid {
         this.multiplier = 360.0 / resolution;
     }
 
+    /**
+     * Gets resolution.
+     *
+     * @return the resolution
+     */
     public double getResolution() {
         return resolution;
     }
 
+    /**
+     * Gets size.
+     *
+     * @return the size
+     */
     public double getSize() {
         return 40075000.0 * resolution / 360.0;
     }
 
+    /**
+     * Gets cell.
+     *
+     * @param cellId the cell id
+     * @return the cell
+     */
     public Cell getCell(long cellId) {
         return new Cell(cellId);
     }
 
+    /**
+     * Gets cell.
+     *
+     * @param pos the pos
+     * @return the cell
+     */
     public Cell getCell(Position pos) {
         return getCell(pos.getLatitude(), pos.getLongitude());
     }
 
+    /**
+     * Gets cell.
+     *
+     * @param lat the lat
+     * @param lon the lon
+     * @return the cell
+     */
     public Cell getCell(double lat, double lon) {
         // We use floor(), not truncation (cast) to handle negative latitudes correctly.
         // Negative longitudes are handled by adding 360 (for backwards compatibility).
@@ -79,6 +116,7 @@ public final class Grid {
 
     /**
      * Compute south-west corner of cell.
+     *
      * @param cell the cell.
      * @return Position of south-west corner of cell.
      */
@@ -95,14 +133,32 @@ public final class Grid {
         return Position.create(resolution * latPart, resolution * lonPart);
     }
 
+    /**
+     * Gets cell north of.
+     *
+     * @param cell the cell
+     * @return the cell north of
+     */
     public Cell getCellNorthOf(Cell cell) {
         return new Cell((long) (cell.getCellId() + multiplier));
     }
 
+    /**
+     * Gets cell south of.
+     *
+     * @param cell the cell
+     * @return the cell south of
+     */
     public Cell getCellSouthOf(Cell cell) {
         return new Cell((long) (cell.getCellId() - multiplier));
     }
 
+    /**
+     * Gets cell west of.
+     *
+     * @param cell the cell
+     * @return the cell west of
+     */
     public Cell getCellWestOf(Cell cell) {
         if (cell.getCellId() % multiplier == 0) {
             return new Cell((long) (cell.getCellId() + multiplier - 1));
@@ -110,6 +166,12 @@ public final class Grid {
         return new Cell(cell.getCellId() - 1);
     }
 
+    /**
+     * Gets cell east of.
+     *
+     * @param cell the cell
+     * @return the cell east of
+     */
     public Cell getCellEastOf(Cell cell) {
         if (cell.getCellId() % multiplier == multiplier-1) {
             return new Cell((long) (cell.getCellId() - multiplier + 1));
@@ -119,6 +181,7 @@ public final class Grid {
 
     /**
      * Compute the geographical bounding box of a cell.
+     *
      * @param cell the cell to have its bounding box computed.
      * @return the bounding box of the given cell.
      */
@@ -128,6 +191,13 @@ public final class Grid {
         return BoundingBox.create(southWestCorner, northEastCorner, CoordinateSystem.GEODETIC);
     }
 
+    /**
+     * Gets nearby cells.
+     *
+     * @param position the position
+     * @param radius   the radius
+     * @return the nearby cells
+     */
     public Set<Cell> getNearbyCells(Position position, double radius) {
         Set<Cell> cells = new HashSet<>();
 
@@ -168,9 +238,9 @@ public final class Grid {
 
     /**
      * Returns a list of cells that the specified area is contained in.
-     * 
-     * @param area
-     * @return
+     *
+     * @param area the area
+     * @return cells
      */
     public Set<Cell> getCells(Area area) {
         if (area instanceof BoundingBox) {
@@ -179,6 +249,12 @@ public final class Grid {
         throw new UnsupportedOperationException("Only bounding boxes are supported");
     }
 
+    /**
+     * Gets cells.
+     *
+     * @param box the box
+     * @return the cells
+     */
     Set<Cell> getCells(BoundingBox box) {
         Set<Long> cells = new TreeSet<>();
         int steps = 64;
@@ -204,10 +280,9 @@ public final class Grid {
     /**
      * Create Grid with degrees size E.g. using 0.0045: 40.075.000 m / (360 / 0.0045) = 500 m cell size E.g. using
      * 0.0008983: 100 m cell size
-     * 
-     * @param resolution
-     *            in degrees
-     * @return
+     *
+     * @param resolution in degrees
+     * @return grid
      */
     public static Grid create(double resolution) {
         return new Grid(resolution);
@@ -215,10 +290,9 @@ public final class Grid {
 
     /**
      * Create a grid with approximately cell size in meters
-     * 
-     * @param approxSize
-     *            cell size in meters
-     * @return
+     *
+     * @param approxSize cell size in meters
+     * @return grid
      */
     public static Grid createSize(double approxSize) {
         return create(360.0 * approxSize / 40075000.0);
@@ -229,6 +303,11 @@ public final class Grid {
     // throw new UnsupportedOperationException();
     // }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         BoundingBox bb = BoundingBox.create(Position.create(-40, 15), Position.create(12, 77),
                 CoordinateSystem.CARTESIAN);

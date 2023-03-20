@@ -14,7 +14,17 @@
  */
 package dk.dma.enav.model.msi;
 
+/**
+ * The enum General category.
+ */
 public enum GeneralCategory {
-    AIDS_TO_NAVIGATION, DANGEROUS_WRECKS;
+    /**
+     * Aids to navigation general category.
+     */
+    AIDS_TO_NAVIGATION,
+    /**
+     * Dangerous wrecks general category.
+     */
+    DANGEROUS_WRECKS;
     // TODO
 }

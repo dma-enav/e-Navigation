@@ -18,16 +18,29 @@ import java.io.Serializable;
 
 import dk.dma.enav.model.Country;
 
+/**
+ * The type Ship information.
+ */
 public class ShipInformation implements Serializable {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     private Country country;
 
+    /**
+     * Gets country.
+     *
+     * @return the country
+     */
     public Country getCountry() {
         return country;
     }
 
+    /**
+     * Sets country.
+     *
+     * @param country the country
+     */
     public void setCountry(Country country) {
         this.country = country;
     }

@@ -29,54 +29,117 @@ public abstract class Message {
     private List<String> chartNumber = new ArrayList<>();
     private List<Integer> internationalNumber = new ArrayList<>();
 
+    /**
+     * Instantiates a new Message.
+     */
     public Message() {
 
     }
 
+    /**
+     * Gets message series identifier.
+     *
+     * @return the message series identifier
+     */
     public MessageSeriesIdentifier getMessageSeriesIdentifier() {
         return messageSeriesIdentifier;
     }
 
+    /**
+     * Sets message series identifier.
+     *
+     * @param messageSeriesIdentifier the message series identifier
+     */
     public void setMessageSeriesIdentifier(MessageSeriesIdentifier messageSeriesIdentifier) {
         this.messageSeriesIdentifier = messageSeriesIdentifier;
     }
 
+    /**
+     * Gets general area.
+     *
+     * @return the general area
+     */
     public String getGeneralArea() {
         return generalArea;
     }
 
+    /**
+     * Sets general area.
+     *
+     * @param generalArea the general area
+     */
     public void setGeneralArea(String generalArea) {
         this.generalArea = generalArea;
     }
 
+    /**
+     * Gets locality.
+     *
+     * @return the locality
+     */
     public String getLocality() {
         return locality;
     }
 
+    /**
+     * Sets locality.
+     *
+     * @param locality the locality
+     */
     public void setLocality(String locality) {
         this.locality = locality;
     }
 
+    /**
+     * Gets specific location.
+     *
+     * @return the specific location
+     */
     public List<String> getSpecificLocation() {
         return specificLocation;
     }
 
+    /**
+     * Sets specific location.
+     *
+     * @param specificLocation the specific location
+     */
     public void setSpecificLocation(List<String> specificLocation) {
         this.specificLocation = specificLocation;
     }
 
+    /**
+     * Gets chart number.
+     *
+     * @return the chart number
+     */
     public List<String> getChartNumber() {
         return chartNumber;
     }
 
+    /**
+     * Sets chart number.
+     *
+     * @param chartNumber the chart number
+     */
     public void setChartNumber(List<String> chartNumber) {
         this.chartNumber = chartNumber;
     }
 
+    /**
+     * Gets international number.
+     *
+     * @return the international number
+     */
     public List<Integer> getInternationalNumber() {
         return internationalNumber;
     }
 
+    /**
+     * Sets international number.
+     *
+     * @param internationalNumber the international number
+     */
     public void setInternationalNumber(List<Integer> internationalNumber) {
         this.internationalNumber = internationalNumber;
     }

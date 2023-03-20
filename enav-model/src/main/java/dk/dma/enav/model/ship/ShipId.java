@@ -38,10 +38,21 @@ public final class ShipId extends MaritimeId {
         return other instanceof ShipId && equals((ShipId) other);
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param other the other
+     * @return the boolean
+     */
     public boolean equals(ShipId other) {
         return other == this || other != null && id.equals(other.id);
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
@@ -55,6 +66,12 @@ public final class ShipId extends MaritimeId {
         return id;
     }
 
+    /**
+     * Create ship id.
+     *
+     * @param id the id
+     * @return the ship id
+     */
     public static ShipId create(String id) {
         return new ShipId(id);
     }

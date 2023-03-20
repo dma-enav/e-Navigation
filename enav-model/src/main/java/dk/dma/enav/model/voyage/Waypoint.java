@@ -17,11 +17,19 @@ package dk.dma.enav.model.voyage;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * The type Waypoint.
+ */
 public class Waypoint implements Serializable {
 
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Gets serialversionuid.
+     *
+     * @return the serialversionuid
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
@@ -46,10 +54,22 @@ public class Waypoint implements Serializable {
     /** Waypoint turn radius in nautical miles. */
     private Double turnRad;
 
+    /**
+     * Instantiates a new Waypoint.
+     */
     public Waypoint() {
 
     }
 
+    /**
+     * Instantiates a new Waypoint.
+     *
+     * @param name      the name
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     * @param rot       the rot
+     * @param turnRad   the turn rad
+     */
     public Waypoint(String name, double latitude, double longitude, Double rot, Double turnRad) {
         super();
         this.name = name;
@@ -59,58 +79,128 @@ public class Waypoint implements Serializable {
         this.turnRad = turnRad;
     }
 
+    /**
+     * Gets eta.
+     *
+     * @return the eta
+     */
     public Date getEta() {
         return eta;
     }
 
+    /**
+     * Gets latitude.
+     *
+     * @return the latitude
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * Gets longitude.
+     *
+     * @return the longitude
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets rot.
+     *
+     * @return the rot
+     */
     public Double getRot() {
         return rot;
     }
 
+    /**
+     * Gets route leg.
+     *
+     * @return the route leg
+     */
     public RouteLeg getRouteLeg() {
         return routeLeg;
     }
 
+    /**
+     * Gets turn rad.
+     *
+     * @return the turn rad
+     */
     public Double getTurnRad() {
         return turnRad;
     }
 
+    /**
+     * Sets eta.
+     *
+     * @param eta the eta
+     */
     public void setEta(Date eta) {
         this.eta = eta;
     }
 
+    /**
+     * Sets latitude.
+     *
+     * @param latitude the latitude
+     */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    /**
+     * Sets longitude.
+     *
+     * @param longitude the longitude
+     */
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Sets rot.
+     *
+     * @param rot the rot
+     */
     public void setRot(Double rot) {
         this.rot = rot;
     }
 
+    /**
+     * Sets route leg.
+     *
+     * @param routeLeg the route leg
+     */
     public void setRouteLeg(RouteLeg routeLeg) {
         this.routeLeg = routeLeg;
     }
 
+    /**
+     * Sets turn rad.
+     *
+     * @param turnRad the turn rad
+     */
     public void setTurnRad(Double turnRad) {
         this.turnRad = turnRad;
     }

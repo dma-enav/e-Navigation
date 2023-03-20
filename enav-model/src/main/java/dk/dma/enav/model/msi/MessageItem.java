@@ -27,38 +27,81 @@ public class MessageItem {
     private MessageCategory messageCategory;
     private List<String> amplifyingRemarks = new ArrayList<>();
 
+    /**
+     * Instantiates a new Message item.
+     */
     public MessageItem() {
 
     }
 
+    /**
+     * Gets key subject.
+     *
+     * @return the key subject
+     */
     public String getKeySubject() {
         return keySubject;
     }
 
+    /**
+     * Sets key subject.
+     *
+     * @param keySubject the key subject
+     */
     public void setKeySubject(String keySubject) {
         this.keySubject = keySubject;
     }
 
+    /**
+     * Gets location.
+     *
+     * @return the location
+     */
     public List<MessageLocation> getLocation() {
         return location;
     }
 
+    /**
+     * Sets location.
+     *
+     * @param location the location
+     */
     public void setLocation(List<MessageLocation> location) {
         this.location = location;
     }
 
+    /**
+     * Gets message category.
+     *
+     * @return the message category
+     */
     public MessageCategory getMessageCategory() {
         return messageCategory;
     }
 
+    /**
+     * Sets message category.
+     *
+     * @param messageCategory the message category
+     */
     public void setMessageCategory(MessageCategory messageCategory) {
         this.messageCategory = messageCategory;
     }
 
+    /**
+     * Gets amplifying remarks.
+     *
+     * @return the amplifying remarks
+     */
     public List<String> getAmplifyingRemarks() {
         return amplifyingRemarks;
     }
 
+    /**
+     * Sets amplifying remarks.
+     *
+     * @param amplifyingRemarks the amplifying remarks
+     */
     public void setAmplifyingRemarks(List<String> amplifyingRemarks) {
         this.amplifyingRemarks = amplifyingRemarks;
     }

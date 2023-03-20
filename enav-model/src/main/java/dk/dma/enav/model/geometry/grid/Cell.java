@@ -15,16 +15,30 @@
 package dk.dma.enav.model.geometry.grid;
 
 /**
+ * The type Cell.
  *
  * @author Kasper Nielsen
  */
 public class Cell implements Comparable<Cell> {
+    /**
+     * The Id.
+     */
     final long id;
 
+    /**
+     * Instantiates a new Cell.
+     *
+     * @param id the id
+     */
     Cell(long id) {
         this.id = id;
     }
 
+    /**
+     * Gets cell id.
+     *
+     * @return the cell id
+     */
     public long getCellId() {
         return id;
     }

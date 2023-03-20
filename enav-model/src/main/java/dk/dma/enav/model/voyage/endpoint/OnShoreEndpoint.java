@@ -14,6 +14,9 @@
  */
 package dk.dma.enav.model.voyage.endpoint;
 
+/**
+ * The type On shore endpoint.
+ */
 public class OnShoreEndpoint extends Endpoint {
 
     /** serialVersionUID. */

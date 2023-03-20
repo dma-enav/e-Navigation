@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * InformationType
- * 
+ * <p>
  * Navigational warning message
  */
 public class NavwarnMessage extends Message {
@@ -29,30 +29,63 @@ public class NavwarnMessage extends Message {
     private List<MessageSeriesIdentifier> cancelMessage = new ArrayList<>();
     private List<MessageItem> messageItem = new ArrayList<>();
 
+    /**
+     * Instantiates a new Navwarn message.
+     */
     public NavwarnMessage() {
 
     }
 
+    /**
+     * Gets cancellation date.
+     *
+     * @return the cancellation date
+     */
     public Date getCancellationDate() {
         return cancellationDate;
     }
 
+    /**
+     * Sets cancellation date.
+     *
+     * @param cancellationDate the cancellation date
+     */
     public void setCancellationDate(Date cancellationDate) {
         this.cancellationDate = cancellationDate;
     }
 
+    /**
+     * Gets cancel message.
+     *
+     * @return the cancel message
+     */
     public List<MessageSeriesIdentifier> getCancelMessage() {
         return cancelMessage;
     }
 
+    /**
+     * Sets cancel message.
+     *
+     * @param cancelMessage the cancel message
+     */
     public void setCancelMessage(List<MessageSeriesIdentifier> cancelMessage) {
         this.cancelMessage = cancelMessage;
     }
 
+    /**
+     * Gets message item.
+     *
+     * @return the message item
+     */
     public List<MessageItem> getMessageItem() {
         return messageItem;
     }
 
+    /**
+     * Sets message item.
+     *
+     * @param messageItem the message item
+     */
     public void setMessageItem(List<MessageItem> messageItem) {
         this.messageItem = messageItem;
     }

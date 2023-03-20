@@ -16,7 +16,7 @@ package dk.dma.enav.model.voyage.endpoint;
 
 /**
  * An offshore {@link Endpoint}.
- * 
+ *
  * @author Kasper Nielsen
  */
 public class OffShoreEndpoint extends Endpoint {

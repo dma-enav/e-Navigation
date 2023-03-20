@@ -20,17 +20,30 @@ import java.util.function.Predicate;
 
 /**
  * A shape has an area
- **/
+ */
 public abstract class Area implements Element {
     /** serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * The Cs.
+     */
     final CoordinateSystem cs;
 
+    /**
+     * Instantiates a new Area.
+     *
+     * @param cs the cs
+     */
     public Area(CoordinateSystem cs) {
         this.cs = requireNonNull(cs);
     }
 
+    /**
+     * Contains predicate.
+     *
+     * @return the predicate
+     */
     public final Predicate<Element> contains() {
         return new Predicate<Element>() {
             public boolean test(Element element) {
@@ -39,6 +52,11 @@ public abstract class Area implements Element {
         };
     }
 
+    /**
+     * Intersects predicate.
+     *
+     * @return the predicate
+     */
     public final Predicate<Element> intersects() {
         return new Predicate<Element>() {
             public boolean test(Element element) {
@@ -49,9 +67,8 @@ public abstract class Area implements Element {
 
     /**
      * Returns <tt>true</tt> if the specified element is fully contained in the shape, otherwise <tt>false</tt>.
-     * 
-     * @param element
-     *            the element to test
+     *
+     * @param element the element to test
      * @return true if the specified element is fully contained in the shape, otherwise false
      */
     public boolean contains(Element element) {
@@ -61,8 +78,7 @@ public abstract class Area implements Element {
     /**
      * Returns <tt>true</tt> if the specified element is fully or partially contained in the shape, otherwise <tt>false</tt>.
      *
-     * @param element
-     *            the element to test
+     * @param element the element to test
      * @return true if the specified element is fully or partially contained in the shape, otherwise false
      */
     public boolean intersects(Element element) { throw new UnsupportedOperationException(); }
@@ -78,6 +94,11 @@ public abstract class Area implements Element {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Gets coordinate system.
+     *
+     * @return the coordinate system
+     */
     public final CoordinateSystem getCoordinateSystem() {
         return cs;
     }

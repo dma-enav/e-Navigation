@@ -16,20 +16,35 @@ package dk.dma.enav.model.geometry;
 
 import java.io.Serializable;
 
+/**
+ * The interface Element.
+ */
 public interface Element extends Serializable {
     // We should only need 1 or 2 of these
 
+    /**
+     * Distance to double.
+     *
+     * @param position the position
+     * @param system   the system
+     * @return the double
+     */
     double distanceTo(Element position, CoordinateSystem system);
 
     /**
      * Returns the geodetic (great circle) distance from this element to the specified element in meters.
-     * 
-     * @param other
-     *            the other element
+     *
+     * @param other the other element
      * @return the distance in meters to the other element
      */
     double geodesicDistanceTo(Element other);
 
+    /**
+     * Rhumb line distance to double.
+     *
+     * @param other the other
+     * @return the double
+     */
     double rhumbLineDistanceTo(Element other);
 
     /**

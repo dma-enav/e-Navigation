@@ -18,48 +18,102 @@ import java.io.Serializable;
 
 import dk.dma.enav.model.voyage.endpoint.Endpoint;
 
+/**
+ * The type Voyage.
+ */
 public class Voyage implements Serializable {
 
     /** serialVersionUID */
     private static final long serialVersionUID = 1L;
 
-    /** The currently active route. */
+    /**
+     * The currently active route.
+     */
     ActiveRoute activeRoute;
 
+    /**
+     * The From.
+     */
     Endpoint from;
 
+    /**
+     * The Planned route.
+     */
     Route plannedRoute;
 
+    /**
+     * The To.
+     */
     Endpoint to;
 
+    /**
+     * Gets active route.
+     *
+     * @return the active route
+     */
     public ActiveRoute getActiveRoute() {
         return activeRoute;
     }
 
+    /**
+     * Gets from.
+     *
+     * @return the from
+     */
     public Endpoint getFrom() {
         return from;
     }
 
+    /**
+     * Gets planned route.
+     *
+     * @return the planned route
+     */
     public Route getPlannedRoute() {
         return plannedRoute;
     }
 
+    /**
+     * Gets to.
+     *
+     * @return the to
+     */
     public Endpoint getTo() {
         return to;
     }
 
+    /**
+     * Sets active route.
+     *
+     * @param activeRoute the active route
+     */
     public void setActiveRoute(ActiveRoute activeRoute) {
         this.activeRoute = activeRoute;
     }
 
+    /**
+     * Sets from.
+     *
+     * @param from the from
+     */
     public void setFrom(Endpoint from) {
         this.from = from;
     }
 
+    /**
+     * Sets planned route.
+     *
+     * @param plannedRoute the planned route
+     */
     public void setPlannedRoute(Route plannedRoute) {
         this.plannedRoute = plannedRoute;
     }
 
+    /**
+     * Sets to.
+     *
+     * @param to the to
+     */
     public void setTo(Endpoint to) {
         this.to = to;
     }

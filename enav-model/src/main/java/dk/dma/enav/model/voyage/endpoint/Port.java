@@ -14,6 +14,9 @@
  */
 package dk.dma.enav.model.voyage.endpoint;
 
+/**
+ * The type Port.
+ */
 //UN calls it port (not harbour)
 //http://www.unece.org/fileadmin/DAM/cefact/recommendations/rec16/rec16_ecetrd205e.pdf
 public class Port extends OnShoreEndpoint {

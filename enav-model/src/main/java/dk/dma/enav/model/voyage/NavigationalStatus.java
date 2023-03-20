@@ -14,12 +14,62 @@
  */
 package dk.dma.enav.model.voyage;
 
+/**
+ * The enum Navigational status.
+ */
 public enum NavigationalStatus {
-    AGROUND, AIS_SART {
+    /**
+     * Aground navigational status.
+     */
+    AGROUND,
+    /**
+     * The Ais sart.
+     */
+    AIS_SART {
         public String toString() {
             return name().replace("_", "-");
         }
-    }, AT_ANCHOR, CONSTRAINED_BY_HER_DRAUGHT, ENGAGED_IN_FISHING, MOORED, NOT_UNDER_COMMAND, RESTRICTED_MANOEUVRABILITY, SAILING, UNDEFINED, UNDER_WAY, UNDER_WAY_USING_ENGINE;
+    },
+    /**
+     * At anchor navigational status.
+     */
+    AT_ANCHOR,
+    /**
+     * Constrained by her draught navigational status.
+     */
+    CONSTRAINED_BY_HER_DRAUGHT,
+    /**
+     * Engaged in fishing navigational status.
+     */
+    ENGAGED_IN_FISHING,
+    /**
+     * Moored navigational status.
+     */
+    MOORED,
+    /**
+     * Not under command navigational status.
+     */
+    NOT_UNDER_COMMAND,
+    /**
+     * Restricted manoeuvrability navigational status.
+     */
+    RESTRICTED_MANOEUVRABILITY,
+    /**
+     * Sailing navigational status.
+     */
+    SAILING,
+    /**
+     * Undefined navigational status.
+     */
+    UNDEFINED,
+    /**
+     * Under way navigational status.
+     */
+    UNDER_WAY,
+    /**
+     * Under way using engine navigational status.
+     */
+    UNDER_WAY_USING_ENGINE;
 
     public String toString() {
         String navStat = name().replace("_", " ");
@@ -28,7 +78,8 @@ public enum NavigationalStatus {
 
     /**
      * Returns a navigation status from an ais int on a best effort.
-     * 
+     *
+     * @param aisNavStatus the ais nav status
      * @return the navigation status.
      */
     public static NavigationalStatus fromAIS(int aisNavStatus) {
@@ -60,6 +111,11 @@ public enum NavigationalStatus {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         System.out.println(AIS_SART.toString());
         System.out.println(AT_ANCHOR.toString());

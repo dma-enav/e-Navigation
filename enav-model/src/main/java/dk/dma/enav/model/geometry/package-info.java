@@ -16,6 +16,6 @@
 /**
  * Utility classes used across multiple packages.
  *
- * <img src="dk.dma.enav.model.geometry.png" height="900" width="1200"/>
+ * <img src="dk.dma.enav.model.geometry.png" height="900" width="1200" alt="geometry model" >
  **/
 package dk.dma.enav.model.geometry;

@@ -23,6 +23,13 @@ public class MessageCategory {
     private final SpecificCategory specificCategory;
     private final String otherCategory;
 
+    /**
+     * Instantiates a new Message category.
+     *
+     * @param generalCategory  the general category
+     * @param specificCategory the specific category
+     * @param otherCategory    the other category
+     */
     public MessageCategory(GeneralCategory generalCategory, SpecificCategory specificCategory, String otherCategory) {
         super();
         this.generalCategory = generalCategory;
@@ -30,14 +37,29 @@ public class MessageCategory {
         this.otherCategory = otherCategory;
     }
 
+    /**
+     * Gets general category.
+     *
+     * @return the general category
+     */
     public GeneralCategory getGeneralCategory() {
         return generalCategory;
     }
 
+    /**
+     * Gets specific category.
+     *
+     * @return the specific category
+     */
     public SpecificCategory getSpecificCategory() {
         return specificCategory;
     }
 
+    /**
+     * Gets other category.
+     *
+     * @return the other category
+     */
     public String getOtherCategory() {
         return otherCategory;
     }

@@ -16,28 +16,57 @@ package dk.dma.enav.model.voct;
 
 import dk.dma.enav.model.geometry.Position;
 
+/**
+ * The type Sar area data.
+ */
 public class SARAreaData {
 
+    /**
+     * The A.
+     */
     Position A;
+    /**
+     * The B.
+     */
     Position B;
+    /**
+     * The C.
+     */
     Position C;
+    /**
+     * The D.
+     */
     Position D;
+    /**
+     * The Centre.
+     */
     Position centre;
+    /**
+     * The Breadth.
+     */
     double breadth;
+    /**
+     * The Length.
+     */
     double length;
 
+    /**
+     * Instantiates a new Sar area data.
+     */
     public SARAreaData() {
 
     }
 
     /**
-     * @param a
-     * @param b
-     * @param c
-     * @param d
-     * @param centre
-     * @param breadth
-     * @param length
+     * Instantiates a new Sar area data.
+     *
+     * @param a       the a
+     * @param b       the b
+     * @param c       the c
+     * @param d       the d
+     * @param centre  the centre
+     * @param breadth the breadth
+     * @param length  the length
      */
     public SARAreaData(Position a, Position b, Position c, Position d, Position centre, double breadth, double length) {
         A = a;
@@ -50,6 +79,8 @@ public class SARAreaData {
     }
 
     /**
+     * Gets a.
+     *
      * @return the a
      */
     public Position getA() {
@@ -57,14 +88,17 @@ public class SARAreaData {
     }
 
     /**
-     * @param a
-     *            the a to set
+     * Sets a.
+     *
+     * @param a the a to set
      */
     public void setA(Position a) {
         A = a;
     }
 
     /**
+     * Gets b.
+     *
      * @return the b
      */
     public Position getB() {
@@ -72,14 +106,17 @@ public class SARAreaData {
     }
 
     /**
-     * @param b
-     *            the b to set
+     * Sets b.
+     *
+     * @param b the b to set
      */
     public void setB(Position b) {
         B = b;
     }
 
     /**
+     * Gets c.
+     *
      * @return the c
      */
     public Position getC() {
@@ -87,14 +124,17 @@ public class SARAreaData {
     }
 
     /**
-     * @param c
-     *            the c to set
+     * Sets c.
+     *
+     * @param c the c to set
      */
     public void setC(Position c) {
         C = c;
     }
 
     /**
+     * Gets d.
+     *
      * @return the d
      */
     public Position getD() {
@@ -102,14 +142,17 @@ public class SARAreaData {
     }
 
     /**
-     * @param d
-     *            the d to set
+     * Sets d.
+     *
+     * @param d the d to set
      */
     public void setD(Position d) {
         D = d;
     }
 
     /**
+     * Gets centre.
+     *
      * @return the centre
      */
     public Position getCentre() {
@@ -117,14 +160,17 @@ public class SARAreaData {
     }
 
     /**
-     * @param centre
-     *            the centre to set
+     * Sets centre.
+     *
+     * @param centre the centre to set
      */
     public void setCentre(Position centre) {
         this.centre = centre;
     }
 
     /**
+     * Gets breadth.
+     *
      * @return the breadth
      */
     public double getBreadth() {
@@ -132,14 +178,17 @@ public class SARAreaData {
     }
 
     /**
-     * @param breadth
-     *            the breadth to set
+     * Sets breadth.
+     *
+     * @param breadth the breadth to set
      */
     public void setBreadth(double breadth) {
         this.breadth = breadth;
     }
 
     /**
+     * Gets length.
+     *
      * @return the length
      */
     public double getLength() {
@@ -147,8 +196,9 @@ public class SARAreaData {
     }
 
     /**
-     * @param length
-     *            the length to set
+     * Sets length.
+     *
+     * @param length the length to set
      */
     public void setLength(double length) {
         this.length = length;

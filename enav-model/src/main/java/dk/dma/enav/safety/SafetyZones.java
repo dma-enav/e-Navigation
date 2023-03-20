@@ -28,18 +28,18 @@ import static java.lang.Math.max;
  * This class holds static methods needed to calculate safety zones (ellipses) and elliptically approximated extents
  * for vessels.
  *
- * @author Thomas Borg Salling <tbsalling@tbsalling.dk>
+ * @author Thomas Borg Salling <a href="mailto:tbsalling@tbsalling.dk">tbsalling@tbsalling.dk</a>
  */
 public final class SafetyZones {
 
     /**
      * Compute the an elliptic zone which roughly corresponds to the vessel's physical extent.
      *
-     * @param position The reported position of the vessel.
-     * @param hdg heading measured in compass degrees.
-     * @param loa The vessel's length-overall (in meters).
-     * @param beam The vessel's beam (in meters).
-     * @param dimStern Distance from GPS antenna to vessel's stern (in meters).
+     * @param position     The reported position of the vessel.
+     * @param hdg          heading measured in compass degrees.
+     * @param loa          The vessel's length-overall (in meters).
+     * @param beam         The vessel's beam (in meters).
+     * @param dimStern     Distance from GPS antenna to vessel's stern (in meters).
      * @param dimStarboard Distance from GPS antenne to vessel's starboard beam (in meters).
      * @return an Ellipse approximately covering the vessel's extent.
      */
@@ -49,17 +49,17 @@ public final class SafetyZones {
 
     /**
      * Compute the an elliptic zone which roughly corresponds to the vessel's physical extent.
-     *
+     * <p>
      * The cartesian center is required to compare for intersection of the return ellipse when other ellipses. If no
      * such comparison is ever made, the alternative method with no geodetic center can be used.
      *
      * @param geodeticReference the geodetic reference needed to compare the returned Ellipse with other Ellipses.
-     * @param position The reported position of the vessel.
-     * @param hdg heading measured in compass degrees.
-     * @param loa The vessel's length-overall (in meters).
-     * @param beam The vessel's beam (in meters).
-     * @param dimStern Distance from GPS antenna to vessel's stern (in meters).
-     * @param dimStarboard Distance from GPS antenne to vessel's starboard beam (in meters).
+     * @param position          The reported position of the vessel.
+     * @param hdg               heading measured in compass degrees.
+     * @param loa               The vessel's length-overall (in meters).
+     * @param beam              The vessel's beam (in meters).
+     * @param dimStern          Distance from GPS antenna to vessel's stern (in meters).
+     * @param dimStarboard      Distance from GPS antenne to vessel's starboard beam (in meters).
      * @return an Ellipse approximately covering the vessel's extent.
      */
     public static Ellipse vesselExtent(Position geodeticReference, Position position, float hdg, float loa, float beam, float dimStern, float dimStarboard) {
@@ -69,18 +69,18 @@ public final class SafetyZones {
     /**
      * Compute the safety zone of track. This is roughly equivalent to the elliptic area around the vessel
      * which its navigator would observe for safety reasons to avoid imminent collisions.
-     *
+     * <p>
      * The cartesian center is required to compare for intersection of the return ellipse when other ellipses. If no
      * such comparison is ever made, the alternative method with no geodetic center can be used.
      *
      * @param geodeticReference the geodetic reference needed to compare the returned Ellipse with other Ellipses.
-     * @param position The reported position of the vessel.
-     * @param cog Course over ground in compass degrees.
-     * @param sog Speed over ground in knots.
-     * @param loa The vessel's length-overall (in meters).
-     * @param beam The vessel's beam (in meters).
-     * @param dimStern Distance from GPS antenna to vessel's stern (in meters).
-     * @param dimStarboard Distance from GPS antenne to vessel's starboard beam (in meters).
+     * @param position          The reported position of the vessel.
+     * @param cog               Course over ground in compass degrees.
+     * @param sog               Speed over ground in knots.
+     * @param loa               The vessel's length-overall (in meters).
+     * @param beam              The vessel's beam (in meters).
+     * @param dimStern          Distance from GPS antenna to vessel's stern (in meters).
+     * @param dimStarboard      Distance from GPS antenne to vessel's starboard beam (in meters).
      * @return an Ellipse approximately covering the vessel's extent.
      */
     public static Ellipse safetyZone(Position geodeticReference, Position position, float cog, float sog, float loa, float beam, float dimStern, float dimStarboard) {
@@ -97,20 +97,20 @@ public final class SafetyZones {
 
     /**
      * Compute an ellipse surrounding.
-     *
+     * <p>
      * The position, offset, orientation and scale of the ellipse will follow characteristics of properties of a track.
      *
-     * @param geodeticReference geodetic reference point for geographic->cartesian mappings
-     * @param position Initial position of ellipse center.
-     * @param direction Direction of ellipse's major axis (in compass degrees).
-     * @param loa Length of the related vessel's major axis (in meters).
-     * @param beam Length of the ellipse's minor axis (in meters)
-     * @param dimStern Offset of ellipse's center along major axis (in meters).
-     * @param dimStarboard Offset of ellipse's center along minor axis (in meters).
-     * @param l1
-     * @param b1
-     * @param xc
-     * @return
+     * @param geodeticReference geodetic reference point for {@literal geographic->cartesian} mappings
+     * @param position          Initial position of ellipse center.
+     * @param direction         Direction of ellipse's major axis (in compass degrees).
+     * @param loa               Length of the related vessel's major axis (in meters).
+     * @param beam              Length of the ellipse's minor axis (in meters).
+     * @param dimStern          Offset of ellipse's center along major axis (in meters).
+     * @param dimStarboard      Offset of ellipse's center along minor axis (in meters).
+     * @param l1                the l 1.
+     * @param b1                the b 1.
+     * @param xc                the xc.
+     * @return ellipse
      */
     @SuppressWarnings("unused")
     public static Ellipse createEllipse(Position geodeticReference, Position position, float direction, float loa, float beam, float dimStern, float dimStarboard, double l1, double b1, double xc) {

@@ -16,44 +16,74 @@ package dk.dma.enav.model.dto;
 
 import java.io.Serializable;
 
+/**
+ * The type Position dto.
+ */
 public class PositionDTO implements Serializable{
 
 
     private static final long serialVersionUID = 1L;
-    
-    
+
+
+    /**
+     * The Latitude.
+     */
     double latitude;
+    /**
+     * The Longitude.
+     */
     double longitude;
-    
-    
+
+
+    /**
+     * Instantiates a new Position dto.
+     */
     public PositionDTO(){
         super();
     }
-    
+
+    /**
+     * Instantiates a new Position dto.
+     *
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     */
     public PositionDTO(double latitude, double longitude) {
         super();
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
     /**
+     * Gets latitude.
+     *
      * @return the latitude
      */
     public double getLatitude() {
         return latitude;
     }
+
     /**
+     * Sets latitude.
+     *
      * @param latitude the latitude to set
      */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
     /**
+     * Gets longitude.
+     *
      * @return the longitude
      */
     public double getLongitude() {
         return longitude;
     }
+
     /**
+     * Sets longitude.
+     *
      * @param longitude the longitude to set
      */
     public void setLongitude(double longitude) {

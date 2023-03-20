@@ -17,7 +17,8 @@ package dk.dma.enav.model.shore;
 import dk.dma.enav.model.MaritimeId;
 
 /**
- * 
+ * The type Server id.
+ *
  * @author Kasper Nielsen
  */
 public class ServerId extends MaritimeId {
@@ -28,7 +29,9 @@ public class ServerId extends MaritimeId {
     private final int id;
 
     /**
-     * @param scheme
+     * Instantiates a new Server id.
+     *
+     * @param id the id
      */
     public ServerId(int id) {
         super("server");
@@ -36,7 +39,9 @@ public class ServerId extends MaritimeId {
     }
 
     /**
-     * @param takeString
+     * Instantiates a new Server id.
+     *
+     * @param takeString the take string
      */
     public ServerId(String takeString) {
         this(4321);
@@ -48,7 +53,11 @@ public class ServerId extends MaritimeId {
         return obj instanceof ServerId && equals((ServerId) obj);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} @param other the other
+     *
+     * @return the boolean
+     */
     public boolean equals(ServerId other) {
         return id == other.id;
     }

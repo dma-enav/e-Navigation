@@ -18,6 +18,33 @@ package dk.dma.enav.model.msi;
  * Message type for message series identifier
  */
 public enum MessageType {
-    PERMANENT_NOTICE, TEMPORARY_NOTICE, PRELIMINARY_NOTICE, MISCELLANEOUS_NOTICE, COSTAL_WARNING, SUBAREA_WARNING, NAVAREA_WARNING;
+    /**
+     * Permanent notice message type.
+     */
+    PERMANENT_NOTICE,
+    /**
+     * Temporary notice message type.
+     */
+    TEMPORARY_NOTICE,
+    /**
+     * Preliminary notice message type.
+     */
+    PRELIMINARY_NOTICE,
+    /**
+     * Miscellaneous notice message type.
+     */
+    MISCELLANEOUS_NOTICE,
+    /**
+     * Costal warning message type.
+     */
+    COSTAL_WARNING,
+    /**
+     * Subarea warning message type.
+     */
+    SUBAREA_WARNING,
+    /**
+     * Navarea warning message type.
+     */
+    NAVAREA_WARNING;
 
 }

@@ -18,6 +18,9 @@ import dk.dma.enav.model.MaritimePeer;
 import dk.dma.enav.model.geometry.Position;
 import dk.dma.enav.model.voyage.Voyage;
 
+/**
+ * The type Ship.
+ */
 public class Ship extends MaritimePeer {
 
     /** serialVersionUID */
@@ -29,6 +32,11 @@ public class Ship extends MaritimePeer {
 
     private Position latest;
 
+    /**
+     * Gets current.
+     *
+     * @return the current
+     */
     public Voyage getCurrent() {
         return current;
     }
@@ -37,18 +45,38 @@ public class Ship extends MaritimePeer {
         return id;
     }
 
+    /**
+     * Gets latest.
+     *
+     * @return the latest
+     */
     public Position getLatest() {
         return latest;
     }
 
+    /**
+     * Sets current.
+     *
+     * @param current the current
+     */
     public void setCurrent(Voyage current) {
         this.current = current;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(ShipId id) {
         this.id = id;
     }
 
+    /**
+     * Sets latest.
+     *
+     * @param latest the latest
+     */
     public void setLatest(Position latest) {
         this.latest = latest;
     }
